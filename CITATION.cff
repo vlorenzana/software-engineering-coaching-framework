@@ -7,6 +7,6 @@ authors:
     given-names: "Victor Hugo"
 version: "0.1.0"
 date-released: "2026-09-30"
-url: "https://github.com/vlorenzana/software-engineering-coaching-framewor"
+url: "https://github.com/vlorenzana/software-engineering-coaching-framework"
 abstract: "An initial open, competency-based and ontology-supported framework for developer coaching, observable evidence, AI assistance, human validation, and software-engineering quality."
 license: MIT
