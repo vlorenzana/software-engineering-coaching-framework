@@ -1,4 +1,4 @@
-@prefix secav: <https://github.com/vlorenzana/software-engineering-coaching-framewor/ontology/secav-o#> .
+@prefix secav: <https://github.com/vlorenzana/software-engineering-coaching-framework/ontology/secav-o#> .
 @prefix ex: <https://example.org/secav/demo#> .
 
 ex:EngineerA
