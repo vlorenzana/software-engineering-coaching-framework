@@ -1,0 +1,123 @@
+@prefix secav: <https://github.com/vlorenzana/software-engineering-coaching-framewor/ontology/secav-o#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://github.com/vlorenzana/software-engineering-coaching-framewor/ontology/secav-o>
+    a owl:Ontology ;
+    dcterms:title "Software Engineering Coaching and AI Validation Ontology (SECAV-O)"@en ;
+    dcterms:creator "Victor Hugo Lorenzana González" ;
+    dcterms:description "Initial experimental ontology connecting software-engineering activities, artifacts, competencies, evidence, measurement, AI assistance, human validation, assessment, and coaching."@en ;
+    owl:versionInfo "0.1.0" ;
+    rdfs:seeAlso <https://dev.nemo.inf.ufes.br/seon/SEON.html> .
+
+secav:SoftwareEngineeringProcess a owl:Class ; rdfs:label "Software Engineering Process"@en .
+secav:EngineeringActivity a owl:Class ; rdfs:label "Engineering Activity"@en .
+secav:RequirementsActivity a owl:Class ; rdfs:subClassOf secav:EngineeringActivity ; rdfs:label "Requirements Activity"@en .
+secav:DesignActivity a owl:Class ; rdfs:subClassOf secav:EngineeringActivity ; rdfs:label "Design Activity"@en .
+secav:CodingActivity a owl:Class ; rdfs:subClassOf secav:EngineeringActivity ; rdfs:label "Coding Activity"@en .
+secav:TestingActivity a owl:Class ; rdfs:subClassOf secav:EngineeringActivity ; rdfs:label "Testing Activity"@en .
+secav:ImplementationActivity a owl:Class ; rdfs:subClassOf secav:EngineeringActivity ; rdfs:label "Implementation Activity"@en .
+secav:ReviewActivity a owl:Class ; rdfs:subClassOf secav:EngineeringActivity ; rdfs:label "Review Activity"@en .
+secav:ApplicationDesign a owl:Class ; rdfs:subClassOf secav:DesignActivity ; rdfs:label "Application Design"@en .
+secav:UnitTestDesign a owl:Class ; rdfs:subClassOf secav:DesignActivity ; rdfs:label "Unit Test Design"@en .
+secav:DesignImplementation a owl:Class ; rdfs:subClassOf secav:ImplementationActivity, secav:DesignActivity ; rdfs:label "Design Implementation"@en .
+secav:DesignReview a owl:Class ; rdfs:subClassOf secav:ReviewActivity, secav:DesignActivity ; rdfs:label "Design Review"@en .
+secav:UnitTestDesignImplementation a owl:Class ; rdfs:subClassOf secav:ImplementationActivity, secav:UnitTestDesign ; rdfs:label "Unit Test Design Implementation"@en .
+secav:UnitTestDesignReview a owl:Class ; rdfs:subClassOf secav:ReviewActivity, secav:UnitTestDesign ; rdfs:label "Unit Test Design Review"@en .
+secav:CodeImplementation a owl:Class ; rdfs:subClassOf secav:ImplementationActivity, secav:CodingActivity ; rdfs:label "Code Implementation"@en .
+secav:CodeReview a owl:Class ; rdfs:subClassOf secav:ReviewActivity, secav:CodingActivity ; rdfs:label "Code Review"@en .
+
+secav:Artifact a owl:Class ; rdfs:label "Engineering Artifact"@en .
+secav:DesignArtifact a owl:Class ; rdfs:subClassOf secav:Artifact ; rdfs:label "Design Artifact"@en .
+secav:UnitTestDesignArtifact a owl:Class ; rdfs:subClassOf secav:Artifact ; rdfs:label "Unit Test Design Artifact"@en .
+secav:SourceCodeArtifact a owl:Class ; rdfs:subClassOf secav:Artifact ; rdfs:label "Source Code Artifact"@en .
+
+secav:Stakeholder a owl:Class ; rdfs:label "Stakeholder"@en .
+secav:Engineer a owl:Class ; rdfs:subClassOf secav:Stakeholder ; rdfs:label "Engineer"@en .
+secav:Coach a owl:Class ; rdfs:subClassOf secav:Stakeholder ; rdfs:label "Developer Coach"@en .
+secav:AISystem a owl:Class ; rdfs:label "AI System"@en .
+
+secav:Competency a owl:Class ; rdfs:label "Engineering Competency"@en .
+secav:DesignCompetency a owl:Class ; rdfs:subClassOf secav:Competency ; rdfs:label "Design Competency"@en .
+secav:ReviewCompetency a owl:Class ; rdfs:subClassOf secav:Competency ; rdfs:label "Review Competency"@en .
+secav:TestingCompetency a owl:Class ; rdfs:subClassOf secav:Competency ; rdfs:label "Testing Competency"@en .
+secav:SecurityCompetency a owl:Class ; rdfs:subClassOf secav:Competency ; rdfs:label "Security Competency"@en .
+secav:PlanningCompetency a owl:Class ; rdfs:subClassOf secav:Competency ; rdfs:label "Planning Competency"@en .
+
+secav:Evidence a owl:Class ; rdfs:label "Observable Evidence"@en .
+secav:WorkProductEvidence a owl:Class ; rdfs:subClassOf secav:Evidence ; rdfs:label "Work Product Evidence"@en .
+secav:ReviewFinding a owl:Class ; rdfs:subClassOf secav:Evidence ; rdfs:label "Review Finding"@en .
+secav:DefectRecord a owl:Class ; rdfs:subClassOf secav:Evidence ; rdfs:label "Defect Record"@en .
+secav:Measurement a owl:Class ; rdfs:subClassOf secav:Evidence ; rdfs:label "Measurement"@en .
+secav:QualityCriterion a owl:Class ; rdfs:label "Quality Criterion"@en .
+secav:AcceptanceCriterion a owl:Class ; rdfs:subClassOf secav:QualityCriterion ; rdfs:label "Acceptance Criterion"@en .
+
+secav:ReviewRecord a owl:Class ; rdfs:subClassOf secav:Artifact, secav:Evidence ; rdfs:label "Review Record"@en .
+secav:TestResult a owl:Class ; rdfs:subClassOf secav:Artifact, secav:Evidence ; rdfs:label "Test Result"@en .
+
+secav:AIAssistedActivity a owl:Class ; rdfs:subClassOf secav:EngineeringActivity ; rdfs:label "AI-Assisted Activity"@en .
+secav:HumanValidationActivity a owl:Class ; rdfs:subClassOf secav:ReviewActivity ; rdfs:label "Human Validation Activity"@en .
+
+secav:CompetencyAssessment a owl:Class ; rdfs:label "Competency Assessment"@en .
+secav:CoachingRecommendation a owl:Class ; rdfs:label "Coaching Recommendation"@en .
+secav:CoachingIntervention a owl:Class ; rdfs:label "Coaching Intervention"@en .
+
+secav:performs a owl:ObjectProperty ;
+    rdfs:domain secav:Engineer ; rdfs:range secav:EngineeringActivity ; rdfs:label "performs"@en .
+
+secav:produces a owl:ObjectProperty ;
+    rdfs:domain secav:EngineeringActivity ; rdfs:range secav:Artifact ; rdfs:label "produces"@en .
+
+secav:evaluates a owl:ObjectProperty ;
+    rdfs:domain secav:ReviewActivity ; rdfs:range secav:Artifact ; rdfs:label "evaluates"@en .
+
+secav:requiresCompetency a owl:ObjectProperty ;
+    rdfs:domain secav:EngineeringActivity ; rdfs:range secav:Competency ; rdfs:label "requires competency"@en .
+
+secav:providesEvidenceOf a owl:ObjectProperty ;
+    rdfs:domain secav:Evidence ; rdfs:range secav:Competency ; rdfs:label "provides evidence of"@en .
+
+secav:assistedByAI a owl:ObjectProperty ;
+    rdfs:domain secav:EngineeringActivity ; rdfs:range secav:AISystem ; rdfs:label "assisted by AI"@en .
+
+secav:requiresHumanValidation a owl:ObjectProperty ;
+    rdfs:domain secav:EngineeringActivity ; rdfs:range secav:HumanValidationActivity ; rdfs:label "requires human validation"@en .
+
+secav:measuredBy a owl:ObjectProperty ;
+    rdfs:domain secav:EngineeringActivity ; rdfs:range secav:Measurement ; rdfs:label "measured by"@en .
+
+secav:assessedAgainst a owl:ObjectProperty ;
+    rdfs:domain secav:EngineeringActivity ; rdfs:range secav:QualityCriterion ; rdfs:label "assessed against"@en .
+
+secav:reviews a owl:ObjectProperty ;
+    rdfs:domain secav:Engineer ; rdfs:range secav:Artifact ; rdfs:label "reviews"@en .
+
+secav:basedOnEvidence a owl:ObjectProperty ;
+    rdfs:domain secav:CompetencyAssessment ; rdfs:range secav:Evidence ; rdfs:label "based on evidence"@en .
+
+secav:assessesCompetency a owl:ObjectProperty ;
+    rdfs:domain secav:CompetencyAssessment ; rdfs:range secav:Competency ; rdfs:label "assesses competency"@en .
+
+secav:triggers a owl:ObjectProperty ;
+    rdfs:domain secav:Evidence ; rdfs:range secav:CoachingIntervention ; rdfs:label "triggers"@en .
+
+secav:targetsCompetency a owl:ObjectProperty ;
+    rdfs:domain secav:CoachingIntervention ; rdfs:range secav:Competency ; rdfs:label "targets competency"@en .
+
+secav:recommendedBy a owl:ObjectProperty ;
+    rdfs:domain secav:CoachingIntervention ; rdfs:range secav:CoachingRecommendation ; rdfs:label "recommended by"@en .
+
+secav:evidenceNote a owl:DatatypeProperty ;
+    rdfs:domain secav:Evidence ; rdfs:range xsd:string ; rdfs:label "evidence note"@en .
+
+secav:measurementValue a owl:DatatypeProperty ;
+    rdfs:domain secav:Measurement ; rdfs:label "measurement value"@en .
+
+secav:criterionStatement a owl:DatatypeProperty ;
+    rdfs:domain secav:QualityCriterion ; rdfs:range xsd:string ; rdfs:label "criterion statement"@en .
+
+secav:assessmentRationale a owl:DatatypeProperty ;
+    rdfs:domain secav:CompetencyAssessment ; rdfs:range xsd:string ; rdfs:label "assessment rationale"@en .
