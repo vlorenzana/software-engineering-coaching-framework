@@ -1,0 +1,48 @@
+@prefix secav: <https://github.com/vlorenzana/software-engineering-coaching-framewor/ontology/secav-o#> .
+@prefix ex: <https://example.org/secav/demo#> .
+
+ex:EngineerA
+    a secav:Engineer ;
+    secav:performs ex:DesignImplementation01 .
+
+ex:DesignImplementation01
+    a secav:DesignImplementation, secav:AIAssistedActivity ;
+    secav:requiresCompetency ex:DesignCompetency01 ;
+    secav:produces ex:DesignArtifact01 ;
+    secav:assistedByAI ex:AIAssistant01 ;
+    secav:requiresHumanValidation ex:DesignReview01 ;
+    secav:assessedAgainst ex:CriterionModifiability .
+
+ex:AIAssistant01 a secav:AISystem .
+ex:DesignCompetency01 a secav:DesignCompetency .
+ex:ReviewCompetency01 a secav:ReviewCompetency .
+ex:DesignArtifact01 a secav:DesignArtifact .
+
+ex:CriterionModifiability
+    a secav:AcceptanceCriterion ;
+    secav:criterionStatement "The design identifies responsibilities, dependencies, and an explicit rationale for decisions that materially affect modifiability." .
+
+ex:DesignReview01
+    a secav:DesignReview, secav:HumanValidationActivity ;
+    secav:requiresCompetency ex:ReviewCompetency01 ;
+    secav:evaluates ex:DesignArtifact01 ;
+    secav:produces ex:ReviewRecord01 .
+
+ex:ReviewRecord01
+    a secav:ReviewRecord ;
+    secav:evidenceNote "Reviewer identified one undocumented dependency and requested an explicit design rationale." ;
+    secav:providesEvidenceOf ex:ReviewCompetency01 ;
+    secav:triggers ex:CoachingIntervention01 .
+
+ex:Assessment01
+    a secav:CompetencyAssessment ;
+    secav:assessesCompetency ex:ReviewCompetency01 ;
+    secav:basedOnEvidence ex:ReviewRecord01 ;
+    secav:assessmentRationale "Assessment is based on the review record only and should be combined with repeated observations before drawing broader conclusions." .
+
+ex:Recommendation01 a secav:CoachingRecommendation .
+
+ex:CoachingIntervention01
+    a secav:CoachingIntervention ;
+    secav:targetsCompetency ex:ReviewCompetency01 ;
+    secav:recommendedBy ex:Recommendation01 .

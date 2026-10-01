@@ -1,0 +1,68 @@
+@prefix secav: <https://github.com/vlorenzana/software-engineering-coaching-framewor/ontology/secav-o#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+# Initial governance/data-quality shapes.
+# These constraints validate RDF data structure. They do not claim empirical
+# validation of the coaching methodology.
+
+secav:EngineeringActivityShape
+    a sh:NodeShape ;
+    sh:targetClass secav:EngineeringActivity ;
+    sh:property [
+        sh:path secav:requiresCompetency ;
+        sh:minCount 1 ;
+        sh:class secav:Competency ;
+        sh:message "An engineering activity should identify at least one required competency."@en
+    ] .
+
+secav:ReviewActivityShape
+    a sh:NodeShape ;
+    sh:targetClass secav:ReviewActivity ;
+    sh:property [
+        sh:path secav:evaluates ;
+        sh:minCount 1 ;
+        sh:class secav:Artifact ;
+        sh:message "A review activity should identify the artifact it evaluates."@en
+    ] .
+
+secav:AIAssistedActivityShape
+    a sh:NodeShape ;
+    sh:targetClass secav:AIAssistedActivity ;
+    sh:property [
+        sh:path secav:assistedByAI ;
+        sh:minCount 1 ;
+        sh:class secav:AISystem ;
+        sh:message "An AI-assisted activity must identify the AI system involved."@en
+    ] ;
+    sh:property [
+        sh:path secav:requiresHumanValidation ;
+        sh:minCount 1 ;
+        sh:class secav:HumanValidationActivity ;
+        sh:message "In this prototype governance profile, an AI-assisted activity must identify a human-validation activity."@en
+    ] .
+
+secav:CompetencyAssessmentShape
+    a sh:NodeShape ;
+    sh:targetClass secav:CompetencyAssessment ;
+    sh:property [
+        sh:path secav:basedOnEvidence ;
+        sh:minCount 1 ;
+        sh:class secav:Evidence ;
+        sh:message "A competency assessment must be based on at least one item of observable evidence."@en
+    ] ;
+    sh:property [
+        sh:path secav:assessesCompetency ;
+        sh:minCount 1 ;
+        sh:class secav:Competency ;
+        sh:message "A competency assessment must identify the competency being assessed."@en
+    ] .
+
+secav:CoachingInterventionShape
+    a sh:NodeShape ;
+    sh:targetClass secav:CoachingIntervention ;
+    sh:property [
+        sh:path secav:targetsCompetency ;
+        sh:minCount 1 ;
+        sh:class secav:Competency ;
+        sh:message "A coaching intervention should identify the competency it targets."@en
+    ] .
