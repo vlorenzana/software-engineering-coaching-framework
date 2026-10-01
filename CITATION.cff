@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software-engineering coaching framework, please cite it using this metadata."
+title: "Software Engineering Coaching Framework / SECAV-O"
+type: software
+authors:
+  - family-names: "Lorenzana González"
+    given-names: "Victor Hugo"
+version: "0.1.0"
+date-released: "2026-09-30"
+url: "https://github.com/vlorenzana/software-engineering-coaching-framewor"
+abstract: "An initial open, competency-based and ontology-supported framework for developer coaching, observable evidence, AI assistance, human validation, and software-engineering quality."
+license: MIT
