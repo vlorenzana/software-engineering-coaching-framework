@@ -73,7 +73,7 @@ Applied to framework adoption:
 The tracer concept, from Hunt & Thomas [1], involves building a thin but complete vertical slice through the entire system rather than completing horizontal layers one by one.
 
 Applied to framework adoption:
-- Run one complete coaching cycle — from `secav:EngineeringActivity` selection through `secav:Evidence` collection, `secav:CompetencyAssessment`, `secavo:CoachingIntervention`, and `secavo:SprintRetrospective` — before attempting to cover multiple activities or engineers.
+- Run one complete coaching cycle — from `secav:EngineeringActivity` selection through `secav:Evidence` collection, `secav:CompetencyAssessment`, `secav:CoachingIntervention`, and `secavo:SprintRetrospective` — before attempting to cover multiple activities or engineers.
 - The tracer confirms that the full ontological chain is operational end-to-end in the organization's context.
 - Gaps discovered in the tracer (e.g., missing evidence types, inapplicable acceptance criteria) are corrected before scope expands.
 
@@ -82,8 +82,8 @@ Applied to framework adoption:
 Short iterations (one to four weeks) force hypotheses to be validated quickly. If a coaching cadence, evidence format, or competency definition does not work, it is discovered in days, not months.
 
 Applied to framework adoption:
-- Use the `secavo:CoachingSprint` and `secavo:SprintRetrospective` structure from the start, even in the PoC stage.
-- Review the `secavo:Risk` register at every retrospective.
+- From Phase 1 (Tracer) onwards, use the `secavo:CoachingSprint` and `secavo:SprintRetrospective` structure. The PoC (Phase 0) is pre-sprint and does not require a full sprint cadence.
+- Review the `secavo:Risk` register at every `secavo:SprintRetrospective`.
 - Retrospective outputs directly inform whether to persist, pivot, or stop.
 
 ---
