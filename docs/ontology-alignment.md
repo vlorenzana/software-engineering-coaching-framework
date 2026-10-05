@@ -9,7 +9,7 @@ The extension is designed to reuse these core concepts already present in the fr
 - `EngineeringActivity`
 - `Artifact`
 - `Competency`
-- `AcceptanceCriteria`
+- `AcceptanceCriterion`
 - `Evidence`
 - `CoachingIntervention`
 - AI-assistance / human-validation concepts remain in the core ontology and can be linked to observed engineering activities and artifacts.
@@ -27,7 +27,7 @@ The extension is designed to reuse these core concepts already present in the fr
 | `ImprovementAction` | subclass of `CoachingIntervention` | Corrective developmental action is a coaching intervention. |
 | `CoachingObjective` | targets `Competency` | Coaching objectives should identify the capability being developed. |
 | `CoachingSprint` | observes `EngineeringActivity` | Sprint evidence comes from real engineering work. |
-| `CoachingSprint` | uses `Artifact`, `AcceptanceCriteria`, `Evidence`, `Metric` | Keeps coaching connected to the existing SECAV-O activity/artifact/evidence pattern. |
+| `CoachingSprint` | uses `Artifact`, `AcceptanceCriterion`, `Evidence`, `Metric` | Keeps coaching connected to the existing SECAV-O activity/artifact/evidence pattern. |
 
 ## Governance alignment
 
@@ -40,7 +40,7 @@ Ethics governance is modeled through a `CoachEthicsCode` and an `EthicsAcknowled
 ## Important merge note
 Version 4 adds team-lifecycle concepts as an extension layer. `TeamCoachingInitiation`, `MemberPreparation`, and `MemberOnboarding` are modeled as specializations of `CoachingIntervention` because each is an intentional coaching action. `MemberBaseline` specializes `Baseline`, which already specializes core `Evidence`. Project objectives remain separate from institutional objectives but can both align to a `CoachingObjective`. Risks reuse the existing `Risk` model rather than introducing a duplicate onboarding-risk concept.
 
-The package currently retains the placeholder namespace `https://example.org/secav-o#` because the canonical namespace of the core ontology was not supplied in this artifact package. Before merging, replace that namespace with the exact namespace used in `ontology/secav-o.ttl` and confirm the exact core class identifiers (`Artifact` vs. `WorkProduct`, `AcceptanceCriteria`, etc.). Do not create duplicate core classes if equivalent terms already exist.
+The package currently retains the placeholder namespace `https://example.org/secav-o#` because the canonical namespace of the core ontology was not supplied in this artifact package. Before merging, replace that namespace with the exact namespace used in `ontology/secav-o.ttl` and confirm the exact core class identifiers (`Artifact` vs. `WorkProduct`, `AcceptanceCriterion`, etc.). Do not create duplicate core classes if equivalent terms already exist.
 
 ## Team lifecycle alignment
 
