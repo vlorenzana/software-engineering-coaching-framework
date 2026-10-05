@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SECAV-O Coaching Sprint",
+  "type": "object",
+  "required": [
+    "sprintId",
+    "engineer",
+    "coach",
+    "startDate",
+    "endDate",
+    "objectives"
+  ],
+  "properties": {
+    "sprintId": {
+      "type": "string"
+    },
+    "engineer": {
+      "type": "string"
+    },
+    "coach": {
+      "type": "string"
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "endDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "baselineReference": {
+      "type": "string"
+    },
+    "objectives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "competency",
+          "expectedOutcome"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "competency": {
+            "type": "string"
+          },
+          "expectedOutcome": {
+            "type": "string"
+          },
+          "acceptanceCriteria": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "baseline": {},
+          "target": {},
+          "actual": {},
+          "source": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "retrospective": {
+      "type": "object",
+      "properties": {
+        "whatImproved": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "whatDidNotImprove": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextSprintChanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "riskReview": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "institutionalAlignmentReview": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "institutionalObjectives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "description"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "description",
+          "probability",
+          "impact"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "probability": {
+            "type": "string"
+          },
+          "impact": {
+            "type": "string"
+          },
+          "preventiveAction": {
+            "type": "string"
+          },
+          "correctiveAction": {
+            "type": "string"
+          },
+          "owner": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
