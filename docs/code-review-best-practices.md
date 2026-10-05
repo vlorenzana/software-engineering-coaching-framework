@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document provides evidence-based best practices for code review within the SECAV-O coaching framework. Code review maps to `secav:CodeReview` (a `secav:ReviewActivity` and `secav:CodingActivity`) and produces `secav:ReviewFinding` evidence that informs competency assessment and coaching interventions.
+This document provides evidence-based best practices for code review within the SECAV-O coaching framework. Code review maps to `secav:CodeReview` (a subclass of both `secav:ReviewActivity` and `secav:CodingActivity`) and produces `secav:ReviewFinding` evidence recorded in a `secav:ReviewRecord`. Both inform `secav:CompetencyAssessment` and may trigger `secav:CoachingIntervention`.
 
 These practices apply to the reviewer, the author, and the coach observing both roles.
 
@@ -140,13 +140,13 @@ Suggested minimum checklist items:
 
 ## 8. Code review as coaching evidence
 
-Within SECAV-O, review findings are `secav:Evidence` linked to `secav:Competency`. The coach should:
+Within SECAV-O, `secav:ReviewFinding` instances are subclasses of `secav:Evidence` and link to `secav:Competency` via `secav:providesEvidenceOf`. The coach should:
 
-- Track recurring finding categories per engineer as coaching signals.
-- Track reviewer quality: does the reviewer catch meaningful defects, or only style issues?
+- Track recurring `secav:ReviewFinding` categories per engineer as coaching signals pointing to a `secav:ReviewCompetency` gap.
+- Track reviewer quality: does the reviewer produce `secav:ReviewFinding` evidence of substance, or only style-level findings?
 - Avoid using review metrics (defect counts, approval rates) in isolation as performance measures. High defect counts found in review may reflect effective review, not weak engineering.
 - Never use review participation metrics as instruments for performance ranking or punitive decisions.
-- Document review competency growth using the longitudinal scale in `docs/competency-growth-scale.md`.
+- Document `secav:ReviewCompetency` growth using the longitudinal scale in `docs/competency-growth-scale.md`.
 
 See `docs/metrics-model.md` §2 for the full set of review and inspection metrics.
 
@@ -157,9 +157,9 @@ See `docs/metrics-model.md` §2 for the full set of review and inspection metric
 When the artifact under review was produced or modified with AI assistance:
 
 - Apply the same review standards as for human-written code. AI assistance is not a substitute for review.
-- Explicitly note in the review record whether the artifact was AI-assisted (`secav:assistedByAI`).
+- The `secav:CodeImplementation` activity that produced the artifact under review is the one linked to `secav:assistedByAI` (an ObjectProperty relating an `secav:EngineeringActivity` to a `secav:AISystem`). Record this in the `secav:ReviewRecord` so the evidence chain is traceable.
 - Pay particular attention to generated code for correctness, security, and unintended behavior that may not be visible in the diff.
-- The review is itself a `secav:HumanValidationActivity` when it validates AI-assisted output.
+- A `secav:CodeReview` of AI-assisted code also qualifies as a `secav:HumanValidationActivity` (both are subclasses of `secav:ReviewActivity`); use `secav:requiresHumanValidation` to link the original AI-assisted activity to this validation step.
 
 ---
 
