@@ -24,7 +24,7 @@ A single coach operating alone does not form a committee. When a second coach jo
 
 | Role | Description |
 |---|---|
-| **Lead Coach** (`secavo:LeadCoach`) | Designated coordinator of the committee. Responsible for organizational coaching plan governance, escalation handling, and external communication with management or HR. |
+| **Lead Coach** (`secavo:LeadCoach` — *proposed, see §7*) | Designated coordinator of the committee. Responsible for organizational coaching plan governance, escalation handling, and external communication with management or HR. |
 | **Committee Member** (`secav:Coach`) | Any active coach assigned to at least one engineering team. Each member retains full autonomy within their assigned teams. |
 
 Minimum size: 2 coaches (1 Lead + 1 Member).
@@ -93,7 +93,7 @@ The Lead Coach may escalate further to management or HR following the chain defi
 
 ### 4.5 Organizational view
 
-The committee aggregates the organizational indicator data from individual engineer development records (`templates/organizational-competency-view.csv`) to produce an organization-level coaching health view at the end of each cycle, including:
+The committee aggregates the organizational indicator data from individual engineer development records (`templates/engineer-development-record.md`, Section 8) into the organizational competency view (`templates/organizational-competency-view.csv`) to produce an organization-level coaching health view at the end of each cycle, including:
 
 - average competency level per dimension across all engineers;
 - coaching objective completion rate;
@@ -139,7 +139,7 @@ The Coach Committee concept requires the following additions to the governance e
 |---|---|---|
 | `secavo:hasLeadCoach` | `secavo:CoachCommittee` → `secavo:LeadCoach` | Links the committee to its designated lead |
 | `secavo:hasCommitteeMember` | `secavo:CoachCommittee` → `secav:Coach` | Links the committee to each member coach |
-| `secavo:assignsCoachToTeam` | `secavo:CoachCommittee` → `secav:Coach` | Records which coach is assigned to which team context |
+| `secavo:assignsCoachToTeam` | `secavo:CoachCommittee` → `secav:Coach` | Records which coach is assigned to which team context. *Note: the range captures the Coach individual; the team context is captured through the assignment matrix in the charter. A richer model would introduce a dedicated assignment class.* |
 | `secavo:generatesOrganizationalPlan` | `secavo:CoachCommittee` → `secavo:AnnualCoachingPlan` | Links the committee to the organization-level plan it produces |
 
 ### Existing terms reused

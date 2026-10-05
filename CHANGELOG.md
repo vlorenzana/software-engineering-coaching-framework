@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed
+
+- `docs/coach-committee.md` Section 2: `secavo:LeadCoach` was presented without a "(proposed)" qualifier — it does not yet exist in the TTL. Added cross-reference to §7.
+- `docs/coach-committee.md` Section 4.5: corrected erroneous description "individual engineer development records (`templates/organizational-competency-view.csv`)" — the CSV is the aggregated organizational view, not individual records. Fixed to clarify that individual data comes from `templates/engineer-development-record.md` §8 and is aggregated into the CSV.
+- `docs/coach-committee.md` Section 7: added design note to `secavo:assignsCoachToTeam` explaining that the current `range secav:Coach` captures the coach individual only; team context is held in the charter assignment matrix and a richer model would need a dedicated assignment class.
+
 ### Changed
 
 - `guides/code-review-best-practices.md` (moved from `docs/`) — code review guides relocated to `guides/` to separate reference guides from operating-model documents.
