@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file.
 
 - `guides/code-review-best-practices.md` (moved from `docs/`) — code review guides relocated to `guides/` to separate reference guides from operating-model documents.
 - `guides/ai-assisted-code-review.md` (moved from `docs/`) — same relocation. All internal cross-references updated.
-- `guides/risk-management.md` (moved from `docs/`) — relocated to `guides/` for consistency.
+- `guides/risk-management.md` (moved from `docs/`) — relocated to `guides/` for consistency; SECAV-O ontology references added inline and in integration table at end of document.
 
 ### Added
 
