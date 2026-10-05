@@ -1,0 +1,45 @@
+teamId: TEAM-ALPHA
+project:
+  name: AI-Assisted Claims Platform
+  institutionalObjectives:
+    - Improve software quality while adopting AI-assisted development
+  objectives:
+    - Deliver maintainable features with accountable human validation
+  context: Cross-functional software team using AI-assisted coding under peer-review controls.
+launch:
+  date: 2026-10-15
+  eventName: Team launch
+  risks:
+    - Over-reliance on AI-generated code without adequate review
+    - Inconsistent unit-test practices among new team members
+  engineeringExpectations:
+    - Peer review for production changes
+    - Human validation of AI-assisted artifacts
+    - Unit tests for changed business logic
+members:
+  - name: Engineer A
+    role: Software Engineer
+    preparation:
+      - Project context briefing
+      - Review/inspection expectations
+      - Unit-test expectations
+      - AI-assistance and human-validation rules
+    baseline:
+      - competency: Code Review Competency
+        observation: Performs reviews with guidance
+        evidenceSource: Initial coached review
+newMemberOnboarding:
+  - name: Engineer B
+    joinDate: 2026-12-01
+    contextReviewed:
+      - Project objectives
+      - Architecture context
+      - Review and testing practices
+      - Current coaching priorities
+    risksReviewed:
+      - AI-output validation risk
+      - Late defect escape risk
+    baseline:
+      - competency: Unit Test Design Competency
+        observation: Baseline to be confirmed from first two work products
+        evidenceSource: Onboarding assessment + observed work
