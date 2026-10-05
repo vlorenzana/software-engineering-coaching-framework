@@ -58,6 +58,9 @@ All notable changes to this project will be documented in this file.
 - `ontology/alignment-matrix.csv` line 12: `AcceptanceCriteria` corrected to `AcceptanceCriterion` to match the class identifier declared in `secav-o.ttl`.
 - `docs/ontology-alignment.md`: two occurrences of `AcceptanceCriteria` corrected to `AcceptanceCriterion`.
 - `docs/code-review-best-practices.md`: three ontology alignment corrections — (1) `secav:CodeReview` subclass relationship clarified and `secav:ReviewRecord`/`secav:CoachingIntervention` added to Purpose; (2) Section 8 updated to use `secav:providesEvidenceOf` and `secav:ReviewCompetency` explicitly; (3) Section 9 corrected `secav:assistedByAI` usage (ObjectProperty on `EngineeringActivity`, not a flag on the review record) and added `secav:requiresHumanValidation` link.
+- `docs/code-review-best-practices.md` Section 9: reworded "Record this in the `secav:ReviewRecord`" — `secav:assistedByAI` belongs to the `secav:EngineeringActivity`, not to the ReviewRecord. Clarified as "Note in the ReviewRecord that the artifact was produced by an AI-assisted activity."
+- `docs/coaching-cycle.md` SECAV-O chain: corrected two ontologically invalid hops — (1) `Artifact → Competency` has no OWL property; (2) `Observable Evidence → Measurement` is wrong because `secav:Measurement` is a *subclass* of `secav:Evidence`, not a successor. Fixed chain: `Engineering Activity (produces Artifact, assessedAgainst AcceptanceCriterion, requiresCompetency) → Evidence/Measurement → Competency Gap → Coaching Intervention`.
+- `docs/ai-assisted-code-review.md`: removed inline citations [14], [15], [16] whose source URLs were garbled/cut off in the source PDF and could not be verified; statements retained; disclosure note added to Sources section.
 
 ### Known issues (pending author decision)
 
