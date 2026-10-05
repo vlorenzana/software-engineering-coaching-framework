@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 
 - `guides/code-review-best-practices.md` (moved from `docs/`) — code review guides relocated to `guides/` to separate reference guides from operating-model documents.
 - `guides/ai-assisted-code-review.md` (moved from `docs/`) — same relocation. All internal cross-references updated.
+- `guides/risk-management.md` (moved from `docs/`) — relocated to `guides/` for consistency.
 
 ### Added
 
@@ -23,7 +24,7 @@ All notable changes to this project will be documented in this file.
 - `docs/project-planning-participation.md` — coach participation in project planning, quality-gate advocacy, formal dissent and escalation.
 - `docs/team-coaching-lifecycle.md` — coaching from team inception/launch through member preparation, baseline establishment and ongoing onboarding.
 - `docs/coaching-cycle.md` — annual planning, sprint execution, retrospectives and replanning.
-- `docs/risk-management.md` — coaching risk-management model.
+- `guides/risk-management.md` — coaching risk-management model.
 - `docs/institutional-alignment.md` — method for connecting individual coaching objectives to institutional objectives.
 - `docs/coach-code-of-ethics.md` — SECAV-O Code of Ethics for coaches.
 - `docs/metrics-model.md` — defects, reviews, inspections, unit tests and competency-growth metrics.

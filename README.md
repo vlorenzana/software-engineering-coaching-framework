@@ -19,7 +19,7 @@ Institutional / Project Objectives -> Project Planning & Quality Governance -> T
 - `docs/project-planning-participation.md` — coach participation in project planning, quality-gate advocacy, formal dissent and escalation.
 - `docs/team-coaching-lifecycle.md` — coaching from team inception/launch through member preparation, baseline establishment and ongoing onboarding.
 - `docs/coaching-cycle.md` — annual planning, sprint execution, retrospectives and replanning.
-- `docs/risk-management.md` — coaching risk-management model.
+- `guides/risk-management.md` — coaching risk-management model.
 - `docs/institutional-alignment.md` — method for connecting individual coaching objectives to institutional objectives.
 - `docs/coach-code-of-ethics.md` — SECAV-O Code of Ethics for coaches.
 - `docs/metrics-model.md` — defects, reviews, inspections, unit tests and competency-growth metrics.
