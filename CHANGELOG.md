@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - `docs/code-review-best-practices.md` — evidence-based best practices for code review (reviewer and author responsibilities, size limits, feedback culture, AI-assisted code, coaching integration). Sources: Google Engineering Practices, Microsoft Code with Engineering Playbook, SmartBear/Cisco peer review research.
+- `docs/ai-assisted-code-review.md` — dedicated guidance for AI-assisted code review: context data, layered pipeline, risk triage, false-positive management, data privacy, SECAV-O integration. 13 sources including Google AutoCommenter study and Faros AI data.
 
 ### Added — Coaching Governance Extension (v5)
 

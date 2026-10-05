@@ -154,12 +154,13 @@ See `docs/metrics-model.md` §2 for the full set of review and inspection metric
 
 ## 9. AI-assisted code and review
 
-When the artifact under review was produced or modified with AI assistance:
+When the artifact under review was produced or modified with AI assistance, additional considerations apply. See `docs/ai-assisted-code-review.md` for the full guidance, including layered pipeline design, risk-based triage, false-positive management, data privacy, and metrics.
 
-- Apply the same review standards as for human-written code. AI assistance is not a substitute for review.
-- The `secav:CodeImplementation` activity that produced the artifact under review is the one linked to `secav:assistedByAI` (an ObjectProperty relating an `secav:EngineeringActivity` to a `secav:AISystem`). Record this in the `secav:ReviewRecord` so the evidence chain is traceable.
-- Pay particular attention to generated code for correctness, security, and unintended behavior that may not be visible in the diff.
+Key ontology points:
+
+- The `secav:CodeImplementation` activity that produced the artifact is linked to `secav:assistedByAI` (an ObjectProperty from `secav:EngineeringActivity` to `secav:AISystem`). Record this in the `secav:ReviewRecord` so the evidence chain is traceable.
 - A `secav:CodeReview` of AI-assisted code also qualifies as a `secav:HumanValidationActivity` (both are subclasses of `secav:ReviewActivity`); use `secav:requiresHumanValidation` to link the original AI-assisted activity to this validation step.
+- Apply the same review standards as for human-written code. AI assistance is not a substitute for human review.
 
 ---
 
