@@ -26,6 +26,7 @@ Institutional / Project Objectives -> Project Planning & Quality Governance -> T
 - `docs/coach-committee.md` — governance model for multi-coach organizations: Coach Committee structure, Lead Coach designation (by management or coach consensus), committee responsibilities, assignment matrix, escalation, and proposed ontology extension.
 - `docs/metrics-model.md` — defects, reviews, inspections, unit tests and competency-growth metrics.
 - `docs/competency-growth-scale.md` — longitudinal competency maturity scale.
+- `guides/coach-team-behaviors.md` — observable coach behaviors in team settings: facilitation vs. protagonist role, consensus-based decision-making, participatory risk management, capability-based work assignment, and respectful team culture. Includes a sprint self-assessment checklist.
 - `guides/code-review-best-practices.md` — evidence-based best practices for code review, covering reviewer and author responsibilities, feedback culture, AI-assisted code, and integration with coaching evidence.
 - `guides/ai-assisted-code-review.md` — guidance for reviewing AI-assisted code and using AI tools in the review pipeline, including risk triage, false-positive management, data privacy, and SECAV-O integration.
 
