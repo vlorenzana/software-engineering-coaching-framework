@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document provides guidance for code review when AI assistance is involved — either in producing the artifact under review, or in supporting the review activity itself. It complements `docs/code-review-best-practices.md`.
+This document provides guidance for code review when AI assistance is involved — either in producing the artifact under review, or in supporting the review activity itself. It complements `guides/code-review-best-practices.md`.
 
 Within SECAV-O, a `secav:CodeReview` of an AI-assisted artifact is also a `secav:HumanValidationActivity`. The original `secav:CodeImplementation` activity is linked to `secav:assistedByAI`; the review must be linked back via `secav:requiresHumanValidation` to preserve traceability.
 

@@ -154,7 +154,7 @@ See `docs/metrics-model.md` §2 for the full set of review and inspection metric
 
 ## 9. AI-assisted code and review
 
-When the artifact under review was produced or modified with AI assistance, additional considerations apply. See `docs/ai-assisted-code-review.md` for the full guidance, including layered pipeline design, risk-based triage, false-positive management, data privacy, and metrics.
+When the artifact under review was produced or modified with AI assistance, additional considerations apply. See `guides/ai-assisted-code-review.md` for the full guidance, including layered pipeline design, risk-based triage, false-positive management, data privacy, and metrics.
 
 Key ontology points:
 
