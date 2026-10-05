@@ -56,6 +56,7 @@ All notable changes to this project will be documented in this file.
 - `ontology/alignment-matrix.csv`: seven rows added in v5 (planning governance) were missing the `alignment_type` column; split and populated from corresponding TTL declarations.
 - `ontology/alignment-matrix.csv` line 12: `AcceptanceCriteria` corrected to `AcceptanceCriterion` to match the class identifier declared in `secav-o.ttl`.
 - `docs/ontology-alignment.md`: two occurrences of `AcceptanceCriteria` corrected to `AcceptanceCriterion`.
+- `docs/code-review-best-practices.md`: three ontology alignment corrections — (1) `secav:CodeReview` subclass relationship clarified and `secav:ReviewRecord`/`secav:CoachingIntervention` added to Purpose; (2) Section 8 updated to use `secav:providesEvidenceOf` and `secav:ReviewCompetency` explicitly; (3) Section 9 corrected `secav:assistedByAI` usage (ObjectProperty on `EngineeringActivity`, not a flag on the review record) and added `secav:requiresHumanValidation` link.
 
 ### Known issues (pending author decision)
 
