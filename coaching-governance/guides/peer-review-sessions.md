@@ -1,4 +1,4 @@
-# Revisiones de Pares: Protocolo de Observación del Coach
+﻿# Revisiones de Pares: Protocolo de Observación del Coach
 
 ## Propósito
 
@@ -120,9 +120,9 @@ Las observaciones del coach se usan además en:
 
 | Documento | Relación |
 |---|---|
-| `guides/code-review-best-practices.md` | Prácticas de revisión para autor y revisor; complementa este protocolo |
-| `guides/formal-inspections.md` | Proceso más riguroso para módulos críticos; el coach tiene rol de moderador (no observador silencioso) |
-| `guides/coach-team-behaviors.md` | Comportamientos del líder de equipo que el coach observa, incluyendo en sesiones de revisión |
+| `coaching-governance/guides/code-review-best-practices.md` | Prácticas de revisión para autor y revisor; complementa este protocolo |
+| `coaching-governance/guides/formal-inspections.md` | Proceso más riguroso para módulos críticos; el coach tiene rol de moderador (no observador silencioso) |
+| `coaching-governance/guides/coach-team-behaviors.md` | Comportamientos del líder de equipo que el coach observa, incluyendo en sesiones de revisión |
 | `templates/sprint-retrospective.md` | Espacio para introducir patrones de revisión como tema de mejora |
 | `templates/engineer-coaching-assessment.md` | Plantilla donde se registran las observaciones de competencia derivadas |
 | `templates/engineer-development-record.md` | Registro longitudinal que acumula la evidencia de revisiones por ciclo |

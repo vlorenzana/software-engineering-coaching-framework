@@ -1,4 +1,4 @@
-# Inspecciones Formales de Módulos Críticos
+﻿# Inspecciones Formales de Módulos Críticos
 
 ## Propósito
 
@@ -128,9 +128,9 @@ Las inspecciones formales solo son efectivas si cuentan con respaldo explícito 
 
 | Documento | Relación |
 |---|---|
-| `guides/project-kickoff-alignment.md` | Las inspecciones formales deben incluirse como actividades de calidad en los objetivos de proyecto |
-| `docs/project-planning-participation.md` | El coach puede levantar una `QualityPlanningConcern` si las inspecciones se omiten del plan |
-| `guides/code-review-best-practices.md` | Base para revisiones ordinarias; las inspecciones formales aplican un estándar más riguroso |
-| `guides/ai-assisted-code-review.md` | Módulos críticos con código generado por IA requieren inspección formal adicional |
+| `coaching-governance/guides/project-kickoff-alignment.md` | Las inspecciones formales deben incluirse como actividades de calidad en los objetivos de proyecto |
+| `coaching-governance/docs/project-planning-participation.md` | El coach puede levantar una `QualityPlanningConcern` si las inspecciones se omiten del plan |
+| `coaching-governance/guides/code-review-best-practices.md` | Base para revisiones ordinarias; las inspecciones formales aplican un estándar más riguroso |
+| `coaching-governance/guides/ai-assisted-code-review.md` | Módulos críticos con código generado por IA requieren inspección formal adicional |
 | `templates/quality-planning-dissent-and-escalation.md` | Mecanismo de escalación si la gerencia elimina inspecciones planeadas |
 | `templates/engineer-coaching-assessment.md` | Los hallazgos de inspección alimentan la evaluación de competencias |

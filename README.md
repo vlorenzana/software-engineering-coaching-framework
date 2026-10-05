@@ -1,4 +1,4 @@
-# SECAV-O Coaching Lifecycle, Planning, Risk, Alignment and Ethics Artifacts
+﻿# SECAV-O Coaching Lifecycle, Planning, Risk, Alignment and Ethics Artifacts
 
 This package extends the SECAV-O coaching operating model with six connected governance dimensions:
 
@@ -16,22 +16,22 @@ Institutional / Project Objectives -> Project Planning & Quality Governance -> T
 ## Included artifacts
 
 ### Operating model
-- `docs/project-planning-participation.md` — coach participation in project planning, quality-gate advocacy, formal dissent and escalation.
-- `docs/team-coaching-lifecycle.md` — coaching from team inception/launch through member preparation, baseline establishment and ongoing onboarding.
-- `docs/coaching-cycle.md` — annual planning, sprint execution, retrospectives and replanning.
-- `guides/risk-management.md` — coaching risk-management model.
-- `guides/incremental-adoption.md` — strategic guide for incremental framework adoption using the Fail Fast philosophy: PoC, end-to-end tracer, short feedback loops, Go/Pivot/Stop decision criteria, and phased expansion from PoC to organization-wide adoption.
-- `docs/institutional-alignment.md` — method for connecting individual coaching objectives to institutional objectives.
-- `docs/coach-code-of-ethics.md` — SECAV-O Code of Ethics for coaches.
-- `docs/coach-committee.md` — governance model for multi-coach organizations: Coach Committee structure, Lead Coach designation (by management or coach consensus), committee responsibilities, assignment matrix, escalation, and proposed ontology extension.
-- `docs/metrics-model.md` — defects, reviews, inspections, unit tests and competency-growth metrics.
-- `docs/competency-growth-scale.md` — longitudinal competency maturity scale.
-- `guides/peer-review-sessions.md` — coach observation protocol during peer reviews: coach attends as silent note-taker only (no verbal participation), product-focused review culture, silent observation when team loses focus, and pending-point procedure for unresolved disagreements (mark pending → continue → escalate to Project Leader after the session).
-- `guides/formal-inspections.md` — structured formal inspections of critical system modules: architect identifies critical modules by risk criteria, coach moderates the inspection process (planning → individual preparation → inspection meeting → rework → follow-up), Technical Lead and management provide support. Outputs map to `secav:ReviewRecord`, `secav:ReviewFinding`, and `secav:CompetencyAssessment`.
-- `guides/project-kickoff-alignment.md` — pre-project alignment meeting between the Technical Lead, Coach, and senior management: establishing few but measurable project success objectives (at least one quality/defect metric required), team objectives (may be more aggressive), individual objectives, and the coach's role in preventing goal dilution.
-- `guides/coach-team-behaviors.md` — team leader behaviors the coach observes: facilitation vs. protagonist role, consensus-based decision-making, building plans the team genuinely believes in, participatory risk management, capability-based work assignment, and respectful team culture. Includes a per-sprint observation checklist and SECAV-O mapping from observed behaviors to coaching interventions.
-- `guides/code-review-best-practices.md` — evidence-based best practices for code review, covering reviewer and author responsibilities, feedback culture, AI-assisted code, and integration with coaching evidence.
-- `guides/ai-assisted-code-review.md` — guidance for reviewing AI-assisted code and using AI tools in the review pipeline, including risk triage, false-positive management, data privacy, and SECAV-O integration.
+- `coaching-governance/docs/project-planning-participation.md` — coach participation in project planning, quality-gate advocacy, formal dissent and escalation.
+- `coaching-governance/docs/team-coaching-lifecycle.md` — coaching from team inception/launch through member preparation, baseline establishment and ongoing onboarding.
+- `coaching-governance/docs/coaching-cycle.md` — annual planning, sprint execution, retrospectives and replanning.
+- `coaching-governance/guides/risk-management.md` — coaching risk-management model.
+- `coaching-governance/guides/incremental-adoption.md` — strategic guide for incremental framework adoption using the Fail Fast philosophy: PoC, end-to-end tracer, short feedback loops, Go/Pivot/Stop decision criteria, and phased expansion from PoC to organization-wide adoption.
+- `coaching-governance/docs/institutional-alignment.md` — method for connecting individual coaching objectives to institutional objectives.
+- `coaching-governance/docs/coach-code-of-ethics.md` — SECAV-O Code of Ethics for coaches.
+- `coaching-governance/docs/coach-committee.md` — governance model for multi-coach organizations: Coach Committee structure, Lead Coach designation (by management or coach consensus), committee responsibilities, assignment matrix, escalation, and proposed ontology extension.
+- `coaching-governance/docs/metrics-model.md` — defects, reviews, inspections, unit tests and competency-growth metrics.
+- `coaching-governance/docs/competency-growth-scale.md` — longitudinal competency maturity scale.
+- `coaching-governance/guides/peer-review-sessions.md` — coach observation protocol during peer reviews: coach attends as silent note-taker only (no verbal participation), product-focused review culture, silent observation when team loses focus, and pending-point procedure for unresolved disagreements (mark pending → continue → escalate to Project Leader after the session).
+- `coaching-governance/guides/formal-inspections.md` — structured formal inspections of critical system modules: architect identifies critical modules by risk criteria, coach moderates the inspection process (planning → individual preparation → inspection meeting → rework → follow-up), Technical Lead and management provide support. Outputs map to `secav:ReviewRecord`, `secav:ReviewFinding`, and `secav:CompetencyAssessment`.
+- `coaching-governance/guides/project-kickoff-alignment.md` — pre-project alignment meeting between the Technical Lead, Coach, and senior management: establishing few but measurable project success objectives (at least one quality/defect metric required), team objectives (may be more aggressive), individual objectives, and the coach's role in preventing goal dilution.
+- `coaching-governance/guides/coach-team-behaviors.md` — team leader behaviors the coach observes: facilitation vs. protagonist role, consensus-based decision-making, building plans the team genuinely believes in, participatory risk management, capability-based work assignment, and respectful team culture. Includes a per-sprint observation checklist and SECAV-O mapping from observed behaviors to coaching interventions.
+- `coaching-governance/guides/code-review-best-practices.md` — evidence-based best practices for code review, covering reviewer and author responsibilities, feedback culture, AI-assisted code, and integration with coaching evidence.
+- `coaching-governance/guides/ai-assisted-code-review.md` — guidance for reviewing AI-assisted code and using AI tools in the review pipeline, including risk triage, false-positive management, data privacy, and SECAV-O integration.
 
 ### Templates
 - `templates/project-planning-quality-gate-review.md` — planning-time review of required quality activities and evidence.

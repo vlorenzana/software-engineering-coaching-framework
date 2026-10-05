@@ -1,4 +1,4 @@
-# Coach Committee
+﻿# Coach Committee
 
 ## Purpose
 
@@ -70,7 +70,7 @@ The committee is responsible for:
 - maintaining the competency scale and ensuring all coaches apply it consistently (`secav:CompetencyAssessment`);
 - reviewing and updating coaching templates and evidence standards;
 - approving changes to the framework's local configuration (adapted acceptance criteria, added competency types, etc.);
-- monitoring that the Code of Ethics (`docs/coach-code-of-ethics.md`) is observed across all coaches.
+- monitoring that the Code of Ethics (`coaching-governance/docs/coach-code-of-ethics.md`) is observed across all coaches.
 
 ### 4.3 Coach assignment
 
@@ -118,7 +118,7 @@ The committee aggregates the organizational indicator data from individual engin
 
 The committee coordinates; it does not override. Each coach retains autonomy over their coaching decisions within their assigned teams, following the framework and the Code of Ethics. The committee may set standards, but it cannot direct a coach to issue a specific competency assessment or coaching recommendation.
 
-This boundary is consistent with the principle in `docs/coach-code-of-ethics.md` that coaching evidence must be distinguished from organizational pressure and that engineer dignity and professional autonomy must be preserved.
+This boundary is consistent with the principle in `coaching-governance/docs/coach-code-of-ethics.md` that coaching evidence must be distinguished from organizational pressure and that engineer dignity and professional autonomy must be preserved.
 
 ---
 

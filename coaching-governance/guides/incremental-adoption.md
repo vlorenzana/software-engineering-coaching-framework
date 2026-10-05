@@ -1,4 +1,4 @@
-# Incremental Adoption and Fail Fast
+﻿# Incremental Adoption and Fail Fast
 
 ## Purpose
 
@@ -146,7 +146,7 @@ The following framework concepts are directly relevant to incremental adoption:
 
 | Document | Role |
 |---|---|
-| `guides/incremental-adoption.md` (this file) | Strategic philosophy, decision structure, and phasing |
+| `coaching-governance/guides/incremental-adoption.md` (this file) | Strategic philosophy, decision structure, and phasing |
 | `pilot/pilot-protocol.md` | Operational protocol: participants, stages, measurements, evidence to retain, pilot outputs |
 
 Use this guide to decide *when and how to phase* adoption. Use the pilot protocol to *execute* each phase.

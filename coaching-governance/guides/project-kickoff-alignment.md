@@ -1,4 +1,4 @@
-# Alineación de Objetivos de Proyecto: Reunión Pre-Inicio
+﻿# Alineación de Objetivos de Proyecto: Reunión Pre-Inicio
 
 ## Propósito
 
@@ -117,8 +117,8 @@ El coach no es un espectador en esta reunión. Sus responsabilidades específica
 
 | Documento | Relación |
 |---|---|
-| `docs/project-planning-participation.md` | Participación formal del coach en planificación y escalación |
-| `docs/institutional-alignment.md` | Método para conectar objetivos de coaching con objetivos institucionales |
+| `coaching-governance/docs/project-planning-participation.md` | Participación formal del coach en planificación y escalación |
+| `coaching-governance/docs/institutional-alignment.md` | Método para conectar objetivos de coaching con objetivos institucionales |
 | `templates/annual-coaching-plan.md` | Plan donde se registran los objetivos acordados |
 | `templates/quality-planning-dissent-and-escalation.md` | Mecanismo formal si los objetivos se diluyen sin justificación |
 | `templates/metrics-register.csv` | Registro de métricas y umbrales acordados |

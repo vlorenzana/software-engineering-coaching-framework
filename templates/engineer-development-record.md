@@ -1,4 +1,4 @@
-# Engineer Development Record
+﻿# Engineer Development Record
 
 > **PROPOSAL** — This template is proposed for adoption. It is a longitudinal development record complementing `templates/engineer-coaching-assessment.md`, which covers per-sprint activity-level assessments. This record spans multiple cycles and coaches.
 
@@ -22,7 +22,7 @@ Every rating requires at least one entry in Section 5 (Impact Evidence). A level
 | 3 | Team reference | Elevates others and resolves ambiguity. |
 | 4 | Multi-team reference | Defines standards with organizational impact. |
 
-**Mapping to SECAV-O competency-growth scale** (`docs/competency-growth-scale.md`):
+**Mapping to SECAV-O competency-growth scale** (`coaching-governance/docs/competency-growth-scale.md`):
 
 | This record (4-level) | SECAV-O coaching-cycle scale (6-level) |
 |---|---|
@@ -168,4 +168,4 @@ Updated at the end of each cycle. These indicators feed team- and organization-l
 | Review participation (from `templates/metrics-register.csv`) | | | | |
 | Coaching objectives aligned to institutional objectives (Y/N) | | | | |
 
-*See `docs/metrics-model.md` for metric definitions and interpretation guidance.*
+*See `coaching-governance/docs/metrics-model.md` for metric definitions and interpretation guidance.*

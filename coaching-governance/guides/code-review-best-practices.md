@@ -1,4 +1,4 @@
-# Code Review Best Practices
+﻿# Code Review Best Practices
 
 ## Purpose
 
@@ -146,15 +146,15 @@ Within SECAV-O, `secav:ReviewFinding` instances are subclasses of `secav:Evidenc
 - Track reviewer quality: does the reviewer produce `secav:ReviewFinding` evidence of substance, or only style-level findings?
 - Avoid using review metrics (defect counts, approval rates) in isolation as performance measures. High defect counts found in review may reflect effective review, not weak engineering.
 - Never use review participation metrics as instruments for performance ranking or punitive decisions.
-- Document `secav:ReviewCompetency` growth using the longitudinal scale in `docs/competency-growth-scale.md`.
+- Document `secav:ReviewCompetency` growth using the longitudinal scale in `coaching-governance/docs/competency-growth-scale.md`.
 
-See `docs/metrics-model.md` §2 for the full set of review and inspection metrics.
+See `coaching-governance/docs/metrics-model.md` §2 for the full set of review and inspection metrics.
 
 ---
 
 ## 9. AI-assisted code and review
 
-When the artifact under review was produced or modified with AI assistance, additional considerations apply. See `guides/ai-assisted-code-review.md` for the full guidance, including layered pipeline design, risk-based triage, false-positive management, data privacy, and metrics.
+When the artifact under review was produced or modified with AI assistance, additional considerations apply. See `coaching-governance/guides/ai-assisted-code-review.md` for the full guidance, including layered pipeline design, risk-based triage, false-positive management, data privacy, and metrics.
 
 Key ontology points:
 

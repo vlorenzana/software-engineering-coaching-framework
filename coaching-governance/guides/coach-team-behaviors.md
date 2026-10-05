@@ -1,10 +1,10 @@
-# Comportamientos del Líder de Equipo: Guía de Observación para el Coach
+﻿# Comportamientos del Líder de Equipo: Guía de Observación para el Coach
 
 ## Propósito
 
 Esta guía describe conductas concretas y verificables que el coach debe observar en el **líder de equipo** durante su trabajo diario. Cada conducta es un indicador observable que el coach puede recoger como `secav:Evidence` para informar una `secav:CompetencyAssessment` y, cuando corresponda, planificar una `secav:CoachingIntervention`.
 
-A diferencia del Código de Ética (`docs/coach-code-of-ethics.md`), que establece los principios del coach, esta guía es una herramienta de observación: le dice al coach qué señales positivas buscar y qué señales de alerta deben derivar en una intervención.
+A diferencia del Código de Ética (`coaching-governance/docs/coach-code-of-ethics.md`), que establece los principios del coach, esta guía es una herramienta de observación: le dice al coach qué señales positivas buscar y qué señales de alerta deben derivar en una intervención.
 
 > El coach no evalúa al líder como superior jerárquico — evalúa las conductas como evidencia de competencias de facilitación, liderazgo de equipo y toma de decisiones.
 
@@ -180,11 +180,11 @@ El coach completa esta lista al final de cada sprint o ciclo de observación. Lo
 
 | Documento | Relación |
 |---|---|
-| `docs/coach-code-of-ethics.md` | Principios éticos que guían la observación y la intervención del coach |
-| `docs/coach-committee.md` | El Comité puede revisar patrones de observación entre coaches para calibración |
-| `docs/project-planning-participation.md` | Participación formal del coach en planificación y escalación de calidad |
+| `coaching-governance/docs/coach-code-of-ethics.md` | Principios éticos que guían la observación y la intervención del coach |
+| `coaching-governance/docs/coach-committee.md` | El Comité puede revisar patrones de observación entre coaches para calibración |
+| `coaching-governance/docs/project-planning-participation.md` | Participación formal del coach en planificación y escalación de calidad |
 | `templates/quality-planning-dissent-and-escalation.md` | Plantilla para documentar y escalar desacuerdos no resueltos internamente |
-| `guides/risk-management.md` | Protocolo detallado de gestión de riesgos |
+| `coaching-governance/guides/risk-management.md` | Protocolo detallado de gestión de riesgos |
 | `templates/sprint-retrospective.md` | Espacio donde el coach registra observaciones del líder |
 | `templates/engineer-coaching-assessment.md` | Plantilla de evaluación de competencias para el líder observado |
 | `templates/engineer-development-record.md` | Registro longitudinal donde se acumulan las observaciones y evidencias del ciclo |
