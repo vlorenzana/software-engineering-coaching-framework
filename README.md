@@ -15,6 +15,9 @@ Institutional / Project Objectives -> Project Planning & Quality Governance -> T
 
 ## Included artifacts
 
+### Glossary
+- `coaching-governance/glossary/glossary.md` — authoritative definitions for all terms introduced or specialized by the framework: calidad mínima razonable, módulo crítico, inspección formal, revisión de pares, observador silencioso, asistente de calidad, principios FIRST, patrón AAA/GWT, BVA, phaseInjected/phaseDetected/detectionMethod, tasa de escape, Fail Fast, PoC, trazador de extremo a extremo, Go/Pivot/Stop, sprint de coaching, ImprovementAction, QualityPlanningConcern, acción preventiva/correctiva, and more. 30 entries across 8 thematic sections.
+
 ### Operating model
 - `coaching-governance/docs/project-planning-participation.md` — coach participation in project planning, quality-gate advocacy, formal dissent and escalation.
 - `coaching-governance/docs/team-coaching-lifecycle.md` — coaching from team inception/launch through member preparation, baseline establishment and ongoing onboarding.
