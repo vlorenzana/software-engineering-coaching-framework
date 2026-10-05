@@ -2,6 +2,11 @@
 
 > **PROPOSAL** — This template is proposed for adoption. It is a longitudinal development record complementing `templates/engineer-coaching-assessment.md`, which covers per-sprint activity-level assessments. This record spans multiple cycles and coaches.
 
+**This artifact has three companion files:**
+- `templates/engineer-development-record.md` — this blank template
+- `examples/example-engineer-development-record.md` — completed example (Valeria Montes, including a coach change in July)
+- `templates/organizational-competency-view.csv` — aggregated organizational view across engineers
+
 **One format across all coaches.** The record belongs to the engineer and the organization, not to the coach assigned at any given time. Any coach can pick it up without losing context; data is comparable across teams.
 
 ---

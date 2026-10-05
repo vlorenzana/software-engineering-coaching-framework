@@ -41,6 +41,8 @@ Institutional / Project Objectives -> Project Planning & Quality Governance -> T
 - `templates/coach-ethics-acknowledgement.md` — acknowledgement of coaching ethics obligations.
 - `templates/engineer-coaching-assessment.md` — coaching assessment/evidence template.
 - `templates/engineer-development-record.md` — **(proposal)** longitudinal engineer development record spanning multiple cycles and coaches, with competency tracking, session log, 360 feedback, coach handoffs, and organizational indicators.
+- `templates/organizational-competency-view.csv` — **(proposal)** aggregated organizational view: one row per engineer per cycle, enabling team-level competency averages, objective progress, and promotion/retention risk flags.
+- `examples/example-engineer-development-record.md` — **(proposal)** fully completed example of the engineer development record (fictional engineer Valeria Montes, including a coach change in July).
 - `templates/metrics-register.csv` — metric collection register.
 - `templates/defect-log.csv` — defect phase-injected / phase-detected log.
 - `templates/competency-trend.csv` — competency progression tracker.
