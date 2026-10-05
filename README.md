@@ -40,6 +40,7 @@ Institutional / Project Objectives -> Project Planning & Quality Governance -> T
 - `templates/institutional-alignment-matrix.csv` — mapping between institutional and coaching objectives.
 - `templates/coach-ethics-acknowledgement.md` — acknowledgement of coaching ethics obligations.
 - `templates/engineer-coaching-assessment.md` — coaching assessment/evidence template.
+- `templates/engineer-development-record.md` — **(proposal)** longitudinal engineer development record spanning multiple cycles and coaches, with competency tracking, session log, 360 feedback, coach handoffs, and organizational indicators.
 - `templates/metrics-register.csv` — metric collection register.
 - `templates/defect-log.csv` — defect phase-injected / phase-detected log.
 - `templates/competency-trend.csv` — competency progression tracker.
