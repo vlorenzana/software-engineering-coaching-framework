@@ -1,134 +1,79 @@
-# Software Engineering Coaching Framework
+# SECAV-O Coaching Lifecycle, Planning, Risk, Alignment and Ethics Artifacts
 
-**Prototype version:** 0.1.0  
-**Status:** Initial experimental prototype
+This package extends the SECAV-O coaching operating model with six connected governance dimensions:
 
-This repository contains an open, competency-based and ontology-supported framework intended to assist developer coaching in AI-assisted software engineering.
+1. team coaching from team inception / planning / launch, including member preparation and onboarding;
+2. annual coaching planning executed through Coaching Sprints;
+3. risk management with preventive and corrective actions;
+4. explicit alignment between coaching objectives and institutional objectives; and
+5. a Code of Ethics for coaches; and
+6. formal coach participation in project planning, quality advocacy, documented dissent and proportional escalation when material quality activities are omitted or weakened.
 
-The framework connects:
+## Core cycle
 
-**Engineering Activity → Artifact → Competency → Acceptance Criteria → Observable Evidence → Measurement → AI Assistance → Human Validation → Coaching Intervention**
+Institutional / Project Objectives -> Project Planning & Quality Governance -> Team Inception & Launch -> Member Preparation -> Initial Baselines -> Annual Coaching Plan -> Risk Plan -> Coaching Sprint -> Evidence & Metrics -> Coaching Intervention -> Sprint Retrospective -> Risk Review -> Replanning -> Competency Trend -> New-Member Onboarding -> Institutional Alignment Review
 
-Its purpose is to help coaches, engineering leaders, educators, and software teams make engineering expectations, evidence, review responsibilities, and coaching decisions more explicit and reusable.
+## Included artifacts
 
-## Problem addressed
+### Operating model
+- `docs/project-planning-participation.md` — coach participation in project planning, quality-gate advocacy, formal dissent and escalation.
+- `docs/team-coaching-lifecycle.md` — coaching from team inception/launch through member preparation, baseline establishment and ongoing onboarding.
+- `docs/coaching-cycle.md` — annual planning, sprint execution, retrospectives and replanning.
+- `docs/risk-management.md` — coaching risk-management model.
+- `docs/institutional-alignment.md` — method for connecting individual coaching objectives to institutional objectives.
+- `docs/coach-code-of-ethics.md` — SECAV-O Code of Ethics for coaches.
+- `docs/metrics-model.md` — defects, reviews, inspections, unit tests and competency-growth metrics.
+- `docs/competency-growth-scale.md` — longitudinal competency maturity scale.
 
-AI-assisted development can increase the speed and volume of software production, but software teams still require engineering judgment, architecture, testing, security review, maintainability, quality measurement, planning discipline, and continued development of human engineering competencies.
+### Templates
+- `templates/project-planning-quality-gate-review.md` — planning-time review of required quality activities and evidence.
+- `templates/quality-planning-dissent-and-escalation.md` — formal quality concern, dissent, management response and escalation record.
+- `templates/team-launch-coaching-plan.md` — launch/planning artifact for team objectives, project context, risks, member preparation and initial coaching baselines.
+- `templates/member-preparation-checklist.md` — readiness checklist before team launch.
+- `templates/new-member-onboarding.md` — structured onboarding for members joining after launch, including project context, objectives, risks and growth baseline.
+- `templates/annual-coaching-plan.md` — annual plan with institutional alignment and annual risk plan.
+- `templates/coaching-sprint-plan.md` — sprint planning/replanning, including sprint risk review.
+- `templates/sprint-retrospective.md` — retrospective with objective, metric and risk follow-up.
+- `templates/risk-register.csv` — risk register including probability, impact, preventive and corrective actions.
+- `templates/institutional-alignment-matrix.csv` — mapping between institutional and coaching objectives.
+- `templates/coach-ethics-acknowledgement.md` — acknowledgement of coaching ethics obligations.
+- `templates/engineer-coaching-assessment.md` — coaching assessment/evidence template.
+- `templates/metrics-register.csv` — metric collection register.
+- `templates/defect-log.csv` — defect phase-injected / phase-detected log.
+- `templates/competency-trend.csv` — competency progression tracker.
+- `templates/coaching-backlog.csv` — coaching improvement-action tracker.
 
-This project does **not** assume that AI-generated code is inherently unsafe, nor that automation can replace accountable engineering judgment. Instead, it models AI assistance and human validation as distinct concepts.
+### Machine-readable artifacts
+- `schemas/project-planning-governance.schema.json` — machine-readable project-planning quality-governance record.
+- `examples/example-quality-planning-escalation.yaml` — worked dissent/escalation example.
+- `schemas/team-coaching-lifecycle.schema.json` — JSON Schema for team launch/preparation/onboarding records.
+- `examples/example-team-launch-and-onboarding.yaml` — worked lifecycle example.
+- `ontology/secav-o-coaching-governance-extension.ttl` — OWL-aligned extension for planning, risks, alignment, ethics, metrics and retrospectives.
+- `ontology/alignment-matrix.csv` — explicit mapping between extension terms and SECAV-O core concepts.
+- `validation/secav-o-coaching-governance.shacl.ttl` — SHACL constraints for annual plans, objectives, risks, retrospectives and ethics acknowledgements.
+- `schemas/coaching-sprint.schema.json` — JSON Schema for coaching sprint records with alignment and risk fields.
+- `examples/example-coaching-sprint.yaml` — worked example.
 
-## Design principles
+## Governance principles
 
-1. **Competency-based:** competencies are connected to observable engineering activities and evidence.
-2. **Evidence-oriented:** assessment should rely on work products, review findings, measurements, and repeated observations.
-3. **Human-accountable:** AI assistance is represented separately from human validation.
-4. **Methodology-agnostic:** the model is not tied to Scrum, TSP/PSP, CMMI, or another single process framework.
-5. **Open and reusable:** the project is intended to support independent review, adaptation, teaching, and experimentation.
-6. **Ontology-supported:** engineering concepts and relationships are represented explicitly in RDF/OWL-compatible form.
-7. **Incremental:** v0.1 covers a deliberately small domain and will be extended through expert review and pilot evidence.
+- Coaching objectives should be traceable to an institutional, team, quality, engineering, security, workforce, or learning objective where appropriate.
+- Risk management is part of the annual plan and is reviewed during every sprint retrospective.
+- Each risk records probability, impact, preventive actions, corrective/contingency actions, owner, status and review history.
+- Coaching metrics are evidence for improvement, not instruments for punishment or isolated performance ranking.
+- Coaches must protect confidentiality, avoid conflicts of interest, distinguish evidence from opinion, and preserve engineer dignity and professional autonomy.
 
-## Repository structure
+## Claim boundary
 
-- `ontology/secav-o.ttl` — initial ontology prototype
-- `validation/secav-o.shacl.ttl` — initial SHACL validation shapes
-- `examples/design-review.ttl` — worked design-review example
-- `docs/architecture.md` — conceptual architecture and scope
-- `docs/competency-questions.md` — competency questions guiding the ontology
-- `pilot/pilot-protocol.md` — initial protocol for future pilot validation
-- `CHANGELOG.md` — version history
-- `CITATION.cff` — citation metadata
-- `LICENSE` — open-source license
+These artifacts define an operating and governance model. They do not claim that the metrics are validated predictors of engineer performance, that any numeric target is universally appropriate, or that SECAV-O has been independently validated, standardized, or adopted by third parties.
 
-## Initial scope
 
-The first prototype focuses on:
+## Ontology alignment note
 
-- requirements
-- design
-- coding
-- testing
-- implementation vs. review activities
-- engineering artifacts
-- technical competencies
-- observable evidence
-- measurements and quality criteria
-- AI-assisted work
-- human validation
-- competency assessment
-- coaching interventions
+Version 5 explicitly aligns coaching governance with the SECAV-O core pattern: Engineering Activity -> Artifact -> Competency -> Acceptance Criteria -> Evidence/Measurement -> Coaching Intervention. Baselines, observations and competency trends are modeled as Evidence; ImprovementAction is modeled as a CoachingIntervention specialization; CoachingObjectives target Competencies; CoachingSprints observe EngineeringActivities and collect Artifact/Evidence/Metric information.
 
-## Example design decomposition
+The namespace in this standalone package is still `https://example.org/secav-o#`. Replace it with the canonical namespace from the core `ontology/secav-o.ttl` before merge, and reuse the exact core class identifiers rather than duplicating equivalent terms.
 
-```text
-Software Engineering Process
-└── Design
-    ├── Application Design
-    │   ├── Design Implementation
-    │   └── Design Review
-    └── Unit Test Design
-        ├── Unit Test Design Implementation
-        └── Unit Test Design Review
-```
 
-A Design Implementation activity can produce a Design Artifact. A Design Review evaluates that artifact and produces Review Findings or a Review Record. Both activities may require distinct competencies. If AI assists in creating an artifact, that assistance can be recorded separately from the Human Validation Activity responsible for accepting or rejecting the result.
+## Planning participation and quality advocacy
 
-## Alignment with existing software-engineering ontologies
-
-This project is intended to **reuse or align with existing software-engineering ontology work where technically and legally appropriate**, rather than redefine equivalent concepts unnecessarily.
-
-SEON (Software Engineering Ontology Network) is being evaluated as a reference source for software-process, design, coding, testing, quality, and measurement concepts. Version 0.1 does **not** import SEON modules directly. Alignment will be added only after relevant ontology identifiers, semantics, maintenance status, and reuse/licensing conditions are verified.
-
-Reference:
-- https://dev.nemo.inf.ufes.br/seon/SEON.html
-
-## Validation approach
-
-The ontology expresses domain concepts and relationships. SHACL shapes express selected data-quality and governance constraints.
-
-For example, a recorded AI-assisted engineering activity should identify:
-- the AI system involved;
-- the human-validation activity, where the implementation policy requires it;
-- relevant evidence or work products.
-
-SHACL is used for graph validation, not as a claim that the engineering process itself has been empirically validated.
-
-## Prototype boundary
-
-Version 0.1 is an **initial technical prototype**. It is not represented as:
-- a completed ontology;
-- an industry standard;
-- an accredited assessment method;
-- a validated predictor of engineer performance;
-- an endorsed framework;
-- evidence of third-party adoption.
-
-Those claims would require separate evidence.
-
-## Roadmap
-
-### v0.1
-- core classes and relationships
-- initial design-review example
-- competency questions
-- basic SHACL constraints
-- pilot protocol
-
-### v0.2
-- requirements, coding, testing, architecture, and security examples
-- competency-level representation
-- expanded evidence and measurement model
-- candidate alignment mappings to existing ontologies
-
-### v0.3+
-- expert review
-- pilot feedback
-- evidence-driven revisions
-- documented interoperability/alignment decisions
-
-## Author
-
-Victor Hugo Lorenzana González, M.Eng. in Software Engineering
-
-## License
-
-MIT License. See [LICENSE](LICENSE).
+Version 5 adds a formal governance role for the coach in project planning. The recommended model gives the coach an explicit voice in planning and, when granted by the adopting organization, a vote on decisions that materially affect quality, competency development and human validation. The coach can raise a documented quality-planning concern when reviews, peer reviews, inspections, unit-test activities or other material quality controls are omitted or weakened. If the residual risk remains material, the coach can record formal dissent and escalate through the defined management chain. SECAV-O does not create legal or managerial authority by itself and does not assume a universal veto right; actual decision rights are defined by each adopting organization.
