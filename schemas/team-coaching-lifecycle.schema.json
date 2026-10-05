@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SECAV-O Team Coaching Lifecycle",
+  "type": "object",
+  "required": [
+    "teamId",
+    "project",
+    "launch",
+    "members"
+  ],
+  "properties": {
+    "teamId": {
+      "type": "string"
+    },
+    "project": {
+      "type": "object",
+      "required": [
+        "name",
+        "objectives"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "institutionalObjectives": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "objectives": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "context": {
+          "type": "string"
+        }
+      }
+    },
+    "launch": {
+      "type": "object",
+      "required": [
+        "date",
+        "eventName"
+      ],
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "eventName": {
+          "type": "string"
+        },
+        "risks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "engineeringExpectations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "members": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "role",
+          "preparation"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "preparation": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "baseline": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "competency": {
+                  "type": "string"
+                },
+                "observation": {
+                  "type": "string"
+                },
+                "evidenceSource": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "newMemberOnboarding": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "joinDate",
+          "contextReviewed",
+          "baseline"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "joinDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "contextReviewed": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "risksReviewed": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "baseline": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  }
+}
