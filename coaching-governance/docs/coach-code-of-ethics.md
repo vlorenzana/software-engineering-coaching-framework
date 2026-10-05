@@ -42,6 +42,15 @@ Where practical, engineers should have an opportunity to provide context, correc
 ### 12. Continuous improvement of coaching
 Coaches should review their own interventions, seek feedback, learn from retrospectives, and adjust methods when evidence shows that an intervention is ineffective or creates unintended consequences.
 
+### 13. Action and results orientation
+Coaching is not purely reflective. Each session is designed to conclude with a concrete action plan containing specific, measurable objectives and defined deadlines. Reflection without commitment to action is incomplete; the coach is responsible for ensuring that insight translates into traceable next steps.
+
+### 14. Self-belief and potential
+Coaching operates under the firm premise that the engineer possesses the internal resources necessary — or the capacity to develop them — to overcome their obstacles and achieve success. The coach's role is to surface and strengthen that latent capability, not to supply answers or create dependency.
+
+### 14. Absence of judgment and empathy
+The coach maintains a neutral, actively listening posture. Coaching sessions take place in an environment of strict confidentiality, where engineers can speak openly without fear of evaluation, exposure, or retaliation. The coach suspends personal judgment, acknowledges the engineer's experience, and responds with empathy — attending to both what is said and what is left unsaid.
+
 ## Ethical escalation
 
 A coach should document and escalate situations involving material conflicts of interest, misuse of confidential evidence, pressure to manipulate metrics, discriminatory treatment, unsafe engineering direction, or requests that contradict professional or organizational obligations.
