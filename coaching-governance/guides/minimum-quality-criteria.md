@@ -4,9 +4,25 @@
 
 En cada fase productiva del desarrollo de software se generan artefactos que condicionan la calidad de todas las fases siguientes. Un defecto introducido en requerimientos que no se detecta hasta pruebas de sistema puede invalidar semanas de trabajo. Un diseño de pruebas unitarias defectuoso puede pasar inadvertido indefinidamente si nadie lo inspecciona.
 
-**El criterio mínimo de calidad razonable es: los artefactos críticos de cada fase deben ser inspeccionados antes de que esa fase concluya.**
+**El criterio de calidad mínima razonable es: los artefactos críticos de cada fase deben ser inspeccionados antes de que esa fase concluya.**
 
-No es necesario inspeccionar todos los artefactos de todas las fases — ese nivel de cobertura no es económicamente viable. Lo que sí es manejable, y necesario, es identificar los artefactos de mayor riesgo en cada fase y asegurar que al menos esos sean revisados formalmente por más de un revisor antes de avanzar.
+---
+
+## Definición: calidad mínima razonable
+
+La **calidad mínima razonable** es el umbral por debajo del cual una organización incurre en mala práctica de ingeniería — independientemente de las restricciones de tiempo o presupuesto que se invoquen para justificarlo. No es el estándar de calidad al que aspirar, sino el piso por debajo del cual el riesgo de fallo sistémico es inaceptable.
+
+La razón de establecer un *mínimo* en lugar de un *óptimo* es que la mayoría de las organizaciones no tienen capacidad para inspeccionar todos los productos de software que genera el desarrollo: requerimientos, diseño de arquitectura, diseño detallado, código, diseño de pruebas unitarias, diseño de pruebas de sistema, diseño de pruebas de aceptación, resultados de ejecución de pruebas, y otros derivados. Inspeccionar todo es un ideal al que conviene aproximarse progresivamente; presuponer que toda organización puede lograrlo desde el inicio es irreal.
+
+Lo que sí es alcanzable en la mayoría de los proyectos — y lo que este framework establece como mínimo razonable — es **identificar los artefactos de mayor riesgo en cada fase y asegurar que al menos esos sean revisados formalmente por más de un revisor antes de avanzar a la siguiente fase**.
+
+| Nivel | Descripción |
+|---|---|
+| **Por debajo del mínimo** | Mala práctica: ningún artefacto crítico de alguna fase es inspeccionado formalmente. Los defectos se acumulan entre fases y se detectan tarde, cuando su costo de corrección es máximo. |
+| **Calidad mínima razonable** | Los artefactos de mayor riesgo de cada fase son inspeccionados por más de un revisor antes de avanzar. Es el piso del framework. |
+| **Calidad aspiracional** | La mayoría o todos los artefactos de cada fase son inspeccionados. Las organizaciones maduran hacia este nivel de forma incremental (`coaching-governance/guides/incremental-adoption.md`). |
+
+Un segundo criterio que refuerza este mínimo: si la presión de tiempo lleva sistemáticamente a omitir inspecciones en alguna fase — cualquier fase — eso es una señal de que el plan de proyecto subestima el esfuerzo de calidad, no de que la inspección sea prescindible. El coach documenta estas omisiones como `secavo:QualityPlanningConcern`.
 
 ---
 
