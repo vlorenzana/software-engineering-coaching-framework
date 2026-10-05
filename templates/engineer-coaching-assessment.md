@@ -1,0 +1,30 @@
+# Engineer Coaching Assessment
+
+- Engineer:
+- Coach:
+- Organization / Team:
+- Assessment Date:
+- Sprint ID:
+- Institutional Objective Link:
+- Coaching Objective Link:
+- Engineering Activity Evaluated:
+- Related Competency:
+- Related Ontology Activity:
+- Artifact / Work Product:
+- Acceptance Criteria:
+- Expected Result:
+- Observed Result:
+- Evidence Reviewed:
+- Metrics Reviewed:
+- Defects / Findings:
+- AI Assistance Used?:
+- Human Validation Performed?:
+- Current Competency Level:
+- Previous Competency Level:
+- Coaching Recommendation:
+- Improvement Action:
+- Related Risk(s):
+- Follow-up Date:
+- Coach Assessment:
+- Engineer Comments:
+- Ethics / confidentiality note (if applicable):
