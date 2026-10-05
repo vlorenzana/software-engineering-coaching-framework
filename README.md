@@ -23,6 +23,7 @@ Institutional / Project Objectives -> Project Planning & Quality Governance -> T
 - `guides/incremental-adoption.md` — strategic guide for incremental framework adoption using the Fail Fast philosophy: PoC, end-to-end tracer, short feedback loops, Go/Pivot/Stop decision criteria, and phased expansion from PoC to organization-wide adoption.
 - `docs/institutional-alignment.md` — method for connecting individual coaching objectives to institutional objectives.
 - `docs/coach-code-of-ethics.md` — SECAV-O Code of Ethics for coaches.
+- `docs/coach-committee.md` — governance model for multi-coach organizations: Coach Committee structure, Lead Coach designation (by management or coach consensus), committee responsibilities, assignment matrix, escalation, and proposed ontology extension.
 - `docs/metrics-model.md` — defects, reviews, inspections, unit tests and competency-growth metrics.
 - `docs/competency-growth-scale.md` — longitudinal competency maturity scale.
 - `guides/code-review-best-practices.md` — evidence-based best practices for code review, covering reviewer and author responsibilities, feedback culture, AI-assisted code, and integration with coaching evidence.
@@ -40,6 +41,7 @@ Institutional / Project Objectives -> Project Planning & Quality Governance -> T
 - `templates/risk-register.csv` — risk register including probability, impact, preventive and corrective actions.
 - `templates/institutional-alignment-matrix.csv` — mapping between institutional and coaching objectives.
 - `templates/coach-ethics-acknowledgement.md` — acknowledgement of coaching ethics obligations.
+- `templates/coach-committee-charter.md` — charter template for the Coach Committee: members, Lead Coach designation, decision rules, assignment matrix, conflict-of-interest declarations, and ethics acknowledgement tracking.
 - `templates/engineer-coaching-assessment.md` — coaching assessment/evidence template.
 - `templates/engineer-development-record.md` — **(proposal)** longitudinal engineer development record spanning multiple cycles and coaches, with competency tracking, session log, 360 feedback, coach handoffs, and organizational indicators.
 - `templates/organizational-competency-view.csv` — **(proposal)** aggregated organizational view: one row per engineer per cycle, enabling team-level competency averages, objective progress, and promotion/retention risk flags.
