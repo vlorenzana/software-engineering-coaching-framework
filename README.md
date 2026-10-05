@@ -19,6 +19,7 @@ Institutional / Project Objectives -> Project Planning & Quality Governance -> T
 - `coaching-governance/docs/project-planning-participation.md` — coach participation in project planning, quality-gate advocacy, formal dissent and escalation.
 - `coaching-governance/docs/team-coaching-lifecycle.md` — coaching from team inception/launch through member preparation, baseline establishment and ongoing onboarding.
 - `coaching-governance/docs/coaching-cycle.md` — annual planning, sprint execution, retrospectives and replanning.
+- `coaching-governance/guides/defect-tracking.md` — coach closes bug tickets in the tracking system (Jira etc.) to collect consistent defect metrics (`secavo:DefectObservation`, `secavo:phaseInjected`, `secavo:phaseDetected`). When the coach is overloaded, a team member can be designated as Quality Assistant after training and under monitored supervision; the assistant role is also a coaching and competency development opportunity.
 - `coaching-governance/guides/risk-management.md` — coaching risk-management model.
 - `coaching-governance/guides/incremental-adoption.md` — strategic guide for incremental framework adoption using the Fail Fast philosophy: PoC, end-to-end tracer, short feedback loops, Go/Pivot/Stop decision criteria, and phased expansion from PoC to organization-wide adoption.
 - `coaching-governance/docs/institutional-alignment.md` — method for connecting individual coaching objectives to institutional objectives.
