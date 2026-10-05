@@ -1,0 +1,71 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix secavo: <https://example.org/secav-o#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+secavo:AnnualCoachingPlanShape a sh:NodeShape ;
+  sh:targetClass secavo:AnnualCoachingPlan ;
+  sh:property [ sh:path secavo:hasObjective ; sh:minCount 1 ; sh:class secavo:CoachingObjective ] ;
+  sh:property [ sh:path secavo:hasSprint ; sh:minCount 1 ; sh:class secavo:CoachingSprint ] ;
+  sh:property [ sh:path secavo:governedByEthicsCode ; sh:minCount 1 ; sh:class secavo:CoachEthicsCode ] .
+
+secavo:CoachingObjectiveShape a sh:NodeShape ;
+  sh:targetClass secavo:CoachingObjective ;
+  sh:property [ sh:path secavo:targetsCompetency ; sh:minCount 1 ; sh:class secavo:Competency ] ;
+  sh:property [ sh:path secavo:alignsWithInstitutionalObjective ; sh:minCount 1 ; sh:class secavo:InstitutionalObjective ] .
+
+secavo:RiskShape a sh:NodeShape ;
+  sh:targetClass secavo:Risk ;
+  sh:property [ sh:path secavo:riskProbability ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:decimal ; sh:minInclusive 0 ; sh:maxInclusive 1 ] ;
+  sh:property [ sh:path secavo:riskImpact ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:decimal ; sh:minInclusive 0 ; sh:maxInclusive 1 ] ;
+  sh:property [ sh:path secavo:hasPreventiveAction ; sh:minCount 1 ; sh:class secavo:PreventiveAction ] ;
+  sh:property [ sh:path secavo:hasCorrectiveAction ; sh:minCount 1 ; sh:class secavo:CorrectiveAction ] .
+
+secavo:SprintRetrospectiveShape a sh:NodeShape ;
+  sh:targetClass secavo:SprintRetrospective ;
+  sh:property [ sh:path secavo:retrospectiveDate ; sh:maxCount 1 ; sh:datatype xsd:date ] .
+
+secavo:EthicsAcknowledgementShape a sh:NodeShape ;
+  sh:targetClass secavo:EthicsAcknowledgement ;
+  sh:property [ sh:path secavo:acknowledgesEthicsCode ; sh:minCount 1 ; sh:maxCount 1 ; sh:class secavo:CoachEthicsCode ] ;
+  sh:property [ sh:path secavo:ethicalCommitmentDate ; sh:maxCount 1 ; sh:datatype xsd:date ] .
+
+
+secavo:TeamCoachingInitiationShape a sh:NodeShape ;
+  sh:targetClass secavo:TeamCoachingInitiation ;
+  sh:property [ sh:path secavo:initiatesCoachingForTeam ; sh:minCount 1 ; sh:class secavo:Team ] ;
+  sh:property [ sh:path secavo:teamLaunchDate ; sh:maxCount 1 ; sh:datatype xsd:date ] .
+
+secavo:MemberPreparationShape a sh:NodeShape ;
+  sh:targetClass secavo:MemberPreparation ;
+  sh:or (
+    [ sh:property [ sh:path secavo:preparesMemberForActivity ; sh:minCount 1 ; sh:class secavo:EngineeringActivity ] ]
+    [ sh:property [ sh:path secavo:preparesMemberForCompetency ; sh:minCount 1 ; sh:class secavo:Competency ] ]
+  ) .
+
+secavo:MemberOnboardingShape a sh:NodeShape ;
+  sh:targetClass secavo:MemberOnboarding ;
+  sh:property [ sh:path secavo:onboardsMemberToTeam ; sh:minCount 1 ; sh:class secavo:Team ] ;
+  sh:property [ sh:path secavo:memberJoinDate ; sh:maxCount 1 ; sh:datatype xsd:date ] ;
+  sh:property [ sh:path secavo:establishesMemberBaseline ; sh:minCount 1 ; sh:class secavo:MemberBaseline ] .
+
+secavo:MemberBaselineShape a sh:NodeShape ;
+  sh:targetClass secavo:MemberBaseline ;
+  sh:property [ sh:path secavo:baselineForCompetency ; sh:minCount 1 ; sh:class secavo:Competency ] .
+
+# v5 planning participation and escalation shapes
+secavo:ProjectPlanningParticipationShape a sh:NodeShape ;
+  sh:targetClass secavo:ProjectPlanningParticipation ;
+  sh:property [ sh:path secavo:participatesInProjectPlanning ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path secavo:participationMode ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path secavo:mayRaiseFormalDissent ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:boolean ] ;
+  sh:property [ sh:path secavo:mayEscalate ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:boolean ] .
+
+secavo:QualityPlanningConcernShape a sh:NodeShape ;
+  sh:targetClass secavo:QualityPlanningConcern ;
+  sh:property [ sh:path secavo:concernAboutDecision ; sh:minCount 1 ] ;
+  sh:property [ sh:path secavo:createsRisk ; sh:minCount 1 ] .
+
+secavo:EscalationShape a sh:NodeShape ;
+  sh:targetClass secavo:Escalation ;
+  sh:property [ sh:path secavo:escalatesConcern ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path secavo:escalationLevel ; sh:minCount 1 ; sh:maxCount 1 ] .
