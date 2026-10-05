@@ -1,0 +1,29 @@
+extension_term,core_term_or_parent,alignment_type,purpose
+Baseline,Evidence,rdfs:subClassOf,Initial comparison evidence
+MeasurementObservation,Evidence,rdfs:subClassOf,Measured observable evidence
+DefectObservation,MeasurementObservation,rdfs:subClassOf,Defect-specific evidence
+ReviewObservation,MeasurementObservation,rdfs:subClassOf,Peer review or inspection evidence
+UnitTestObservation,MeasurementObservation,rdfs:subClassOf,Unit testing evidence
+CompetencyTrend,Evidence,rdfs:subClassOf,Longitudinal competency evidence
+ImprovementAction,CoachingIntervention,rdfs:subClassOf,Targeted improvement/coaching action
+CoachingObjective,Competency,targetsCompetency,Connect objective to capability
+CoachingSprint,EngineeringActivity,observesActivity,Connect sprint to real engineering activity
+CoachingSprint,Artifact,usesArtifactEvidence,Connect observed work products
+CoachingSprint,AcceptanceCriteria,usesAcceptanceCriteria,Connect expected quality criteria
+CoachingSprint,Evidence,collectsEvidence,Collect observable evidence
+CoachingSprint,CoachingIntervention,implementsCoachingIntervention,Record targeted coaching intervention
+TeamCoachingInitiation,CoachingIntervention,rdfs:subClassOf,Start coaching at team inception or launch
+MemberPreparation,CoachingIntervention,rdfs:subClassOf,Prepare members before normal team delivery
+MemberOnboarding,CoachingIntervention,rdfs:subClassOf,Coach integration of members joining an active team
+MemberBaseline,Baseline -> Evidence,rdfs:subClassOf,Initial member growth evidence
+MemberPreparation,EngineeringActivity,preparesMemberForActivity,Connect preparation to expected real work
+MemberPreparation,Competency,preparesMemberForCompetency,Connect preparation to capabilities required
+CoachingObjective,ProjectObjective,alignsWithProjectObjective,Trace individual development to project outcomes
+TeamCoachingInitiation / MemberOnboarding,Risk,communicatesRisk,Reuse risk context during launch/onboarding
+ProjectPlanningParticipation,CoachingIntervention,Specialized coaching intervention that participates in project planning and quality governance
+PlanningDecision,Governance concept,Records a project planning decision affecting engineering work or quality controls
+QualityActivityRequirement,EngineeringActivity linkage,Represents a planned quality activity requirement linked to a SECAV-O EngineeringActivity
+QualityPlanningConcern,Evidence,Documents an evidence-based concern about a planning decision or omitted quality activity
+FormalDissent,Evidence,Preserves traceable professional dissent when a material quality concern remains unresolved
+Escalation,CoachingIntervention,Represents proportional escalation of an unresolved material quality concern
+GovernanceDecision,Evidence,Records the final management decision and residual-risk disposition
