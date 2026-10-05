@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/secav-o/schema/project-planning-governance.schema.json",
+  "title": "SECAV-O Project Planning Quality Governance",
+  "type": "object",
+  "required": ["project", "planning_event", "coach_participation", "quality_activities", "decision"],
+  "properties": {
+    "project": {"type": "string"},
+    "planning_event": {"type": "string"},
+    "coach_participation": {
+      "type": "object",
+      "required": ["mode", "may_raise_formal_dissent", "may_escalate"],
+      "properties": {
+        "mode": {"enum": ["advisory_voice", "voice_and_vote", "other"]},
+        "has_voting_right": {"type": "boolean"},
+        "may_raise_formal_dissent": {"type": "boolean"},
+        "may_escalate": {"type": "boolean"}
+      }
+    },
+    "quality_activities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "applicable", "planned"],
+        "properties": {
+          "name": {"type": "string"},
+          "applicable": {"type": "boolean"},
+          "planned": {"type": "boolean"},
+          "owner": {"type": "string"},
+          "acceptance_criteria": {"type": "string"},
+          "evidence": {"type": "string"},
+          "risk_id": {"type": "string"}
+        }
+      }
+    },
+    "concern": {
+      "type": ["object", "null"],
+      "properties": {
+        "quality_activity": {"type": "string"},
+        "evidence": {"type": "string"},
+        "probability": {"type": "number", "minimum": 0, "maximum": 1},
+        "impact": {"type": "number", "minimum": 0, "maximum": 1},
+        "preventive_action": {"type": "string"},
+        "formal_dissent": {"type": "boolean"},
+        "escalation_level": {"type": "string"}
+      }
+    },
+    "decision": {
+      "type": "object",
+      "required": ["outcome", "owner", "rationale"],
+      "properties": {
+        "outcome": {"type": "string"},
+        "owner": {"type": "string"},
+        "rationale": {"type": "string"},
+        "risk_disposition": {"enum": ["accepted", "mitigated", "deferred", "rejected", "transferred", "not_applicable"]}
+      }
+    },
+    "retrospective_follow_up": {"type": "string"}
+  }
+}
