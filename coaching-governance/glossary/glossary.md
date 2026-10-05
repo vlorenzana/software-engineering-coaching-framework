@@ -7,6 +7,7 @@ Este glosario reúne los términos introducidos o redefinidos por el framework d
 ## Índice temático
 
 - [Calidad y criterios mínimos](#calidad-y-criterios-mínimos)
+- [Documentación y glosarios](#documentación-y-glosarios)
 - [Roles del framework](#roles-del-framework)
 - [Actividades de revisión e inspección](#actividades-de-revisión-e-inspección)
 - [Pruebas unitarias](#pruebas-unitarias)
@@ -76,6 +77,32 @@ Artefacto de escalación generado por el coach cuando una actividad de calidad o
 El coach documenta el artefacto, lo comunica al Líder Técnico y a la gerencia, y si el patrón es recurrente, lo lleva al Comité de Coaches.
 
 **Término SECAV-O asociado:** `secavo:QualityPlanningConcern`
+
+---
+
+## Documentación y glosarios
+
+### Glosario primario
+*Fuente: `coaching-governance/guides/requirements-inspection.md`*
+
+Glosario ubicado al **inicio** de un documento de requerimientos (o de cualquier documento técnico) que contiene los términos sin los cuales el lector no puede interpretar correctamente el documento. Si un término del glosario primario es ambiguo, todos los requerimientos que lo usan heredan esa ambigüedad.
+
+Los términos del glosario primario son productos de trabajo inspeccionables con el mismo rigor que un requerimiento: **deben ser discutidos por dos o más revisores de forma independiente** antes de ser aceptados. Un término que dos revisores interpretan de forma distinta es un `secav:ReviewFinding` que debe resolverse antes de aprobar los requerimientos que lo usan.
+
+Criterios de calidad de un término del glosario primario: interpretación unívoca entre revisores, definición operacional (permite decidir si algo pertenece o no al concepto), consistencia con otros términos, y correspondencia con el uso del dominio de negocio.
+
+Contrasta con el [glosario secundario](#glosario-secundario).
+
+**Término SECAV-O asociado:** `secav:DesignArtifact` (parte del documento), `secav:QualityCriterion`, `secav:ReviewFinding`
+
+---
+
+### Glosario secundario
+*Fuente: `coaching-governance/guides/requirements-inspection.md`*
+
+Glosario ubicado al **final** de un documento de requerimientos que contiene términos de apoyo: acrónimos, referencias a sistemas externos, convenciones de nomenclatura, y términos técnicos que aparecen ocasionalmente pero no son centrales para la comprensión del documento.
+
+A diferencia del [glosario primario](#glosario-primario), los términos del glosario secundario tienen menor riesgo de propagar ambigüedad y no requieren el mismo nivel de inspección formal, aunque sí deben ser revisados por al menos un revisor adicional al autor.
 
 ---
 

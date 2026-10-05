@@ -54,7 +54,34 @@ El proceso sigue las mismas cinco fases que la inspección formal de código (`c
 
 ---
 
-## 4. Criterios de calidad de un requerimiento
+## 4. Glosario del documento de requerimientos
+
+### 4.1 Estructura recomendada: dos niveles
+
+Un documento de requerimientos debe incluir dos glosarios:
+
+- **Glosario primario** — al inicio del documento, antes de los requerimientos. Contiene los términos sin los cuales el lector no puede interpretar correctamente los requerimientos. Si un término del glosario primario es ambiguo o interpretado de forma distinta por dos lectores, los requerimientos que lo usan heredan esa ambigüedad.
+
+- **Glosario secundario** — al final del documento. Contiene términos de apoyo: acrónimos, referencias a sistemas externos, convenciones de nomenclatura, términos técnicos que aparecen ocasionalmente pero no son centrales para la comprensión del documento.
+
+### 4.2 Los términos del glosario primario son productos de trabajo inspeccionables
+
+Un término del glosario primario es un artefacto con el mismo riesgo de ambigüedad que un requerimiento. Al igual que con los requerimientos, **un término solo es inequívoco cuando dos o más revisores lo interpretan de la misma forma de forma independiente**. Un autor no puede detectar la ambigüedad de su propia definición porque la leerá con la interpretación que ya tiene en mente.
+
+Los inspectores deben verificar cada término del glosario primario del mismo modo que verifican los requerimientos:
+
+| Criterio | Pregunta |
+|---|---|
+| **¿Todos lo interpretan igual?** | Cada inspector anota su comprensión del término antes de la reunión y compara |
+| **¿La definición es operacional?** | ¿Permite decidir, sin ambigüedad, si algo pertenece o no al concepto? |
+| **¿Es consistente con otros términos?** | ¿Contradice o superpone el significado de otro término del glosario? |
+| **¿Refleja el dominio del negocio?** | ¿Coincide con el uso del término por parte de los stakeholders? |
+
+Un término del glosario primario con dos interpretaciones distintas entre los inspectores es un `secav:ReviewFinding` que debe resolverse antes de que los requerimientos que lo usan sean aprobados.
+
+---
+
+## 5. Criterios de calidad de un requerimiento
 
 Los inspectores evalúan cada requerimiento contra estos criterios (`secav:QualityCriterion`):
 
@@ -69,7 +96,7 @@ Los inspectores evalúan cada requerimiento contra estos criterios (`secav:Quali
 
 ---
 
-## 5. Rol del coach
+## 6. Rol del coach
 
 El coach asiste a la reunión de inspección como **observador silencioso**, consistente con el protocolo establecido para todas las reuniones de revisión:
 
@@ -78,14 +105,14 @@ El coach asiste a la reunión de inspección como **observador silencioso**, con
 - Verifica que el `secav:ReviewRecord` se está completando con los datos necesarios.
 - Da retroalimentación después de la sesión — grupal, individual, o a la organización — siguiendo el mismo criterio que en peer reviews e inspecciones formales.
 
-### 5.1 Qué observa el coach específicamente
+### 6.1 Qué observa el coach específicamente
 
 - **Preparación individual:** ¿vinieron los inspectores con sus anotaciones previas? Si no, el moderador debería reprogramar — el coach lo registra como señal de alerta.
 - **Profundidad del análisis:** ¿los inspectores están comparando interpretaciones o solo leyendo el requerimiento en voz alta sin contrastar?
 - **Registro de hallazgos:** ¿se están documentando los defectos con suficiente detalle para que el autor pueda corregirlos sin nueva reunión?
 - **Patrón de defectos:** si el mismo tipo de defecto (ej. vaguedad) aparece en la mayoría de los requerimientos, es una señal de proceso — no de un autor individual.
 
-### 5.2 Retroalimentación posterior
+### 6.2 Retroalimentación posterior
 
 | Destinatario | Cuándo | Qué |
 |---|---|---|
@@ -95,7 +122,7 @@ El coach asiste a la reunión de inspección como **observador silencioso**, con
 
 ---
 
-## 6. Integración con SECAV-O
+## 7. Integración con SECAV-O
 
 | Concepto | Término SECAV-O |
 |---|---|
@@ -104,7 +131,8 @@ El coach asiste a la reunión de inspección como **observador silencioso**, con
 | Criterios de calidad evaluados | `secav:QualityCriterion` |
 | Criterio de verificabilidad del requerimiento | `secav:AcceptanceCriterion` |
 | Registro de la inspección | `secav:ReviewRecord` |
-| Hallazgo (ambigüedad, vaguedad, inconsistencia) | `secav:ReviewFinding` |
+| Término del glosario primario con interpretaciones discrepantes | `secav:ReviewFinding` |
+| Hallazgo (ambigüedad, vaguedad, inconsistencia en requerimiento) | `secav:ReviewFinding` |
 | Defecto registrado al cerrar | `secav:DefectRecord`; `secavo:DefectObservation` con `secavo:phaseInjected = "requirements"` |
 | Fase de detección | `secavo:phaseDetected = "requirements review"` |
 | Notas de observación del coach | `secav:WorkProductEvidence` |
@@ -114,7 +142,7 @@ El coach asiste a la reunión de inspección como **observador silencioso**, con
 
 ---
 
-## 7. Documentos relacionados
+## 8. Documentos relacionados
 
 | Documento | Relación |
 |---|---|
