@@ -76,11 +76,11 @@ The framework does not prescribe one universal sprint duration. A coaching sprin
 
 The coaching cycle extends the existing SECAV-O chain:
 
-`Engineering Activity -> Artifact -> Competency -> Acceptance Criteria -> Observable Evidence -> Measurement -> Gap -> Coaching Intervention`
+`Engineering Activity (produces Artifact, assessedAgainst Acceptance Criteria, requiresCompetency) -> Observable Evidence/Measurement -> Competency Gap -> Coaching Intervention`
 
 with a longitudinal loop:
 
-`Baseline -> Objective -> Coaching Sprint -> Evidence -> Measurement -> Retrospective -> Replanning -> Competency Trend`
+`Baseline -> Objective -> Coaching Sprint -> Evidence/Measurement -> Retrospective -> Replanning -> Competency Trend`
 
 
 ## Institutional alignment and risk governance

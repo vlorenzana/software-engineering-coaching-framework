@@ -158,7 +158,7 @@ When the artifact under review was produced or modified with AI assistance, addi
 
 Key ontology points:
 
-- The `secav:CodeImplementation` activity that produced the artifact is linked to `secav:assistedByAI` (an ObjectProperty from `secav:EngineeringActivity` to `secav:AISystem`). Record this in the `secav:ReviewRecord` so the evidence chain is traceable.
+- The `secav:CodeImplementation` activity that produced the artifact is linked to `secav:assistedByAI` (an ObjectProperty from `secav:EngineeringActivity` to `secav:AISystem`). Note in the `secav:ReviewRecord` that the artifact was produced by an AI-assisted activity, so the evidence chain remains traceable.
 - A `secav:CodeReview` of AI-assisted code also qualifies as a `secav:HumanValidationActivity` (both are subclasses of `secav:ReviewActivity`); use `secav:requiresHumanValidation` to link the original AI-assisted activity to this validation step.
 - Apply the same review standards as for human-written code. AI assistance is not a substitute for human review.
 

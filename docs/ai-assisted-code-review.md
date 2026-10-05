@@ -76,7 +76,7 @@ Any change that appears security-sensitive must trigger human review [10]. Monit
 
 ### 3.5 Provide context and configure the tool
 
-Most AI review tools accept project-specific rules, conventions, and focus areas [3][4][16]. If false positives are high, adjust configuration or add more context rather than disabling the tool. Reusable security checklists (SQL injection, XSS, missing authentication, secrets in code) improve consistency [13].
+Most AI review tools accept project-specific rules, conventions, and focus areas [3][4]. If false positives are high, adjust configuration or add more context rather than disabling the tool. Reusable security checklists (SQL injection, XSS, missing authentication, secrets in code) improve consistency [13].
 
 Instruct the AI tool to explicitly mark what **requires human judgment** [13].
 
@@ -87,8 +87,9 @@ Google's AutoCommenter study found that AI-assisted review went beyond tradition
 False positives erode trust quickly and cause reviewers to ignore even legitimate alerts [7][9]. Actions to take:
 
 - Tune sensitivity thresholds based on observed false positive rate.
-- Tag AI suggestions as: **accepted**, **dismissed**, or **false positive**. Teams using this practice report action rates above 30% [15].
-- Note that AI review comments are adopted only 1–19% of the time on average; quality of suggestions matters more than quantity [14].
+e- Tag AI suggestions as: **accepted**, **dismissed**, or **false positive**. Teams using this practice report action
+ rates above 30%.
+- Note that AI review comments are adopted only 1–19% of the time on average; quality of suggestions matters more than quantity.
 - Measure the impact of tuning on PR cycle time and escaped defects [7].
 
 ### 3.7 Integrate into existing workflow
@@ -120,10 +121,10 @@ Review false positives periodically and retune [11].
 
 ## 4. Common errors to avoid
 
-- **Approving because the AI approved.** AI approval does not mean production-ready [16].
+- **Approving because the AI approved.** AI approval does not mean production-ready.
 - **Reducing human review because "the AI ran."** This increases false negatives [13].
 - **Reviewing large diffs line-by-line without a strategy**, or approving without reading [2].
-- **Relying only on diff analysis.** Many tools analyze only changed lines and miss broader context [15].
+- **Relying only on diff analysis.** Many tools analyze only changed lines and miss broader context.
 - **Ignoring the social dimension of review:** mentoring, shared team knowledge, and design discussion are not AI-replaceable [8].
 
 ---
@@ -186,3 +187,5 @@ The AI system used must be recorded as a `secav:AISystem` instance linked via `s
 [12] DEV Community (dixitgurv). *AI-Assisted Code Review: Opportunities and Pitfalls*. https://dev.to/dixitgurv/ai-assisted-code-review-opportunities-and-pitfalls-llp
 
 [13] WebReference. *AI Code Review*. https://webreference.com/ai/building/ai-code-review/
+
+> Sources [14]–[16] were referenced in the original synthesis document but their full URLs could not be verified from the available PDF export. The statistical claims attributed to those sources (adoption rates, action rates, approval warnings) are retained in the text without inline citation numbers until the original references can be confirmed.
