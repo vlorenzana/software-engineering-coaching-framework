@@ -50,7 +50,32 @@ El coach impulsa el consenso como primera opción y ancla las decisiones en las 
 
 ---
 
-## 3. Gestión participativa de riesgos
+## 3. Construcción de planes en los que el equipo cree
+
+Un plan en el que el equipo no cree no se ejecutará con convicción. El coach es responsable no solo de que exista un plan, sino de que los miembros lo entiendan, hayan participado en construirlo, y lo consideren factible y legítimo.
+
+**Conductas observables:**
+
+- Después de construir un plan (sprint, ciclo anual, plan de adopción), el coach verifica activamente si el equipo lo considera alcanzable — no asume que el silencio es acuerdo.
+- Hace preguntas explícitas para detectar reservas: *"¿Ven alguna razón por la que este plan no funcione?"*, *"¿Qué necesitaría cambiar para que esto sea realista para ustedes?"*
+- Cuando alguien expresa una duda o desacuerdo, escucha sin interrumpir y sin descartarlo como obstrucción.
+- Si hay un desacuerdo, convierte el punto en una conversación del equipo, no en una confrontación bilateral. Involucra al resto en buscar una salida: *"¿Alguien ve una alternativa que resuelva la preocupación de X?"*
+- Distingue entre "el equipo llegó a un acuerdo" y "el equipo se resignó" — el segundo no produce un plan creíble ni un compromiso sostenido.
+- Si el desacuerdo no puede resolverse dentro del equipo y afecta compromisos organizacionales materiales, lo documenta y lo escala a gerencia a través del mecanismo formal de disidencia (`templates/quality-planning-dissent-and-escalation.md`), en lugar de suprimirlo o archivarlo.
+- Al cierre del plan, puede pedir una señal explícita de compromiso — no un voto de mayoría, sino una confirmación de que cada persona puede ejecutar su parte con convicción. (*"¿Alguno necesita algo diferente para poder comprometerse con esto?"*)
+
+**Señales de alerta:**
+
+- El plan es presentado como cerrado antes de que el equipo haya podido cuestionarlo.
+- Las dudas expresadas se registran pero no modifican nada — sistemáticamente se archivan sin respuesta real.
+- El coach interpreta el silencio como acuerdo.
+- Cuando alguien discrepa, el coach lo resuelve unilateralmente en lugar de abrir el punto al equipo.
+- Desacuerdos que no pueden resolverse internamente no se escalan — se ignoran o se suprimen.
+- El equipo ejecuta el plan sin poder explicar por qué fue construido de esa forma.
+
+---
+
+## 4. Gestión participativa de riesgos
 
 El coach guía al equipo en la identificación y mitigación de riesgos. No identifica los riesgos solo, ni asigna acciones sin involucrar al equipo.
 
@@ -71,7 +96,7 @@ El coach guía al equipo en la identificación y mitigación de riesgos. No iden
 
 ---
 
-## 4. Distribución del trabajo
+## 5. Distribución del trabajo
 
 El coach asigna trabajo de acuerdo a las capacidades del equipo y mantiene su propia carga de tareas al mínimo necesario. El trabajo de coaching es observar, guiar y evidenciar — no ejecutar.
 
@@ -92,7 +117,7 @@ El coach asigna trabajo de acuerdo a las capacidades del equipo y mantiene su pr
 
 ---
 
-## 5. Respeto y cultura de equipo
+## 6. Respeto y cultura de equipo
 
 El coach establece el tono cultural del equipo a través de sus propias conductas, no solo de sus palabras.
 
@@ -114,7 +139,7 @@ El coach establece el tono cultural del equipo a través de sus propias conducta
 
 ---
 
-## 6. Lista de verificación de autoevaluación
+## 7. Lista de verificación de autoevaluación
 
 El coach puede usar esta lista al final de cada sprint para revisar sus propias conductas. Los ítems marcados como "No" o "No aplica aún" son candidatos a una `secavo:ImprovementAction` en la retrospectiva.
 
@@ -124,6 +149,9 @@ El coach puede usar esta lista al final de cada sprint para revisar sus propias 
 | Distribuí el tiempo de participación en reuniones — no monopolicé la conversación | | | |
 | Las restricciones del proyecto eran visibles y las usamos como base de las decisiones | | | |
 | Buscamos consenso antes de recurrir a votación o decisión unilateral | | | |
+| Verifiqué activamente que el equipo cree en el plan — no asumí que el silencio es acuerdo | | | |
+| Escuché y tramité cada desacuerdo con el plan, sin descartarlo ni suprimirlo | | | |
+| Los desacuerdos no resueltos internamente fueron escalados formalmente si correspondía | | | |
 | Revisamos el registro de riesgos en la retrospectiva | | | |
 | El equipo propuso acciones preventivas — yo no las dicté | | | |
 | Las asignaciones de trabajo consideraron los objetivos de desarrollo de cada ingeniero | | | |
@@ -133,7 +161,7 @@ El coach puede usar esta lista al final de cada sprint para revisar sus propias 
 
 ---
 
-## 7. Integración con SECAV-O
+## 8. Integración con SECAV-O
 
 | Conducta | Término SECAV-O |
 |---|---|
@@ -144,15 +172,20 @@ El coach puede usar esta lista al final de cada sprint para revisar sus propias 
 | Acciones correctivas al materializar un riesgo | `secavo:CorrectiveAction` documentada sin asignación de culpa |
 | Corrección de conducta del coach en retrospectiva | `secavo:ImprovementAction` (subclase de `secav:CoachingIntervention`) |
 | Evidencia de conductas para supervisión del Comité | `secav:WorkProductEvidence`, `secav:ReviewFinding` |
+| Plan construido con el equipo | `secavo:AnnualCoachingPlan`, `secavo:SprintPlan` |
+| Ajuste al plan por desacuerdo | `secavo:ImprovementAction`, `secavo:PlanningDecision` |
+| Escalación formal de desacuerdo | `secavo:GovernanceDecision`; documentado en `secavo:SprintRetrospective` |
 
 ---
 
-## 8. Documentos relacionados
+## 9. Documentos relacionados
 
 | Documento | Relación |
 |---|---|
 | `docs/coach-code-of-ethics.md` | Principios éticos que fundamentan estas conductas |
 | `docs/coach-committee.md` | El Comité puede usar estas conductas como criterio de supervisión |
+| `docs/project-planning-participation.md` | Participación formal del coach en planificación y escalación de calidad |
+| `templates/quality-planning-dissent-and-escalation.md` | Plantilla para documentar y escalar desacuerdos no resueltos internamente |
 | `guides/risk-management.md` | Protocolo detallado de gestión de riesgos |
 | `templates/sprint-retrospective.md` | Espacio donde se recogen y discuten estas conductas |
 | `templates/coach-committee-charter.md` | Registro de supervisión y posibles mejoras del coach |
