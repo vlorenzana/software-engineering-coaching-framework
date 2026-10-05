@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- `docs/code-review-best-practices.md` — evidence-based best practices for code review (reviewer and author responsibilities, size limits, feedback culture, AI-assisted code, coaching integration). Sources: Google Engineering Practices, Microsoft Code with Engineering Playbook, SmartBear/Cisco peer review research.
+
 ### Added — Coaching Governance Extension (v5)
 
 **Operating model documents**

@@ -24,6 +24,7 @@ Institutional / Project Objectives -> Project Planning & Quality Governance -> T
 - `docs/coach-code-of-ethics.md` — SECAV-O Code of Ethics for coaches.
 - `docs/metrics-model.md` — defects, reviews, inspections, unit tests and competency-growth metrics.
 - `docs/competency-growth-scale.md` — longitudinal competency maturity scale.
+- `docs/code-review-best-practices.md` — evidence-based best practices for code review, covering reviewer and author responsibilities, feedback culture, AI-assisted code, and integration with coaching evidence.
 
 ### Templates
 - `templates/project-planning-quality-gate-review.md` — planning-time review of required quality activities and evidence.
