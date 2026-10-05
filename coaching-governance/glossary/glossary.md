@@ -97,6 +97,19 @@ Contrasta con el [glosario secundario](#glosario-secundario).
 
 ---
 
+### Diagrama de estados
+*Fuente: `coaching-governance/guides/design-documentation-standards.md`*
+
+Artefacto de diseño obligatorio (`secav:DesignArtifact`) para cualquier entidad del sistema — clase, módulo, proceso, recurso o flujo de negocio — cuyo comportamiento varía según el estado en el que se encuentre. Su función es hacer visible simultáneamente todo el ciclo de vida del objeto: estados posibles, estado inicial, estados finales, transiciones, condiciones de guarda y acciones.
+
+Un diagrama de estados completo debe incluir: estado inicial explícito (marcado con símbolo estándar), todos los estados posibles, estados finales explícitos, transiciones etiquetadas con el evento o condición que las dispara, condiciones de guarda, y acciones de transición cuando aplique.
+
+La ausencia de un diagrama de estados cuando el sistema tiene estados, o un diagrama incompleto que omite estados finales o transiciones, es un `secav:ReviewFinding` bloqueante para avanzar a implementación.
+
+**Término SECAV-O asociado:** `secav:DesignArtifact`, `secav:DesignReview`, `secav:QualityCriterion`, `secav:ReviewFinding`, `secav:DesignCompetency`
+
+---
+
 ### Glosario secundario
 *Fuente: `coaching-governance/guides/requirements-inspection.md`*
 
