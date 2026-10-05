@@ -1,0 +1,38 @@
+sprintId: CS-2026-01
+engineer: Example Engineer
+coach: Example Coach
+startDate: 2026-10-01
+endDate: 2026-10-31
+institutionalObjectives:
+  - id: IO-QUALITY-01
+    description: Reduce late-phase design defects and strengthen early review effectiveness.
+baselineReference: Annual Coaching Plan 2026 baseline
+objectives:
+  - id: SP-01
+    competency: Design Review
+    institutionalObjectiveId: IO-QUALITY-01
+    expectedOutcome: Perform design review independently using defined acceptance criteria.
+    acceptanceCriteria:
+      - Review identifies material design risks before integration testing.
+      - Findings are documented with evidence and rationale.
+metrics:
+  - name: Late-phase design defects
+    baseline: 6
+    target: 3
+    actual: null
+    source: defect-log.csv
+risks:
+  - id: R-01
+    description: Insufficient design-review samples during the sprint.
+    probability: Medium
+    impact: Medium
+    preventiveAction: Reserve at least two design reviews in the sprint plan.
+    correctiveAction: Extend observation window or use additional reviewed artifacts.
+    owner: Example Coach
+    status: Open
+retrospective:
+  whatImproved: []
+  whatDidNotImprove: []
+  riskReview: []
+  institutionalAlignmentReview: []
+  nextSprintChanges: []
