@@ -4,7 +4,7 @@
 
 No todos los artefactos del sistema merecen el mismo nivel de escrutinio. Las inspecciones formales son una actividad de revisión estructurada, más rigurosa que una revisión de código ordinaria, aplicada selectivamente a los módulos que concentran mayor riesgo de impacto.
 
-Se recomienda que el arquitecto del sistema identifique los módulos críticos al inicio del proyecto, y que sobre esos módulos se planifiquen inspecciones formales guiadas por el coach y respaldadas por el Líder Técnico y la gerencia.
+Se recomienda que el arquitecto del sistema identifique los módulos críticos al inicio del proyecto, y que sobre esos módulos se planifiquen inspecciones formales respaldadas por el Líder Técnico y la gerencia, con el coach presente como observador.
 
 ---
 
@@ -43,7 +43,7 @@ La diferencia respecto a una revisión de código ordinaria es el grado de estru
 |---|---|---|
 | **1. Planificación** | Coach + Líder Técnico | Seleccionar el módulo a inspeccionar, definir participantes, distribuir el material con anticipación (al menos 24–48 h antes de la reunión). |
 | **2. Preparación individual** | Todos los participantes | Cada inspector revisa el artefacto de forma independiente y anota observaciones, preguntas y posibles defectos antes de la reunión. La preparación individual es obligatoria — no puede sustituirse por la lectura durante la reunión. |
-| **3. Reunión de inspección** | Coach (moderador) | Revisión estructurada del artefacto. El autor escucha y responde preguntas; no defiende. El recorder documenta los hallazgos (`secav:ReviewFinding`). El coach mantiene el enfoque en defectos, no en preferencias de estilo. |
+| **3. Reunión de inspección** | Moderador designado | Revisión estructurada del artefacto. El autor escucha y responde preguntas; no defiende. El recorder documenta los hallazgos (`secav:ReviewFinding`). El coach asiste como observador silencioso: toma notas, no interviene verbalmente. |
 | **4. Rework** | Autor + Líder Técnico | El autor corrige los defectos identificados. El Líder Técnico puede orientar si la corrección requiere decisiones de diseño. |
 | **5. Seguimiento** | Coach | El coach verifica que los hallazgos críticos fueron corregidos antes de que el módulo avance. Las correcciones se registran en el `secav:ReviewRecord`. |
 
@@ -54,21 +54,24 @@ La diferencia respecto a una revisión de código ordinaria es el grado de estru
 | Rol | Función en la inspección |
 |---|---|
 | **Arquitecto** | Define qué módulos son críticos y por qué. Puede participar como inspector en módulos de su dominio. |
-| **Coach (moderador)** | Guía la reunión, mantiene la agenda, asegura que todos los participantes contribuyan, registra o supervisa el registro de hallazgos. No es el evaluador técnico principal — es el facilitador del proceso. |
+| **Moderador designado** | Conduce la reunión, mantiene el foco en el artefacto y el tiempo de cada punto. Es un inspector del equipo designado para este rol — no el coach. |
 | **Autor del módulo** | Presenta el artefacto brevemente. Escucha y responde preguntas sin defender decisiones de diseño durante la reunión. |
 | **Inspectores** | Ingenieros del equipo o externos con competencia en el dominio. Revisaron el material individualmente y traen observaciones documentadas. |
+| **Recorder** | Documenta los hallazgos (`secav:ReviewFinding`) durante la reunión. Puede ser uno de los inspectores. |
 | **Líder Técnico** | Resuelve ambigüedades técnicas durante la reunión y apoya al autor en la fase de rework. Garantiza que la inspección tenga el tiempo y los participantes necesarios. |
+| **Coach** | Asiste como observador silencioso. No participa ni modera. Toma notas de observación que usa después de la reunión para retroalimentación grupal o individual. |
 | **Gerencia** | Autoriza el tiempo de la inspección. Reconoce los hallazgos como evidencia de calidad — no los usa como instrumento de evaluación de rendimiento individual. |
 
 ---
 
 ## 4. Rol del coach
 
-El coach no evalúa la calidad técnica del módulo directamente — facilita el proceso para que los ingenieros lo hagan. Sus responsabilidades específicas son:
+El coach asiste a todas las reuniones de la inspección — con el moderador, con los inspectores, con el autor — como observador silencioso. No participa verbalmente en ninguna de ellas. Toma notas y da retroalimentación después.
 
-- **Antes de la reunión:** verificar que la preparación individual se realizó. Si algún participante no preparó el material, reprogramar la reunión antes de comenzar.
-- **Durante la reunión:** moderar el tiempo, distribuir la participación, redirigir debates de preferencia hacia la identificación de defectos objetivos. Clasificar cada hallazgo por tipo y severidad en el `secav:ReviewRecord`.
-- **Después de la reunión:** verificar que los hallazgos críticos fueron corregidos antes del avance. Usar los hallazgos como evidencia de competencia (`secav:ReviewFinding` → `secav:CompetencyAssessment`).
+- **Antes de la reunión:** verificar que la preparación individual se realizó. Si algún participante no preparó el material, coordina con el Líder Técnico para reprogramar.
+- **Durante la reunión:** observa y toma notas. No interviene, no modera, no comenta hallazgos. Registra: quién participa, cómo se formulan los comentarios (producto vs. persona), puntos de tensión, acuerdos y desacuerdos.
+- **Después de la reunión:** da retroalimentación — grupal si el patrón afecta a todo el equipo, individual si es específica de un participante. Usa los `secav:ReviewFinding` documentados como evidencia para la `secav:CompetencyAssessment`.
+- **Seguimiento de rework:** verifica que los hallazgos críticos fueron corregidos antes de que el módulo avance. Esta verificación puede hacerse sin reunión — revisando el `secav:ReviewRecord` actualizado.
 - **Si la inspección revela un patrón sistémico** (el mismo tipo de defecto aparece en varios módulos): documentar una `secav:CoachingIntervention` o `secavo:ImprovementAction` dirigida al equipo, no al autor individual.
 
 ---
@@ -95,6 +98,8 @@ Las inspecciones formales solo son efectivas si cuentan con respaldo explícito 
 |---|---|---|
 | Registro de inspección | Artefacto, participantes, hallazgos, severidad, estado de corrección | `secav:ReviewRecord` |
 | Hallazgos documentados | Lista de defectos clasificados por tipo y severidad | `secav:ReviewFinding` |
+| Notas de observación del coach | Observaciones del coach durante la reunión, base para retroalimentación | `secav:WorkProductEvidence` |
+| Retroalimentación posterior | Grupal o individual, según el patrón observado | `secav:CoachingRecommendation` |
 | Evidencia de competencia | Hallazgos usados para informar la evaluación del autor e inspectores | `secav:ReviewFinding` → `secav:CompetencyAssessment` |
 | Intervención de coaching | Si hay un patrón sistémico en los hallazgos | `secav:CoachingIntervention`, `secavo:ImprovementAction` |
 | Preocupación de calidad | Si la inspección fue omitida o reducida sin justificación | `secavo:QualityPlanningConcern` |

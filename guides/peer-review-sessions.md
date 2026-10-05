@@ -85,13 +85,19 @@ Las notas del coach son internas al proceso de coaching. No se comparten con la 
 
 ---
 
-## 6. Después de la sesión: uso de las observaciones
+## 6. Después de la sesión: retroalimentación y uso de las observaciones
 
-Las observaciones del coach se usan en tres contextos, todos fuera de la sesión de revisión:
+Inmediatamente después de la sesión o en un momento acordado próximo, el coach da retroalimentación basada en sus notas. La forma depende del patrón observado:
 
-1. **Sesión individual con cada ingeniero** — feedback específico sobre su rol en la revisión (cómo formuló comentarios, cómo respondió al feedback, participación).
-2. **Retrospectiva del sprint** — si el patrón de desvíos o desacuerdos es sistemático, el coach lo introduce como tema de mejora del proceso de revisión del equipo (`secavo:ImprovementAction`).
-3. **Evaluación de competencias** — los hallazgos técnicos y de proceso informan la `secav:CompetencyAssessment` de cada ingeniero en las dimensiones de `secav:ReviewCompetency`.
+- **Retroalimentación grupal** — cuando el patrón afecta a todo el equipo (por ejemplo, la revisión derivó sistemáticamente hacia juicios sobre la persona, o los desvíos de foco fueron recurrentes). Se da en un espacio colectivo del equipo.
+- **Retroalimentación individual** — cuando la observación es específica de un participante (por ejemplo, un ingeniero que no había preparado el material, o cuyo tono fue consistentemente descalificador). Se da en privado.
+
+En ambos casos las observaciones son del coach — no del autor, los inspectores ni la gerencia. Se derivan de los hechos observados, no de juicios sobre la persona.
+
+Las observaciones del coach se usan además en:
+
+1. **Retrospectiva del sprint** — si el patrón de desvíos o desacuerdos es sistemático, el coach lo introduce como tema de mejora (`secavo:ImprovementAction`).
+2. **Evaluación de competencias** — los hallazgos técnicos y de proceso informan la `secav:CompetencyAssessment` de cada ingeniero en `secav:ReviewCompetency`.
 
 ---
 
