@@ -1,0 +1,2 @@
+defect_id,sprint_id,engineer,artifact,defect_category,severity,phase_injected,phase_detected,detection_method,ai_assisted_activity,human_validation_performed,linked_competency,root_cause,coaching_action,status
+D-001,,,,,,,,,,,,,,
