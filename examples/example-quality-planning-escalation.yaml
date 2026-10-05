@@ -1,0 +1,35 @@
+project: "AI-assisted payments modernization"
+planning_event: "Release planning"
+coach_participation:
+  mode: "voice_and_vote"
+  has_voting_right: true
+  may_raise_formal_dissent: true
+  may_escalate: true
+quality_activities:
+  - name: "Architecture/design review"
+    applicable: true
+    planned: true
+    owner: "Lead Architect"
+    acceptance_criteria: "Critical quality attributes reviewed before implementation"
+    evidence: "Design review record"
+  - name: "Structured code inspection"
+    applicable: true
+    planned: false
+    owner: ""
+    acceptance_criteria: ""
+    evidence: ""
+    risk_id: "R-QUAL-014"
+concern:
+  quality_activity: "Structured code inspection"
+  evidence: "Payment authorization code is high criticality and includes AI-assisted modifications"
+  probability: 0.6
+  impact: 0.9
+  preventive_action: "Plan structured inspection before integration testing"
+  formal_dissent: true
+  escalation_level: "Engineering Manager"
+decision:
+  outcome: "Inspection restored to release plan"
+  owner: "Engineering Manager"
+  rationale: "Residual quality and security risk exceeded project tolerance"
+  risk_disposition: "mitigated"
+retrospective_follow_up: "Review inspection findings, late-phase defect escapes, and whether the gate should become a standing planning rule."
