@@ -20,6 +20,7 @@ Institutional / Project Objectives -> Project Planning & Quality Governance -> T
 - `docs/team-coaching-lifecycle.md` — coaching from team inception/launch through member preparation, baseline establishment and ongoing onboarding.
 - `docs/coaching-cycle.md` — annual planning, sprint execution, retrospectives and replanning.
 - `guides/risk-management.md` — coaching risk-management model.
+- `guides/incremental-adoption.md` — strategic guide for incremental framework adoption using the Fail Fast philosophy: PoC, end-to-end tracer, short feedback loops, Go/Pivot/Stop decision criteria, and phased expansion from PoC to organization-wide adoption.
 - `docs/institutional-alignment.md` — method for connecting individual coaching objectives to institutional objectives.
 - `docs/coach-code-of-ethics.md` — SECAV-O Code of Ethics for coaches.
 - `docs/metrics-model.md` — defects, reviews, inspections, unit tests and competency-growth metrics.

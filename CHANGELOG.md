@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- `guides/incremental-adoption.md` — strategic guide for incremental framework adoption: Fail Fast philosophy, PoC technique, end-to-end tracer, short feedback loops, Go/Pivot/Stop decision table, 5-phase expansion model, SECAV-O integration table. References: The Pragmatic Programmer, The Lean Startup, Agile Manifesto. Philosophy borrowed without prescribing Scrum or SAFe.
 - `templates/engineer-development-record.md` — **(proposal)** longitudinal engineer development record: 8-section template (general data, competencies by cycle, development plan, session log, impact evidence typed to `secav:Evidence` subclasses, 360 feedback, coach handoffs, organizational indicators). 4-level competency scale with explicit mapping to SECAV-O 6-level scale. Designed to be coach-independent and comparable across teams.
 - `templates/organizational-competency-view.csv` — **(proposal)** aggregated organizational view: one row per engineer per cycle, enabling team-level competency averages, objective progress, and promotion/retention risk flags. Populated with Valeria Montes example row.
 - `examples/example-engineer-development-record.md` — **(proposal)** fully completed fictional example (Valeria Montes, Platform Engineering, cycles H1 and H2 2026) showing a coach change in July, 2 completed objectives, 5 evidence entries, 360 feedback, and promotion/retention flags in Section 8.
