@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- `coaching-governance/docs/internal-audit-checklist.md` — structured checklist for internal audit functions auditing SECAV-O coaching processes. 67 criteria organized into 11 areas: team inception and launch, member preparation and onboarding, initial growth baseline, annual coaching plan, sprint planning, evidence collection and coaching interventions, retrospective and replanning, risk management, Coach Committee governance, ethics and confidentiality, and traceability. Each criterion specifies the evidence to request and provides a pass/fail result field and observation column. Includes a summary table aggregating compliance results by area.
+- `coaching-governance/docs/cmmi-mapping.md` — mapping of SECAV-O processes and artifacts to CMMI for Development (CMMI-DEV) v2.0 practice areas. Covers OT, OPF, OPD, MA, PQA, PMC, RSKM, VER, and PR. For each practice area, lists the specific CMMI practice, the SECAV-O implementation, and the primary artifacts that provide appraisal evidence. Includes a cross-reference artifact locator table and notes for appraisers on longitudinal evidence, metric interpretation, the distinction between coaching and performance management, and tailoring expectations.
+
 ## [0.2.0] - 2026-10-07
 
 ### Changed
