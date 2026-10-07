@@ -5,8 +5,8 @@ type: software
 authors:
   - family-names: "Lorenzana González"
     given-names: "Victor Hugo"
-version: "0.1.0"
-date-released: "2026-09-30"
+version: "0.2.0"
+date-released: "2026-10-07"
 url: "https://github.com/vlorenzana/software-engineering-coaching-framework"
 abstract: "An initial open, competency-based and ontology-supported framework for developer coaching, observable evidence, AI assistance, human validation, and software-engineering quality."
 license: MIT

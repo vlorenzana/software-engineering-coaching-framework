@@ -87,9 +87,8 @@ Google's AutoCommenter study found that AI-assisted review went beyond tradition
 False positives erode trust quickly and cause reviewers to ignore even legitimate alerts [7][9]. Actions to take:
 
 - Tune sensitivity thresholds based on observed false positive rate.
-e- Tag AI suggestions as: **accepted**, **dismissed**, or **false positive**. Teams using this practice report action
- rates above 30%.
-- Note that AI review comments are adopted only 1–19% of the time on average; quality of suggestions matters more than quantity.
+e- Tag AI suggestions as: **accepted**, **dismissed**, or **false positive**. Available reports from early adopters of this practice suggest action rates above 30%, though figures vary significantly by tool and context.
+- AI review comments are adopted at low rates in available studies (reported range: 1–19%); quality of suggestions matters more than quantity.
 - Measure the impact of tuning on PR cycle time and escaped defects [7].
 
 ### 3.7 Integrate into existing workflow

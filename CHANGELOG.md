@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-07
+
 ### Changed
 
 - `coaching-governance/guides/code-review-best-practices.md` (moved from `coaching-governance/docs/`) — code review guides relocated to `coaching-governance/guides/` to separate reference guides from operating-model documents.
@@ -87,11 +89,16 @@ All notable changes to this project will be documented in this file.
 - `coaching-governance/docs/coaching-cycle.md` SECAV-O chain: corrected two ontologically invalid hops — (1) `Artifact → Competency` has no OWL property; (2) `Observable Evidence → Measurement` is wrong because `secav:Measurement` is a *subclass* of `secav:Evidence`, not a successor. Fixed chain: `Engineering Activity (produces Artifact, assessedAgainst AcceptanceCriterion, requiresCompetency) → Evidence/Measurement → Competency Gap → Coaching Intervention`.
 - `coaching-governance/guides/ai-assisted-code-review.md`: removed inline citations [14], [15], [16] whose source URLs were garbled/cut off in the source PDF and could not be verified; statements retained; disclosure note added to Sources section.
 
-### Known issues (pending author decision)
+### Fixed — 0.2.0 consistency corrections
 
-- `ontology/secav-o-coaching-governance-extension.ttl` line 60: `rdfs:range secavo:AcceptanceCriteria` references an undeclared class. Correct reference is `secav:AcceptanceCriterion`; resolution requires namespace-merge decision noted in README.
-- `validation/secav-o-coaching-governance.shacl.ttl`: `CoachingObjectiveShape` enforces `sh:minCount 1` on `alignsWithInstitutionalObjective`, making institutional alignment mandatory, while `coaching-governance/docs/institutional-alignment.md` treats it as a recommendation. Alignment between constraint and documentation is pending author decision.
-- `README.md`: core artifacts (`ontology/secav-o.ttl`, `validation/secav-o.shacl.ttl`, `examples/design-review.ttl`) are not listed; pending decision on whether to add a "Core artifacts" section.
+- `ontology/secav-o-coaching-governance-extension.ttl`: replaced provisional namespace `https://example.org/secav-o#` with stable extension namespace `https://github.com/vlorenzana/software-engineering-coaching-framework/ontology/secav-o-coaching-governance#`; added `secav:` prefix for core ontology and `owl:imports` declaration; corrected all core-class references (`secav:Evidence`, `secav:CoachingIntervention`, `secav:Competency`, `secav:EngineeringActivity`, `secav:Artifact`) to use the `secav:` prefix instead of `secavo:`.
+- `ontology/secav-o-coaching-governance-extension.ttl` line 60 (former): corrected `secavo:AcceptanceCriteria` (undeclared class) to `secav:AcceptanceCriterion` (the class declared in `secav-o.ttl`).
+- `validation/secav-o-coaching-governance.shacl.ttl`: updated namespace prefix to match stable extension namespace; added `secav:` prefix; corrected `sh:class` references for core classes to use `secav:` prefix; removed `sh:minCount 1` from `alignsWithInstitutionalObjective` in `CoachingObjectiveShape` — the documentation presents institutional alignment as a recommendation, not an obligation for all records; adopting organizations may enforce it in their own SHACL profiles.
+- `README.md`: added "Core artifacts" section; updated "Ontology alignment note" to reflect that the extension now uses a stable namespace and explicitly imports the core ontology; replaced internal version label "Version 5" with public version "0.2.0"; added evidence boundary note in "Claim boundary" section.
+- `CITATION.cff`: updated `version` to `0.2.0` and `date-released` to `2026-10-07`.
+- `coaching-governance/glossary/glossary.md`: updated "Coach" entry to distinguish observer, facilitator, and moderator roles by activity and to clarify that engineers retain technical responsibility; updated "Calidad mínima razonable" to present it as a SECAV-O framework proposal rather than a universally recognized standard.
+- `coaching-governance/guides/minimum-quality-criteria.md`: added framing note that the criterion is a SECAV-O proposal.
+- `coaching-governance/guides/ai-assisted-code-review.md`: fixed formatting error ("e-" prefix on a list item); rephrased unsupported statistical claims as reported observations pending source verification.
 
 ## [0.1.0] - 2026-09-30
 

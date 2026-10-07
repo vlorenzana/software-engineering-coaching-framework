@@ -23,9 +23,11 @@ Este glosario reúne los términos introducidos o redefinidos por el framework d
 ### Calidad mínima razonable
 *Fuente: `coaching-governance/guides/minimum-quality-criteria.md`*
 
-El umbral por debajo del cual una organización incurre en mala práctica de ingeniería, independientemente de las restricciones de tiempo o presupuesto que se invoquen para justificarlo. No es el estándar de calidad al que aspirar, sino el piso por debajo del cual el riesgo de fallo sistémico es inaceptable.
+Criterio propuesto por el framework SECAV-O para definir el umbral mínimo de inspección en cada fase del desarrollo. No es un estándar universal reconocido por organismos de certificación; es una convención del framework que establece el piso a partir del cual este modelo de coaching considera que la cobertura de inspección es insuficiente.
 
-El criterio operativo es: los artefactos críticos de cada fase productiva deben ser inspeccionados por más de un revisor antes de que esa fase concluya.
+El criterio operativo propuesto es: los artefactos críticos de cada fase productiva deben ser inspeccionados por más de un revisor antes de que esa fase concluya.
+
+Una organización que no aplique este criterio puede tener razones técnicas, de madurez o de contexto que justifiquen un enfoque distinto; el framework invita a reflexionar sobre el riesgo acumulado, no a declarar mala práctica de forma automática. El coach documenta la omisión como `secavo:QualityPlanningConcern` para que la organización pueda tomar una decisión informada.
 
 Contrasta con la [calidad aspiracional](#calidad-aspiracional), que es el nivel al que las organizaciones maduran progresivamente.
 
@@ -135,7 +137,18 @@ El rol tiene alcance delimitado: solo puede clasificar y cerrar defectos con los
 ### Coach
 *Fuente: `ontology/secav-o.ttl`, framework general*
 
-Stakeholder (`secav:Coach`, subclase de `secav:Stakeholder`) responsable de observar actividades de ingeniería, recopilar evidencia, producir evaluaciones de competencia y generar intervenciones de coaching. En el contexto del framework, el coach actúa como [observador silencioso](#observador-silencioso) en reuniones de revisión e inspección, y da retroalimentación después de la sesión.
+Stakeholder (`secav:Coach`, subclase de `secav:Stakeholder`) responsable de observar actividades de ingeniería, recopilar evidencia, producir evaluaciones de competencia y generar intervenciones de coaching.
+
+El rol que adopta el coach varía según la actividad:
+
+| Actividad | Rol del coach |
+|---|---|
+| Revisiones de pares e inspecciones formales | [Observador silencioso](#observador-silencioso): toma notas, no interviene durante la sesión |
+| Retrospectivas sin Scrum Master ni facilitador | Facilitador: conduce la sesión siguiendo el protocolo definido |
+| Retrospectivas con facilitador externo | Observador silencioso |
+| Planificación de proyecto | Participante: voz de calidad; puede registrar preocupaciones, disentir y escalar |
+
+**Responsabilidad técnica de los ingenieros:** el coach observa y retroalimenta, pero no diseña pruebas, no decide qué defectos corregir ni aprueba técnicamente el avance de artefactos. Verificar que el proceso se siguió no equivale a reemplazar la aprobación técnica, que corresponde al Líder Técnico y a los ingenieros responsables.
 
 ---
 

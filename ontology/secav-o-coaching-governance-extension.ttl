@@ -1,16 +1,24 @@
-@prefix secavo: <https://example.org/secav-o#> .
+@prefix secavo: <https://github.com/vlorenzana/software-engineering-coaching-framework/ontology/secav-o-coaching-governance#> .
+@prefix secav: <https://github.com/vlorenzana/software-engineering-coaching-framework/ontology/secav-o#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-# SECAV-O Coaching Governance Extension v5
-# IMPORTANT: replace https://example.org/secav-o# with the canonical SECAV-O namespace
-# if the core ontology uses a different IRI before merging into the main repository.
+# SECAV-O Coaching Governance Extension v0.2.0
+# Extension namespace: https://github.com/vlorenzana/software-engineering-coaching-framework/ontology/secav-o-coaching-governance#
+# Core ontology namespace: https://github.com/vlorenzana/software-engineering-coaching-framework/ontology/secav-o#
+#
+# This ontology explicitly imports the SECAV-O core ontology.
+# Extension-specific classes and properties use the secavo: prefix.
+# Core classes (Competency, EngineeringActivity, Evidence, Artifact, CoachingIntervention,
+# AcceptanceCriterion) are referenced via the secav: prefix and must not be redeclared here.
 
-secavo:CoachingGovernanceExtension a owl:Ontology ;
-  rdfs:label "SECAV-O Coaching Governance Extension" ;
-  rdfs:comment "Extends the SECAV-O core model with team inception/launch coaching, member preparation and onboarding, annual/sprint coaching planning, risk governance, institutional alignment, ethics, measurement, retrospectives and longitudinal competency growth." .
+<https://github.com/vlorenzana/software-engineering-coaching-framework/ontology/secav-o-coaching-governance>
+    a owl:Ontology ;
+    owl:imports <https://github.com/vlorenzana/software-engineering-coaching-framework/ontology/secav-o> ;
+    rdfs:label "SECAV-O Coaching Governance Extension" ;
+    rdfs:comment "Extends the SECAV-O core model with team inception/launch coaching, member preparation and onboarding, annual/sprint coaching planning, risk governance, institutional alignment, ethics, measurement, retrospectives and longitudinal competency growth." .
 
 ### Core-aligned planning classes
 secavo:AnnualCoachingPlan a owl:Class ; rdfs:label "Annual Coaching Plan" .
@@ -18,13 +26,13 @@ secavo:CoachingSprint a owl:Class ; rdfs:label "Coaching Sprint" .
 secavo:SprintPlan a owl:Class ; rdfs:label "Sprint Plan" .
 secavo:SprintRetrospective a owl:Class ; rdfs:label "Sprint Retrospective" .
 secavo:CoachingObjective a owl:Class ; rdfs:label "Coaching Objective" .
-secavo:Baseline a owl:Class ; rdfs:label "Baseline" ; rdfs:subClassOf secavo:Evidence .
-secavo:CompetencyTrend a owl:Class ; rdfs:label "Competency Trend" ; rdfs:subClassOf secavo:Evidence .
-secavo:ImprovementAction a owl:Class ; rdfs:label "Improvement Action" ; rdfs:subClassOf secavo:CoachingIntervention .
+secavo:Baseline a owl:Class ; rdfs:label "Baseline" ; rdfs:subClassOf secav:Evidence .
+secavo:CompetencyTrend a owl:Class ; rdfs:label "Competency Trend" ; rdfs:subClassOf secav:Evidence .
+secavo:ImprovementAction a owl:Class ; rdfs:label "Improvement Action" ; rdfs:subClassOf secav:CoachingIntervention .
 
 ### Measurement/evidence classes aligned to SECAV-O Evidence
 secavo:Metric a owl:Class ; rdfs:label "Metric" .
-secavo:MeasurementObservation a owl:Class ; rdfs:label "Measurement Observation" ; rdfs:subClassOf secavo:Evidence .
+secavo:MeasurementObservation a owl:Class ; rdfs:label "Measurement Observation" ; rdfs:subClassOf secav:Evidence .
 secavo:DefectObservation a owl:Class ; rdfs:label "Defect Observation" ; rdfs:subClassOf secavo:MeasurementObservation .
 secavo:ReviewObservation a owl:Class ; rdfs:label "Review Observation" ; rdfs:subClassOf secavo:MeasurementObservation .
 secavo:UnitTestObservation a owl:Class ; rdfs:label "Unit Test Observation" ; rdfs:subClassOf secavo:MeasurementObservation .
@@ -35,7 +43,7 @@ secavo:Risk a owl:Class ; rdfs:label "Risk" .
 secavo:PreventiveAction a owl:Class ; rdfs:label "Preventive Action" .
 secavo:CorrectiveAction a owl:Class ; rdfs:label "Corrective / Contingency Action" .
 secavo:CoachEthicsCode a owl:Class ; rdfs:label "Coach Ethics Code" .
-secavo:EthicsAcknowledgement a owl:Class ; rdfs:label "Coach Ethics Acknowledgement" ; rdfs:subClassOf secavo:Evidence .
+secavo:EthicsAcknowledgement a owl:Class ; rdfs:label "Coach Ethics Acknowledgement" ; rdfs:subClassOf secav:Evidence .
 
 ### Planning relationships
 secavo:hasObjective a owl:ObjectProperty ;
@@ -51,15 +59,15 @@ secavo:updatesPlan a owl:ObjectProperty ;
 
 ### Alignment to SECAV-O competency/activity/evidence model
 secavo:targetsCompetency a owl:ObjectProperty ;
-  rdfs:domain secavo:CoachingObjective ; rdfs:range secavo:Competency .
+  rdfs:domain secavo:CoachingObjective ; rdfs:range secav:Competency .
 secavo:observesActivity a owl:ObjectProperty ;
-  rdfs:domain secavo:CoachingSprint ; rdfs:range secavo:EngineeringActivity .
+  rdfs:domain secavo:CoachingSprint ; rdfs:range secav:EngineeringActivity .
 secavo:usesArtifactEvidence a owl:ObjectProperty ;
-  rdfs:domain secavo:CoachingSprint ; rdfs:range secavo:Artifact .
+  rdfs:domain secavo:CoachingSprint ; rdfs:range secav:Artifact .
 secavo:usesAcceptanceCriteria a owl:ObjectProperty ;
-  rdfs:domain secavo:CoachingSprint ; rdfs:range secavo:AcceptanceCriteria .
+  rdfs:domain secavo:CoachingSprint ; rdfs:range secav:AcceptanceCriterion .
 secavo:collectsEvidence a owl:ObjectProperty ;
-  rdfs:domain secavo:CoachingSprint ; rdfs:range secavo:Evidence .
+  rdfs:domain secavo:CoachingSprint ; rdfs:range secav:Evidence .
 secavo:collectsMetric a owl:ObjectProperty ;
   rdfs:domain secavo:CoachingSprint ; rdfs:range secavo:Metric .
 secavo:producesObservation a owl:ObjectProperty ;
@@ -69,7 +77,7 @@ secavo:hasBaseline a owl:ObjectProperty ;
 secavo:comparesToBaseline a owl:ObjectProperty ;
   rdfs:domain secavo:MeasurementObservation ; rdfs:range secavo:Baseline .
 secavo:evaluatesCompetency a owl:ObjectProperty ;
-  rdfs:domain secavo:MeasurementObservation ; rdfs:range secavo:Competency .
+  rdfs:domain secavo:MeasurementObservation ; rdfs:range secav:Competency .
 secavo:tracksTrend a owl:ObjectProperty ;
   rdfs:range secavo:CompetencyTrend .
 secavo:identifiesGap a owl:ObjectProperty ;
@@ -77,7 +85,7 @@ secavo:identifiesGap a owl:ObjectProperty ;
 secavo:triggersImprovementAction a owl:ObjectProperty ;
   rdfs:domain secavo:MeasurementObservation ; rdfs:range secavo:ImprovementAction .
 secavo:implementsCoachingIntervention a owl:ObjectProperty ;
-  rdfs:domain secavo:CoachingSprint ; rdfs:range secavo:CoachingIntervention .
+  rdfs:domain secavo:CoachingSprint ; rdfs:range secav:CoachingIntervention .
 
 ### Institutional alignment
 secavo:alignsWithInstitutionalObjective a owl:ObjectProperty ;
@@ -126,9 +134,9 @@ secavo:ethicalCommitmentDate a owl:DatatypeProperty ; rdfs:domain secavo:EthicsA
 ### Team lifecycle and onboarding classes
 secavo:Team a owl:Class ; rdfs:label "Team" .
 secavo:Project a owl:Class ; rdfs:label "Project" .
-secavo:TeamCoachingInitiation a owl:Class ; rdfs:label "Team Coaching Initiation / Launch" ; rdfs:subClassOf secavo:CoachingIntervention .
-secavo:MemberPreparation a owl:Class ; rdfs:label "Member Preparation" ; rdfs:subClassOf secavo:CoachingIntervention .
-secavo:MemberOnboarding a owl:Class ; rdfs:label "Member Onboarding" ; rdfs:subClassOf secavo:CoachingIntervention .
+secavo:TeamCoachingInitiation a owl:Class ; rdfs:label "Team Coaching Initiation / Launch" ; rdfs:subClassOf secav:CoachingIntervention .
+secavo:MemberPreparation a owl:Class ; rdfs:label "Member Preparation" ; rdfs:subClassOf secav:CoachingIntervention .
+secavo:MemberOnboarding a owl:Class ; rdfs:label "Member Onboarding" ; rdfs:subClassOf secav:CoachingIntervention .
 secavo:ProjectContext a owl:Class ; rdfs:label "Project Context" .
 secavo:ProjectObjective a owl:Class ; rdfs:label "Project Objective" .
 secavo:MemberBaseline a owl:Class ; rdfs:label "Member Growth Baseline" ; rdfs:subClassOf secavo:Baseline .
@@ -141,9 +149,9 @@ secavo:relatesToProject a owl:ObjectProperty ;
 secavo:providesProjectContext a owl:ObjectProperty ;
   rdfs:domain secavo:TeamCoachingInitiation ; rdfs:range secavo:ProjectContext .
 secavo:preparesMemberForActivity a owl:ObjectProperty ;
-  rdfs:domain secavo:MemberPreparation ; rdfs:range secavo:EngineeringActivity .
+  rdfs:domain secavo:MemberPreparation ; rdfs:range secav:EngineeringActivity .
 secavo:preparesMemberForCompetency a owl:ObjectProperty ;
-  rdfs:domain secavo:MemberPreparation ; rdfs:range secavo:Competency .
+  rdfs:domain secavo:MemberPreparation ; rdfs:range secav:Competency .
 secavo:onboardsMemberToTeam a owl:ObjectProperty ;
   rdfs:domain secavo:MemberOnboarding ; rdfs:range secavo:Team .
 secavo:communicatesObjective a owl:ObjectProperty ;
@@ -154,7 +162,7 @@ secavo:establishesMemberBaseline a owl:ObjectProperty ;
   rdfs:domain [ a owl:Class ; owl:unionOf ( secavo:TeamCoachingInitiation secavo:MemberOnboarding ) ] ;
   rdfs:range secavo:MemberBaseline .
 secavo:baselineForCompetency a owl:ObjectProperty ;
-  rdfs:domain secavo:MemberBaseline ; rdfs:range secavo:Competency .
+  rdfs:domain secavo:MemberBaseline ; rdfs:range secav:Competency .
 secavo:alignsWithProjectObjective a owl:ObjectProperty ;
   rdfs:domain secavo:CoachingObjective ; rdfs:range secavo:ProjectObjective .
 secavo:supportsTeamLifecycle a owl:ObjectProperty ;
@@ -167,31 +175,31 @@ secavo:teamLaunchDate a owl:DatatypeProperty ; rdfs:domain secavo:TeamCoachingIn
 secavo:memberJoinDate a owl:DatatypeProperty ; rdfs:domain secavo:MemberOnboarding ; rdfs:range xsd:date .
 secavo:preparationStatus a owl:DatatypeProperty ; rdfs:domain secavo:MemberPreparation ; rdfs:range xsd:string .
 
-### Project planning participation, quality advocacy, dissent and escalation (v5)
+### Project planning participation, quality advocacy, dissent and escalation
 secavo:ProjectPlanningParticipation a owl:Class ;
   rdfs:label "Project Planning Participation" ;
-  rdfs:subClassOf secavo:CoachingIntervention .
+  rdfs:subClassOf secav:CoachingIntervention .
 secavo:PlanningDecision a owl:Class ; rdfs:label "Planning Decision" .
 secavo:QualityActivityRequirement a owl:Class ; rdfs:label "Quality Activity Requirement" .
-secavo:QualityPlanningConcern a owl:Class ; rdfs:label "Quality Planning Concern" ; rdfs:subClassOf secavo:Evidence .
-secavo:FormalDissent a owl:Class ; rdfs:label "Formal Quality Dissent" ; rdfs:subClassOf secavo:Evidence .
-secavo:Escalation a owl:Class ; rdfs:label "Quality Governance Escalation" ; rdfs:subClassOf secavo:CoachingIntervention .
-secavo:GovernanceDecision a owl:Class ; rdfs:label "Governance Decision" ; rdfs:subClassOf secavo:Evidence .
+secavo:QualityPlanningConcern a owl:Class ; rdfs:label "Quality Planning Concern" ; rdfs:subClassOf secav:Evidence .
+secavo:FormalDissent a owl:Class ; rdfs:label "Formal Quality Dissent" ; rdfs:subClassOf secav:Evidence .
+secavo:Escalation a owl:Class ; rdfs:label "Quality Governance Escalation" ; rdfs:subClassOf secav:CoachingIntervention .
+secavo:GovernanceDecision a owl:Class ; rdfs:label "Governance Decision" ; rdfs:subClassOf secav:Evidence .
 
 secavo:participatesInProjectPlanning a owl:ObjectProperty ;
   rdfs:domain secavo:ProjectPlanningParticipation ; rdfs:range secavo:Project .
 secavo:hasPlanningDecision a owl:ObjectProperty ;
   rdfs:domain secavo:ProjectPlanningParticipation ; rdfs:range secavo:PlanningDecision .
 secavo:requiresQualityActivity a owl:ObjectProperty ;
-  rdfs:domain secavo:QualityActivityRequirement ; rdfs:range secavo:EngineeringActivity .
+  rdfs:domain secavo:QualityActivityRequirement ; rdfs:range secav:EngineeringActivity .
 secavo:planningDecisionAffectsActivity a owl:ObjectProperty ;
-  rdfs:domain secavo:PlanningDecision ; rdfs:range secavo:EngineeringActivity .
+  rdfs:domain secavo:PlanningDecision ; rdfs:range secav:EngineeringActivity .
 secavo:raisesQualityConcern a owl:ObjectProperty ;
   rdfs:domain secavo:ProjectPlanningParticipation ; rdfs:range secavo:QualityPlanningConcern .
 secavo:concernAboutDecision a owl:ObjectProperty ;
   rdfs:domain secavo:QualityPlanningConcern ; rdfs:range secavo:PlanningDecision .
 secavo:concernAboutOmittedActivity a owl:ObjectProperty ;
-  rdfs:domain secavo:QualityPlanningConcern ; rdfs:range secavo:EngineeringActivity .
+  rdfs:domain secavo:QualityPlanningConcern ; rdfs:range secav:EngineeringActivity .
 secavo:recordsFormalDissent a owl:ObjectProperty ;
   rdfs:domain secavo:ProjectPlanningParticipation ; rdfs:range secavo:FormalDissent .
 secavo:dissentAboutConcern a owl:ObjectProperty ;

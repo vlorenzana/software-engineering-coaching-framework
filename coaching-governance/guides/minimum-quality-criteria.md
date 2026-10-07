@@ -10,7 +10,9 @@ En cada fase productiva del desarrollo de software se generan artefactos que con
 
 ## Definición: calidad mínima razonable
 
-La **calidad mínima razonable** es el umbral por debajo del cual una organización incurre en mala práctica de ingeniería — independientemente de las restricciones de tiempo o presupuesto que se invoquen para justificarlo. No es el estándar de calidad al que aspirar, sino el piso por debajo del cual el riesgo de fallo sistémico es inaceptable.
+> **Nota de alcance:** "Calidad mínima razonable" es un criterio propuesto por este framework, no un estándar universal reconocido por organismos de certificación. El objetivo es proporcionar un punto de referencia operativo concreto; no declarar automáticamente mala práctica en toda organización que opere de forma distinta.
+
+La **calidad mínima razonable** es, según la propuesta de SECAV-O, el umbral por debajo del cual el riesgo de acumulación de defectos entre fases es inaceptable — independientemente de las restricciones de tiempo o presupuesto que se invoquen para justificarlo. No es el estándar de calidad al que aspirar, sino el piso a partir del cual este framework considera que la cobertura de inspección es insuficiente.
 
 La razón de establecer un *mínimo* en lugar de un *óptimo* es que la mayoría de las organizaciones no tienen capacidad para inspeccionar todos los productos de software que genera el desarrollo: requerimientos, diseño de arquitectura, diseño detallado, código, diseño de pruebas unitarias, diseño de pruebas de sistema, diseño de pruebas de aceptación, resultados de ejecución de pruebas, y otros derivados. Inspeccionar todo es un ideal al que conviene aproximarse progresivamente; presuponer que toda organización puede lograrlo desde el inicio es irreal.
 

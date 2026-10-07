@@ -1,5 +1,6 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix secavo: <https://example.org/secav-o#> .
+@prefix secavo: <https://github.com/vlorenzana/software-engineering-coaching-framework/ontology/secav-o-coaching-governance#> .
+@prefix secav: <https://github.com/vlorenzana/software-engineering-coaching-framework/ontology/secav-o#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 secavo:AnnualCoachingPlanShape a sh:NodeShape ;
@@ -8,10 +9,12 @@ secavo:AnnualCoachingPlanShape a sh:NodeShape ;
   sh:property [ sh:path secavo:hasSprint ; sh:minCount 1 ; sh:class secavo:CoachingSprint ] ;
   sh:property [ sh:path secavo:governedByEthicsCode ; sh:minCount 1 ; sh:class secavo:CoachEthicsCode ] .
 
+# alignsWithInstitutionalObjective is recommended but not mandatory for all CoachingObjective records.
+# Adopting organizations may make it mandatory for specific record types in their own profiles.
 secavo:CoachingObjectiveShape a sh:NodeShape ;
   sh:targetClass secavo:CoachingObjective ;
-  sh:property [ sh:path secavo:targetsCompetency ; sh:minCount 1 ; sh:class secavo:Competency ] ;
-  sh:property [ sh:path secavo:alignsWithInstitutionalObjective ; sh:minCount 1 ; sh:class secavo:InstitutionalObjective ] .
+  sh:property [ sh:path secavo:targetsCompetency ; sh:minCount 1 ; sh:class secav:Competency ] ;
+  sh:property [ sh:path secavo:alignsWithInstitutionalObjective ; sh:class secavo:InstitutionalObjective ] .
 
 secavo:RiskShape a sh:NodeShape ;
   sh:targetClass secavo:Risk ;
@@ -38,8 +41,8 @@ secavo:TeamCoachingInitiationShape a sh:NodeShape ;
 secavo:MemberPreparationShape a sh:NodeShape ;
   sh:targetClass secavo:MemberPreparation ;
   sh:or (
-    [ sh:property [ sh:path secavo:preparesMemberForActivity ; sh:minCount 1 ; sh:class secavo:EngineeringActivity ] ]
-    [ sh:property [ sh:path secavo:preparesMemberForCompetency ; sh:minCount 1 ; sh:class secavo:Competency ] ]
+    [ sh:property [ sh:path secavo:preparesMemberForActivity ; sh:minCount 1 ; sh:class secav:EngineeringActivity ] ]
+    [ sh:property [ sh:path secavo:preparesMemberForCompetency ; sh:minCount 1 ; sh:class secav:Competency ] ]
   ) .
 
 secavo:MemberOnboardingShape a sh:NodeShape ;
@@ -50,9 +53,9 @@ secavo:MemberOnboardingShape a sh:NodeShape ;
 
 secavo:MemberBaselineShape a sh:NodeShape ;
   sh:targetClass secavo:MemberBaseline ;
-  sh:property [ sh:path secavo:baselineForCompetency ; sh:minCount 1 ; sh:class secavo:Competency ] .
+  sh:property [ sh:path secavo:baselineForCompetency ; sh:minCount 1 ; sh:class secav:Competency ] .
 
-# v5 planning participation and escalation shapes
+# Planning participation and escalation shapes
 secavo:ProjectPlanningParticipationShape a sh:NodeShape ;
   sh:targetClass secavo:ProjectPlanningParticipation ;
   sh:property [ sh:path secavo:participatesInProjectPlanning ; sh:minCount 1 ; sh:maxCount 1 ] ;

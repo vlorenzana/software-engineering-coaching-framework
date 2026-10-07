@@ -83,18 +83,27 @@ Institutional / Project Objectives -> Project Planning & Quality Governance -> T
 - Coaching metrics are evidence for improvement, not instruments for punishment or isolated performance ranking.
 - Coaches must protect confidentiality, avoid conflicts of interest, distinguish evidence from opinion, and preserve engineer dignity and professional autonomy.
 
+## Core artifacts
+
+The SECAV-O core ontology files that this extension builds on:
+
+- `ontology/secav-o.ttl` — core ontology: engineering activities, artifacts, competencies, evidence, measurement, AI assistance, human validation, assessment, and coaching concepts.
+- `validation/secav-o.shacl.ttl` — SHACL constraints for the core ontology.
+- `examples/design-review.ttl` — worked example: AI-assisted design review instance.
+
 ## Claim boundary
 
 These artifacts define an operating and governance model. They do not claim that the metrics are validated predictors of engineer performance, that any numeric target is universally appropriate, or that SECAV-O has been independently validated, standardized, or adopted by third parties.
 
+The engineer development record example (Valeria Montes) is entirely fictional and serves only as a template illustration. Templates and example files are not evidence of adoption or measured outcomes. The pilot protocol (`pilot/pilot-protocol.md`) describes a planned future validation activity, not a completed one.
+
 
 ## Ontology alignment note
 
-Version 5 explicitly aligns coaching governance with the SECAV-O core pattern: Engineering Activity -> Artifact -> Competency -> Acceptance Criteria -> Evidence/Measurement -> Coaching Intervention. Baselines, observations and competency trends are modeled as Evidence; ImprovementAction is modeled as a CoachingIntervention specialization; CoachingObjectives target Competencies; CoachingSprints observe EngineeringActivities and collect Artifact/Evidence/Metric information.
+Version 0.2.0 explicitly aligns coaching governance with the SECAV-O core pattern: Engineering Activity → Artifact → Competency → Acceptance Criterion → Evidence/Measurement → Coaching Intervention. Baselines, observations and competency trends are modeled as Evidence; ImprovementAction is modeled as a CoachingIntervention specialization; CoachingObjectives target Competencies; CoachingSprints observe EngineeringActivities and collect Artifact/Evidence/Metric information.
 
-The namespace in this standalone package is still `https://example.org/secav-o#`. Replace it with the canonical namespace from the core `ontology/secav-o.ttl` before merge, and reuse the exact core class identifiers rather than duplicating equivalent terms.
-
+The extension uses the stable namespace `https://github.com/vlorenzana/software-engineering-coaching-framework/ontology/secav-o-coaching-governance#` and formally imports the core ontology via `owl:imports`. Core classes are referenced using the `secav:` prefix; extension-specific classes use the `secavo:` prefix.
 
 ## Planning participation and quality advocacy
 
-Version 5 adds a formal governance role for the coach in project planning. The recommended model gives the coach an explicit voice in planning and, when granted by the adopting organization, a vote on decisions that materially affect quality, competency development and human validation. The coach can raise a documented quality-planning concern when reviews, peer reviews, inspections, unit-test activities or other material quality controls are omitted or weakened. If the residual risk remains material, the coach can record formal dissent and escalate through the defined management chain. SECAV-O does not create legal or managerial authority by itself and does not assume a universal veto right; actual decision rights are defined by each adopting organization.
+Version 0.2.0 adds a formal governance role for the coach in project planning. The recommended model gives the coach an explicit voice in planning and, when granted by the adopting organization, a vote on decisions that materially affect quality, competency development and human validation. The coach can raise a documented quality-planning concern when reviews, peer reviews, inspections, unit-test activities or other material quality controls are omitted or weakened. If the residual risk remains material, the coach can record formal dissent and escalate through the defined management chain. SECAV-O does not create legal or managerial authority by itself and does not assume a universal veto right; actual decision rights are defined by each adopting organization.
