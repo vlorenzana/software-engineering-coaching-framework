@@ -35,6 +35,40 @@ Contrasta con la [calidad aspiracional](#calidad-aspiracional), que es el nivel 
 
 ---
 
+### Proceso robusto
+*Fuente: `coaching-governance/guides/robust-process-criteria.md`*
+
+Nivel de calidad del framework SECAV-O definido por encima de la [calidad mínima razonable](#calidad-mínima-razonable) y por debajo de la [calidad aspiracional](#calidad-aspiracional). Un proceso robusto no solo realiza las prácticas de calidad requeridas — las realiza de forma que genera su propia evidencia verificable de efectividad.
+
+Un proceso se considera robusto cuando cumple los criterios definidos en `coaching-governance/guides/robust-process-criteria.md`. Los criterios actualmente definidos son:
+
+| ID | Criterio |
+|---|---|
+| CR-1 | Las inspecciones se realizan sobre los productos críticos |
+| CR-2 | El comportamiento dinámico se diseña con diagramas UML de actividad o de secuencia |
+| CR-3 | Los defectos resultantes de revisiones e inspecciones se documentan con campos completos |
+| CR-4 | Las revisiones individuales generan hallazgos |
+| CR-5 | Cuando una revisión no genera hallazgos, el coach emite un [waiver](#waiver-del-coach) justificado |
+
+La distinción fundamental con la calidad mínima razonable es que el proceso robusto produce evidencia de que las prácticas funcionan — no solo evidencia de que se realizaron.
+
+**Término SECAV-O asociado:** Los criterios individuales referencian `secav:ReviewRecord`, `secav:ReviewFinding`, `secav:DesignArtifact`, `secavo:DefectObservation`, `secavo:CoachWaiver` *(propuesto)*.
+
+---
+
+### Waiver del coach
+*Fuente: `coaching-governance/guides/robust-process-criteria.md` §CR-5*
+
+Documento emitido por el coach que justifica objetivamente la ausencia de hallazgos en una revisión individual. Aplica cuando una revisión legítimamente no produce hallazgos — porque el artefacto fue corregido exhaustivamente antes de la revisión, porque el revisor tiene evidencia objetiva de que el artefacto cumple todos los criterios de aceptación, o porque el artefacto es de baja complejidad y alcance acotado.
+
+El waiver debe documentar: identidad del artefacto y del revisor, justificación objetiva referenciando evidencia, criterios de aceptación verificados, firma del coach y fecha. Un waiver sin justificación objetiva es inválido.
+
+Criterio de proceso robusto CR-5: si la ausencia de hallazgos no tiene justificación documentada, el coach registra una `secav:CoachingIntervention` dirigida al desarrollo de la competencia de revisión del ingeniero.
+
+**Término SECAV-O asociado:** `secavo:CoachWaiver` *(propuesto — no declarado aún en TTL)*
+
+---
+
 ### Calidad aspiracional
 *Fuente: `coaching-governance/guides/minimum-quality-criteria.md`*
 
@@ -109,6 +143,32 @@ Un diagrama de estados completo debe incluir: estado inicial explícito (marcado
 La ausencia de un diagrama de estados cuando el sistema tiene estados, o un diagrama incompleto que omite estados finales o transiciones, es un `secav:ReviewFinding` bloqueante para avanzar a implementación.
 
 **Término SECAV-O asociado:** `secav:DesignArtifact`, `secav:DesignReview`, `secav:QualityCriterion`, `secav:ReviewFinding`, `secav:DesignCompetency`
+
+---
+
+### Diagrama de actividad / flujo
+*Fuente: `coaching-governance/guides/robust-process-criteria.md` §CR-2*
+
+Artefacto de diseño obligatorio (`secav:DesignArtifact`) para toda lógica cuyo comportamiento varía según el flujo de control: procesos con ramificaciones (if/else), bucles, condiciones de guarda, y algoritmos con múltiples caminos de ejecución.
+
+Un diagrama de actividad válido como artefacto inspeccionable debe: ser consistente con el código o especificación que modela, cubrir los flujos principales y los alternativos o de error más relevantes, y mostrar condiciones de guarda explícitas en todos los puntos de decisión.
+
+La ausencia de este diagrama cuando el comportamiento es dinámico es un `secav:ReviewFinding` de tipo `missingRequiredDiagram`. Se distingue del [diagrama de secuencia](#diagrama-de-secuencia) en que modela flujo de control dentro de un proceso, no mensajes entre componentes.
+
+**Término SECAV-O asociado:** `secav:DesignArtifact`, `secav:DesignReview`, `secav:ReviewFinding`, `secav:DesignCompetency`
+
+---
+
+### Diagrama de secuencia
+*Fuente: `coaching-governance/guides/robust-process-criteria.md` §CR-2*
+
+Artefacto de diseño obligatorio (`secav:DesignArtifact`) para toda interacción entre componentes, servicios, actores o capas del sistema en la que el orden temporal de los mensajes es relevante.
+
+Un diagrama de secuencia válido como artefacto inspeccionable debe: ser consistente con el código o especificación que modela, cubrir los flujos principales e incluir flujos alternativos o de error relevantes, y mostrar el nombre de la operación o evento en cada mensaje junto con los retornos relevantes.
+
+La ausencia de este diagrama cuando existen interacciones con orden temporal definido es un `secav:ReviewFinding` de tipo `missingRequiredDiagram`. Se distingue del [diagrama de actividad](#diagrama-de-actividad--flujo) en que modela la colaboración entre participantes, no el flujo interno de un proceso.
+
+**Término SECAV-O asociado:** `secav:DesignArtifact`, `secav:DesignReview`, `secav:ReviewFinding`, `secav:DesignCompetency`
 
 ---
 

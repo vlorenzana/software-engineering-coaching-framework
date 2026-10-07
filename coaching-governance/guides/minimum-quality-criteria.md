@@ -22,6 +22,7 @@ Lo que sí es alcanzable en la mayoría de los proyectos — y lo que este frame
 |---|---|
 | **Por debajo del mínimo** | Mala práctica: ningún artefacto crítico de alguna fase es inspeccionado formalmente. Los defectos se acumulan entre fases y se detectan tarde, cuando su costo de corrección es máximo. |
 | **Calidad mínima razonable** | Los artefactos de mayor riesgo de cada fase son inspeccionados por más de un revisor antes de avanzar. Es el piso del framework. |
+| **Proceso robusto** | Las prácticas de calidad producen evidencia verificable de su efectividad: inspecciones sobre productos críticos, diseño de comportamiento dinámico con diagramas UML, hallazgos documentados en revisiones individuales, y waivers justificados cuando no los hay. Definido en `coaching-governance/guides/robust-process-criteria.md`. |
 | **Calidad aspiracional** | La mayoría o todos los artefactos de cada fase son inspeccionados. Las organizaciones maduran hacia este nivel de forma incremental (`coaching-governance/guides/incremental-adoption.md`). |
 
 Un segundo criterio que refuerza este mínimo: si la presión de tiempo lleva sistemáticamente a omitir inspecciones en alguna fase — cualquier fase — eso es una señal de que el plan de proyecto subestima el esfuerzo de calidad, no de que la inspección sea prescindible. El coach documenta estas omisiones como `secavo:QualityPlanningConcern`.
