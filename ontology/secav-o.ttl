@@ -114,7 +114,7 @@ secav:evidenceNote a owl:DatatypeProperty ;
     rdfs:domain secav:Evidence ; rdfs:range xsd:string ; rdfs:label "evidence note"@en .
 
 secav:measurementValue a owl:DatatypeProperty ;
-    rdfs:domain secav:Measurement ; rdfs:label "measurement value"@en .
+    rdfs:domain secav:Measurement ; rdfs:range xsd:decimal ; rdfs:label "measurement value"@en .
 
 secav:criterionStatement a owl:DatatypeProperty ;
     rdfs:domain secav:QualityCriterion ; rdfs:range xsd:string ; rdfs:label "criterion statement"@en .
