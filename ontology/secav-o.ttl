@@ -1375,3 +1375,152 @@ secav:ReopeningClosedDebates a owl:Class ;
     rdfs:subClassOf secav:DesignReviewAntipattern ;
     rdfs:label "Reopening Closed Debates"@en ;
     rdfs:comment "Reopening decisions that were settled in previous sessions without presenting new data — produces the 'Groundhog Day' syndrome where the same topics repeat meeting after meeting."@en .
+
+# ---------------------------------------------------------------------------
+# Development Lifecycle — Full 22-Phase Model
+# Phases already modeled elsewhere in this ontology:
+#   Phase  1  secav:RequirementsActivity  (line 18)
+#   Phase  2  secav:RequirementsReview    (Requirements section)
+#   Phase  3  secav:ApplicationDesign     (line 24) / secav:DesignActivity (line 19)
+#   Phase  4  secav:DesignReview          (line 27)
+#   Phase  5  secav:UnitTestDesign        (line 25) / secav:UnitTestDesignImplementation (line 28)
+#   Phase  6  secav:UnitTestDesignReview  (line 29)
+#   Phase 13  secav:CodeImplementation    (line 30)
+#   Phase 14  secav:CodeReview            (line 31)
+# Phases added in this section: 7-12 (test design + review) and 15-22 (execution + results review).
+# ---------------------------------------------------------------------------
+
+# --- Phase 7: Integration Test Design ---
+
+secav:IntegrationTestDesign a owl:Class ;
+    rdfs:subClassOf secav:DesignActivity ;
+    rdfs:label "Integration Test Design"@en ;
+    rdfs:comment "The activity of designing test cases, data, and environments that verify correct interaction between integrated modules or components. Produces integration test design artifacts subject to peer review before execution."@en .
+
+secav:IntegrationTestDesignImplementation a owl:Class ;
+    rdfs:subClassOf secav:ImplementationActivity, secav:IntegrationTestDesign ;
+    rdfs:label "Integration Test Design Implementation"@en ;
+    rdfs:comment "The act of writing integration test code and configuration that realizes the integration test design."@en .
+
+secav:IntegrationTestDesignArtifact a owl:Class ;
+    rdfs:subClassOf secav:Artifact ;
+    rdfs:label "Integration Test Design Artifact"@en ;
+    rdfs:comment "A document or code artifact describing integration test cases, interaction scenarios, or test data for verifying module interfaces."@en .
+
+# --- Phase 8: Integration Test Design Review ---
+
+secav:IntegrationTestDesignReview a owl:Class ;
+    rdfs:subClassOf secav:ReviewActivity, secav:IntegrationTestDesign ;
+    rdfs:label "Integration Test Design Review"@en ;
+    rdfs:comment "Peer review, walkthrough, or inspection of integration test design artifacts to verify correctness of interaction scenarios, test data coverage, and environment assumptions before execution. Requires coach sign-off and recorded findings."@en .
+
+# --- Phase 9: System Test Design ---
+
+secav:SystemTestDesign a owl:Class ;
+    rdfs:subClassOf secav:DesignActivity ;
+    rdfs:label "System Test Design"@en ;
+    rdfs:comment "The activity of designing end-to-end test scenarios that validate the complete system against functional and non-functional requirements. Produces system test design artifacts subject to peer review before execution."@en .
+
+secav:SystemTestDesignImplementation a owl:Class ;
+    rdfs:subClassOf secav:ImplementationActivity, secav:SystemTestDesign ;
+    rdfs:label "System Test Design Implementation"@en ;
+    rdfs:comment "The act of writing system test scripts, automation, and environment configuration that realizes the system test design."@en .
+
+secav:SystemTestDesignArtifact a owl:Class ;
+    rdfs:subClassOf secav:Artifact ;
+    rdfs:label "System Test Design Artifact"@en ;
+    rdfs:comment "A document or code artifact describing system-level test cases, end-to-end scenarios, or non-functional test specifications."@en .
+
+# --- Phase 10: System Test Design Review ---
+
+secav:SystemTestDesignReview a owl:Class ;
+    rdfs:subClassOf secav:ReviewActivity, secav:SystemTestDesign ;
+    rdfs:label "System Test Design Review"@en ;
+    rdfs:comment "Peer review, walkthrough, or inspection of system test design artifacts to verify that test scenarios cover system-level requirements and edge cases before execution. Requires coach sign-off and recorded findings."@en .
+
+# --- Phase 11: Acceptance Test Design ---
+
+secav:AcceptanceTestDesign a owl:Class ;
+    rdfs:subClassOf secav:DesignActivity ;
+    rdfs:label "Acceptance Test Design"@en ;
+    rdfs:comment "The activity of designing acceptance criteria, scenarios, and validation procedures that confirm the system meets business and stakeholder expectations. Produces acceptance test design artifacts subject to peer review."@en .
+
+secav:AcceptanceTestDesignImplementation a owl:Class ;
+    rdfs:subClassOf secav:ImplementationActivity, secav:AcceptanceTestDesign ;
+    rdfs:label "Acceptance Test Design Implementation"@en ;
+    rdfs:comment "The act of writing acceptance test scripts, BDD scenarios, or manual test procedures that realize the acceptance test design."@en .
+
+secav:AcceptanceTestDesignArtifact a owl:Class ;
+    rdfs:subClassOf secav:Artifact ;
+    rdfs:label "Acceptance Test Design Artifact"@en ;
+    rdfs:comment "A document or script artifact describing acceptance test cases, BDD scenarios, or stakeholder-facing validation procedures."@en .
+
+# --- Phase 12: Acceptance Test Design Review ---
+
+secav:AcceptanceTestDesignReview a owl:Class ;
+    rdfs:subClassOf secav:ReviewActivity, secav:AcceptanceTestDesign ;
+    rdfs:label "Acceptance Test Design Review"@en ;
+    rdfs:comment "Peer review, walkthrough, or inspection of acceptance test design artifacts to verify that acceptance criteria correctly capture stakeholder expectations before execution. Requires coach sign-off and recorded findings."@en .
+
+# --- Test Execution Result Artifact (shared by phases 15, 17, 19, 21) ---
+
+secav:TestExecutionResultArtifact a owl:Class ;
+    rdfs:subClassOf secav:Artifact ;
+    rdfs:label "Test Execution Result Artifact"@en ;
+    rdfs:comment "A report or record produced by any test execution phase, containing pass/fail counts, defects found, coverage data, and execution anomalies. The reviewable work product for all test results review phases."@en .
+
+# --- Phase 15: Unit Test Execution ---
+
+secav:UnitTestExecution a owl:Class ;
+    rdfs:subClassOf secav:TestingActivity ;
+    rdfs:label "Unit Test Execution"@en ;
+    rdfs:comment "The activity of running unit tests against the implementation and recording results. Distinct from unit test design (phases 5-6) — produces a TestExecutionResultArtifact reviewed in phase 16."@en .
+
+# --- Phase 16: Unit Test Results Review ---
+
+secav:UnitTestResultsReview a owl:Class ;
+    rdfs:subClassOf secav:ReviewActivity ;
+    rdfs:label "Unit Test Results Review"@en ;
+    rdfs:comment "Review of unit test execution results to assess defect density, coverage adequacy, and readiness to proceed to integration testing. Requires coach sign-off and at least one recorded finding (including explicit 'no defects found')."@en .
+
+# --- Phase 17: Integration Test Execution ---
+
+secav:IntegrationTestExecution a owl:Class ;
+    rdfs:subClassOf secav:TestingActivity ;
+    rdfs:label "Integration Test Execution"@en ;
+    rdfs:comment "The activity of running integration tests to verify correct module interactions and recording results. Produces a TestExecutionResultArtifact reviewed in phase 18."@en .
+
+# --- Phase 18: Integration Test Results Review ---
+
+secav:IntegrationTestResultsReview a owl:Class ;
+    rdfs:subClassOf secav:ReviewActivity ;
+    rdfs:label "Integration Test Results Review"@en ;
+    rdfs:comment "Review of integration test execution results to assess whether module interaction defects have been resolved and whether the system is ready for system-level testing."@en .
+
+# --- Phase 19: System Test Execution ---
+
+secav:SystemTestExecution a owl:Class ;
+    rdfs:subClassOf secav:TestingActivity ;
+    rdfs:label "System Test Execution"@en ;
+    rdfs:comment "The activity of running end-to-end system tests against the deployed system and recording results. Produces a TestExecutionResultArtifact reviewed in phase 20."@en .
+
+# --- Phase 20: System Test Results Review ---
+
+secav:SystemTestResultsReview a owl:Class ;
+    rdfs:subClassOf secav:ReviewActivity ;
+    rdfs:label "System Test Results Review"@en ;
+    rdfs:comment "Review of system test execution results to evaluate end-to-end quality, unresolved defects, and readiness to proceed to acceptance testing."@en .
+
+# --- Phase 21: Acceptance Test Execution ---
+
+secav:AcceptanceTestExecution a owl:Class ;
+    rdfs:subClassOf secav:TestingActivity ;
+    rdfs:label "Acceptance Test Execution"@en ;
+    rdfs:comment "The activity of executing acceptance tests with or in coordination with stakeholders to validate that the system meets business expectations. Produces a TestExecutionResultArtifact reviewed in phase 22."@en .
+
+# --- Phase 22: Acceptance Test Results Review ---
+
+secav:AcceptanceTestResultsReview a owl:Class ;
+    rdfs:subClassOf secav:ReviewActivity ;
+    rdfs:label "Acceptance Test Results Review"@en ;
+    rdfs:comment "Review of acceptance test execution results with stakeholder participation to make a go/no-go decision for release. The final quality gate before production deployment. Requires coach sign-off and recorded findings."@en .

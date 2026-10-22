@@ -465,6 +465,145 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 
 ---
 
+## Group 14 — Integration Test Design & Review (Phases 7–8)
+
+> **Key principle:** Integration test design artifacts are work products. Like unit test code, they must be individually reviewed before execution. Integration tests detect inter-module defects that unit tests cannot see — a poorly designed integration test suite creates a false sense of quality at the interface level.
+
+| # | Observable signal | Type | SECAV-O Term |
+|---|------------------|------|--------------|
+| 14.01 | Integration test design includes scenarios covering all documented module interfaces and contracts | ✓ | `secav:IntegrationTestDesign` |
+| 14.02 | Integration test cases explicitly reference the requirements or design decisions they verify | ✓ | `secav:IntegrationTestDesignArtifact` |
+| 14.03 | Test data and environment assumptions are documented — not left implicit or dependent on local setup | ✓ | `secav:IntegrationTestDesignArtifact` |
+| 14.04 | The team can describe which module interaction failures the integration tests would and would not detect | ✓ | `secav:IntegrationTestDesign` |
+| 14.05 | Integration tests are written before — or in parallel with — implementation, not as an afterthought post-merge | ✓ | `secav:IntegrationTestDesign` |
+| 14.06 | Integration test design artifacts are submitted as a formal review request with change description and acceptance criteria before the review session | ✓ | `secav:FormalReviewRequest` |
+| 14.07 | The integration test design review covers interaction correctness, data boundary handling, and environment dependencies — not just syntax | ✓ | `secav:IntegrationTestDesignReview` |
+| 14.08 | Integration tests exercise failure paths (timeouts, partial responses, unavailable dependencies) not only happy paths | ✓ | `secav:IntegrationTestDesign` |
+| 14.09 | Integration tests are executed only against the reviewed and approved design — not against ad-hoc, unreviewed test code | ✓ | `secav:IntegrationTestDesignReview` |
+| 14.10 | Tests are merged or integrated without a prior design review — execution results are not trustworthy without review | ⚠ | `secav:UnreviewedTestCode` |
+| 14.11 | Integration test coverage is declared solely by count of test cases — not by interface coverage or scenario coverage | ⚠ | `secav:ReviewAntipattern` |
+| 14.12 | All findings from the integration test design review (defects, gaps, explicit "no defects found") are recorded before closing the session | ✓ | `secav:producesReviewFinding` · `secav:proposedSolution` (optional) |
+| 14.13 | The coach issues a process sign-off confirming the integration test design review was conducted acceptably | ✓ | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
+| 14.14 | The integration test design review closes without written findings or the coach sign-off is not issued | ⚠ | absence of `secav:producesReviewFinding` or `secav:CoachReviewSignOff` |
+
+### Escalation notes — Group 14
+
+- ⚠ signal 14.10 in the same engineer in two or more sprints justifies an individual `secav:CoachingIntervention` on test discipline.
+- ⚠ signal 14.11 indicates a measurement gap; record a `secavo:ImprovementAction` to introduce interface coverage criteria.
+- ⚠ signal 14.14: pending sign-off must be tracked as an open `secav:MeetingAgreement` in the next meeting.
+
+---
+
+## Group 15 — System Test Design & Review (Phases 9–10)
+
+> **Key principle:** System tests validate the system against end-to-end requirements including non-functional requirements (performance, security, reliability). Defects that escape system test design review are the most expensive to correct — they surface only under real load or after deployment.
+
+| # | Observable signal | Type | SECAV-O Term |
+|---|------------------|------|--------------|
+| 15.01 | System test cases are traceable to documented functional and non-functional requirements | ✓ | `secav:SystemTestDesign` |
+| 15.02 | Non-functional test scenarios (performance baselines, security checks, reliability targets) are designed explicitly — not left to informal observation | ✓ | `secav:SystemTestDesignArtifact` |
+| 15.03 | The team can describe which requirement gaps or edge cases the system tests are designed to expose | ✓ | `secav:SystemTestDesign` |
+| 15.04 | Test environment specifications (infrastructure, data sets, configuration) are documented and reviewed alongside the test cases | ✓ | `secav:SystemTestDesignArtifact` |
+| 15.05 | System test artifacts are submitted as a formal review request before the system test design review session | ✓ | `secav:FormalReviewRequest` |
+| 15.06 | The system test design review verifies traceability to requirements, environment feasibility, and coverage of non-functional scenarios | ✓ | `secav:SystemTestDesignReview` |
+| 15.07 | Performance and reliability scenarios include defined pass/fail thresholds — not vague "must be fast" criteria | ✓ | `secav:SystemTestDesign` |
+| 15.08 | System test execution proceeds without a completed design review — failures are harder to diagnose with unreviewed test code | ⚠ | `secav:UnreviewedTestCode` |
+| 15.09 | Non-functional requirements are not covered by any system test scenario — systemic coverage gap | ⚠ | `secav:ReviewAntipattern` |
+| 15.10 | All findings from the system test design review are recorded before closing the session | ✓ | `secav:producesReviewFinding` · `secav:proposedSolution` (optional) |
+| 15.11 | The coach issues a process sign-off confirming the system test design review was conducted acceptably | ✓ | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
+| 15.12 | The system test design review closes without written findings or the coach sign-off is not issued | ⚠ | absence of `secav:producesReviewFinding` or `secav:CoachReviewSignOff` |
+
+### Escalation notes — Group 15
+
+- ⚠ signal 15.08: system test execution without a reviewed design should be flagged as a `secavo:QualityPlanningConcern` and raised in the next retrospective.
+- ⚠ signal 15.09: if non-functional requirements exist but no test covers them, record a `secavo:ImprovementAction` to close the coverage gap before release.
+- ⚠ signal 15.12: pending sign-off must be tracked as an open `secav:MeetingAgreement`.
+
+---
+
+## Group 16 — Acceptance Test Design & Review (Phases 11–12)
+
+> **Key principle:** Acceptance test design is the translation of business requirements into verifiable scenarios co-created with stakeholders. A flaw in acceptance test design means the team ships something that passes all technical tests but fails business expectations — the most visible type of failure.
+
+| # | Observable signal | Type | SECAV-O Term |
+|---|------------------|------|--------------|
+| 16.01 | Acceptance test scenarios are written with stakeholder participation or explicit stakeholder review — not by the development team alone | ✓ | `secav:AcceptanceTestDesign` |
+| 16.02 | Each acceptance test case references a specific user story, business rule, or acceptance criterion documented in the requirements | ✓ | `secav:AcceptanceTestDesignArtifact` |
+| 16.03 | Acceptance criteria are expressed in observable, verifiable terms — "the system displays X within 2 seconds" not "the system is fast" | ✓ | `secav:AcceptanceTestDesign` |
+| 16.04 | The acceptance test design includes both successful flows and explicitly designed rejection scenarios (what the system must NOT do or accept) | ✓ | `secav:AcceptanceTestDesignArtifact` |
+| 16.05 | Acceptance test artifacts are submitted as a formal review request before the acceptance test design review session | ✓ | `secav:FormalReviewRequest` |
+| 16.06 | The acceptance test design review verifies stakeholder traceability, observability of criteria, and coverage of business edge cases | ✓ | `secav:AcceptanceTestDesignReview` |
+| 16.07 | Stakeholder representatives can confirm that the acceptance test scenarios match their expectations after the review | ✓ | `secav:AcceptanceTestDesignReview` |
+| 16.08 | Acceptance tests are designed by the development team without stakeholder input or review — business alignment risk | ⚠ | `secav:ReviewAntipattern` |
+| 16.09 | Acceptance criteria contain vague or unmeasurable language that was not corrected during requirements review | ⚠ | `secav:VagueRequirement` |
+| 16.10 | Acceptance tests are executed before the design has been formally reviewed and the stakeholders have confirmed alignment | ⚠ | `secav:UnreviewedTestCode` |
+| 16.11 | All findings from the acceptance test design review are recorded before closing the session | ✓ | `secav:producesReviewFinding` · `secav:proposedSolution` (optional) |
+| 16.12 | The coach issues a process sign-off confirming the acceptance test design review was conducted acceptably | ✓ | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
+| 16.13 | The acceptance test design review closes without written findings or the coach sign-off is not issued | ⚠ | absence of `secav:producesReviewFinding` or `secav:CoachReviewSignOff` |
+
+### Escalation notes — Group 16
+
+- ⚠ signal 16.08: escalate as a `secavo:QualityPlanningConcern`; acceptance tests without stakeholder input cannot serve as release quality gates.
+- ⚠ signal 16.09: this is a requirements defect that propagated forward — record as a late-detected `secav:VagueRequirement` finding and trace back to the requirements review phase.
+- ⚠ signal 16.13: pending sign-off must be tracked as an open `secav:MeetingAgreement`.
+
+---
+
+## Group 17 — Test Execution & Results Review (Phases 15–22)
+
+> **Key principle:** Test execution produces a `secav:TestExecutionResultArtifact` — a report that is itself a work product requiring review. A test run without a structured results review is a missed quality gate. Results reviews are not just "did it pass?" — they examine defect density, coverage gaps, and the team's readiness decision.
+
+### 17.1 — Unit Test Execution & Results Review (Phases 15–16)
+
+| # | Observable signal | Type | SECAV-O Term |
+|---|------------------|------|--------------|
+| 17.01 | Unit test execution results are recorded in a structured report (pass/fail counts, coverage, failing test names) — not communicated verbally | ✓ | `secav:TestExecutionResultArtifact` · `secav:UnitTestExecution` |
+| 17.02 | The unit test results review assesses defect density against defined thresholds before authorizing integration | ✓ | `secav:UnitTestResultsReview` |
+| 17.03 | Coverage data is reviewed for gaps (untested paths) not just total coverage percentage | ✓ | `secav:UnitTestResultsReview` |
+| 17.04 | Flaky or intermittently failing tests are flagged as findings — not dismissed or re-run without investigation | ✓ | `secav:ReviewFinding` |
+| 17.05 | The team proceeds to integration testing based on CI pass status alone, without a reviewed results report | ⚠ | absence of `secav:UnitTestResultsReview` |
+| 17.06 | The unit test results review records at least one finding (including explicit "no defects, coverage adequate, ready to integrate") | ✓ | `secav:producesReviewFinding` |
+| 17.07 | Coach sign-off is issued after confirming the results review was conducted with a coverage and defect density assessment | ✓ | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
+
+### 17.2 — Integration Test Execution & Results Review (Phases 17–18)
+
+| # | Observable signal | Type | SECAV-O Term |
+|---|------------------|------|--------------|
+| 17.08 | Integration test execution results are recorded per interface or module-pair — not only as aggregate pass/fail | ✓ | `secav:TestExecutionResultArtifact` · `secav:IntegrationTestExecution` |
+| 17.09 | The integration test results review identifies which module interfaces had failures and whether they are blocking or non-blocking | ✓ | `secav:IntegrationTestResultsReview` |
+| 17.10 | Defects found in integration testing are traced back to the phase where the defect was injected (requirements, design, or implementation) | ✓ | `secavo:phaseInjected` · `secav:ReviewFinding` |
+| 17.11 | The team advances to system testing before all blocking integration defects are resolved or documented with an explicit exception | ⚠ | `secav:ReviewAntipattern` |
+| 17.12 | The integration test results review records at least one finding and is signed off by the coach | ✓ | `secav:producesReviewFinding` · `secav:CoachReviewSignOff` |
+
+### 17.3 — System Test Execution & Results Review (Phases 19–20)
+
+| # | Observable signal | Type | SECAV-O Term |
+|---|------------------|------|--------------|
+| 17.13 | System test execution results include both functional and non-functional test outcomes (performance, security, reliability) | ✓ | `secav:TestExecutionResultArtifact` · `secav:SystemTestExecution` |
+| 17.14 | The system test results review produces an explicit quality assessment with a recommendation for or against advancing to acceptance testing | ✓ | `secav:SystemTestResultsReview` |
+| 17.15 | Non-functional test failures (performance regression, security vulnerability) are classified as blocking by default unless the team documents an explicit exception | ✓ | `secav:ReviewFinding` |
+| 17.16 | The team advances to acceptance testing before the system test results review is complete — last integration-side quality gate is skipped | ⚠ | absence of `secav:SystemTestResultsReview` |
+| 17.17 | The system test results review records at least one finding and is signed off by the coach | ✓ | `secav:producesReviewFinding` · `secav:CoachReviewSignOff` |
+
+### 17.4 — Acceptance Test Execution & Results Review (Phases 21–22)
+
+| # | Observable signal | Type | SECAV-O Term |
+|---|------------------|------|--------------|
+| 17.18 | Acceptance test execution is conducted with stakeholder participation or explicit stakeholder observation — not by the development team alone | ✓ | `secav:AcceptanceTestExecution` |
+| 17.19 | The acceptance test results review includes a formal go/no-go decision with documented justification — not an implicit approval by silence | ✓ | `secav:AcceptanceTestResultsReview` |
+| 17.20 | Defects found during acceptance testing are classified by severity and business impact before the release decision is made | ✓ | `secav:ReviewFinding` |
+| 17.21 | Stakeholder signs off on the release decision based on the acceptance test results report — verbal acknowledgment without a documented record is not a valid sign-off | ✓ | `secav:CoachReviewSignOff` |
+| 17.22 | The team proceeds to production deployment before the acceptance test results review is completed or without stakeholder sign-off | ⚠ | absence of `secav:AcceptanceTestResultsReview` |
+| 17.23 | The acceptance test results review records at least one finding and is signed off by the coach before the release decision is finalized | ✓ | `secav:producesReviewFinding` · `secav:CoachReviewSignOff` · `secav:hasSignOff` |
+
+### Escalation notes — Group 17
+
+- ⚠ signals 17.05, 17.11, 17.16, or 17.22 represent quality gate bypasses — each must trigger a `secavo:QualityPlanningConcern` and be raised in the next retrospective.
+- Defects traced via `secavo:phaseInjected` back to requirements or design (signal 17.10) indicate that the earlier review phases (groups 1–2 or 13) were insufficient. Record as escape observations.
+- ⚠ signal 17.22 is the highest-severity bypass: production deployment without acceptance results review. Escalate immediately.
+
+---
+
 ## Related documents
 
 | Document | Relationship |
@@ -478,3 +617,4 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 | `templates/engineer-coaching-assessment.md` | ✓ evidence feeds the competency assessment |
 | `coaching-governance/guides/software-walkthroughs.md` | Complete protocol for group 12 (code walkthroughs) |
 | `coaching-governance/guides/design-review.md` | Complete protocol for group 13 (design reviews) |
+| `ontology/secav-o.ttl` | Full 22-phase lifecycle model — phases 7–12 and 15–22 defined in the Development Lifecycle section |

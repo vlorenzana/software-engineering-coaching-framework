@@ -367,3 +367,73 @@ secav:CodeWalkthroughShape
         sh:class secav:Artifact ;
         sh:message "A code walkthrough must identify the artifact (source file, module, or PR) it reviews."@en
     ] .
+
+secav:IntegrationTestDesignReviewShape
+    a sh:NodeShape ;
+    sh:targetClass secav:IntegrationTestDesignReview ;
+    sh:property [
+        sh:path secav:evaluates ;
+        sh:minCount 1 ;
+        sh:class secav:IntegrationTestDesignArtifact ;
+        sh:message "An integration test design review must identify the integration test artifact being reviewed."@en
+    ] .
+
+secav:SystemTestDesignReviewShape
+    a sh:NodeShape ;
+    sh:targetClass secav:SystemTestDesignReview ;
+    sh:property [
+        sh:path secav:evaluates ;
+        sh:minCount 1 ;
+        sh:class secav:SystemTestDesignArtifact ;
+        sh:message "A system test design review must identify the system test artifact being reviewed."@en
+    ] .
+
+secav:AcceptanceTestDesignReviewShape
+    a sh:NodeShape ;
+    sh:targetClass secav:AcceptanceTestDesignReview ;
+    sh:property [
+        sh:path secav:evaluates ;
+        sh:minCount 1 ;
+        sh:class secav:AcceptanceTestDesignArtifact ;
+        sh:message "An acceptance test design review must identify the acceptance test artifact being reviewed."@en
+    ] .
+
+secav:UnitTestResultsReviewShape
+    a sh:NodeShape ;
+    sh:targetClass secav:UnitTestResultsReview ;
+    sh:property [
+        sh:path secav:evaluates ;
+        sh:minCount 1 ;
+        sh:class secav:TestExecutionResultArtifact ;
+        sh:message "A unit test results review must identify the test execution result artifact (report) being reviewed."@en
+    ] .
+
+secav:IntegrationTestResultsReviewShape
+    a sh:NodeShape ;
+    sh:targetClass secav:IntegrationTestResultsReview ;
+    sh:property [
+        sh:path secav:evaluates ;
+        sh:minCount 1 ;
+        sh:class secav:TestExecutionResultArtifact ;
+        sh:message "An integration test results review must identify the test execution result artifact being reviewed."@en
+    ] .
+
+secav:SystemTestResultsReviewShape
+    a sh:NodeShape ;
+    sh:targetClass secav:SystemTestResultsReview ;
+    sh:property [
+        sh:path secav:evaluates ;
+        sh:minCount 1 ;
+        sh:class secav:TestExecutionResultArtifact ;
+        sh:message "A system test results review must identify the test execution result artifact being reviewed."@en
+    ] .
+
+secav:AcceptanceTestResultsReviewShape
+    a sh:NodeShape ;
+    sh:targetClass secav:AcceptanceTestResultsReview ;
+    sh:property [
+        sh:path secav:evaluates ;
+        sh:minCount 1 ;
+        sh:class secav:TestExecutionResultArtifact ;
+        sh:message "An acceptance test results review must identify the test execution result artifact being reviewed. This is the final quality gate before production deployment."@en
+    ] .
