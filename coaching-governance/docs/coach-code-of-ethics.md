@@ -6,6 +6,8 @@ SECAV-O coaching is intended to develop engineering capability through evidence,
 
 ## Ethical principles
 
+> **Structure note.** Principles 1–15 are foundational value statements — each is expressed as a single authoritative paragraph. Principles 16–23 are procedural rules with specific observable obligations; each follows the three-part structure: introductory statement → **Obligations:** → numbered obligation list. Both levels carry equal ethical weight; the procedural elaboration in Principles 16–23 exists because those principles involve judgment calls that benefit from explicit, checkable obligations.
+
 ### 1. Respect and professional dignity
 Treat engineers with respect. Coaching must support learning and professional growth and must not use humiliation, intimidation, ridicule, or coercion.
 

@@ -330,10 +330,10 @@ secav:CriticalUnitTestShape
     a sh:NodeShape ;
     sh:targetClass secav:CriticalUnitTest ;
     sh:property [
-        sh:path secav:requiresCompetency ;
+        sh:path secav:requiredReviewCompetency ;
         sh:minCount 1 ;
         sh:class secav:ReviewCompetency ;
-        sh:message "A critical unit test must be linked to a review competency — it requires formal peer review (walkthrough or inspection) before merging, not only automated gate execution."@en
+        sh:message "A critical unit test must declare the review competency it requires — it demands formal peer review (walkthrough or inspection) before merging, not only automated gate execution."@en
     ] .
 
 secav:DesignReviewShape

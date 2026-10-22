@@ -76,6 +76,12 @@ secav:evaluates a owl:ObjectProperty ;
 secav:requiresCompetency a owl:ObjectProperty ;
     rdfs:domain secav:EngineeringActivity ; rdfs:range secav:Competency ; rdfs:label "requires competency"@en .
 
+secav:requiredReviewCompetency a owl:ObjectProperty ;
+    rdfs:domain secav:Artifact ;
+    rdfs:range secav:Competency ;
+    rdfs:label "required review competency"@en ;
+    rdfs:comment "Declares the competency level required to review this artifact responsibly. Applicable to any Artifact subclass — primarily used on CriticalUnitTest to mandate formal peer review (walkthrough or inspection) rather than automated gate execution alone."@en .
+
 secav:providesEvidenceOf a owl:ObjectProperty ;
     rdfs:domain secav:Evidence ; rdfs:range secav:Competency ; rdfs:label "provides evidence of"@en .
 
