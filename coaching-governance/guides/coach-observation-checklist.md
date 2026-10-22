@@ -167,6 +167,11 @@ This checklist allows the coach to record, during any observation session, the p
 | 7.14 | ⚠ | Test code on critical modules is merged without any individual peer review — CI passing is treated as sufficient validation | `secav:UnreviewedTestCode` |
 | 7.15 | ⚠ | Assertions in tests always pass regardless of the behavior under test (e.g., asserting a mock value instead of the actual unit result) | `secav:TautologicalAssertion` |
 | 7.16 | ⚠ | Tests fail intermittently for reasons unrelated to the behavior they verify (time-dependent, environment-dependent, order-dependent) | `secav:BrittleTest` |
+| 7.17 | ✓ | All findings from the unit test design review (defects, observations, or explicit "no defects found") are recorded in the tracking tool before closing the session | `secav:producesReviewFinding` |
+| 7.18 | ✓ | The coach issues a process sign-off confirming the unit test design review was conducted acceptably (roles followed, findings documented, review not rubber-stamped) | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
+| 7.19 | ✓ | When the review identifies a test design problem and the team agrees on a fix approach, the proposed solution is recorded alongside the finding | `secav:proposedSolution` (optional) |
+| 7.20 | ⚠ | The unit test design review session ends without any written findings — verbal comments only | absence of `secav:producesReviewFinding` |
+| 7.21 | ⚠ | The coach does not issue a sign-off on the unit test design review — findings cannot be used as valid competency evidence | absence of `secav:CoachReviewSignOff` |
 
 ---
 
