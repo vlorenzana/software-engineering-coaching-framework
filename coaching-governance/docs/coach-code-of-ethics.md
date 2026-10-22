@@ -76,6 +76,18 @@ This is a distinct duty from the witness obligation (Principle 16). The coach's 
 3. **No retroactive satisfaction.** A requirements review conducted after implementation has already started does not fulfill the planning gate — it may still produce valuable findings, but the implementation risk materializes from day one of unreviewed requirements.
 4. **This is an ethical obligation, not only a process step.** Starting implementation on unreviewed requirements is the highest-risk lifecycle antipattern (`secav:MissingRequirementsReview`). Endorsing a plan that omits this gate makes the coach complicit in accepting that risk without disclosure.
 
+### 17. Work plan gate for requirements review
+The coach has an active obligation — not merely a recommendation — to confirm that at least one `secav:RequirementsReview` session (peer review, walkthrough, or formal inspection of requirements artifacts) is included in the sprint or feature work plan **before authorizing implementation to begin**. This obligation exists because vague, ambiguous, unclear, and incomplete requirements are invisible to automated tools and carry the highest downstream correction cost in the lifecycle.
+
+**Obligations:**
+
+1. **Sprint planning gate.** During sprint planning (or equivalent planning ceremony), the coach must verify that the work plan contains a scheduled RequirementsReview for every feature or story entering implementation in that sprint. If none is present, the coach must either request its inclusion or document a written exception with justification.
+2. **No silent approval.** Approving a sprint plan or signing a kick-off document implicitly authorizes the work plan it describes. A plan without RequirementsReview that the coach signs without noting the omission is a tacit endorsement of the `secav:MissingRequirementsReview` antipattern.
+3. **Exception justification.** If a RequirementsReview is genuinely not feasible (e.g., requirements are inherited from a prior sprint and already reviewed), the coach must document the reason explicitly. Silence does not constitute an exception.
+4. **Planning endorsement vs. session sign-off.** The planning-gate endorsement confirms the session is planned — it is distinct from the post-session `secav:CoachReviewSignOff` (Principle 16), which certifies the session was conducted acceptably.
+
+Repeated failure to enforce the requirements review planning gate — allowing implementation to begin on unreviewed requirements — is a professional ethics concern that should be self-disclosed and addressed through coaching practice improvement (see Principle 12).
+
 ## Ethical escalation
 
 A coach should document and escalate situations involving material conflicts of interest, misuse of confidential evidence, pressure to manipulate metrics, discriminatory treatment, unsafe engineering direction, or requests that contradict professional or organizational obligations.

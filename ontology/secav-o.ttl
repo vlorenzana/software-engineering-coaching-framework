@@ -1239,7 +1239,7 @@ secav:UnnecessaryRewalkthrough a owl:Class ;
 
 secav:WalkthroughRole a owl:Class ;
     rdfs:label "Walkthrough Role"@en ;
-    rdfs:comment "A designated role in a code walkthrough session: Autor/Presentador, Moderador, or Escribano."@en .
+    rdfs:comment "A designated role in a code walkthrough session: Author/Presenter, Moderator, or Scribe."@en .
 
 secav:walkthroughFocus a owl:DatatypeProperty ;
     rdfs:domain secav:CodeWalkthrough ;
@@ -1257,7 +1257,7 @@ secav:walkthroughSeverity a owl:DatatypeProperty ;
     rdfs:domain secav:ReviewFinding ;
     rdfs:range xsd:string ;
     rdfs:label "walkthrough severity"@en ;
-    rdfs:comment "Severity classification of a walkthrough finding: 'Bloqueante' (blocks merge), 'Mejora' (improvement opportunity), or 'Aclaración' (clarification needed)."@en .
+    rdfs:comment "Severity classification of a walkthrough finding: 'Blocking' (must be resolved before merge), 'Improvement' (recommended but not blocking), or 'Clarification' (question or explanation needed)."@en .
 
 # ---------------------------------------------------------------------------
 # Design Review
