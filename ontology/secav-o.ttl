@@ -1214,3 +1214,56 @@ secav:mandatoryForLaunch a owl:DatatypeProperty ;
     rdfs:range xsd:boolean ;
     rdfs:label "mandatory for launch"@en ;
     rdfs:comment "True if the finding represents a change indispensable before product launch; false if it is an optional improvement for future iterations."@en .
+
+# Additional DesignReviewAntipatterns
+# Derived from: Guia de Malas Practicas para Revision de Diseno
+
+secav:DesignAmbush a owl:Class ;
+    rdfs:subClassOf secav:DesignReviewAntipattern ;
+    rdfs:label "Design Ambush"@en ;
+    rdfs:comment "Presenting a complex design proposal for the first time in the review meeting without sending a pre-read — reviewers cannot analyze the flow logic in depth and react impulsively."@en .
+
+secav:OvercrowdedDesignReview a owl:Class ;
+    rdfs:subClassOf secav:DesignReviewAntipattern ;
+    rdfs:label "Overcrowded Design Review"@en ;
+    rdfs:comment "Inviting dozens of participants without defined roles, causing endless debates, loss of focus, and analysis paralysis that blocks consensus."@en .
+
+secav:LiveDesignRedesign a owl:Class ;
+    rdfs:subClassOf secav:DesignReviewAntipattern ;
+    rdfs:label "Live Design Redesign"@en ;
+    rdfs:comment "Moving pixels, changing typography, or adjusting colors in real time based on each attendee's requests — turns the review into a chaotic workshop and undermines the designer's professional judgment."@en .
+
+secav:PrematureDetailFocus a owl:Class ;
+    rdfs:subClassOf secav:DesignReviewAntipattern ;
+    rdfs:label "Premature Detail Focus"@en ;
+    rdfs:comment "Debating button colors or shadows in early exploratory phases when the information architecture or main flow has not yet been validated. Red flag: more than 15 minutes on a cosmetic detail."@en .
+
+secav:VagueFeedback a owl:Class ;
+    rdfs:subClassOf secav:DesignReviewAntipattern ;
+    rdfs:label "Vague Feedback"@en ;
+    rdfs:comment "Non-actionable comments such as 'make it more modern' or 'give it more impact' without explaining what problem exists and what impact it has on user experience — impossible to act on."@en .
+
+secav:DefensiveDesignerAttitude a owl:Class ;
+    rdfs:subClassOf secav:DesignReviewAntipattern ;
+    rdfs:label "Defensive Designer Attitude"@en ;
+    rdfs:comment "The designer spends most of the session justifying their decisions instead of listening — blocks constructive feedback and prevents iteration toward better solutions."@en .
+
+secav:LastMinuteRequirementChange a owl:Class ;
+    rdfs:subClassOf secav:DesignReviewAntipattern ;
+    rdfs:label "Last-Minute Requirement Change"@en ;
+    rdfs:comment "The Product Manager introduces scope or requirement changes during the review session, invalidating weeks of prior work and misaligning the MVP objectives."@en .
+
+secav:ImmediateTechnicalRejection a owl:Class ;
+    rdfs:subClassOf secav:DesignReviewAntipattern ;
+    rdfs:label "Immediate Technical Rejection"@en ;
+    rdfs:comment "The engineer/dev immediately rejects a design without exploring alternative implementations — limits product innovation by only considering the easiest solution to code."@en .
+
+secav:HierarchyBasedDecision a owl:Class ;
+    rdfs:subClassOf secav:DesignReviewAntipattern ;
+    rdfs:label "Hierarchy-Based Decision"@en ;
+    rdfs:comment "A stakeholder imposes design decisions based on authority or personal preference rather than user testing or evidence — delays delivery and produces untested solutions."@en .
+
+secav:ReopeningClosedDebates a owl:Class ;
+    rdfs:subClassOf secav:DesignReviewAntipattern ;
+    rdfs:label "Reopening Closed Debates"@en ;
+    rdfs:comment "Reopening decisions that were settled in previous sessions without presenting new data — produces the 'Groundhog Day' syndrome where the same topics repeat meeting after meeting."@en .

@@ -395,11 +395,30 @@ Para el Grupo 9, las señales ⚠ sistémicas (presentes en más de la mitad del
 | 13.18 | La sesión cierra sin registrar acuerdos ni responsables — solo comentarios verbales | ⚠ | `secav:UndocumentedDesignDecision` |
 | 13.19 | No se documenta por qué se descartaron alternativas — en la siguiente iteración se repiten las mismas discusiones | ⚠ | `secav:UndocumentedDesignDecision` |
 
+### 13.4 Antipatrones adicionales y señales de alerta por rol
+
+> **Fuente complementaria:** Guia de Malas Practicas para Revision de Diseno
+
+| # | Señal observable | Tipo | Término SECAV-O |
+|---|-----------------|------|-----------------|
+| 13.20 | El presentador muestra propuestas complejas por primera vez en la reunión sin pre-read enviado | ⚠ | `secav:DesignAmbush` |
+| 13.21 | La sesión tiene más de 8 participantes sin roles definidos — se generan debates interminables y parálisis de análisis | ⚠ | `secav:OvercrowdedDesignReview` |
+| 13.22 | El diseñador mueve píxeles o cambia estilos en vivo según cada solicitud del público | ⚠ | `secav:LiveDesignRedesign` |
+| 13.23 | La sesión lleva más de 15 min debatiendo un detalle cosmético (color, sombra) cuando el flujo principal aún no está validado | ⚠ | `secav:PrematureDetailFocus` |
+| 13.24 | Un revisor emite comentarios vagos e inoperables ("hazlo más moderno", "que tenga más impacto") sin indicar el problema ni su impacto | ⚠ | `secav:VagueFeedback` |
+| 13.25 | El diseñador pasa la mayor parte del tiempo justificando decisiones en lugar de escuchar — bloquea la iteración | ⚠ | `secav:DefensiveDesignerAttitude` |
+| 13.26 | El Product Manager introduce cambios de requisitos o alcance durante la sesión, invalidando trabajo previo | ⚠ | `secav:LastMinuteRequirementChange` |
+| 13.27 | El ingeniero rechaza la propuesta de inmediato sin explorar implementaciones alternativas | ⚠ | `secav:ImmediateTechnicalRejection` |
+| 13.28 | Un stakeholder impone una decisión de diseño por jerarquía sin respaldo en datos ni pruebas con usuarios | ⚠ | `secav:HierarchyBasedDecision` |
+| 13.29 | Se reabre un debate resuelto en sesiones anteriores sin aportar información nueva | ⚠ | `secav:ReopeningClosedDebates` |
+
 ### Notas de escalamiento — Grupo 13
 
 - Las señales ⚠ 13.05, 13.06 o 13.07 deben resolverse **antes** de iniciar la sesión; el coach puede solicitar reagendar si la preparación es insuficiente.
-- La señal ⚠ 13.13 recurrente en un mismo revisor debe derivar en una `secav:CoachingIntervention` individual para reforzar el método "observación + impacto".
+- La señal ⚠ 13.13 o 13.24 recurrente en un mismo revisor debe derivar en una `secav:CoachingIntervention` individual para reforzar el método "observación + impacto".
 - La señal ⚠ 13.18 equivale a una sesión sin valor rastreable; el coach debe solicitar documentar los acuerdos antes de 24 h o la revisión se considera no realizada.
+- Las señales ⚠ 13.25–13.28 son antipatrones específicos por rol: el coach los documenta como `secav:AlertBehaviorObservation` vinculada al rol y persona correspondiente, y diseña una intervención individual si se repiten en dos o más sesiones.
+- La señal ⚠ 13.29 indica deuda de gobernanza: registrar como `secavo:ImprovementAction` el reforzamiento del proceso de cierre y archivo de decisiones.
 
 ---
 
