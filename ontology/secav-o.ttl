@@ -23,12 +23,12 @@ secav:ImplementationActivity a owl:Class ; rdfs:subClassOf secav:EngineeringActi
 secav:ReviewActivity a owl:Class ; rdfs:subClassOf secav:EngineeringActivity ; rdfs:label "Review Activity"@en .
 secav:ApplicationDesign a owl:Class ; rdfs:subClassOf secav:DesignActivity ; rdfs:label "Application Design"@en .
 secav:UnitTestDesign a owl:Class ; rdfs:subClassOf secav:DesignActivity ; rdfs:label "Unit Test Design"@en .
-secav:DesignImplementation a owl:Class ; rdfs:subClassOf secav:ImplementationActivity, secav:DesignActivity ; rdfs:label "Design Implementation"@en .
+secav:DesignImplementation a owl:Class ; rdfs:subClassOf secav:ImplementationActivity, secav:DesignActivity ; rdfs:label "Design Implementation"@en ; rdfs:comment "The act of producing a design artifact — wireframe, prototype, diagram, or specification — that realizes a design decision."@en .
 secav:DesignReview a owl:Class ; rdfs:subClassOf secav:ReviewActivity, secav:DesignActivity ; rdfs:label "Design Review"@en ; rdfs:comment "A formal multidisciplinary review session that evaluates a design artifact (prototype, wireframe, or specification) for usability, technical feasibility, and business alignment. Not purely aesthetic — it is a strategic process to ensure the product solves real user problems."@en .
-secav:UnitTestDesignImplementation a owl:Class ; rdfs:subClassOf secav:ImplementationActivity, secav:UnitTestDesign ; rdfs:label "Unit Test Design Implementation"@en .
+secav:UnitTestDesignImplementation a owl:Class ; rdfs:subClassOf secav:ImplementationActivity, secav:UnitTestDesign ; rdfs:label "Unit Test Design Implementation"@en ; rdfs:comment "The act of writing unit test code that realizes the unit test design — producing a UnitTestDesignArtifact subject to peer review before merging."@en .
 secav:UnitTestDesignReview a owl:Class ; rdfs:subClassOf secav:ReviewActivity, secav:UnitTestDesign ; rdfs:label "Unit Test Design Review"@en ; rdfs:comment "Individual peer review of unit test code as a work product — distinct from executing tests or checking coverage gates. Validates that assertions are meaningful, edge cases are covered, test names describe behavior, and tests are not brittle or tautological. Required before test code is merged, independently of CI automation results."@en .
 secav:CodeImplementation a owl:Class ; rdfs:subClassOf secav:ImplementationActivity, secav:CodingActivity ; rdfs:label "Code Implementation"@en .
-secav:CodeReview a owl:Class ; rdfs:subClassOf secav:ReviewActivity, secav:CodingActivity ; rdfs:label "Code Review"@en .
+secav:CodeReview a owl:Class ; rdfs:subClassOf secav:ReviewActivity, secav:CodingActivity ; rdfs:label "Code Review"@en ; rdfs:comment "A peer review of source code — the author submits a formal review request and one or more reviewers examine correctness, security, style, and test coverage before the change is merged."@en .
 
 secav:Artifact a owl:Class ; rdfs:label "Engineering Artifact"@en .
 secav:DesignArtifact a owl:Class ; rdfs:subClassOf secav:Artifact ; rdfs:label "Design Artifact"@en .
@@ -1634,6 +1634,7 @@ secav:WalkthroughReview a owl:Class ;
 # ---------------------------------------------------------------------------
 
 secav:CoachAbsenceRecord a owl:Class ;
+    rdfs:subClassOf secav:Artifact ;
     rdfs:label "Coach Absence Record"@en ;
     rdfs:comment "An explicit record of the coach's documented absence from a scheduled lifecycle phase activity. Must be created before the session, not retroactively. Absence does not constitute approval or sign-off. For ReviewActivity instances: no CoachReviewSignOff can be issued (Principle 16). For all other activities: no CoachObservation can be recorded for that session, leaving a gap in competency evidence."@en .
 

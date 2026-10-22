@@ -620,7 +620,7 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 | 17.18 | Acceptance test execution is conducted with stakeholder participation or explicit stakeholder observation — not by the development team alone | ✓ | `secav:AcceptanceTestExecution` |
 | 17.19 | The acceptance test results review includes a formal go/no-go decision with documented justification — not an implicit approval by silence | ✓ | `secav:AcceptanceTestResultsReview` |
 | 17.20 | Defects found during acceptance testing are classified by severity and business impact before the release decision is made | ✓ | `secav:ReviewFinding` |
-| 17.21 | Stakeholder signs off on the release decision based on the acceptance test results report — verbal acknowledgment without a documented record is not a valid sign-off | ✓ | `secav:CoachReviewSignOff` |
+| 17.21 | The acceptance test results review produces a documented go/no-go finding with stakeholder participation — verbal acknowledgment without a written record is not a valid release decision | ✓ | `secav:AcceptanceTestResultsReview` · `secav:ReviewFinding` |
 | 17.22 | The team proceeds to production deployment before the acceptance test results review is completed or without stakeholder sign-off | ⚠ | absence of `secav:AcceptanceTestResultsReview` |
 | 17.23 | The acceptance test results review records at least one finding and is signed off by the coach before the release decision is finalized | ✓ | `secav:producesReviewFinding` · `secav:CoachReviewSignOff` · `secav:hasSignOff` |
 
@@ -668,7 +668,7 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 
 | # | Observable signal | Type | SECAV-O Term |
 |---|------------------|------|--------------|
-| 19.01 | The team can articulate why they chose a given review method (peer review, walkthrough, or formal inspection) for the artifact — not just because it is habit | ✓ | `secav:PeerReview` · `secav:CodeWalkthrough` · `secav:FormalInspection` |
+| 19.01 | The team can articulate why they chose a given review method (peer review, walkthrough, or formal inspection) for the artifact — not just because it is habit | ✓ | `secav:PeerReview` · `secav:Walkthrough` · `secav:FormalInspection` |
 | 19.02 | Critical artifacts (requirements, high-level architecture, critical unit tests) are reviewed by formal inspection or walkthrough — not by informal async peer review alone | ✓ | `secav:FormalInspection` |
 | 19.03 | Formal inspections have a designated Moderator who enforces entry criteria, controls the session, and manages follow-up verification | ✓ | `secav:FormalInspection` |
 | 19.04 | Formal inspections include a Reader role who presents the artifact, allowing inspectors to focus on detecting defects rather than navigating the document | ✓ | `secav:FormalInspection` |
@@ -681,6 +681,7 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 | 19.11 | Inspection findings are lost because no Scribe was designated or the record was not preserved after the session | ⚠ | `secav:WalkthroughWithoutRecord` |
 | 19.12 | All findings from any review session (peer review, walkthrough, or formal inspection) are recorded with severity and proposed resolution before the session closes | ✓ | `secav:producesReviewFinding` · `secav:walkthroughSeverity` · `secav:proposedSolution` (optional) |
 | 19.13 | The coach issues a process sign-off confirming the session was conducted acceptably under the declared review method | ✓ | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
+| 19.14 | A review session (peer review, walkthrough, or formal inspection) closes without the coach issuing a process sign-off — findings cannot be used as formal competency evidence | ⚠ | absence of `secav:CoachReviewSignOff` |
 
 ### Escalation notes — Group 19
 

@@ -462,6 +462,12 @@ secav:FormalInspectionShape
         sh:minCount 1 ;
         sh:class secav:ReviewFinding ;
         sh:message "A formal inspection must record at least one finding — including an explicit 'no defects found' record when the artifact is clean. Causal analysis of findings is required for process improvement."@en
+    ] ;
+    sh:property [
+        sh:path secav:hasSignOff ;
+        sh:minCount 1 ;
+        sh:class secav:CoachReviewSignOff ;
+        sh:message "A formal inspection must be certified by a coach sign-off confirming that the session was conducted with proper roles (Moderator, Reader, Inspectors, Scribe), entry criteria met, and all findings recorded."@en
     ] .
 
 secav:ReleaseReviewShape
@@ -478,6 +484,12 @@ secav:ReleaseReviewShape
         sh:minCount 1 ;
         sh:class secav:ReviewFinding ;
         sh:message "A release review must record at least one finding — including an explicit 'release approved, all quality gates confirmed' when no blocking issues remain."@en
+    ] ;
+    sh:property [
+        sh:path secav:hasSignOff ;
+        sh:minCount 1 ;
+        sh:class secav:CoachReviewSignOff ;
+        sh:message "A release review must be certified by a coach sign-off confirming that all quality gates were verified and the release readiness assessment was conducted acceptably."@en
     ] .
 
 secav:PlanningReviewShape
@@ -494,6 +506,12 @@ secav:PlanningReviewShape
         sh:minCount 1 ;
         sh:class secav:ReviewFinding ;
         sh:message "A planning review must record at least one finding — including an explicit 'plan approved, all mandatory review activities scheduled' when requirements are met."@en
+    ] ;
+    sh:property [
+        sh:path secav:hasSignOff ;
+        sh:minCount 1 ;
+        sh:class secav:CoachReviewSignOff ;
+        sh:message "A planning review must be certified by a coach sign-off confirming the plan contains all mandatory quality gates before the sprint is authorized to begin (Code of Ethics, Principle 17)."@en
     ] .
 
 secav:DesignWalkthroughShape
@@ -531,6 +549,12 @@ secav:WalkthroughExecutionShape
 secav:WalkthroughReviewShape
     a sh:NodeShape ;
     sh:targetClass secav:WalkthroughReview ;
+    sh:property [
+        sh:path secav:evaluates ;
+        sh:minCount 1 ;
+        sh:class secav:Artifact ;
+        sh:message "A walkthrough review must identify the artifact whose findings are being verified — the same artifact reviewed in the walkthrough execution."@en
+    ] ;
     sh:property [
         sh:path secav:producesReviewFinding ;
         sh:minCount 1 ;
