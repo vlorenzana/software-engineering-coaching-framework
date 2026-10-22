@@ -121,6 +121,7 @@ Las observaciones del coach se usan además en:
 | Documento | Relación |
 |---|---|
 | `coaching-governance/guides/code-review-best-practices.md` | Prácticas de revisión para autor y revisor; complementa este protocolo |
+| `coaching-governance/guides/peer-review-antipatterns.md` | Antipatrones operativos y culturales frecuentes — señales de coaching derivadas de revisiones |
 | `coaching-governance/guides/formal-inspections.md` | Proceso más riguroso para módulos críticos; el coach tiene rol de moderador (no observador silencioso) |
 | `coaching-governance/guides/coach-team-behaviors.md` | Comportamientos del líder de equipo que el coach observa, incluyendo en sesiones de revisión |
 | `templates/sprint-retrospective.md` | Espacio para introducir patrones de revisión como tema de mejora |

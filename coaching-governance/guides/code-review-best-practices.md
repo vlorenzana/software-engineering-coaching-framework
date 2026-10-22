@@ -193,3 +193,9 @@ Code review is a high analytical-demand task. Detection of subtle defects and em
 - Google LLC. *Google Engineering Practices Documentation — Code Review*. [https://google.github.io/eng-practices/review/](https://google.github.io/eng-practices/review/)
 - Microsoft. *Code with Engineering Playbook — Code Reviews: Reviewer Guidance*. [https://microsoft.github.io/code-with-engineering-playbook/code-reviews/process-guidance/reviewer-guidance/](https://microsoft.github.io/code-with-engineering-playbook/code-reviews/process-guidance/reviewer-guidance/)
 - SmartBear Software. *Best Practices for Peer Code Review*. Based on Cisco Systems study data. [https://smartbear.com/learn/code-review/best-practices-for-peer-code-review/](https://smartbear.com/learn/code-review/best-practices-for-peer-code-review/)
+
+---
+
+## Related guides
+
+- `coaching-governance/guides/peer-review-antipatterns.md` — the counterpart to this document: six critical errors to avoid, with observable coaching signals and mitigation strategies.
