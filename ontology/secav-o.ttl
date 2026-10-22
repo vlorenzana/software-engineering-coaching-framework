@@ -62,7 +62,6 @@ secav:AIAssistedActivity a owl:Class ; rdfs:subClassOf secav:EngineeringActivity
 secav:HumanValidationActivity a owl:Class ; rdfs:subClassOf secav:ReviewActivity ; rdfs:label "Human Validation Activity"@en .
 
 secav:CompetencyAssessment a owl:Class ; rdfs:label "Competency Assessment"@en .
-secav:CoachingRecommendation a owl:Class ; rdfs:label "Coaching Recommendation"@en .
 secav:CoachingIntervention a owl:Class ; rdfs:label "Coaching Intervention"@en .
 
 secav:performs a owl:ObjectProperty ;
@@ -1095,6 +1094,64 @@ secav:IncompleteRequirement a owl:Class ;
     rdfs:label "Incomplete Requirement"@en ;
     rdfs:comment "A requirement that is missing information necessary to implement or test it — no acceptance criteria, no error scenarios, no performance bounds. Detected in review when participants cannot answer the question: 'how would we verify this is done?'"@en .
 
+# ---------------------------------------------------------------------------
+# Review finding taxonomy — compliance vs. recommendation
+# ---------------------------------------------------------------------------
+
+secav:ProcessComplianceFinding a owl:Class ;
+    rdfs:subClassOf secav:ReviewFinding ;
+    rdfs:label "Process Compliance Finding"@en ;
+    rdfs:comment "A review finding that documents a deviation from a formally adopted process, standard, or acceptance criterion. The coach has authority to raise this finding because it references a documented obligation the team has already accepted. Distinct from a coaching recommendation, which proposes an improvement not yet required by any adopted process. Grounded in Principle 22 of the Code of Ethics."@en .
+
+secav:CoachingRecommendation a owl:Class ;
+    rdfs:subClassOf secav:ReviewFinding ;
+    rdfs:label "Coaching Recommendation"@en ;
+    rdfs:comment "An observation or improvement suggestion raised by the coach that is not backed by a currently adopted process requirement. Coaching recommendations have advisory weight only — the engineer may accept or decline them (Principle 20 of the Code of Ethics). If repeated observations reveal a systematic gap, the coach may propose formalizing the recommendation as a process requirement through the appropriate channel. Distinct from a ProcessComplianceFinding, which references an existing obligation."@en .
+
+secav:referencedProcessRequirement a owl:DatatypeProperty ;
+    rdfs:domain secav:ProcessComplianceFinding ;
+    rdfs:range xsd:string ;
+    rdfs:label "referenced process requirement"@en ;
+    rdfs:comment "Identifies the specific process document, standard, checklist section, or acceptance criterion that the artifact deviates from. Required for all ProcessComplianceFinding instances — a compliance finding without a cited requirement cannot be distinguished from a personal preference."@en .
+
+# ---------------------------------------------------------------------------
+# Design consultation — ad-hoc technical Q&A at the engineer's request
+# ---------------------------------------------------------------------------
+
+secav:DesignConsultation a owl:Class ;
+    rdfs:subClassOf secav:EngineeringActivity ;
+    rdfs:label "Design Consultation"@en ;
+    rdfs:comment "An ad-hoc technical design consultation initiated by an engineer who has questions or doubts about a design decision. The coach may respond only when qualified in the specific design domain being asked about (Principle 23 of the Code of Ethics). Distinct from structured technical training (Principle 21) and from the coach's artifact review authority (Principle 22). The engineer retains full professional accountability for any design decision they make, regardless of whether they adopted the coach's recommendation."@en .
+
+secav:CoachConsultingScope a owl:Class ;
+    rdfs:subClassOf secav:Artifact ;
+    rdfs:label "Coach Consulting Scope"@en ;
+    rdfs:comment "A declared, periodically reviewed document listing the design domains, technologies, and architectural areas in which the coach is qualified to provide technical consultation. Must be made available to the team and management. When a consultation request falls outside this scope, the coach records it as a knowledge gap and includes it in the management report so an appropriate expert can be identified."@en .
+
+secav:consultingDomain a owl:DatatypeProperty ;
+    rdfs:domain secav:CoachConsultingScope ;
+    rdfs:range xsd:string ;
+    rdfs:label "consulting domain"@en ;
+    rdfs:comment "A named design domain, technology area, or architectural concern in which the coach has declared consulting competence. One value per domain — list multiple with repeated properties."@en .
+
+secav:scopeDeclarationDate a owl:DatatypeProperty ;
+    rdfs:domain secav:CoachConsultingScope ;
+    rdfs:range xsd:date ;
+    rdfs:label "scope declaration date"@en ;
+    rdfs:comment "The date on which this consulting scope declaration was last reviewed and confirmed by the coach. Scope declarations should be reviewed at regular intervals (recommended: every six months or after a significant project change)."@en .
+
+secav:consultationDomain a owl:DatatypeProperty ;
+    rdfs:domain secav:DesignConsultation ;
+    rdfs:range xsd:string ;
+    rdfs:label "consultation domain"@en ;
+    rdfs:comment "The specific design domain or technology area the engineer's question concerned. Used to verify the coach's response falls within their declared CoachConsultingScope."@en .
+
+secav:coachQualified a owl:DatatypeProperty ;
+    rdfs:domain secav:DesignConsultation ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "coach qualified"@en ;
+    rdfs:comment "True if the coach determined they were qualified to answer the consultation question based on their declared CoachConsultingScope. False if the question fell outside their competence — in which case a knowledge gap must be recorded in the coaching log and management report."@en .
+
 secav:RequirementsReview a owl:Class ;
     rdfs:subClassOf secav:ReviewActivity ;
     rdfs:label "Requirements Review"@en ;
@@ -1136,6 +1193,12 @@ secav:signOffDate a owl:DatatypeProperty ;
     rdfs:range xsd:date ;
     rdfs:label "sign-off date"@en ;
     rdfs:comment "Date on which the coach issued the process sign-off for this review activity."@en .
+
+secav:findingDescription a owl:DatatypeProperty ;
+    rdfs:domain secav:ReviewFinding ;
+    rdfs:range xsd:string ;
+    rdfs:label "finding description"@en ;
+    rdfs:comment "Textual description of the observed deviation, defect, or improvement opportunity. Required for ProcessComplianceFinding instances; recommended for all ReviewFinding instances."@en .
 
 secav:proposedSolution a owl:DatatypeProperty ;
     rdfs:domain secav:ReviewFinding ;
@@ -1247,10 +1310,10 @@ secav:WalkthroughRole a owl:Class ;
     rdfs:comment "A designated role in a code walkthrough session: Author/Presenter, Moderator, or Scribe."@en .
 
 secav:walkthroughFocus a owl:DatatypeProperty ;
-    rdfs:domain secav:CodeWalkthrough ;
+    rdfs:domain secav:Walkthrough ;
     rdfs:range xsd:string ;
     rdfs:label "walkthrough focus"@en ;
-    rdfs:comment "The declared review focus of the walkthrough session: 'architecture', 'logic', 'security', 'concurrency', or 'knowledge-transfer'."@en .
+    rdfs:comment "The declared review focus of the walkthrough session. Applicable to any Walkthrough subclass (CodeWalkthrough or DesignWalkthrough). Example values for code: 'architecture', 'logic', 'security', 'concurrency', 'knowledge-transfer'. Example values for design: 'usability', 'data-model', 'component-boundaries', 'interface-contracts'."@en .
 
 secav:walkthroughLineCount a owl:DatatypeProperty ;
     rdfs:domain secav:CodeWalkthrough ;

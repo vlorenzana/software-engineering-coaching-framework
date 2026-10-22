@@ -583,3 +583,65 @@ secav:CoachAbsenceRecordShape
         sh:datatype xsd:string ;
         sh:message "A coach absence record must document the consequence: for review activities 'no sign-off issued, findings provisional'; for other activities 'no observation recorded'."@en
     ] .
+
+# CoachingRecommendation — advisory finding; must be described so it can be tracked and evaluated
+secav:CoachingRecommendationShape
+    a sh:NodeShape ;
+    sh:targetClass secav:CoachingRecommendation ;
+    sh:property [
+        sh:path secav:findingDescription ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Every coaching recommendation must include a description of the suggested improvement. Without a description the recommendation cannot be tracked, evaluated, or referenced in the management report."@en
+    ] .
+
+# ProcessComplianceFinding — must cite the specific process requirement it references
+secav:ProcessComplianceFindingShape
+    a sh:NodeShape ;
+    sh:targetClass secav:ProcessComplianceFinding ;
+    sh:property [
+        sh:path secav:referencedProcessRequirement ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "A process compliance finding must reference the specific process document, standard, checklist section, or acceptance criterion that was violated. A finding without a cited requirement cannot be distinguished from a personal preference and has no authority to compel a change."@en
+    ] ;
+    sh:property [
+        sh:path secav:findingDescription ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "A process compliance finding must include a description of the observed deviation from the referenced requirement."@en
+    ] .
+
+# DesignConsultation — qualification check and domain must be documented
+secav:DesignConsultationShape
+    a sh:NodeShape ;
+    sh:targetClass secav:DesignConsultation ;
+    sh:property [
+        sh:path secav:consultationDomain ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Every design consultation must record the design domain or technology area the engineer's question concerned. This is required to verify that the coach's response fell within their declared consulting scope."@en
+    ] ;
+    sh:property [
+        sh:path secav:coachQualified ;
+        sh:minCount 1 ;
+        sh:datatype xsd:boolean ;
+        sh:message "Every design consultation must record whether the coach determined they were qualified to answer. If false, a knowledge gap must be documented in the coaching log and management report."@en
+    ] .
+
+# CoachConsultingScope — must declare at least one domain and a declaration date
+secav:CoachConsultingScopeShape
+    a sh:NodeShape ;
+    sh:targetClass secav:CoachConsultingScope ;
+    sh:property [
+        sh:path secav:consultingDomain ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "A coach consulting scope declaration must list at least one domain of qualified competence."@en
+    ] ;
+    sh:property [
+        sh:path secav:scopeDeclarationDate ;
+        sh:minCount 1 ;
+        sh:datatype xsd:date ;
+        sh:message "A coach consulting scope declaration must carry the date it was last reviewed and confirmed."@en
+    ] .

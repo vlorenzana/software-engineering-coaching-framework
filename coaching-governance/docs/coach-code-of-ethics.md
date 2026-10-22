@@ -135,6 +135,31 @@ The coach may participate in the technical training of a team member, but only w
 4. **No transferred accountability.** When the coach provides technical training at the engineer's request, the coach acts as a resource — not as the accountable party for the engineer's subsequent technical decisions. The engineer's professional accountability for their own work is not transferred to the coach by the training interaction.
 5. **Document every training session.** Technical training sessions provided by the coach must be recorded in the coaching log: topic covered, date, duration, name of the engineer who requested it, and the coach's honest self-assessment of their competence level on the topic.
 
+### 22. Design review authority and process compliance
+
+The coach has the authority to review design artifacts produced during any lifecycle phase and to assess whether they comply with the processes, standards, and criteria that the engineering team has formally adopted. This review authority is grounded in the documented process — not in the coach's personal preferences or general best-practice knowledge alone.
+
+**Obligations:**
+
+1. **Process-grounded review only.** The coach's authority to raise a compliance finding against a design artifact extends only to deviations from processes, standards, and acceptance criteria that are formally documented and adopted by the team. The coach may not impose requirements that are absent from those documents.
+2. **Framework recommendations as process input.** The organization's engineering processes may reference, adopt, or incorporate recommendations from this framework (SECAV-O). When they do, those recommendations acquire the force of process requirements, and the coach may raise deviations from them as `secav:ProcessComplianceFinding` — a finding backed by a documented obligation.
+3. **Distinguish compliance findings from coaching recommendations.** The coach must clearly mark the difference between: (a) a **process compliance finding** — the design deviates from a documented, adopted process requirement — and (b) a **coaching recommendation** — the design could be improved in ways not yet formalized in the process. Both are legitimate, but they carry different authority and impose different obligations on the team.
+4. **No process-less requirements.** The coach may not compel a design change on the basis of personal technical preference, independent best-practice knowledge, or framework guidance that has not been adopted into the team's process. Such observations are recorded as recommendations, not findings, and the engineer's decision to accept or decline them is protected by Principle 20.
+5. **Contribute to process evolution.** When repeated coaching observations reveal that the team's processes omit important quality requirements, the coach may formally propose process improvements through the appropriate channel. This is how framework recommendations gain normative force — through adoption into the process — not by being enforced unilaterally as if already required.
+
+### 23. Design consultation — at the engineer's request and within coach qualifications
+
+When a team member has questions or doubts about design decisions, the coach may provide technical recommendations in response — provided the coach's qualifications and knowledge cover that specific design domain. This is distinct from structured training (Principle 21): it is ad-hoc design consultation in response to an explicit technical question. The coach's primary obligation in this context is to know and honestly declare the boundary of their consulting capacity.
+
+**Obligations:**
+
+1. **Consultation is engineer-initiated.** The coach does not volunteer design opinions unsolicited. When the engineer asks a design question, the coach may respond. When no question is asked, the coach observes and, if warranted, raises a `secav:CoachingRecommendation` through the finding record — not through spontaneous design advice during the session.
+2. **Qualification self-assessment before responding.** Before answering a design question, the coach must honestly assess whether their knowledge of that specific design domain is sufficient to give responsible guidance. General engineering experience is not a qualification for every domain — the coach must distinguish between areas where they can advise reliably and areas where their knowledge is insufficient or outdated.
+3. **Respond only within demonstrated competence.** The coach may offer design recommendations only on topics where they possess the knowledge to do so accurately and without creating misconceptions or harmful design choices. This is a specific application of Principle 7.
+4. **Declare limits immediately and transparently.** When an engineer asks a design question that falls outside the coach's competence, the coach must say so immediately and without deflection. Offering a guess, an approximation, or a partial answer framed as authoritative guidance in a domain outside the coach's competence is a violation of this principle. The declaration of a knowledge limit is recorded in the coaching log.
+5. **Document the consulting scope.** The coach must maintain and periodically review a declared consulting scope: the design domains, technologies, and architectural areas in which they are qualified to advise. This scope is made available to the team and to management. When a question falls outside that scope, the coach records it as a gap and, where relevant, includes it in the management report so that an appropriate expert can be identified.
+6. **No transferred accountability for design decisions.** When the coach provides design consultation, the engineer retains full professional accountability for the design decisions they ultimately make. The coach's input is advisory; the engineer's judgment is final. This applies even when the engineer adopts the coach's recommendation directly.
+
 ## Ethical escalation
 
 A coach should document and escalate situations involving material conflicts of interest, misuse of confidential evidence, pressure to manipulate metrics, discriminatory treatment, unsafe engineering direction, or requests that contradict professional or organizational obligations.

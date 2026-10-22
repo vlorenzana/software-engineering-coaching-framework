@@ -27,6 +27,38 @@ This checklist allows the coach to record, during any observation session, the p
 
 ---
 
+## Cross-cutting rule — Coach review authority and finding type
+
+> **Code of Ethics, Principle 22.** The coach may review any design artifact for compliance with formally adopted processes. The coach's authority extends to deviations from documented requirements — not to personal preferences. Every finding must be classified as either a **process compliance finding** (`secav:ProcessComplianceFinding`) or a **coaching recommendation** (`secav:CoachingRecommendation`).
+
+| Rule | When | SECAV-O Term |
+|------|------|--------------|
+| **Process compliance finding = deviation from a documented obligation.** When the artifact deviates from an adopted process, standard, checklist section, or acceptance criterion, record a `ProcessComplianceFinding` and cite the specific requirement. The process — not the coach personally — requires the correction; the coach documents and reports the deviation, and enforcement flows through the team's process governance (Principle 22, consistent with Principle 20). | Any artifact review | `secav:ProcessComplianceFinding` · `secav:referencedProcessRequirement` |
+| **Coaching recommendation = improvement not yet in the process.** When the coach sees an improvement opportunity not covered by any adopted process requirement, record a `CoachingRecommendation`. The engineer may accept or decline it (Principle 20). | Any artifact review | `secav:CoachingRecommendation` |
+| **Always cite the requirement.** A `ProcessComplianceFinding` without a `referencedProcessRequirement` value is invalid — it cannot distinguish from a personal preference and cannot be used to compel a change. | All compliance findings | `secav:referencedProcessRequirement` required |
+| **Framework recommendations become binding only when adopted into the process.** SECAV-O guidance acquires the force of a process requirement only when the team formally adopts it. Until then, framework-based observations are `CoachingRecommendation`. | All sessions | classification gate before recording finding type |
+| **Contribute to process evolution.** Repeated `CoachingRecommendation` instances on the same topic are signal for process improvement — propose adoption through the appropriate channel. | Retrospectives / reports | `secavo:QualityPlanningConcern` in management report |
+
+> **How to apply this rule:** before recording any finding during an artifact review, ask: "Is this deviation from a documented, adopted requirement — or is it my professional judgment that the artifact could be better?" The answer determines the finding type. Misclassifying a personal preference as a compliance finding violates Principle 22 and Principle 1.
+
+---
+
+## Cross-cutting rule — Design consultation at the engineer's request
+
+> **Code of Ethics, Principle 23.** When a team member has design questions, the coach may respond — but only within their declared consulting scope. The coach's primary obligation is to know and honestly declare where their technical consulting capacity ends. Consultation is always engineer-initiated.
+
+| Rule | When | SECAV-O Term |
+|------|------|--------------|
+| **Consultation is engineer-initiated.** The coach does not volunteer unsolicited design opinions during sessions. If an engineer asks, the coach may respond — subject to the rules below. | Any session | `secav:DesignConsultation` created on engineer request only |
+| **Self-assess before responding.** Before answering a design question, the coach must verify whether the domain falls within their declared `CoachConsultingScope`. General engineering experience is not a qualification for every domain. | Every consultation | `secav:coachQualified` on `secav:DesignConsultation` |
+| **Respond only within declared scope.** If the question falls within the coach's declared consulting scope, the coach may provide design recommendations. The recommendation is advisory — the engineer decides. | In-scope questions | `secav:coachQualified = true` · `secav:consultationDomain` matches declared scope |
+| **Declare limits immediately.** If the question falls outside the coach's competence, the coach says so immediately, without offering a guess or partial guidance framed as authoritative. The gap is recorded. | Out-of-scope questions | `secav:coachQualified = false` · knowledge gap in coaching log and management report |
+| **Document every consultation.** Whether in-scope or out-of-scope, every design consultation is logged: domain, date, engineer who asked, and whether the coach was qualified to respond. | All consultations | `secav:DesignConsultation` with `secav:consultationDomain` and `secav:coachQualified` |
+| **Maintain a current consulting scope declaration.** The coach must keep a `CoachConsultingScope` document listing their qualified domains, reviewed at least every six months. | Ongoing | `secav:CoachConsultingScope` · `secav:scopeDeclarationDate` |
+| **No transferred accountability.** The engineer retains full professional accountability for any design decision, even one made by adopting the coach's recommendation directly. | All consultations | `secav:CoachingRecommendation` is advisory; design decision accountability stays with engineer |
+
+---
+
 ## 1. Requirements Definition and Acceptance Criteria
 
 > SECAV-O activity: `secav:RequirementsActivity`, `secav:AcceptanceCriteriaDefinition`, `secav:RequirementsReview`
