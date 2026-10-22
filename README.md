@@ -347,7 +347,7 @@ The engineer development record example (Valeria Montes) is entirely fictional a
 
 ## Ontology alignment note
 
-Version 0.2.0 explicitly aligns coaching governance with the SECAV-O core pattern: Engineering Activity → Artifact → Competency → Acceptance Criterion → Evidence/Measurement → Coaching Intervention. Baselines, observations and competency trends are modeled as Evidence; ImprovementAction is modeled as a CoachingIntervention specialization; CoachingObjectives target Competencies; CoachingSprints observe EngineeringActivities and collect Artifact/Evidence/Metric information.
+Version 0.3.0 explicitly aligns coaching governance with the SECAV-O core pattern: Engineering Activity → Artifact → Competency → Acceptance Criterion → Evidence/Measurement → Coaching Intervention. Baselines, observations and competency trends are modeled as Evidence; ImprovementAction is modeled as a CoachingIntervention specialization; CoachingObjectives target Competencies; CoachingSprints observe EngineeringActivities and collect Artifact/Evidence/Metric information.
 
 The extension uses the stable namespace `https://github.com/vlorenzana/software-engineering-coaching-framework/ontology/secav-o-coaching-governance#` and formally imports the core ontology via `owl:imports`. Core classes are referenced using the `secav:` prefix; extension-specific classes use the `secavo:` prefix.
 

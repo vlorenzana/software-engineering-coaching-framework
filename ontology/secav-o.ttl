@@ -10,7 +10,7 @@
     dcterms:title "Software Engineering Coaching and AI Validation Ontology (SECAV-O)"@en ;
     dcterms:creator "Victor Hugo Lorenzana González" ;
     dcterms:description "Initial experimental ontology connecting software-engineering activities, artifacts, competencies, evidence, measurement, AI assistance, human validation, assessment, and coaching."@en ;
-    owl:versionInfo "0.1.0" ;
+    owl:versionInfo "0.3.0" ;
     rdfs:seeAlso <https://dev.nemo.inf.ufes.br/seon/SEON.html> .
 
 secav:SoftwareEngineeringProcess a owl:Class ; rdfs:label "Software Engineering Process"@en .
