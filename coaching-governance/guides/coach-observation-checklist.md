@@ -12,7 +12,7 @@ This checklist allows the coach to record, during any observation session, the p
 
 ## Cross-cutting rule — Coach presence in all lifecycle phases
 
-> **Code of Ethics, Principle 18.** The coach has an observer obligation for every scheduled lifecycle phase activity — planning, requirements, high-level design, design, test design, implementation, test execution, walkthrough, inspection, and release. Presence is the basis for observations, sign-offs, and competency evidence.
+> **Code of Ethics, Principle 18.** The coach has an obligation to observe lifecycle phase activities according to a risk-based coverage plan. Presence is required for high-risk sessions; risk-based sampling is permitted for routine sessions with experienced team members (see obligation 1). Presence is the basis for observations, certifications (direct sign-off or remote endorsement), and competency evidence.
 
 | Rule | When | SECAV-O Term |
 |------|------|--------------|
@@ -81,7 +81,7 @@ This checklist allows the coach to record, during any observation session, the p
 | 1.11 | ⚠ | Acceptance criteria are written after implementation (post-hoc) | absence of `secav:AcceptanceCriteriaDefinition` as a preventive activity |
 | 1.12 | ⚠ | No traceability exists between acceptance criteria and automated test cases | `secav:QualityCriterion` without `secav:AutomationGate` |
 | 1.13 | ⚠ | Implementation begins on requirements that have not been subject to any peer review, walkthrough, or inspection | `secav:MissingRequirementsReview` — highest-risk antipattern in the lifecycle |
-| 1.14 | ⚠ | The requirements review was conducted but the coach did not issue a sign-off — findings cannot be used as planning evidence | absence of `secav:CoachReviewSignOff` on `secav:RequirementsReview` |
+| 1.14 | ⚠ | The requirements review was conducted but the coach issued neither a direct sign-off nor a remote endorsement — findings cannot be used as planning evidence | absence of `secav:CoachReviewSignOff` and `secav:CoachRemoteEndorsement` on `secav:RequirementsReview` |
 
 ---
 
@@ -162,10 +162,10 @@ This checklist allows the coach to record, during any observation session, the p
 | 5.16 | ⚠ | The review only validates the happy path — no edge case or error case was questioned | `secav:HappyPathOnlyReview` |
 | 5.17 | ⚠ | Comments are ironic, sarcastic, or condescending — the tone is not deliberately punitive but damages psychological safety | `secav:NonEmpathicReviewFeedback` |
 | 5.18 | ✓ | All findings (defects, observations, or explicit "no defects found") are recorded in the tracking tool before closing the session | `secav:producesReviewFinding` |
-| 5.19 | ✓ | The coach issues a process sign-off confirming the review was conducted acceptably (roles followed, findings documented) | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
+| 5.19 | ✓ | The coach issues a process sign-off confirming the review was conducted acceptably (roles followed, findings documented) | `secav:CoachReviewSignOff` **or** `secav:CoachRemoteEndorsement` |
 | 5.20 | ✓ | When the team agrees on a fix direction during the session, a proposed solution is recorded alongside the finding | `secav:proposedSolution` (optional) |
 | 5.21 | ⚠ | The session ends without any written findings — only verbal comments | absence of `secav:producesReviewFinding` |
-| 5.22 | ⚠ | The coach does not issue a sign-off — the review findings cannot be used as valid competency evidence | absence of `secav:CoachReviewSignOff` |
+| 5.22 | ⚠ | The coach issues neither a direct sign-off nor a remote endorsement — the review findings cannot be used as valid competency evidence | absence of `secav:CoachReviewSignOff` and `secav:CoachRemoteEndorsement` |
 
 ---
 
@@ -188,8 +188,8 @@ This checklist allows the coach to record, during any observation session, the p
 | 6.11 | ⚠ | The same defect type appears in multiple inspected modules (systemic pattern) | `secav:CoachingIntervention` → `secavo:ImprovementAction` |
 | 6.12 | ⚠ | Management uses inspection findings to evaluate the author's performance punitively | `secavo:QualityPlanningConcern` |
 | 6.13 | ✓ | All findings (defects, observations, or explicit "no defects found") are recorded before closing the inspection — including type, severity, and proposed solution when available | `secav:producesReviewFinding` · `secav:proposedSolution` (optional) |
-| 6.14 | ✓ | The coach issues a formal process sign-off confirming the inspection was conducted acceptably | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
-| 6.15 | ⚠ | The inspection closes without written findings or the sign-off is not issued — the session findings are not valid as competency evidence | absence of `secav:producesReviewFinding` or `secav:CoachReviewSignOff` |
+| 6.14 | ✓ | The coach issues a formal process sign-off confirming the inspection was conducted acceptably | `secav:CoachReviewSignOff` **or** `secav:CoachRemoteEndorsement` |
+| 6.15 | ⚠ | The inspection closes without written findings or the sign-off is not issued — the session findings are not valid as competency evidence | absence of `secav:producesReviewFinding` or both `secav:CoachReviewSignOff` and `secav:CoachRemoteEndorsement` |
 
 ---
 
@@ -218,10 +218,10 @@ This checklist allows the coach to record, during any observation session, the p
 | 7.15 | ⚠ | Assertions in tests always pass regardless of the behavior under test (e.g., asserting a mock value instead of the actual unit result) | `secav:TautologicalAssertion` |
 | 7.16 | ⚠ | Tests fail intermittently for reasons unrelated to the behavior they verify (time-dependent, environment-dependent, order-dependent) | `secav:BrittleTest` |
 | 7.17 | ✓ | All findings from the unit test design review (defects, observations, or explicit "no defects found") are recorded in the tracking tool before closing the session | `secav:producesReviewFinding` |
-| 7.18 | ✓ | The coach issues a process sign-off confirming the unit test design review was conducted acceptably (roles followed, findings documented, review not rubber-stamped) | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
+| 7.18 | ✓ | The coach issues a process sign-off confirming the unit test design review was conducted acceptably (roles followed, findings documented, review not rubber-stamped) | `secav:CoachReviewSignOff` **or** `secav:CoachRemoteEndorsement` |
 | 7.19 | ✓ | When the review identifies a test design problem and the team agrees on a fix approach, the proposed solution is recorded alongside the finding | `secav:proposedSolution` (optional) |
 | 7.20 | ⚠ | The unit test design review session ends without any written findings — verbal comments only | absence of `secav:producesReviewFinding` |
-| 7.21 | ⚠ | The coach does not issue a sign-off on the unit test design review — findings cannot be used as valid competency evidence | absence of `secav:CoachReviewSignOff` |
+| 7.21 | ⚠ | The coach issues neither a direct sign-off nor a remote endorsement on the unit test design review — findings cannot be used as valid competency evidence | absence of `secav:CoachReviewSignOff` and `secav:CoachRemoteEndorsement` |
 
 ---
 
@@ -445,8 +445,8 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 | 12.20 | Code is merged without having addressed the recorded observations | ⚠ | `secav:IgnoredWalkthroughFeedback` |
 | 12.21 | A full new walkthrough is called to verify minor corrections that could be reviewed asynchronously | ⚠ | `secav:UnnecessaryRewalkthrough` |
 | 12.22 | All findings (defects, observations, or explicit "no defects found") are recorded with severity classification before closing the session — proposed solution included when the team agrees on a direction | ✓ | `secav:producesReviewFinding` · `secav:proposedSolution` (optional) |
-| 12.23 | The coach issues a process sign-off confirming the walkthrough was conducted acceptably (scope respected, roles present, findings documented) | ✓ | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
-| 12.24 | The walkthrough closes without written findings or the coach sign-off is not issued | ⚠ | absence of `secav:producesReviewFinding` or `secav:CoachReviewSignOff` |
+| 12.23 | The coach issues a process sign-off confirming the walkthrough was conducted acceptably (scope respected, roles present, findings documented) | ✓ | `secav:CoachReviewSignOff` **or** `secav:CoachRemoteEndorsement` |
+| 12.24 | The walkthrough closes without written findings or the coach sign-off is not issued | ⚠ | absence of `secav:producesReviewFinding` or both `secav:CoachReviewSignOff` and `secav:CoachRemoteEndorsement` |
 
 ### Escalation notes — Group 12
 
@@ -513,8 +513,8 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 | 13.28 | A stakeholder imposes a design decision by hierarchy without data or user-testing backing | ⚠ | `secav:HierarchyBasedDecision` |
 | 13.29 | A debate resolved in previous sessions is reopened without contributing new information | ⚠ | `secav:ReopeningClosedDebates` |
 | 13.30 | All findings (defects, experience failures, or explicit "no findings") are recorded before closing the review — with mandatory-for-launch classification and proposed solution when the team agrees | ✓ | `secav:producesReviewFinding` · `secav:mandatoryForLaunch` · `secav:proposedSolution` (optional) |
-| 13.31 | The coach issues a process sign-off confirming the design review was conducted acceptably (roles present, feedback evidence-based, findings documented) | ✓ | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
-| 13.32 | The design review closes without written findings or the coach sign-off is not issued | ⚠ | absence of `secav:producesReviewFinding` or `secav:CoachReviewSignOff` |
+| 13.31 | The coach issues a process sign-off confirming the design review was conducted acceptably (roles present, feedback evidence-based, findings documented) | ✓ | `secav:CoachReviewSignOff` **or** `secav:CoachRemoteEndorsement` |
+| 13.32 | The design review closes without written findings or the coach sign-off is not issued | ⚠ | absence of `secav:producesReviewFinding` or both `secav:CoachReviewSignOff` and `secav:CoachRemoteEndorsement` |
 
 ### Escalation notes — Group 13
 
@@ -544,8 +544,8 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 | 14.10 | Tests are merged or integrated without a prior design review — execution results are not trustworthy without review | ⚠ | `secav:UnreviewedTestCode` |
 | 14.11 | Integration test coverage is declared solely by count of test cases — not by interface coverage or scenario coverage | ⚠ | `secav:ReviewAntipattern` |
 | 14.12 | All findings from the integration test design review (defects, gaps, explicit "no defects found") are recorded before closing the session | ✓ | `secav:producesReviewFinding` · `secav:proposedSolution` (optional) |
-| 14.13 | The coach issues a process sign-off confirming the integration test design review was conducted acceptably | ✓ | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
-| 14.14 | The integration test design review closes without written findings or the coach sign-off is not issued | ⚠ | absence of `secav:producesReviewFinding` or `secav:CoachReviewSignOff` |
+| 14.13 | The coach issues a process sign-off confirming the integration test design review was conducted acceptably | ✓ | `secav:CoachReviewSignOff` **or** `secav:CoachRemoteEndorsement` |
+| 14.14 | The integration test design review closes without written findings or the coach sign-off is not issued | ⚠ | absence of `secav:producesReviewFinding` or both `secav:CoachReviewSignOff` and `secav:CoachRemoteEndorsement` |
 
 ### Escalation notes — Group 14
 
@@ -571,8 +571,8 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 | 15.08 | System test execution proceeds without a completed design review — failures are harder to diagnose with unreviewed test code | ⚠ | `secav:UnreviewedTestCode` |
 | 15.09 | Non-functional requirements are not covered by any system test scenario — systemic coverage gap | ⚠ | `secav:ReviewAntipattern` |
 | 15.10 | All findings from the system test design review are recorded before closing the session | ✓ | `secav:producesReviewFinding` · `secav:proposedSolution` (optional) |
-| 15.11 | The coach issues a process sign-off confirming the system test design review was conducted acceptably | ✓ | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
-| 15.12 | The system test design review closes without written findings or the coach sign-off is not issued | ⚠ | absence of `secav:producesReviewFinding` or `secav:CoachReviewSignOff` |
+| 15.11 | The coach issues a process sign-off confirming the system test design review was conducted acceptably | ✓ | `secav:CoachReviewSignOff` **or** `secav:CoachRemoteEndorsement` |
+| 15.12 | The system test design review closes without written findings or the coach sign-off is not issued | ⚠ | absence of `secav:producesReviewFinding` or both `secav:CoachReviewSignOff` and `secav:CoachRemoteEndorsement` |
 
 ### Escalation notes — Group 15
 
@@ -599,8 +599,8 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 | 16.09 | Acceptance criteria contain vague or unmeasurable language that was not corrected during requirements review | ⚠ | `secav:VagueRequirement` |
 | 16.10 | Acceptance tests are executed before the design has been formally reviewed and the stakeholders have confirmed alignment | ⚠ | `secav:UnreviewedTestCode` |
 | 16.11 | All findings from the acceptance test design review are recorded before closing the session | ✓ | `secav:producesReviewFinding` · `secav:proposedSolution` (optional) |
-| 16.12 | The coach issues a process sign-off confirming the acceptance test design review was conducted acceptably | ✓ | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
-| 16.13 | The acceptance test design review closes without written findings or the coach sign-off is not issued | ⚠ | absence of `secav:producesReviewFinding` or `secav:CoachReviewSignOff` |
+| 16.12 | The coach issues a process sign-off confirming the acceptance test design review was conducted acceptably | ✓ | `secav:CoachReviewSignOff` **or** `secav:CoachRemoteEndorsement` |
+| 16.13 | The acceptance test design review closes without written findings or the coach sign-off is not issued | ⚠ | absence of `secav:producesReviewFinding` or both `secav:CoachReviewSignOff` and `secav:CoachRemoteEndorsement` |
 
 ### Escalation notes — Group 16
 
@@ -624,7 +624,7 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 | 17.04 | Flaky or intermittently failing tests are flagged as findings — not dismissed or re-run without investigation | ✓ | `secav:ReviewFinding` |
 | 17.05 | The team proceeds to integration testing based on CI pass status alone, without a reviewed results report | ⚠ | absence of `secav:UnitTestResultsReview` |
 | 17.06 | The unit test results review records at least one finding (including explicit "no defects, coverage adequate, ready to integrate") | ✓ | `secav:producesReviewFinding` |
-| 17.07 | Coach sign-off is issued after confirming the results review was conducted with a coverage and defect density assessment | ✓ | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
+| 17.07 | Coach sign-off is issued after confirming the results review was conducted with a coverage and defect density assessment | ✓ | `secav:CoachReviewSignOff` **or** `secav:CoachRemoteEndorsement` |
 
 ### 17.2 — Integration Test Execution & Results Review (Phases 17–18)
 
@@ -655,7 +655,7 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 | 17.20 | Defects found during acceptance testing are classified by severity and business impact before the release decision is made | ✓ | `secav:ReviewFinding` |
 | 17.21 | The acceptance test results review produces a documented go/no-go finding with stakeholder participation — verbal acknowledgment without a written record is not a valid release decision | ✓ | `secav:AcceptanceTestResultsReview` · `secav:ReviewFinding` |
 | 17.22 | The team proceeds to production deployment before the acceptance test results review is completed or without stakeholder sign-off | ⚠ | absence of `secav:AcceptanceTestResultsReview` |
-| 17.23 | The acceptance test results review records at least one finding and is signed off by the coach before the release decision is finalized | ✓ | `secav:producesReviewFinding` · `secav:CoachReviewSignOff` · `secav:hasSignOff` |
+| 17.23 | The acceptance test results review records at least one finding and is signed off by the coach before the release decision is finalized | ✓ | `secav:producesReviewFinding` · `secav:CoachReviewSignOff` **or** `secav:CoachRemoteEndorsement` |
 
 ### Escalation notes — Group 17
 
@@ -684,8 +684,8 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 | 18.11 | Architecture decisions are made verbally or in Slack without being captured in a reviewable artifact — decisions are irretrievable when challenged | ⚠ | `secav:ReviewAntipattern` |
 | 18.12 | Non-functional requirements are absent from the architecture — the system will fail under production load or security audit | ⚠ | `secav:ReviewAntipattern` |
 | 18.13 | All findings from the high-level design review (defects, risks, ADR gaps, explicit "no defects found") are recorded before closing the session | ✓ | `secav:producesReviewFinding` · `secav:proposedSolution` (optional) |
-| 18.14 | The coach issues a process sign-off confirming the high-level design review was conducted acceptably | ✓ | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
-| 18.15 | The high-level design review closes without written findings or the coach sign-off is not issued | ⚠ | absence of `secav:producesReviewFinding` or `secav:CoachReviewSignOff` |
+| 18.14 | The coach issues a process sign-off confirming the high-level design review was conducted acceptably | ✓ | `secav:CoachReviewSignOff` **or** `secav:CoachRemoteEndorsement` |
+| 18.15 | The high-level design review closes without written findings or the coach sign-off is not issued | ⚠ | absence of `secav:producesReviewFinding` or both `secav:CoachReviewSignOff` and `secav:CoachRemoteEndorsement` |
 
 ### Escalation notes — Group 18
 
@@ -714,7 +714,7 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 | 19.11 | Inspection findings are lost because no Scribe was designated or the record was not preserved after the session | ⚠ | `secav:WalkthroughWithoutRecord` |
 | 19.12 | All findings from any review session (peer review, walkthrough, or formal inspection) are recorded with severity and proposed resolution before the session closes | ✓ | `secav:producesReviewFinding` · `secav:walkthroughSeverity` · `secav:proposedSolution` (optional) |
 | 19.13 | The coach certifies the session via direct sign-off (when present) or remote endorsement via a designated observer's `secav:ObserverReport` (when absent — Principle 16), confirming the session was conducted acceptably under the declared review method | ✓ | `secav:CoachReviewSignOff` **or** `secav:CoachRemoteEndorsement` |
-| 19.14 | A review session (peer review, walkthrough, or formal inspection) closes without the coach issuing a process sign-off — findings cannot be used as formal competency evidence | ⚠ | absence of `secav:CoachReviewSignOff` |
+| 19.14 | A review session (peer review, walkthrough, or formal inspection) closes without the coach issuing a direct sign-off or a remote endorsement — findings cannot be used as formal competency evidence | ⚠ | absence of `secav:CoachReviewSignOff` and `secav:CoachRemoteEndorsement` |
 
 ### Escalation notes — Group 19
 
@@ -743,8 +743,8 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 | 20.11 | Release notes are incomplete or absent — users and operators cannot determine what changed or what risks exist | ⚠ | `secav:ReviewAntipattern` |
 | 20.12 | One or more mandatory quality gates (requirements review, design review, test design review, results review) were skipped and this was not documented as an explicit exception | ⚠ | `secav:MissingRequirementsReview` · `secav:ReviewAntipattern` |
 | 20.13 | All findings from the release review (quality gate gaps, open defects, risks, or explicit "all gates confirmed, release approved") are recorded before the release proceeds | ✓ | `secav:producesReviewFinding` · `secav:proposedSolution` (optional) |
-| 20.14 | The coach issues a process sign-off confirming the release review was conducted acceptably and all quality gates were verified | ✓ | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
-| 20.15 | The release review closes without written findings or coach sign-off — the release readiness cannot be traced | ⚠ | absence of `secav:producesReviewFinding` or `secav:CoachReviewSignOff` |
+| 20.14 | The coach issues a process sign-off confirming the release review was conducted acceptably and all quality gates were verified | ✓ | `secav:CoachReviewSignOff` **or** `secav:CoachRemoteEndorsement` |
+| 20.15 | The release review closes without written findings or coach sign-off — the release readiness cannot be traced | ⚠ | absence of `secav:producesReviewFinding` or both `secav:CoachReviewSignOff` and `secav:CoachRemoteEndorsement` |
 
 ### Escalation notes — Group 20
 
@@ -773,8 +773,8 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 | 21.11 | The coach endorses the plan without checking for a RequirementsReview — planning gate violation (Code of Ethics, Principle 17) | ⚠ | `secav:MissingRequirementsReview` |
 | 21.12 | Review activities added to the plan after implementation already started — retroactive scheduling does not satisfy the planning gate | ⚠ | `secav:MissingRequirementsReview` |
 | 21.13 | All findings from the planning review (missing gates, incomplete review scheduling, or explicit "plan approved, all gates present") are recorded | ✓ | `secav:producesReviewFinding` · `secav:proposedSolution` (optional) |
-| 21.14 | The coach issues a process sign-off confirming the planning review was conducted and the plan meets quality gate requirements | ✓ | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
-| 21.15 | The sprint begins without a completed planning review or coach sign-off on the plan | ⚠ | absence of `secav:PlanningReview` or `secav:CoachReviewSignOff` |
+| 21.14 | The coach issues a process sign-off confirming the planning review was conducted and the plan meets quality gate requirements | ✓ | `secav:CoachReviewSignOff` **or** `secav:CoachRemoteEndorsement` |
+| 21.15 | The sprint begins without a completed planning review or coach sign-off on the plan | ⚠ | absence of `secav:PlanningReview` or both `secav:CoachReviewSignOff` and `secav:CoachRemoteEndorsement` |
 
 ### Escalation notes — Group 21
 
@@ -825,8 +825,8 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 | 22.21 | The walkthrough review produces a closing record: final state of each finding (resolved / deferred / declined) with rationale | ✓ | `secav:WalkthroughReview` · `secav:producesReviewFinding` |
 | 22.22 | The artifact is merged or advanced before Blocking findings from the walkthrough execution are addressed — IgnoredWalkthroughFeedback | ⚠ | `secav:IgnoredWalkthroughFeedback` |
 | 22.23 | No walkthrough review takes place — the walkthrough lifecycle closes with execution only and finding follow-up is never verified | ⚠ | absence of `secav:WalkthroughReview` |
-| 22.24 | The coach issues a process sign-off confirming the full walkthrough lifecycle was completed: preparation, execution, and finding verification | ✓ | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
-| 22.25 | The walkthrough lifecycle closes without coach sign-off or without a written closing record | ⚠ | absence of `secav:WalkthroughReview` or `secav:CoachReviewSignOff` |
+| 22.24 | The coach issues a process sign-off confirming the full walkthrough lifecycle was completed: preparation, execution, and finding verification | ✓ | `secav:CoachReviewSignOff` **or** `secav:CoachRemoteEndorsement` |
+| 22.25 | The walkthrough lifecycle closes without coach sign-off or without a written closing record | ⚠ | absence of `secav:WalkthroughReview` or both `secav:CoachReviewSignOff` and `secav:CoachRemoteEndorsement` |
 
 ### Escalation notes — Group 22
 
