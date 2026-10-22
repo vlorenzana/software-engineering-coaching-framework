@@ -32,6 +32,15 @@ The review objective is **human review assisted by AI**, not AI review replacing
 | Flagging known anti-patterns | Understanding product intent |
 | Repetitive or templated checks | Mentoring and knowledge transfer |
 
+The following matrix shows the recommended responsibility split per review dimension:
+
+| Dimension | AI role | Human role |
+|---|---|---|
+| Syntax and style | Full automation — flags deviations from style guides | Minimal supervision; trust the linter and AI |
+| Optimization | Proposes refactoring for performance and algorithmic complexity | Evaluates whether the proposed refactoring is necessary and readable |
+| Business logic | Limited — can infer basic context but lacks global product vision | Critical validation — ensures code meets product requirements |
+| Security | Early detection of common vulnerabilities (OWASP Top 10, API leaks) | Deep analysis of the threat model and authorization logic |
+
 AI review is advisory. It must not approve or block a change autonomously, and must not be used to trigger automatic merges [11][13].
 
 ---
@@ -80,6 +89,13 @@ Most AI review tools accept project-specific rules, conventions, and focus areas
 
 Instruct the AI tool to explicitly mark what **requires human judgment** [13].
 
+When configuring prompts or agents for AI review, apply the following steps in sequence:
+
+1. **Context definition** — provide the AI with the framework, language version, and business rules specific to the module under review.
+2. **Impact analysis** — ask the AI to identify potential side effects on dependent systems.
+3. **Security evaluation** — instruct the AI to actively search for injection vulnerabilities, authentication failures, and insecure data handling.
+4. **Test generation** — ask the AI to suggest additional unit test cases, with special attention to edge cases not covered by the current test suite.
+
 Google's AutoCommenter study found that AI-assisted review went beyond traditional static analysis for 66% of evaluated best-practice violations [5].
 
 ### 3.6 Manage false positives and alert fatigue
@@ -125,6 +141,8 @@ Review false positives periodically and retune [11].
 - **Reviewing large diffs line-by-line without a strategy**, or approving without reading [2].
 - **Relying only on diff analysis.** Many tools analyze only changed lines and miss broader context.
 - **Ignoring the social dimension of review:** mentoring, shared team knowledge, and design discussion are not AI-replaceable [8].
+- **Treating AI suggestions as directives rather than proposals.** Use AI output as constructive input; final communication between reviewers must remain assertive and respectful. AI suggestions do not carry authority over human judgment.
+- **Using tools without a data privacy policy.** Before sending source code to any hosted model, verify that the provider's enterprise agreement guarantees that the code is not used to train public models.
 
 ---
 
@@ -135,9 +153,11 @@ Review false positives periodically and retune [11].
 - [ ] Linters, type checks, secret scan, and security scan run before AI review
 - [ ] AI review configured with project-specific rules
 - [ ] Human review mandatory for production paths and sensitive code
+- [ ] AI prompt configured with context → impact → security → test generation sequence
 - [ ] AI suggestions tagged: accepted / dismissed / false positive
 - [ ] False positive rate, cycle time, and escaped defects measured
 - [ ] Data privacy policy defined for code sent to the model
+- [ ] Team treats AI suggestions as proposals, not directives
 
 ---
 
