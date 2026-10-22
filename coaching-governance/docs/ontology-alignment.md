@@ -37,10 +37,10 @@ Risk governance is attached to the `AnnualCoachingPlan`, with sprint-level risks
 
 Ethics governance is modeled through a `CoachEthicsCode` and an `EthicsAcknowledgement`. The annual plan can be governed by an ethics code, while individual acknowledgements provide evidence that a coach accepted those obligations.
 
-## Important merge note
+## Integration note
 Version 4 adds team-lifecycle concepts as an extension layer. `TeamCoachingInitiation`, `MemberPreparation`, and `MemberOnboarding` are modeled as specializations of `CoachingIntervention` because each is an intentional coaching action. `MemberBaseline` specializes `Baseline`, which already specializes core `Evidence`. Project objectives remain separate from institutional objectives but can both align to a `CoachingObjective`. Risks reuse the existing `Risk` model rather than introducing a duplicate onboarding-risk concept.
 
-The package currently retains the placeholder namespace `https://example.org/secav-o#` because the canonical namespace of the core ontology was not supplied in this artifact package. Before merging, replace that namespace with the exact namespace used in `ontology/secav-o.ttl` and confirm the exact core class identifiers (`Artifact` vs. `WorkProduct`, `AcceptanceCriterion`, etc.). Do not create duplicate core classes if equivalent terms already exist.
+As of v0.2.0, the extension uses the stable namespace `https://github.com/vlorenzana/software-engineering-coaching-framework/ontology/secav-o-coaching-governance#` and explicitly imports the core ontology via `owl:imports`. Core class references use the `secav:` prefix (e.g., `secav:Artifact`, `secav:AcceptanceCriterion`, `secav:CoachingIntervention`). The placeholder namespace `https://example.org/secav-o#` is no longer present in any framework artifact.
 
 ## Team lifecycle alignment
 
