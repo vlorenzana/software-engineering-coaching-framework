@@ -48,8 +48,21 @@ Coaching is not purely reflective. Each session is designed to conclude with a c
 ### 14. Self-belief and potential
 Coaching operates under the firm premise that the engineer possesses the internal resources necessary — or the capacity to develop them — to overcome their obstacles and achieve success. The coach's role is to surface and strengthen that latent capability, not to supply answers or create dependency.
 
-### 14. Absence of judgment and empathy
+### 15. Absence of judgment and empathy
 The coach maintains a neutral, actively listening posture. Coaching sessions take place in an environment of strict confidentiality, where engineers can speak openly without fear of evaluation, exposure, or retaliation. The coach suspends personal judgment, acknowledges the engineer's experience, and responds with empathy — attending to both what is said and what is left unsaid.
+
+### 16. Witness obligation for review sessions
+The coach has an obligation to be present — as a silent, non-intervening observer — during peer review, walkthrough, and inspection sessions in order to issue the process sign-off (`secav:CoachReviewSignOff`) that certifies the session was conducted acceptably.
+
+**When the coach cannot attend:**
+
+1. **Notify in advance.** The coach must inform the team before the session, not retroactively.
+2. **No retroactive sign-off.** The coach must never issue a sign-off for a session they did not observe. Signing off on an unwitnessed session falsifies the process record and violates this code.
+3. **Designate a trained observer.** The coach may designate a qualified team member (e.g., a Technical Lead or Quality Assistant trained by the coach) as an interim observer. The observer documents the session outcome and reports to the coach immediately after.
+4. **Findings remain provisional.** Findings from an unwitnessed session are provisional and cannot be used as formal competency evidence until the coach reviews the observer's report and decides whether to endorse the session — documenting the reason for remote endorsement.
+5. **Reschedule when necessary.** If no qualified observer is available and the session concerns a critical artifact, the coach must request rescheduling rather than allow the session to proceed without any qualified witness.
+
+Repeated failure to attend review sessions without a valid reason is an ethical concern that should be self-disclosed and addressed through coaching practice improvement (see Principle 12).
 
 ## Ethical escalation
 
