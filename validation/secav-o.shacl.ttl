@@ -77,6 +77,16 @@ secav:ReviewAntipatternShape
         sh:message "A review antipattern should trigger at least one coaching intervention."@en
     ] .
 
+secav:RubberStampApprovalShape
+    a sh:NodeShape ;
+    sh:targetClass secav:RubberStampApproval ;
+    sh:property [
+        sh:path secav:providesEvidenceOf ;
+        sh:minCount 1 ;
+        sh:class secav:Competency ;
+        sh:message "A rubber-stamp approval must identify the review competency gap it evidences."@en
+    ] .
+
 secav:FormalReviewRequestShape
     a sh:NodeShape ;
     sh:targetClass secav:FormalReviewRequest ;

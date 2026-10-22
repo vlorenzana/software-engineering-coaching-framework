@@ -134,35 +134,105 @@ secav:ReviewAntipattern a owl:Class ;
     rdfs:label "Review Antipattern"@en ;
     rdfs:comment "An observable degradation pattern in a review activity that reduces review quality and may trigger a coaching intervention."@en .
 
-secav:ManualStyleReview a owl:Class ;
+# Category subclasses — group antipatterns by the dimension they affect
+
+secav:CulturalReviewAntipattern a owl:Class ;
     rdfs:subClassOf secav:ReviewAntipattern ;
-    rdfs:label "Manual Style Review"@en ;
-    rdfs:comment "Style and formatting issues are debated manually instead of being delegated to automated linters in CI/CD."@en .
+    rdfs:label "Cultural Review Antipattern"@en ;
+    rdfs:comment "An antipattern rooted in team attitude or interpersonal dynamics during the review."@en .
+
+secav:ProcessReviewAntipattern a owl:Class ;
+    rdfs:subClassOf secav:ReviewAntipattern ;
+    rdfs:label "Process Review Antipattern"@en ;
+    rdfs:comment "An antipattern in the workflow or mechanics of submitting and routing review requests."@en .
+
+secav:TechnicalReviewAntipattern a owl:Class ;
+    rdfs:subClassOf secav:ReviewAntipattern ;
+    rdfs:label "Technical Review Antipattern"@en ;
+    rdfs:comment "An antipattern in the technical scope or depth of the review itself."@en .
+
+secav:ClosureReviewAntipattern a owl:Class ;
+    rdfs:subClassOf secav:ReviewAntipattern ;
+    rdfs:label "Closure Review Antipattern"@en ;
+    rdfs:comment "An antipattern in the follow-up, resolution, or closure of review comments."@en .
+
+# Cultural antipatterns
+
+secav:PunitiveReviewApproach a owl:Class ;
+    rdfs:subClassOf secav:CulturalReviewAntipattern ;
+    rdfs:label "Punitive Review Approach"@en ;
+    rdfs:comment "The reviewer treats the review as a punitive audit — searching for culprits or errors to demonstrate technical superiority rather than collaborating to improve the artifact."@en .
+
+secav:NonEmpathicReviewFeedback a owl:Class ;
+    rdfs:subClassOf secav:CulturalReviewAntipattern ;
+    rdfs:label "Non-Empathic Review Feedback"@en ;
+    rdfs:comment "Review comments use an aggressive, sarcastic, or dismissive tone, targeting the author rather than the code and eroding psychological safety."@en .
+
+secav:ReviewerDictatorship a owl:Class ;
+    rdfs:subClassOf secav:CulturalReviewAntipattern ;
+    rdfs:label "Reviewer Dictatorship"@en ;
+    rdfs:comment "The reviewer forces changes solely because they would have written the code differently, even when the author's solution is functional, clean, and standards-compliant."@en .
+
+# Process antipatterns
+
+secav:OversizedPullRequest a owl:Class ;
+    rdfs:subClassOf secav:ProcessReviewAntipattern ;
+    rdfs:label "Oversized Pull Request"@en ;
+    rdfs:comment "A pull request modifies hundreds or thousands of lines across many files, making thorough review impossible and leading to superficial approvals."@en .
 
 secav:OversizedReviewSession a owl:Class ;
-    rdfs:subClassOf secav:ReviewAntipattern ;
+    rdfs:subClassOf secav:ProcessReviewAntipattern ;
     rdfs:label "Oversized Review Session"@en ;
     rdfs:comment "A review session exceeds 60 continuous minutes or 400 LOC, causing analytical fatigue and reduced defect detection."@en .
 
-secav:MissingReviewContext a owl:Class ;
-    rdfs:subClassOf secav:ReviewAntipattern ;
-    rdfs:label "Missing Review Context"@en ;
-    rdfs:comment "The review request lacks a clear description of what changed, why, and the acceptance criteria, forcing the reviewer to infer intent."@en .
+secav:RubberStampApproval a owl:Class ;
+    rdfs:subClassOf secav:ProcessReviewAntipattern ;
+    rdfs:label "Rubber-Stamp Approval"@en ;
+    rdfs:comment "A pull request is approved without being read, due to time pressure, author seniority, or pipeline urgency, completely bypassing the quality filter."@en .
+
+secav:SingleApproverBottleneck a owl:Class ;
+    rdfs:subClassOf secav:ProcessReviewAntipattern ;
+    rdfs:label "Single Approver Bottleneck"@en ;
+    rdfs:comment "The team depends exclusively on one person to review all code, paralysing delivery whenever that person is unavailable or overloaded."@en .
 
 secav:PrematureReviewRequest a owl:Class ;
-    rdfs:subClassOf secav:ReviewAntipattern ;
+    rdfs:subClassOf secav:ProcessReviewAntipattern ;
     rdfs:label "Premature Review Request"@en ;
     rdfs:comment "A formal review is requested before automated tests pass or while the artifact is still in draft state, invalidating prior review effort."@en .
 
-secav:NonEmpathicReviewFeedback a owl:Class ;
-    rdfs:subClassOf secav:ReviewAntipattern ;
-    rdfs:label "Non-Empathic Review Feedback"@en ;
-    rdfs:comment "Review comments target the author rather than the artifact, generating defensiveness and eroding psychological safety."@en .
+# Technical antipatterns
+
+secav:ManualStyleReview a owl:Class ;
+    rdfs:subClassOf secav:TechnicalReviewAntipattern ;
+    rdfs:label "Manual Style Review"@en ;
+    rdfs:comment "Style and formatting issues are debated manually instead of being delegated to automated linters in CI/CD."@en .
+
+secav:LateArchitecturalDiscussion a owl:Class ;
+    rdfs:subClassOf secav:TechnicalReviewAntipattern ;
+    rdfs:label "Late Architectural Discussion"@en ;
+    rdfs:comment "The system design or architecture is questioned at review time — after the code is production-ready — rather than being agreed during the planning or design phase."@en .
+
+secav:HappyPathOnlyReview a owl:Class ;
+    rdfs:subClassOf secav:TechnicalReviewAntipattern ;
+    rdfs:label "Happy Path Only Review"@en ;
+    rdfs:comment "The reviewer verifies only the favourable scenario, ignoring missing unit/integration tests, error handling, and potential security vulnerabilities."@en .
 
 secav:InsufficientAICodeScrutiny a owl:Class ;
-    rdfs:subClassOf secav:ReviewAntipattern ;
+    rdfs:subClassOf secav:TechnicalReviewAntipattern ;
     rdfs:label "Insufficient AI Code Scrutiny"@en ;
     rdfs:comment "AI-assisted code is approved without exhaustive human validation of business logic, introducing unaudited hallucinations or duplications."@en .
+
+# Closure antipatterns
+
+secav:MissingReviewContext a owl:Class ;
+    rdfs:subClassOf secav:ClosureReviewAntipattern ;
+    rdfs:label "Missing Review Context"@en ;
+    rdfs:comment "The review request lacks a clear description of what changed, why, and the acceptance criteria — omitting test instructions or supporting screenshots — forcing the reviewer to infer intent."@en .
+
+secav:InfiniteCommentLoop a owl:Class ;
+    rdfs:subClassOf secav:ClosureReviewAntipattern ;
+    rdfs:label "Infinite Comment Loop"@en ;
+    rdfs:comment "A review comment thread extends beyond 2–3 exchanges without resolution. The protocol is to switch to a 5-minute synchronous call and document the agreed outcome."@en .
 
 # ---------------------------------------------------------------------------
 # Reviewer Readiness
