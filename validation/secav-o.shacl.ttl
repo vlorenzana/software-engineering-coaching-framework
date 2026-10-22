@@ -282,6 +282,16 @@ secav:UnitTestDesignReviewShape
         sh:message "A unit test design review must identify the test artifact being reviewed — test code is a work product requiring individual peer review, not just CI execution."@en
     ] .
 
+secav:CriticalUnitTestShape
+    a sh:NodeShape ;
+    sh:targetClass secav:CriticalUnitTest ;
+    sh:property [
+        sh:path secav:requiresCompetency ;
+        sh:minCount 1 ;
+        sh:class secav:ReviewCompetency ;
+        sh:message "A critical unit test must be linked to a review competency — it requires formal peer review (walkthrough or inspection) before merging, not only automated gate execution."@en
+    ] .
+
 secav:DesignReviewShape
     a sh:NodeShape ;
     sh:targetClass secav:DesignReview ;

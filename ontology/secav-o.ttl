@@ -1065,6 +1065,16 @@ secav:contingencyAction a owl:DatatypeProperty ;
 # Unit Test Review — test code as a reviewable work product
 # ---------------------------------------------------------------------------
 
+secav:CriticalUnitTest a owl:Class ;
+    rdfs:subClassOf secav:UnitTestDesignArtifact ;
+    rdfs:label "Critical Unit Test"@en ;
+    rdfs:comment "A unit test that covers a high-risk or high-criticality system path (e.g., payment flows, security boundaries, concurrency, data integrity). Critical unit tests are candidates for formal peer review — ideally a formal inspection — rather than routine CI-only validation. Selection criteria: business impact, defect history, and architectural sensitivity."@en .
+
+secav:TestSelectionForReview a owl:Class ;
+    rdfs:subClassOf secav:ReviewActivity ;
+    rdfs:label "Test Selection for Review"@en ;
+    rdfs:comment "The activity of identifying and prioritizing unit tests that warrant a formal peer review, walkthrough, or inspection. Output: a list of CriticalUnitTest instances to be scheduled for UnitTestDesignReview. Recommended trigger: at sprint start for new tests on critical modules."@en .
+
 secav:UnreviewedTestCode a owl:Class ;
     rdfs:subClassOf secav:ReviewAntipattern ;
     rdfs:label "Unreviewed Test Code"@en ;
