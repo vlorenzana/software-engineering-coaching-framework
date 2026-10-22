@@ -727,3 +727,46 @@ secav:CoachConsultingScopeShape
         sh:datatype xsd:date ;
         sh:message "A coach consulting scope declaration must carry the date it was last reviewed and confirmed."@en
     ] .
+
+# ---------------------------------------------------------------------------
+# Pessimistic Defect Prevention Shapes
+# ---------------------------------------------------------------------------
+
+# PreMortemReport — must carry the participant's failure-cause list
+secav:PreMortemReportShape
+    a sh:NodeShape ;
+    sh:targetClass secav:PreMortemReport ;
+    sh:property [
+        sh:path secav:findingDescription ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "A Pre-Mortem Report must include a consolidated description of the hypothetical failure causes identified independently by each participant. Without this record the session produces no persistent evidence."@en
+    ] .
+
+# FMEARegister — each entry must have a failure mode and at least the RPN score
+secav:FMEARegisterShape
+    a sh:NodeShape ;
+    sh:targetClass secav:FMEARegister ;
+    sh:property [
+        sh:path secav:failureMode ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "An FMEA Register must document at least one failure mode. An FMEA with no failure mode entries is an empty artifact with no analytical value."@en
+    ] ;
+    sh:property [
+        sh:path secav:rpnScore ;
+        sh:minCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:message "An FMEA Register must include at least one RPN score (S × O × D). Without a quantified priority score, high-risk failure modes cannot be distinguished from low-risk ones and resilience pattern selection is arbitrary."@en
+    ] .
+
+# ThreatModel — must identify at least one threat and the attack surface
+secav:ThreatModelShape
+    a sh:NodeShape ;
+    sh:targetClass secav:ThreatModel ;
+    sh:property [
+        sh:path secav:findingDescription ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "A Threat Model must document at least one identified threat with its STRIDE category and the planned control. An empty threat model does not fulfil the purpose of the ThreatModelingActivity."@en
+    ] .

@@ -1812,3 +1812,179 @@ secav:hasObserverReport a owl:ObjectProperty ;
     rdfs:range secav:ObserverReport ;
     rdfs:label "has observer report"@en ;
     rdfs:comment "Links the coach absence record to the observer's report filed after the session. When a designated observer was named in the CoachAbsenceRecord and attended, the resulting ObserverReport is linked here. This link completes the traceability chain required for a CoachRemoteEndorsement."@en .
+
+# ---------------------------------------------------------------------------
+# Pessimistic Defect Prevention Techniques
+# Derived from: Prevención de Defectos Basada en Escenarios Pesimistas
+# ---------------------------------------------------------------------------
+
+# § Parent activity class
+
+secav:DefectPreventionActivity a owl:Class ;
+    rdfs:subClassOf secav:EngineeringActivity ;
+    rdfs:label "Defect Prevention Activity"@en ;
+    rdfs:comment "A structured engineering activity that assumes failure as a certainty and analyzes its causes before the construction phase, in order to surface vulnerabilities, erroneous assumptions, and single points of failure before they are built in. Contrasts with reactive quality assurance: prevention acts as a design-phase filter rather than a post-construction detector. Specializations: PreMortemAnalysis, FMEAAnalysis, FaultTreeAnalysis, ThreatModelingActivity, ChaosEngineeringActivity."@en .
+
+# § Specific technique classes
+
+secav:PreMortemAnalysis a owl:Class ;
+    rdfs:subClassOf secav:DefectPreventionActivity ;
+    rdfs:label "Pre-Mortem Analysis"@en ;
+    rdfs:comment "A defect prevention session held before project start in which the team assumes the system has already failed catastrophically. Each participant independently documents all hypothetical causes of failure. Independence is mandatory: social pressure to suppress doubts must be neutralized. Output: a PreMortemReport that feeds the project risk register. Psychological basis: prospective hindsight increases failure-cause identification by approximately 30%."@en .
+
+secav:FMEAAnalysis a owl:Class ;
+    rdfs:subClassOf secav:DefectPreventionActivity ;
+    rdfs:label "FMEA Analysis"@en ;
+    rdfs:comment "Failure Mode and Effects Analysis — a systematic activity that evaluates how each individual component can fail. Quantifies three factors per failure mode: Severity (S), Occurrence (O), and Detectability (D). Risk Priority Number: RPN = S × O × D. High-RPN failure modes are prioritized for resilience patterns (circuit breakers, fallbacks, retry, redundancy). When to apply: detailed design or architecture definition phase. Output: FMEARegister."@en .
+
+secav:FaultTreeAnalysis a owl:Class ;
+    rdfs:subClassOf secav:DefectPreventionActivity ;
+    rdfs:label "Fault Tree Analysis"@en ;
+    rdfs:comment "Top-down deductive analysis that starts from a declared catastrophic failure event and decomposes the combination of software, hardware, and human errors required for it to occur. Uses Boolean logic: AND gates (all sub-events must co-occur) and OR gates (any sub-event alone is sufficient). Primary result: identification and elimination of single points of failure. When to apply: security or systems safety analysis during architecture definition."@en .
+
+secav:ThreatModelingActivity a owl:Class ;
+    rdfs:subClassOf secav:DefectPreventionActivity ;
+    rdfs:label "Threat Modeling Activity"@en ;
+    rdfs:comment "A structured analysis of the attack surface from an adversarial perspective. Uses the STRIDE classification: Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege. Output: a ThreatModel documenting identified threats and the controls planned for each. When to apply: architecture definition phase, before security boundaries and trust zones are committed. Required for systems that handle authentication, user data, or external interfaces."@en .
+
+secav:ChaosEngineeringActivity a owl:Class ;
+    rdfs:subClassOf secav:DefectPreventionActivity, secav:TestingActivity ;
+    rdfs:label "Chaos Engineering Activity"@en ;
+    rdfs:comment "Empirical verification of resilience by deliberately injecting failures into a staging or controlled production environment. Validates that resilience patterns (circuit breakers, bulkheads, graceful degradation) perform as designed under actual fault conditions. Distinct from analytical techniques: Chaos Engineering is applied post-implementation. When to apply: testing or pre-production phase after resilience mechanisms are in place."@en .
+
+# § Artifact classes
+
+secav:PreMortemReport a owl:Class ;
+    rdfs:subClassOf secav:Artifact ;
+    rdfs:label "Pre-Mortem Report"@en ;
+    rdfs:comment "A documented list of hypothetical failure causes produced by a PreMortemAnalysis session. Items are collected independently from each participant, then grouped and prioritized. The report feeds directly into the project RiskRegister as candidate risks for further evaluation."@en .
+
+secav:FMEARegister a owl:Class ;
+    rdfs:subClassOf secav:Artifact ;
+    rdfs:label "FMEA Register"@en ;
+    rdfs:comment "A structured table produced by an FMEAAnalysis session containing the identified failure modes, their effects, root causes, Severity, Occurrence, and Detectability scores, and the resulting RPN (Risk Priority Number = S × O × D) for each. High-RPN entries drive the selection of resilience patterns and feed the RiskResponsePlan."@en .
+
+secav:ThreatModel a owl:Class ;
+    rdfs:subClassOf secav:Artifact ;
+    rdfs:label "Threat Model"@en ;
+    rdfs:comment "A documented analysis of the attack surface produced by a ThreatModelingActivity. Contains the system's trust boundaries and data flows, the enumerated STRIDE threats, their severity, and the access controls, encryption requirements, or architectural changes planned to mitigate each threat."@en .
+
+# § FMEA datatype properties
+
+secav:fmeaSeverity a owl:DatatypeProperty ;
+    rdfs:range xsd:integer ;
+    rdfs:label "FMEA severity"@en ;
+    rdfs:comment "FMEA Severity score (1–10): the impact on the system or end user if the failure mode occurs. Score 1 = no noticeable effect; score 10 = catastrophic failure with no warning."@en .
+
+secav:fmeaOccurrence a owl:DatatypeProperty ;
+    rdfs:range xsd:integer ;
+    rdfs:label "FMEA occurrence"@en ;
+    rdfs:comment "FMEA Occurrence score (1–10): the probability that the failure mode will occur. Score 1 = almost never; score 10 = failure is certain or near-certain."@en .
+
+secav:fmeaDetectability a owl:DatatypeProperty ;
+    rdfs:range xsd:integer ;
+    rdfs:label "FMEA detectability"@en ;
+    rdfs:comment "FMEA Detectability score (1–10): the difficulty of detecting the failure before it reaches the end user. Score 1 = easily detectable by automated means; score 10 = undetectable before production impact. Note: higher score means WORSE detectability — inverted direction compared to Severity and Occurrence."@en .
+
+secav:rpnScore a owl:DatatypeProperty ;
+    rdfs:range xsd:integer ;
+    rdfs:label "RPN score"@en ;
+    rdfs:comment "Risk Priority Number = fmeaSeverity × fmeaOccurrence × fmeaDetectability. Range 1–1000. High-RPN failure modes (typically RPN ≥ 100) are prioritized for resilience patterns and preventive action."@en .
+
+secav:failureMode a owl:DatatypeProperty ;
+    rdfs:range xsd:string ;
+    rdfs:label "failure mode"@en ;
+    rdfs:comment "Description of the specific way in which a component can fail (the 'what could go wrong' statement in FMEA). Each component may have multiple failure modes, each analyzed independently."@en .
+
+secav:failureEffect a owl:DatatypeProperty ;
+    rdfs:range xsd:string ;
+    rdfs:label "failure effect"@en ;
+    rdfs:comment "The observable consequence of a failure mode on the system, subsystem, or end user. Used in FMEA to establish the Severity score and to prioritize which failures most need resilience countermeasures."@en .
+
+# ---------------------------------------------------------------------------
+# Pessimistic Defect Prevention Techniques
+# Derived from: Prevención de Defectos Basada en Escenarios Pesimistas
+# ---------------------------------------------------------------------------
+
+# § Parent activity class
+
+secav:DefectPreventionActivity a owl:Class ;
+    rdfs:subClassOf secav:EngineeringActivity ;
+    rdfs:label "Defect Prevention Activity"@en ;
+    rdfs:comment "A structured engineering activity that assumes failure as a certainty and analyzes its causes before the construction phase, in order to surface vulnerabilities, erroneous assumptions, and single points of failure before they are built in. Contrasts with reactive quality assurance: prevention acts as a design-phase filter rather than a post-construction detector. Specializations: PreMortemAnalysis, FMEAAnalysis, FaultTreeAnalysis, ThreatModelingActivity, ChaosEngineeringActivity."@en .
+
+# § Specific technique classes
+
+secav:PreMortemAnalysis a owl:Class ;
+    rdfs:subClassOf secav:DefectPreventionActivity ;
+    rdfs:label "Pre-Mortem Analysis"@en ;
+    rdfs:comment "A defect prevention session held before project start in which the team assumes the system has already failed catastrophically. Each participant independently documents all hypothetical causes of failure. Independence is mandatory: social pressure to suppress doubts must be neutralized. Output: a PreMortemReport that feeds the project risk register. Psychological basis: prospective hindsight increases failure-cause identification by approximately 30%."@en .
+
+secav:FMEAAnalysis a owl:Class ;
+    rdfs:subClassOf secav:DefectPreventionActivity ;
+    rdfs:label "FMEA Analysis"@en ;
+    rdfs:comment "Failure Mode and Effects Analysis — a systematic activity that evaluates how each individual component can fail. Quantifies three factors per failure mode: Severity (S), Occurrence (O), and Detectability (D). Risk Priority Number: RPN = S × O × D. High-RPN failure modes are prioritized for resilience patterns (circuit breakers, fallbacks, retry, redundancy). When to apply: detailed design or architecture definition phase. Output: FMEARegister."@en .
+
+secav:FaultTreeAnalysis a owl:Class ;
+    rdfs:subClassOf secav:DefectPreventionActivity ;
+    rdfs:label "Fault Tree Analysis"@en ;
+    rdfs:comment "Top-down deductive analysis that starts from a declared catastrophic failure event and decomposes the combination of software, hardware, and human errors required for it to occur. Uses Boolean logic: AND gates (all sub-events must co-occur) and OR gates (any sub-event alone is sufficient). Primary result: identification and elimination of single points of failure — nodes that appear in multiple paths to the top event. When to apply: security or systems safety analysis during architecture definition."@en .
+
+secav:ThreatModelingActivity a owl:Class ;
+    rdfs:subClassOf secav:DefectPreventionActivity ;
+    rdfs:label "Threat Modeling Activity"@en ;
+    rdfs:comment "A structured analysis of the attack surface from an adversarial perspective. Uses the STRIDE classification to enumerate threats: Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege. Output: a ThreatModel documenting identified threats and the controls planned for each. When to apply: architecture definition phase, before security boundaries and trust zones are committed. Required for systems that handle authentication, user data, or external interfaces."@en .
+
+secav:ChaosEngineeringActivity a owl:Class ;
+    rdfs:subClassOf secav:DefectPreventionActivity, secav:TestingActivity ;
+    rdfs:label "Chaos Engineering Activity"@en ;
+    rdfs:comment "Empirical verification of resilience by deliberately injecting failures into a staging or controlled production environment. Validates that resilience patterns (circuit breakers, bulkheads, graceful degradation) perform as designed under actual fault conditions. Distinct from analytical techniques (Pre-Mortem, FMEA, FTA): Chaos Engineering is applied post-implementation. When to apply: testing or pre-production phase after resilience mechanisms are in place."@en .
+
+# § Artifact classes
+
+secav:PreMortemReport a owl:Class ;
+    rdfs:subClassOf secav:Artifact ;
+    rdfs:label "Pre-Mortem Report"@en ;
+    rdfs:comment "A documented list of hypothetical failure causes produced by a PreMortemAnalysis session. Items are collected independently from each participant, then grouped and prioritized. The report feeds directly into the project RiskRegister as candidate risks for further evaluation."@en .
+
+secav:FMEARegister a owl:Class ;
+    rdfs:subClassOf secav:Artifact ;
+    rdfs:label "FMEA Register"@en ;
+    rdfs:comment "A structured table produced by an FMEAAnalysis session containing the identified failure modes, their effects, root causes, Severity, Occurrence, and Detectability scores, and the resulting RPN (Risk Priority Number = S × O × D) for each. High-RPN entries drive the selection of resilience patterns and feed the RiskResponsePlan."@en .
+
+secav:ThreatModel a owl:Class ;
+    rdfs:subClassOf secav:Artifact ;
+    rdfs:label "Threat Model"@en ;
+    rdfs:comment "A documented analysis of the attack surface produced by a ThreatModelingActivity. Contains the system's trust boundaries and data flows, the enumerated STRIDE threats, their severity, and the access controls, encryption requirements, or architectural changes planned to mitigate each threat."@en .
+
+# § FMEA datatype properties
+
+secav:fmeaSeverity a owl:DatatypeProperty ;
+    rdfs:range xsd:integer ;
+    rdfs:label "FMEA severity"@en ;
+    rdfs:comment "FMEA Severity score (1–10): the impact on the system or end user if the failure mode occurs. Score 1 = no noticeable effect; score 10 = catastrophic failure with no warning."@en .
+
+secav:fmeaOccurrence a owl:DatatypeProperty ;
+    rdfs:range xsd:integer ;
+    rdfs:label "FMEA occurrence"@en ;
+    rdfs:comment "FMEA Occurrence score (1–10): the probability that the failure mode will occur within the expected operating life. Score 1 = almost never; score 10 = failure is certain or near-certain."@en .
+
+secav:fmeaDetectability a owl:DatatypeProperty ;
+    rdfs:range xsd:integer ;
+    rdfs:label "FMEA detectability"@en ;
+    rdfs:comment "FMEA Detectability score (1–10): the difficulty of detecting the failure before it reaches the end user. Score 1 = easily detectable by automated means; score 10 = undetectable before production impact. Note: higher score means WORSE detectability — the direction is inverted compared to Severity and Occurrence."@en .
+
+secav:rpnScore a owl:DatatypeProperty ;
+    rdfs:range xsd:integer ;
+    rdfs:label "RPN score"@en ;
+    rdfs:comment "Risk Priority Number = fmeaSeverity × fmeaOccurrence × fmeaDetectability. Range 1–1000. High-RPN failure modes (typically RPN ≥ 100) are prioritized for resilience patterns and preventive action. Used in FMEAAnalysis to rank failure modes by combined risk."@en .
+
+secav:failureMode a owl:DatatypeProperty ;
+    rdfs:range xsd:string ;
+    rdfs:label "failure mode"@en ;
+    rdfs:comment "Description of the specific way in which a component can fail (the 'what could go wrong' statement in FMEA). Each component may have multiple failure modes, each analyzed independently."@en .
+
+secav:failureEffect a owl:DatatypeProperty ;
+    rdfs:range xsd:string ;
+    rdfs:label "failure effect"@en ;
+    rdfs:comment "The observable consequence of a failure mode on the system, subsystem, or end user. Used in FMEA to establish the Severity score and to prioritize which failures most need resilience countermeasures."@en .

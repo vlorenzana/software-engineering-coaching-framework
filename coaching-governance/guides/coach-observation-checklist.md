@@ -398,6 +398,7 @@ This checklist allows the coach to record, during any observation session, the p
 | Group 20 | Before and during release preparation; at the release review gate |
 | Group 21 | At sprint planning — before the plan is endorsed; at planning review session |
 | Group 22 | Before, during, and after any design walkthrough or code walkthrough session (full lifecycle: preparation → execution → follow-up review) |
+| Group 23 | Before architecture commitment, at project start, and during security design sessions |
 
 ✓ signals are recorded as `secav:WorkProductEvidence` or `secav:ReviewFinding` and feed the `secav:CompetencyAssessment` of the cycle.
 
@@ -843,6 +844,32 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 
 ---
 
+## Group 23 — Pessimistic Defect Prevention Techniques (`secav:DefectPreventionActivity`)
+
+> **Source:** `coaching-governance/guides/pessimistic-defect-prevention.md`
+> **When to observe:** Before architecture commitment, at project start, and during security or high-risk design sessions.
+> **Primary SECAV-O term:** `secav:DefectPreventionActivity` and its subclasses
+
+| # | Type | Observable behavior | SECAV-O Term |
+|---|------|---------------------|--------------|
+| 23.1 | ✓ | The team conducts a Pre-Mortem Analysis before committing to architecture or starting implementation — each participant independently documents hypothetical failure causes | `secav:PreMortemAnalysis` · `secav:PreMortemReport` |
+| 23.2 | ✓ | The Pre-Mortem report is produced in writing and fed into the risk register as candidate risks before any design is committed | `secav:PreMortemReport` → `secav:RiskRegister` |
+| 23.3 | ✓ | The team applies FMEA/AMFE to critical components (authentication, payment, data integrity) and produces a register with RPN scores (S × O × D) | `secav:FMEAAnalysis` · `secav:FMEARegister` · `secav:rpnScore` |
+| 23.4 | ✓ | High-RPN failure modes (typically RPN ≥ 100) have an explicit resilience pattern assigned — circuit breaker, fallback, retry, or redundancy | `secav:FMEARegister` → `secav:RiskResponsePlan` with `secav:preventionAction` |
+| 23.5 | ✓ | A Fault Tree Analysis is performed for critical modules where a single failure would be catastrophic — the tree identifies and eliminates single points of failure | `secav:FaultTreeAnalysis` |
+| 23.6 | ✓ | The team conducts a STRIDE threat modeling session before security boundaries are committed — identified threats are documented with planned controls | `secav:ThreatModelingActivity` · `secav:ThreatModel` |
+| 23.7 | ✓ | Chaos Engineering is run in staging before production — resilience patterns are verified under active fault injection, not only by code inspection | `secav:ChaosEngineeringActivity` |
+| 23.8 | ⚠ | The project begins implementation without any structured failure-assumption exercise — the team operates from optimistic assumptions alone | absence of `secav:DefectPreventionActivity`; no `secav:PreMortemReport` in the project record |
+| 23.9 | ⚠ | Critical components (authentication, payment, data integrity) have no FMEA analysis and no explicit resilience pattern selection — component risk is assumed rather than quantified | absence of `secav:FMEAAnalysis` for high-criticality component |
+| 23.10 | ⚠ | FMEA entries are listed without RPN scores — failure modes are catalogued but not prioritized, so resilience effort is distributed arbitrarily | absence of `secav:rpnScore`; `secav:FMEARegister` incomplete |
+| 23.11 | ⚠ | The architecture handles authentication, user data, or external interfaces without a documented STRIDE threat model | absence of `secav:ThreatModel`; unmitigated `secav:ThreatModelingActivity` gap |
+| 23.12 | ⚠ | Resilience patterns (circuit breakers, bulkheads) are implemented but never verified under real fault conditions — confidence is based on code inspection alone | absence of `secav:ChaosEngineeringActivity` evidence |
+| 23.13 | ⚠ | Engineers resist raising weak points in architectural proposals — the team's culture does not normalize pessimistic analysis | `secav:PunitiveReviewApproach` context in design sessions; culture signal for `secav:CoachingIntervention` |
+
+> **How to apply:** Pessimistic defect prevention is a design-phase obligation for high-risk systems, not an optional extra. The coach raises the absence of any technique as a `secav:CoachingRecommendation` (if not an adopted requirement) or a `secav:ProcessComplianceFinding` (if the team's adopted process requires it). Systemic absence across sprints escalates to `secavo:QualityPlanningConcern`.
+
+---
+
 ## Related documents
 
 | Document | Relationship |
@@ -852,6 +879,7 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 | `coaching-governance/guides/shift-left-prevention.md` | Context for groups 1–4 (shift-left prevention) |
 | `coaching-governance/guides/formal-inspections.md` | Complete protocol for group 6 |
 | `coaching-governance/guides/ai-assisted-code-review.md` | Complete context for group 8 |
+| `coaching-governance/guides/pessimistic-defect-prevention.md` | Source guide for group 23 — technique descriptions and SECAV-O integration |
 | `templates/rca-defect-analysis.md` | When a ⚠ signal leads to a P1/P2 defect |
 | `templates/engineer-coaching-assessment.md` | ✓ evidence feeds the competency assessment |
 | `coaching-governance/guides/software-walkthroughs.md` | Complete protocol for group 12 (code walkthroughs) |
