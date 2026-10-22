@@ -56,6 +56,16 @@ secav:ReviewActivityShape
         sh:class secav:ReviewFinding ;
         sh:message "Every peer review, walkthrough, or inspection must record at least one finding — including an explicit 'no defects found' record when the artifact is clean."@en
     ] ;
+    sh:property [
+        sh:path secav:hasSignOff ;
+        sh:maxCount 1 ;
+        sh:message "A review activity can have at most one direct coach sign-off per session — multiple sign-offs on the same session are invalid."@en
+    ] ;
+    sh:property [
+        sh:path secav:hasRemoteEndorsement ;
+        sh:maxCount 1 ;
+        sh:message "A review activity can have at most one remote endorsement per session — multiple endorsements on the same session are invalid."@en
+    ] ;
     sh:node secav:ReviewCertifiedShape .
 
 secav:CoachReviewSignOffShape
@@ -94,6 +104,25 @@ secav:CoachRemoteEndorsementShape
         sh:minCount 1 ;
         sh:class secav:ObserverReport ;
         sh:message "A remote endorsement must reference an ObserverReport — not the absence record. The ObserverReport identifies the observer and records their session findings. Without this link the endorsement is untraced and invalid."@en
+    ] ;
+    sh:property [
+        sh:path secav:correspondingAbsenceRecord ;
+        sh:minCount 1 ;
+        sh:class secav:CoachAbsenceRecord ;
+        sh:message "A remote endorsement must reference the CoachAbsenceRecord that established the designated observer for this session. Required to cross-verify that the observer who filed the report is the same person designated in the absence record."@en
+    ] ;
+    sh:sparql [
+        sh:message "The observer who filed the ObserverReport (secav:reportedBy) must match the designated observer in the corresponding CoachAbsenceRecord (secav:designatedObserver). A mismatch breaks the traceability chain and invalidates the remote endorsement."@en ;
+        sh:select """
+            PREFIX secav: <https://github.com/vlorenzana/software-engineering-coaching-framework/ontology/secav-o#>
+            SELECT $this WHERE {
+                $this secav:endorsedObserverReport ?report .
+                $this secav:correspondingAbsenceRecord ?absence .
+                ?absence secav:designatedObserver ?designated .
+                ?report secav:reportedBy ?reporter .
+                FILTER(bound(?designated) && bound(?reporter) && ?designated != ?reporter)
+            }
+        """
     ] .
 
 secav:ObserverReportShape

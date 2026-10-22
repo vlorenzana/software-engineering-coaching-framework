@@ -36,6 +36,21 @@ All notable changes to this project will be documented in this file.
 
 - `validation/secav-o.shacl.ttl` — updated SHACL constraints to cover `secav:ProcessComplianceFinding` (requires `secav:referencedProcessRequirement`) and `secav:DesignConsultation` (requires `secav:coachQualified` and `secav:consultationDomain`).
 
+### Added — Remote observer traceability
+
+- `ontology/secav-o.ttl` — three new terms completing the remote certification chain:
+  - `secav:ObserverReport` — independent artifact filed by the designated observer documenting who attended, when, and what findings were recorded. Distinct from `secav:CoachAbsenceRecord` (which records context and designation), and required before a `secav:CoachRemoteEndorsement` can be issued.
+  - `secav:correspondingAbsenceRecord` — ObjectProperty on `CoachRemoteEndorsement → CoachAbsenceRecord`; makes the cross-link between endorsement and absence explicit so the observer identity constraint can be verified.
+  - `secav:sessionIdentifier` — DatatypeProperty for linking absence record, observer report, and remote endorsement to the same lifecycle phase session.
+- `validation/secav-o.shacl.ttl` — four new constraints:
+  - `CoachRemoteEndorsementShape.correspondingAbsenceRecord` — `sh:minCount 1`; the endorsement must reference the absence record that established the designated observer.
+  - SPARQL-based cross-node constraint on `CoachRemoteEndorsementShape` — verifies that `endorsedObserverReport.reportedBy` matches `correspondingAbsenceRecord.designatedObserver`; a mismatch breaks the traceability chain and triggers a violation.
+  - `ReviewActivityShape.hasSignOff` — `sh:maxCount 1`; prevents duplicate direct sign-offs on the same session.
+  - `ReviewActivityShape.hasRemoteEndorsement` — `sh:maxCount 1`; prevents duplicate remote endorsements on the same session (complements `sh:xone` mutual exclusivity).
+- `examples/design-review.ttl` — updated to satisfy all current SHACL constraints:
+  - Valid scenario (direct sign-off): added `secav:producesReviewFinding`, `secav:FindingO1`, and `secav:CoachReviewSignOff` instance with `signOffStatement` and `signOffDate`.
+  - Remote endorsement scenario: second `DesignReview` instance demonstrating the full chain — `CoachAbsenceRecord` (with `designatedObserver`) → `ObserverReport` (with `reportedBy`, `observerReportDate`, `reportedFindings`) → `CoachRemoteEndorsement` (with `correspondingAbsenceRecord`).
+
 ### Fixed — Metadata
 
 - `CITATION.cff` — updated `version` to `0.3.0`, `date-released` to `2026-10-22`, and `abstract` to reflect the 23-principle code of ethics.

@@ -1748,6 +1748,17 @@ secav:hasRemoteEndorsement a owl:ObjectProperty ;
     rdfs:label "has remote endorsement"@en ;
     rdfs:comment "Links a review activity to a coach remote endorsement issued after the coach reviewed the designated observer's report. Applicable only when the coach was absent and a designated observer filed a report (Principle 16). If the coach was present, a secav:CoachReviewSignOff applies instead."@en .
 
+secav:correspondingAbsenceRecord a owl:ObjectProperty ;
+    rdfs:domain secav:CoachRemoteEndorsement ;
+    rdfs:range secav:CoachAbsenceRecord ;
+    rdfs:label "corresponding absence record"@en ;
+    rdfs:comment "Links the remote endorsement to the CoachAbsenceRecord that originally documented the coach's absence and named the designated observer. Required for cross-verification: the designatedObserver in this absence record must match the reportedBy in the endorsed ObserverReport."@en .
+
+secav:sessionIdentifier a owl:DatatypeProperty ;
+    rdfs:range xsd:string ;
+    rdfs:label "session identifier"@en ;
+    rdfs:comment "A shared identifier (e.g., sprint-ID + activity-type + date) used to link a CoachAbsenceRecord, ObserverReport, and CoachRemoteEndorsement to the same lifecycle phase session. Enables cross-artifact traceability verification."@en .
+
 secav:remoteEndorsementReason a owl:DatatypeProperty ;
     rdfs:domain secav:CoachRemoteEndorsement ;
     rdfs:range xsd:string ;

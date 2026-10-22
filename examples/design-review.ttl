@@ -1,5 +1,11 @@
 @prefix secav: <https://github.com/vlorenzana/software-engineering-coaching-framework/ontology/secav-o#> .
 @prefix ex: <https://example.org/secav/demo#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# ---------------------------------------------------------------------------
+# Valid scenario — design review with direct coach sign-off
+# Satisfies: ReviewActivityShape, ReviewCertifiedShape, CoachReviewSignOffShape
+# ---------------------------------------------------------------------------
 
 ex:EngineerA
     a secav:Engineer ;
@@ -26,7 +32,18 @@ ex:DesignReview01
     a secav:DesignReview, secav:HumanValidationActivity ;
     secav:requiresCompetency ex:ReviewCompetency01 ;
     secav:evaluates ex:DesignArtifact01 ;
-    secav:produces ex:ReviewRecord01 .
+    secav:produces ex:ReviewRecord01 ;
+    secav:producesReviewFinding ex:Finding01 ;
+    secav:hasSignOff ex:SignOff01 .
+
+ex:Finding01
+    a secav:ReviewFinding ;
+    secav:findingDescription "One undocumented dependency detected; explicit design rationale requested before implementation." .
+
+ex:SignOff01
+    a secav:CoachReviewSignOff ;
+    secav:signOffStatement "Review conducted acceptably: participants prepared, roles observed, finding documented." ;
+    secav:signOffDate "2026-10-22"^^xsd:date .
 
 ex:ReviewRecord01
     a secav:ReviewRecord ;
@@ -40,9 +57,45 @@ ex:Assessment01
     secav:basedOnEvidence ex:ReviewRecord01 ;
     secav:assessmentRationale "Assessment is based on the review record only and should be combined with repeated observations before drawing broader conclusions." .
 
-ex:Recommendation01 a secav:CoachingRecommendation .
-
 ex:CoachingIntervention01
     a secav:CoachingIntervention ;
-    secav:targetsCompetency ex:ReviewCompetency01 ;
-    secav:recommendedBy ex:Recommendation01 .
+    secav:targetsCompetency ex:ReviewCompetency01 .
+
+# ---------------------------------------------------------------------------
+# Remote-endorsement scenario — coach absent, designated observer attended
+# Satisfies: ReviewCertifiedShape (remote path), CoachRemoteEndorsementShape,
+#            ObserverReportShape, traceability SPARQL constraint
+# ---------------------------------------------------------------------------
+
+ex:DesignReview02
+    a secav:DesignReview, secav:HumanValidationActivity ;
+    secav:requiresCompetency ex:ReviewCompetency01 ;
+    secav:evaluates ex:DesignArtifact01 ;
+    secav:producesReviewFinding ex:Finding02 ;
+    secav:hasRemoteEndorsement ex:RemoteEndorsement01 .
+
+ex:Finding02
+    a secav:ReviewFinding ;
+    secav:findingDescription "No defects found. Modifiability criterion satisfied. Rationale documented in design artifact." .
+
+ex:AbsenceRecord01
+    a secav:CoachAbsenceRecord ;
+    secav:absenceReason "Coach attending parallel formal inspection of critical payment module." ;
+    secav:absenceConsequence "No CoachReviewSignOff can be issued for this session; findings provisional until remote endorsement." ;
+    secav:designatedObserver ex:TechLead01 ;
+    secav:hasObserverReport ex:ObserverReport01 .
+
+ex:TechLead01 a secav:Stakeholder .
+
+ex:ObserverReport01
+    a secav:ObserverReport ;
+    secav:reportedBy ex:TechLead01 ;
+    secav:observerReportDate "2026-10-22"^^xsd:date ;
+    secav:reportedFindings "Session conducted in accordance with design walkthrough protocol. All participants prepared. One finding raised (no defects beyond the finding documented in Finding02). No entry criterion violations." .
+
+ex:RemoteEndorsement01
+    a secav:CoachRemoteEndorsement ;
+    secav:remoteEndorsementReason "Coach was at parallel critical inspection; TechLead01 designated as observer in advance." ;
+    secav:remoteEndorsementDate "2026-10-22"^^xsd:date ;
+    secav:endorsedObserverReport ex:ObserverReport01 ;
+    secav:correspondingAbsenceRecord ex:AbsenceRecord01 .
