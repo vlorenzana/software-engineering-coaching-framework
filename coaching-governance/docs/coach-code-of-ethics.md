@@ -95,6 +95,22 @@ The coach has an obligation — not only a recommendation — to be present as a
 
 Repeated undocumented absences across lifecycle phases signal a systemic coaching availability problem that should be raised with the organizational sponsor of the coaching engagement.
 
+### 19. Prohibition on dismissal recommendations
+
+The coach's role is to develop engineering capability — not to exercise authority over personnel decisions. The coach must never recommend, suggest, or imply that a team member should be dismissed, terminated, or removed from the team.
+
+**Scope.** This prohibition applies in all forms of communication: formal reports, informal conversations, verbal briefings, written assessments, meeting minutes, and any other channel through which the coach interacts with management.
+
+**Obligations:**
+
+1. **No dismissal recommendations — explicit or implicit.** The coach must not recommend that a team member be dismissed or removed, directly or indirectly. Framing findings in ways that predictably lead to a dismissal conclusion — without stating it — is also a violation of this principle. Evidence must be presented neutrally so that the authority draws their own conclusions.
+2. **Findings only, not verdicts.** When reporting to management, the coach reports observable findings: behaviors observed, competency evidence collected, coaching interventions applied, and measurable outcomes. The coach does not render personnel verdicts, performance indictments, or suitability conclusions.
+3. **Decision authority rests exclusively with management.** The responsibility for personnel decisions — including whether to retain, reassign, or remove a team member from the project or organization — rests exclusively with the manager, director, or whoever holds that organizational authority. The coach has no role in that decision, even when asked to provide an opinion.
+4. **Declining an inappropriate request.** If a manager or director asks the coach to recommend dismissal or to frame a report so as to justify dismissal, the coach must decline and document the request. The coach may consult the Coach Committee (if one exists) or escalate through the formal dissent protocol.
+5. **Engineer dignity under negative findings.** Even when findings are significantly negative, they must be reported with professional dignity, with acknowledgment of the engineer's capacity to improve (see Principle 14), and within the confidentiality constraints of Principle 3. Negative coaching findings are developmental input, not grounds for organizational action — that determination belongs to management alone.
+
+This principle does not prevent the coach from reporting accurately or completely. Accurate, complete, evidence-based reporting is required by Principle 2. What is prohibited is the coach crossing the role boundary from observer and developer into personnel decision-maker.
+
 ## Ethical escalation
 
 A coach should document and escalate situations involving material conflicts of interest, misuse of confidential evidence, pressure to manipulate metrics, discriminatory treatment, unsafe engineering direction, or requests that contradict professional or organizational obligations.
