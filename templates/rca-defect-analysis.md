@@ -1,163 +1,163 @@
-# Análisis de Causa Raíz de Defecto (RCA)
+# Root Cause Analysis — Defect (RCA)
 
-<!-- Completa una instancia de esta plantilla por cada defecto de severidad P1 (Crítico) o P2 (Mayor).
-     Para defectos menores, registra directamente en defect-log.csv sin RCA completo. -->
+<!-- Complete one instance of this template for every P1 (Critical) or P2 (Major) defect.
+     For minor defects, record directly in defect-log.csv without a full RCA. -->
 
-## Encabezado
+## Header
 
-- **Código de incidente:** INC-`AAAA`-`XXXX`
-- **Fecha del reporte:** DD/MM/AAAA
-- **Líder del análisis:** [Nombre]
-- **Coach responsable:** [Nombre]
-- **Severidad:** [ ] P1 — Crítico  [ ] P2 — Mayor
-- **Sprint / Ciclo:** [ID del sprint]
+- **Incident code:** INC-`YYYY`-`XXXX`
+- **Report date:** DD/MM/YYYY
+- **Analysis lead:** [Name]
+- **Responsible coach:** [Name]
+- **Severity:** [ ] P1 — Critical  [ ] P2 — Major
+- **Sprint / Cycle:** [Sprint ID]
 
 ---
 
-## 1. Metadatos del entorno de desarrollo
+## 1. Development environment metadata
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| Repositorio / Microservicio | ej. `github.com/org/payment-gateway` |
-| Rama / Branch afectada | ej. `main` / `release/v2.4.0` |
-| Commit defectuoso (SHA) | ej. `a1b2c3d4e5f6...` |
-| Commit de rollback / fix | ej. `f7e6d5c4b3a2...` |
-| Ambiente impactado | [ ] Producción  [ ] Staging  [ ] Beta |
-| Pull Request asociado | PR #`NNN` |
+| Repository / Microservice | e.g. `github.com/org/payment-gateway` |
+| Affected branch | e.g. `main` / `release/v2.4.0` |
+| Defective commit (SHA) | e.g. `a1b2c3d4e5f6...` |
+| Rollback / fix commit | e.g. `f7e6d5c4b3a2...` |
+| Impacted environment | [ ] Production  [ ] Staging  [ ] Beta |
+| Associated pull request | PR #`NNN` |
 
-**SECAV-O:** El commit defectuoso es el `secav:SourceCodeArtifact` que originó el `secav:DefectRecord`. El PR asociado es el `secav:FormalReviewRequest` que lo introdujo al repositorio principal.
-
----
-
-## 2. Resumen del impacto
-
-- **Descripción del fallo:**
-  > ej. El endpoint `/v1/charge` respondió con errores 500 de forma masiva, bloqueando el procesamiento de pagos.
-
-- **Tiempo de inactividad (downtime):** ___ horas, ___ minutos
-- **Usuarios / clientes afectados:** ej. 15 % de los usuarios activos en la plataforma web
-- **Fase de inyección** (`secavo:phaseInjected`): [ ] Requisitos  [ ] Diseño  [ ] Codificación  [ ] Pruebas
-- **Fase de detección** (`secavo:phaseDetected`): [ ] Revisión de código  [ ] Prueba unitaria  [ ] Integración  [ ] Producción
-- **Método de detección** (`secavo:detectionMethod`): [ ] Inspección formal  [ ] Revisión de pares  [ ] Prueba automatizada  [ ] Alerta de monitoreo  [ ] Reporte de usuario
+**SECAV-O:** The defective commit is the `secav:SourceCodeArtifact` that originated the `secav:DefectRecord`. The associated PR is the `secav:FormalReviewRequest` that introduced it to the main repository.
 
 ---
 
-## 3. Línea de tiempo del ciclo de vida del software
+## 2. Impact summary
 
-Registra los eventos clave desde la aprobación del cambio hasta la resolución. Usa formato `HH:MM (Día N)`.
+- **Failure description:**
+  > e.g. The `/v1/charge` endpoint returned 500 errors at scale, blocking payment processing.
 
-| Hora | Evento | Responsable |
+- **Downtime:** ___ hours, ___ minutes
+- **Affected users / customers:** e.g. 15% of active users on the web platform
+- **Injection phase** (`secavo:phaseInjected`): [ ] Requirements  [ ] Design  [ ] Coding  [ ] Testing
+- **Detection phase** (`secavo:phaseDetected`): [ ] Code review  [ ] Unit test  [ ] Integration  [ ] Production
+- **Detection method** (`secavo:detectionMethod`): [ ] Formal inspection  [ ] Peer review  [ ] Automated test  [ ] Monitoring alert  [ ] User report
+
+---
+
+## 3. Software lifecycle timeline
+
+Record key events from change approval to resolution. Use format `HH:MM (Day N)`.
+
+| Time | Event | Owner |
 |---|---|---|
-| HH:MM (Día 1) | **Aprobación de PR** — el PR #NNN es aprobado en revisión de pares sin observaciones críticas | Revisor |
-| HH:MM (Día 1) | **Pipeline CI/CD** — el build automatizado se ejecuta; las pruebas unitarias pasan exitosamente | CI/CD |
-| HH:MM (Día 1) | **Despliegue** — el commit defectuoso se despliega a Producción | CI/CD |
-| HH:MM (Día 1) | **Detección** — las métricas de APM (Datadog / New Relic) registran un pico anómalo de excepciones | Monitor |
-| HH:MM (Día 1) | **Mitigación temporal** — el equipo ejecuta un rollback al commit anterior estable | [Nombre] |
-| HH:MM (Día N) | **Fix permanente** — se despliega la corrección definitiva | [Nombre] |
+| HH:MM (Day 1) | **PR approval** — PR #NNN approved in peer review without critical observations | Reviewer |
+| HH:MM (Day 1) | **CI/CD pipeline** — automated build runs; unit tests pass | CI/CD |
+| HH:MM (Day 1) | **Deployment** — defective commit deployed to Production | CI/CD |
+| HH:MM (Day 1) | **Detection** — APM metrics (Datadog / New Relic) record anomalous exception spike | Monitor |
+| HH:MM (Day 1) | **Temporary mitigation** — team executes rollback to previous stable commit | [Name] |
+| HH:MM (Day N) | **Permanent fix** — definitive correction deployed | [Name] |
 
-> Agrega o elimina filas según la cronología real del incidente.
+> Add or remove rows to match the actual incident timeline.
 
 ---
 
-## 4. Análisis de causa raíz — 5 Porqués de ingeniería
+## 4. Root cause analysis — 5 Whys (engineering)
 
-Responde cada pregunta de forma concreta. Si la cadena termina antes del quinto porqué, la causa raíz está identificada en ese punto.
+Answer each question concretely. If the chain ends before the fifth why, the root cause is identified at that point.
 
-**¿Por qué falló el sistema en producción?**
+**Why did the system fail in production?**
 
-> Respuesta: _
+> Answer: _
 
-**¿Por qué ocurrió esa condición de fallo?**
+**Why did that failure condition occur?**
 
-> Respuesta: _
+> Answer: _
 
-**¿Por qué el código no manejó ese caso de forma segura?**
+**Why did the code not handle that case safely?**
 
-> Respuesta: _
+> Answer: _
 
-**¿Por qué las pruebas automatizadas en CI/CD no detectaron la vulnerabilidad?**
+**Why did the automated tests in CI/CD not detect the vulnerability?**
 
-> Respuesta: _
+> Answer: _
 
-**¿Por qué se aprobó el Pull Request con esta debilidad lógica? ← Causa raíz**
+**Why was the pull request approved with this logic weakness? ← Root cause**
 
-> Respuesta: _
+> Answer: _
 
-**Causa raíz identificada (resumen en una oración):**
+**Root cause identified (one-sentence summary):**
 
 > _
 
-**Categoría de la causa raíz:**
+**Root cause category:**
 
-| Categoría | ¿Aplica? | Antipatrón SECAV-O asociado |
+| Category | Applies? | Associated SECAV-O antipattern |
 |---|---|---|
-| Revisión bajo fatiga cognitiva | [ ] | `secav:OversizedReviewSession`, `secav:ReviewerEnergyCondition` |
-| Pruebas incompletas (solo happy path) | [ ] | `secav:HappyPathOnlyReview` |
-| PR demasiado grande para revisar | [ ] | `secav:OversizedPullRequest` |
-| Aprobación sin lectura real | [ ] | `secav:RubberStampApproval` |
-| Discusión arquitectónica tardía | [ ] | `secav:LateArchitecturalDiscussion` |
-| Falta de contexto en el PR | [ ] | `secav:MissingReviewContext` |
-| Análisis estático sin configurar | [ ] | `secav:ManualStyleReview`, `secav:AutomationGate` ausente |
-| Otra causa | [ ] | — |
+| Review under cognitive fatigue | [ ] | `secav:OversizedReviewSession`, `secav:ReviewerEnergyCondition` |
+| Incomplete tests (happy path only) | [ ] | `secav:HappyPathOnlyReview` |
+| PR too large to review properly | [ ] | `secav:OversizedPullRequest` |
+| Approval without real reading | [ ] | `secav:RubberStampApproval` |
+| Late architectural discussion | [ ] | `secav:LateArchitecturalDiscussion` |
+| Missing context in the PR | [ ] | `secav:MissingReviewContext` |
+| Static analysis not configured | [ ] | `secav:ManualStyleReview`, missing `secav:AutomationGate` |
+| Other cause | [ ] | — |
 
 ---
 
-## 5. Plan de acciones correctivas (SMART)
+## 5. Corrective action plan (SMART)
 
-Cada acción debe ser: Específica, Medible, Asignable, Realista y con Fecha límite.
+Each action must be: Specific, Measurable, Assignable, Realistic, and Time-bound.
 
-| ID | Acción técnica obligatoria | Responsable | Fecha límite | Estado |
+| ID | Required technical action | Owner | Deadline | Status |
 |---|---|---|---|---|
-| SOFT-01 | Implementar validación defensiva del campo/caso afectado y subir el fix | [Nombre] | DD/MM/AAAA | [ ] Pendiente |
-| SOFT-02 | Agregar pruebas de integración que simulen payloads corruptos o vacíos para el caso afectado | [Nombre] | DD/MM/AAAA | [ ] Pendiente |
-| SOFT-03 | Configurar regla en linter / SonarQube / analizador estático para forzar verificación del tipo de dato afectado | [Nombre] | DD/MM/AAAA | [ ] Pendiente |
+| SOFT-01 | Implement defensive validation for the affected field/case and push the fix | [Name] | DD/MM/YYYY | [ ] Pending |
+| SOFT-02 | Add integration tests that simulate corrupt or empty payloads for the affected case | [Name] | DD/MM/YYYY | [ ] Pending |
+| SOFT-03 | Configure a linter / SonarQube / static-analyser rule to enforce verification of the affected data type | [Name] | DD/MM/YYYY | [ ] Pending |
 
-**SECAV-O:** Cada fila es una `secavo:CorrectiveAction` vinculada al `secav:DefectRecord` de este incidente. Las filas SOFT-02 y SOFT-03 pueden derivar adicionalmente en `secav:PreventiveAction` si se incorporan como estándares del equipo.
+**SECAV-O:** Each row is a `secavo:CorrectiveAction` linked to the `secav:DefectRecord` of this incident. Rows SOFT-02 and SOFT-03 may additionally become `secav:PreventiveAction` entries if adopted as team standards.
 
 ---
 
-## 6. Acciones preventivas sistémicas
+## 6. Systemic preventive actions
 
-Si la causa raíz revela una brecha de proceso o cultura que puede repetirse, registra aquí las acciones para que no ocurra de nuevo en otros módulos o equipos.
+If the root cause reveals a process or culture gap that could recur, record here the actions to prevent it from happening again in other modules or teams.
 
-| ID | Acción preventiva | Responsable | Fecha límite | Estado |
+| ID | Preventive action | Owner | Deadline | Status |
 |---|---|---|---|---|
-| PREV-01 | | [Nombre] | DD/MM/AAAA | [ ] Pendiente |
-| PREV-02 | | [Nombre] | DD/MM/AAAA | [ ] Pendiente |
+| PREV-01 | | [Name] | DD/MM/YYYY | [ ] Pending |
+| PREV-02 | | [Name] | DD/MM/YYYY | [ ] Pending |
 
-**SECAV-O:** Cada fila es una `secav:PreventiveAction` orientada a evitar la clase de defecto, no solo la instancia. Se registra en `secavo:SprintRetrospective` como `secavo:ImprovementAction`.
-
----
-
-## 7. Intervención de coaching derivada
-
-El coach completa esta sección al cerrar el RCA. No se comparte con gerencia como evaluación de rendimiento individual.
-
-- **Competencia afectada** (`secav:Competency`): [ ] ReviewCompetency  [ ] TestingCompetency  [ ] SecurityCompetency  [ ] DesignCompetency
-- **Patrón observado:** _
-- **Intervención planificada** (`secav:CoachingIntervention`): _
-- **Sesión individual programada:** DD/MM/AAAA
+**SECAV-O:** Each row is a `secav:PreventiveAction` aimed at eliminating the defect class, not just the instance. Recorded in `secavo:SprintRetrospective` as a `secavo:ImprovementAction`.
 
 ---
 
-## 8. Cierre y verificación
+## 7. Derived coaching intervention
 
-- **Fecha de cierre del RCA:** DD/MM/AAAA
-- **Fix verificado en producción:** [ ] Sí  [ ] No  — Fecha: DD/MM/AAAA
-- **Acciones correctivas completadas:** [ ] Todas  [ ] Parcial — pendientes: ___
-- **Acciones preventivas completadas:** [ ] Todas  [ ] Parcial — pendientes: ___
-- **Defecto registrado en** `templates/defect-log.csv`: [ ] Sí
-- **RCA archivado en el registro de coaching del ingeniero** (`templates/engineer-coaching-assessment.md`): [ ] Sí
+The coach completes this section when closing the RCA. It is not shared with management as an individual performance evaluation.
+
+- **Affected competency** (`secav:Competency`): [ ] ReviewCompetency  [ ] TestingCompetency  [ ] SecurityCompetency  [ ] DesignCompetency
+- **Observed pattern:** _
+- **Planned intervention** (`secav:CoachingIntervention`): _
+- **Individual session scheduled:** DD/MM/YYYY
 
 ---
 
-## Documentos relacionados
+## 8. Closure and verification
 
-| Documento | Relación |
+- **RCA closure date:** DD/MM/YYYY
+- **Fix verified in production:** [ ] Yes  [ ] No  — Date: DD/MM/YYYY
+- **Corrective actions completed:** [ ] All  [ ] Partial — pending: ___
+- **Preventive actions completed:** [ ] All  [ ] Partial — pending: ___
+- **Defect recorded in** `templates/defect-log.csv`: [ ] Yes
+- **RCA archived in engineer coaching record** (`templates/engineer-coaching-assessment.md`): [ ] Yes
+
+---
+
+## Related documents
+
+| Document | Relationship |
 |---|---|
-| `templates/defect-log.csv` | Registro estructurado del defecto; este RCA complementa cada fila de severidad P1/P2 |
-| `coaching-governance/guides/defect-tracking.md` | Protocolo del coach para clasificar y cerrar tickets de defectos |
-| `coaching-governance/guides/peer-review-antipatterns.md` | Antipatrones de revisión que este RCA puede identificar como causa raíz |
-| `coaching-governance/guides/shift-left-prevention.md` | Acciones preventivas que reducen la probabilidad de este tipo de defecto |
-| `templates/sprint-retrospective.md` | Las acciones preventivas sistémicas (§6) se incorporan como ImprovementActions en la retrospectiva |
-| `templates/engineer-coaching-assessment.md` | La intervención de coaching (§7) se registra en la evaluación del ingeniero |
+| `templates/defect-log.csv` | Structured defect record; this RCA complements each P1/P2 severity row |
+| `coaching-governance/guides/defect-tracking.md` | Coach protocol for classifying and closing defect tickets |
+| `coaching-governance/guides/peer-review-antipatterns.md` | Review antipatterns this RCA may identify as root cause |
+| `coaching-governance/guides/shift-left-prevention.md` | Preventive actions that reduce the probability of this defect type |
+| `templates/sprint-retrospective.md` | Systemic preventive actions (§6) are added as ImprovementActions in the retrospective |
+| `templates/engineer-coaching-assessment.md` | The coaching intervention (§7) is recorded in the engineer assessment |
