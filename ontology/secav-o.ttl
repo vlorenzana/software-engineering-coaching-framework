@@ -848,3 +848,54 @@ secav:belongsToDimension a owl:ObjectProperty ;
     rdfs:range secav:TechnicalLeadershipDimension ;
     rdfs:label "belongs to dimension"@en ;
     rdfs:comment "Links a leader behavior to the strategic leadership dimension it belongs to."@en .
+
+# ---------------------------------------------------------------------------
+# Coaching Meeting and Meeting Minutes
+# Derived from: templates/coach-meeting-minutes.md
+# Models the coaching meeting as a structured intervention that produces a
+# minutes artifact containing tracked agreements with owners and due dates.
+# ---------------------------------------------------------------------------
+
+secav:CoachingMeeting a owl:Class ;
+    rdfs:subClassOf secav:CoachingIntervention ;
+    rdfs:label "Coaching Meeting"@en ;
+    rdfs:comment "A facilitated session led by the coach — kick-off, retrospective, 1-on-1, technical review, inspection, or follow-up — that produces a set of tracked agreements documented in meeting minutes."@en .
+
+secav:MeetingMinutes a owl:Class ;
+    rdfs:subClassOf secav:Artifact ;
+    rdfs:label "Meeting Minutes"@en ;
+    rdfs:comment "A structured artifact recording topics discussed, decisions made, and agreements committed to in a coaching meeting; distributed to all participants within 24 hours."@en .
+
+secav:MeetingAgreement a owl:Class ;
+    rdfs:label "Meeting Agreement"@en ;
+    rdfs:comment "A tracked commitment made by one or more participants during a coaching meeting, with an identified owner and a due date. Reviewed at the opening of every subsequent meeting of the same type."@en .
+
+secav:producesMinutes a owl:ObjectProperty ;
+    rdfs:domain secav:CoachingMeeting ;
+    rdfs:range secav:MeetingMinutes ;
+    rdfs:label "produces minutes"@en ;
+    rdfs:comment "Links a coaching meeting to the minutes artifact it generates."@en .
+
+secav:hasAgreement a owl:ObjectProperty ;
+    rdfs:domain secav:MeetingMinutes ;
+    rdfs:range secav:MeetingAgreement ;
+    rdfs:label "has agreement"@en ;
+    rdfs:comment "Links a meeting minutes artifact to the tracked agreements it records."@en .
+
+secav:agreementOwner a owl:ObjectProperty ;
+    rdfs:domain secav:MeetingAgreement ;
+    rdfs:range secav:Stakeholder ;
+    rdfs:label "agreement owner"@en ;
+    rdfs:comment "The stakeholder responsible for fulfilling this agreement by the due date."@en .
+
+secav:agreementDueDate a owl:DatatypeProperty ;
+    rdfs:domain secav:MeetingAgreement ;
+    rdfs:range xsd:date ;
+    rdfs:label "agreement due date"@en ;
+    rdfs:comment "The date by which this agreement must be fulfilled."@en .
+
+secav:agreementStatus a owl:DatatypeProperty ;
+    rdfs:domain secav:MeetingAgreement ;
+    rdfs:range xsd:string ;
+    rdfs:label "agreement status"@en ;
+    rdfs:comment "Current tracking status of the agreement: 'open', 'completed', or 'cancelled'."@en .

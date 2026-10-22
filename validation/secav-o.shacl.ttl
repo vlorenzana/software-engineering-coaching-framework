@@ -190,3 +190,19 @@ secav:LeaderBehaviorShape
         sh:class secav:TechnicalLeadershipDimension ;
         sh:message "A leader behavior must belong to at least one technical leadership dimension."@en
     ] .
+
+secav:MeetingAgreementShape
+    a sh:NodeShape ;
+    sh:targetClass secav:MeetingAgreement ;
+    sh:property [
+        sh:path secav:agreementOwner ;
+        sh:minCount 1 ;
+        sh:class secav:Stakeholder ;
+        sh:message "A meeting agreement must have an identified owner."@en
+    ] ;
+    sh:property [
+        sh:path secav:agreementDueDate ;
+        sh:minCount 1 ;
+        sh:datatype xsd:date ;
+        sh:message "A meeting agreement must have a due date."@en
+    ] .
