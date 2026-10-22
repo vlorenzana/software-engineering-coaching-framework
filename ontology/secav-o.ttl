@@ -1626,3 +1626,37 @@ secav:WalkthroughReview a owl:Class ;
     rdfs:subClassOf secav:ReviewActivity ;
     rdfs:label "Walkthrough Review"@en ;
     rdfs:comment "The post-session review phase of a walkthrough: verifying that all recorded findings have been addressed by the author, that corrections are adequate, and that no new defects were introduced. Closes the walkthrough lifecycle. Requires coach sign-off and a finding record confirming the follow-up state of each finding from the WalkthroughExecution."@en .
+
+# ---------------------------------------------------------------------------
+# Coach Presence — applicable to ALL lifecycle phases
+# Code of Ethics Principle 18: coach has an observer obligation for every
+# scheduled phase activity. Absence must be documented explicitly.
+# ---------------------------------------------------------------------------
+
+secav:CoachAbsenceRecord a owl:Class ;
+    rdfs:label "Coach Absence Record"@en ;
+    rdfs:comment "An explicit record of the coach's documented absence from a scheduled lifecycle phase activity. Must be created before the session, not retroactively. Absence does not constitute approval or sign-off. For ReviewActivity instances: no CoachReviewSignOff can be issued (Principle 16). For all other activities: no CoachObservation can be recorded for that session, leaving a gap in competency evidence."@en .
+
+secav:hasCoachAbsenceRecord a owl:ObjectProperty ;
+    rdfs:domain secav:EngineeringActivity ;
+    rdfs:range secav:CoachAbsenceRecord ;
+    rdfs:label "has coach absence record"@en ;
+    rdfs:comment "Links an engineering activity to a documented coach absence record when the coach was not present. Absence of both a CoachObservation and a CoachAbsenceRecord for an activity represents an undocumented absence — the worst case, since there is no record at all."@en .
+
+secav:absenceReason a owl:DatatypeProperty ;
+    rdfs:domain secav:CoachAbsenceRecord ;
+    rdfs:range xsd:string ;
+    rdfs:label "absence reason"@en ;
+    rdfs:comment "The documented justification for the coach's absence from the scheduled activity."@en .
+
+secav:absenceConsequence a owl:DatatypeProperty ;
+    rdfs:domain secav:CoachAbsenceRecord ;
+    rdfs:range xsd:string ;
+    rdfs:label "absence consequence"@en ;
+    rdfs:comment "Documents the consequence of the absence: 'No CoachReviewSignOff issued — findings are provisional' (for review activities) or 'No CoachObservation recorded for this session' (for non-review activities)."@en .
+
+secav:designatedObserver a owl:ObjectProperty ;
+    rdfs:domain secav:CoachAbsenceRecord ;
+    rdfs:range secav:Stakeholder ;
+    rdfs:label "designated observer"@en ;
+    rdfs:comment "The trained team member designated by the coach to observe the session in their absence and report findings. Required for critical artifact sessions when the coach cannot attend."@en .

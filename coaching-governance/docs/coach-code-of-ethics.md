@@ -64,18 +64,6 @@ The coach has an obligation to be present — as a silent, non-intervening obser
 
 Repeated failure to attend review sessions without a valid reason is an ethical concern that should be self-disclosed and addressed through coaching practice improvement (see Principle 12).
 
-### 17. Planning gate obligation for requirements review
-Before endorsing a sprint or iteration plan that includes implementation work, the coach must verify that at least one `secav:RequirementsReview` (peer review, walkthrough, or formal inspection of requirements) is explicitly scheduled in the work plan and will complete before implementation begins on those requirements.
-
-This is a distinct duty from the witness obligation (Principle 16). The coach's responsibility here is at planning time — not only at session time.
-
-**Obligations:**
-
-1. **Review the plan, not only the sessions.** The coach must check that the sprint plan includes a `secav:RequirementsReview` activity for any requirements being implemented in that sprint.
-2. **Withhold endorsement when the gate is missing.** If the plan proceeds to implementation without a scheduled requirements review, the coach must document a quality planning concern (`secavo:QualityPlanningConcern`) and, if not resolved, invoke the formal dissent and escalation protocol.
-3. **No retroactive satisfaction.** A requirements review conducted after implementation has already started does not fulfill the planning gate — it may still produce valuable findings, but the implementation risk materializes from day one of unreviewed requirements.
-4. **This is an ethical obligation, not only a process step.** Starting implementation on unreviewed requirements is the highest-risk lifecycle antipattern (`secav:MissingRequirementsReview`). Endorsing a plan that omits this gate makes the coach complicit in accepting that risk without disclosure.
-
 ### 17. Work plan gate for requirements review
 The coach has an active obligation — not merely a recommendation — to confirm that at least one `secav:RequirementsReview` session (peer review, walkthrough, or formal inspection of requirements artifacts) is included in the sprint or feature work plan **before authorizing implementation to begin**. This obligation exists because vague, ambiguous, unclear, and incomplete requirements are invisible to automated tools and carry the highest downstream correction cost in the lifecycle.
 
@@ -87,6 +75,25 @@ The coach has an active obligation — not merely a recommendation — to confir
 4. **Planning endorsement vs. session sign-off.** The planning-gate endorsement confirms the session is planned — it is distinct from the post-session `secav:CoachReviewSignOff` (Principle 16), which certifies the session was conducted acceptably.
 
 Repeated failure to enforce the requirements review planning gate — allowing implementation to begin on unreviewed requirements — is a professional ethics concern that should be self-disclosed and addressed through coaching practice improvement (see Principle 12).
+
+### 18. Observer obligation for all lifecycle phases
+
+The coach has an obligation — not only a recommendation — to be present as a **silent, non-intervening observer** during any scheduled lifecycle phase activity: planning, requirements, high-level design, design, test design, implementation, test execution, walkthrough execution, formal inspection, and release. Presence is the only basis on which the coach can issue observations, sign-offs, and competency evidence for that activity.
+
+**Scope.** This principle generalizes Principle 16 (witness obligation for review sessions) to all lifecycle phases, not only review activities. The quality gate principle is the same: the coach cannot certify what they did not witness.
+
+**What "observer" means.** The coach does not direct, interrupt, or evaluate engineers in real time during the session. They take notes, record observations (`secav:CoachObservation`), and defer feedback to the coaching session that follows. The observer role is silent — attending does not mean intervening.
+
+**Obligations:**
+
+1. **Attend whenever possible.** The ideal is that the coach is present at every scheduled lifecycle phase activity. Repeated absence is a practice quality concern, not a scheduling inconvenience.
+2. **Document every absence.** When the coach cannot attend, they must record a `secav:CoachAbsenceRecord` for that activity before the session, not retroactively. The record must state the reason and the consequence.
+3. **No implicit approval from absence.** The coach's absence from any activity — review or otherwise — does not constitute approval, sign-off, or certification of what occurred. Absence produces a gap in the observation record, not a neutral endorsement.
+4. **For review activities: no sign-off without presence.** Absence from a review activity (peer review, walkthrough, inspection, results review) means no `secav:CoachReviewSignOff` can be issued for that session (see Principle 16 for the full protocol when a designated observer is needed).
+5. **For non-review activities: no observation record.** Absence from a non-review activity (planning, design, implementation, test execution) means no `secav:CoachObservation` can be recorded for that session. Competency evidence from that session is unavailable until a follow-up observation opportunity arises.
+6. **Designate a trained observer when absent.** When a session concerns a critical artifact or a high-risk phase and the coach cannot attend, they must designate a trained team member to observe and report. The designation and the observer's report must be documented. For review activities, the Principle 16 protocol applies.
+
+Repeated undocumented absences across lifecycle phases signal a systemic coaching availability problem that should be raised with the organizational sponsor of the coaching engagement.
 
 ## Ethical escalation
 

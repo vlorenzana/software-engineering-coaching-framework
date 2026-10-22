@@ -10,6 +10,23 @@ This checklist allows the coach to record, during any observation session, the p
 
 ---
 
+## Cross-cutting rule — Coach presence in all lifecycle phases
+
+> **Code of Ethics, Principle 18.** The coach has an observer obligation for every scheduled lifecycle phase activity — planning, requirements, high-level design, design, test design, implementation, test execution, walkthrough, inspection, and release. Presence is the basis for observations, sign-offs, and competency evidence.
+
+| Rule | When | SECAV-O Term |
+|------|------|--------------|
+| **Ideal: coach attends every session.** The goal is full presence across all phases. Absence is the exception, not the norm. | All phases | `secav:CoachObservation` · `secav:observedDuring` |
+| **Every absence must be documented before the session** with reason and consequence. Undocumented absence (no observation AND no absence record) is the worst case — there is no evidence of what occurred. | Any missed session | `secav:CoachAbsenceRecord` · `secav:absenceReason` · `secav:absenceConsequence` |
+| **Absence ≠ approval.** The coach not attending a session does not constitute endorsement, sign-off, or certification of what occurred in that session. | All phases | absence of `secav:CoachObservation` is a gap, not a neutral record |
+| **For review activities (peer review, walkthrough, inspection, results review): no sign-off without presence.** If the coach was absent, findings are provisional and the session cannot be used as formal competency evidence until the coach reviews the designated observer's report and decides to endorse remotely (Principle 16). | Review phases | absence of `secav:CoachReviewSignOff` |
+| **For non-review activities (planning, design, implementation, test execution): no observation record.** If absent, the coach records a `CoachAbsenceRecord` and there is no `CoachObservation` for that session. | Production phases | `secav:CoachAbsenceRecord` |
+| **Designate a trained observer for critical sessions.** When absence is unavoidable for a high-risk phase, the coach must name a designated observer before the session begins, not after. | Critical sessions | `secav:designatedObserver` on `secav:CoachAbsenceRecord` |
+
+> **How to apply this rule per checklist group:** before completing any group's observation signals for a session, confirm coach presence. If the coach was not present: (a) do not record ✓ or ⚠ signals for that session, (b) record a `secav:CoachAbsenceRecord`, and (c) if the session was a review activity, note that sign-off is withheld.
+
+---
+
 ## 1. Requirements Definition and Acceptance Criteria
 
 > SECAV-O activity: `secav:RequirementsActivity`, `secav:AcceptanceCriteriaDefinition`, `secav:RequirementsReview`

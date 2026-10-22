@@ -543,3 +543,19 @@ secav:WalkthroughReviewShape
         sh:class secav:CoachReviewSignOff ;
         sh:message "The walkthrough lifecycle closes with a coach sign-off issued during the walkthrough review, confirming all findings were addressed."@en
     ] .
+
+secav:CoachAbsenceRecordShape
+    a sh:NodeShape ;
+    sh:targetClass secav:CoachAbsenceRecord ;
+    sh:property [
+        sh:path secav:absenceReason ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "A coach absence record must state the reason for absence. Undocumented absence provides no basis for determining what occurred in the session."@en
+    ] ;
+    sh:property [
+        sh:path secav:absenceConsequence ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "A coach absence record must document the consequence: for review activities 'no sign-off issued, findings provisional'; for other activities 'no observation recorded'."@en
+    ] .
