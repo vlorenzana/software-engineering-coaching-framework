@@ -12,7 +12,9 @@ This checklist allows the coach to record, during any observation session, the p
 
 ## 1. Requirements Definition and Acceptance Criteria
 
-> SECAV-O activity: `secav:RequirementsActivity`, `secav:AcceptanceCriteriaDefinition`
+> SECAV-O activity: `secav:RequirementsActivity`, `secav:AcceptanceCriteriaDefinition`, `secav:RequirementsReview`
+>
+> **Key principle:** Defect types "vague", "ambiguous", "unclear", and "incomplete" in requirements are **invisible to automated tools** — they can only be detected through peer review, walkthrough, or formal inspection (preferred). These defects carry the highest downstream cost in the lifecycle: injected at the earliest phase, detected late. The work plan **must** include at least one `secav:RequirementsReview` session for each sprint or feature set before implementation begins, endorsed by a coach sign-off.
 
 | # | Type | Observable behavior | SECAV-O Term |
 |---|------|---------------------|--------------|
@@ -20,10 +22,16 @@ This checklist allows the coach to record, during any observation session, the p
 | 1.2 | ✓ | Acceptance criteria produce a documented artifact (BDD scenario, test specification, ticket with complete AC) | `secav:AcceptanceCriteriaDefinition` → `secav:produces` → `secav:Artifact` |
 | 1.3 | ✓ | Edge cases and error paths are explicitly stated in the criteria — not only the happy path | `secav:AcceptanceCriterion` |
 | 1.4 | ✓ | The engineer can verbally explain the requirement before coding | `secav:WorkProductEvidence` |
-| 1.5 | ⚠ | A user story enters the sprint without defined acceptance criteria | `secav:HappyPathOnlyReview` (risk) |
-| 1.6 | ⚠ | The team starts coding with ambiguous requirements without requesting clarification | `secav:MissingReviewContext` (precondition) |
-| 1.7 | ⚠ | Acceptance criteria are written after implementation (post-hoc) | absence of `secav:AcceptanceCriteriaDefinition` as a preventive activity |
-| 1.8 | ⚠ | No traceability exists between acceptance criteria and automated test cases | `secav:QualityCriterion` without `secav:AutomationGate` |
+| 1.5 | ✓ | The sprint or feature work plan explicitly includes a peer review, walkthrough, or formal inspection of requirements before implementation starts | `secav:RequirementsReview` in work plan |
+| 1.6 | ✓ | The requirements review session produces at least one documented finding — including explicit "no defects found" — before coding begins | `secav:producesReviewFinding` · `secav:RequirementsDefect` |
+| 1.7 | ✓ | The coach issues a sign-off confirming the requirements review was conducted acceptably before authorizing implementation | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
+| 1.8 | ✓ | Review participants flag "vague", "ambiguous", "unclear", or "incomplete" defects using explicit labels — not generic comments | `secav:VagueRequirement` / `secav:AmbiguousRequirement` / `secav:UnclearRequirement` / `secav:IncompleteRequirement` |
+| 1.9 | ⚠ | A user story enters the sprint without defined acceptance criteria | `secav:HappyPathOnlyReview` (risk) |
+| 1.10 | ⚠ | The team starts coding with ambiguous requirements without requesting clarification | `secav:AmbiguousRequirement` unresolved; `secav:MissingReviewContext` |
+| 1.11 | ⚠ | Acceptance criteria are written after implementation (post-hoc) | absence of `secav:AcceptanceCriteriaDefinition` as a preventive activity |
+| 1.12 | ⚠ | No traceability exists between acceptance criteria and automated test cases | `secav:QualityCriterion` without `secav:AutomationGate` |
+| 1.13 | ⚠ | Implementation begins on requirements that have not been subject to any peer review, walkthrough, or inspection | `secav:MissingRequirementsReview` — highest-risk antipattern in the lifecycle |
+| 1.14 | ⚠ | The requirements review was conducted but the coach did not issue a sign-off — findings cannot be used as planning evidence | absence of `secav:CoachReviewSignOff` on `secav:RequirementsReview` |
 
 ---
 

@@ -300,6 +300,22 @@ secav:RiskResponsePlanShape
         sh:message "A risk response plan must describe the prevention action."@en
     ] .
 
+secav:RequirementsReviewShape
+    a sh:NodeShape ;
+    sh:targetClass secav:RequirementsReview ;
+    sh:property [
+        sh:path secav:evaluates ;
+        sh:minCount 1 ;
+        sh:class secav:RequirementsArtifact ;
+        sh:message "A requirements review must identify the requirements artifact being reviewed."@en
+    ] ;
+    sh:property [
+        sh:path secav:hasSignOff ;
+        sh:minCount 1 ;
+        sh:class secav:CoachReviewSignOff ;
+        sh:message "A requirements review must be endorsed by the coach before implementation begins on the reviewed requirements."@en
+    ] .
+
 secav:UnitTestDesignReviewShape
     a sh:NodeShape ;
     sh:targetClass secav:UnitTestDesignReview ;

@@ -1062,6 +1062,50 @@ secav:contingencyAction a owl:DatatypeProperty ;
     rdfs:comment "The reactive action to execute if the risk event materializes despite prevention efforts."@en .
 
 # ---------------------------------------------------------------------------
+# Requirements artifacts and human-only defect types
+# ---------------------------------------------------------------------------
+
+secav:RequirementsArtifact a owl:Class ;
+    rdfs:subClassOf secav:Artifact ;
+    rdfs:label "Requirements Artifact"@en ;
+    rdfs:comment "A documented requirements specification, user story, use case, or acceptance criteria set. Requirements artifacts are the primary source of high-impact defects that can only be detected through human review — vague, ambiguous, unclear, or incomplete requirements survive automated validation but generate disproportionate rework during implementation and testing."@en .
+
+secav:RequirementsDefect a owl:Class ;
+    rdfs:subClassOf secav:ReviewFinding ;
+    rdfs:label "Requirements Defect"@en ;
+    rdfs:comment "A defect in a requirements artifact that can only be detected through peer review, walkthrough, or formal inspection — not by automated tools. Requirements defects carry the highest downstream cost because they are injected at the earliest phase but often detected late in integration or user acceptance testing."@en .
+
+secav:VagueRequirement a owl:Class ;
+    rdfs:subClassOf secav:RequirementsDefect ;
+    rdfs:label "Vague Requirement"@en ;
+    rdfs:comment "A requirement stated at a level of generality that does not allow a single verifiable implementation — e.g., 'the system should be fast' or 'the UI must be friendly'. Different team members can derive contradictory implementations without either being provably wrong."@en .
+
+secav:AmbiguousRequirement a owl:Class ;
+    rdfs:subClassOf secav:RequirementsDefect ;
+    rdfs:label "Ambiguous Requirement"@en ;
+    rdfs:comment "A requirement that has more than one valid reading, leading to different implementations depending on who interprets it. Ambiguity can only be discovered by comparing independent interpretations — which is only possible in human review sessions."@en .
+
+secav:UnclearRequirement a owl:Class ;
+    rdfs:subClassOf secav:RequirementsDefect ;
+    rdfs:label "Unclear Requirement"@en ;
+    rdfs:comment "A requirement whose text cannot be understood as written — missing context, undefined terms, or contradictory statements. Unlike ambiguity, clarity defects prevent any consistent interpretation regardless of perspective."@en .
+
+secav:IncompleteRequirement a owl:Class ;
+    rdfs:subClassOf secav:RequirementsDefect ;
+    rdfs:label "Incomplete Requirement"@en ;
+    rdfs:comment "A requirement that is missing information necessary to implement or test it — no acceptance criteria, no error scenarios, no performance bounds. Detected in review when participants cannot answer the question: 'how would we verify this is done?'"@en .
+
+secav:RequirementsReview a owl:Class ;
+    rdfs:subClassOf secav:ReviewActivity ;
+    rdfs:label "Requirements Review"@en ;
+    rdfs:comment "A mandatory peer review, walkthrough, or formal inspection of requirements artifacts conducted before implementation begins. The only mechanism capable of detecting vague, ambiguous, unclear, and incomplete requirements — defect types invisible to automated validation. The coach must endorse the inclusion of at least one RequirementsReview in the sprint or project work plan and issue a sign-off after the session."@en .
+
+secav:MissingRequirementsReview a owl:Class ;
+    rdfs:subClassOf secav:ReviewAntipattern ;
+    rdfs:label "Missing Requirements Review"@en ;
+    rdfs:comment "Starting implementation of requirements that have not been subject to a peer review, walkthrough, or inspection. The highest-risk antipattern in the development lifecycle: ambiguous or incomplete requirements that survive to coding generate rework across multiple phases and are significantly more expensive to correct than if found before development started."@en .
+
+# ---------------------------------------------------------------------------
 # Review Process Record — mandatory outcomes for every peer review, walkthrough, or inspection
 # ---------------------------------------------------------------------------
 
