@@ -154,3 +154,29 @@ secav:AIReviewPromptConfigurationShape
         sh:datatype xsd:string ;
         sh:message "An AI review prompt configuration must include a test generation instruction (step 4)."@en
     ] .
+
+secav:AdoptionBehaviorShape
+    a sh:NodeShape ;
+    sh:targetClass secav:AdoptionBehavior ;
+    sh:property [
+        sh:path secav:belongsToPillar ;
+        sh:minCount 1 ;
+        sh:class secav:AdoptionPillar ;
+        sh:message "An adoption behavior must belong to at least one adoption pillar."@en
+    ] .
+
+secav:CoachObservationShape
+    a sh:NodeShape ;
+    sh:targetClass secav:CoachObservation ;
+    sh:property [
+        sh:path secav:observedDuring ;
+        sh:minCount 1 ;
+        sh:class secav:EngineeringActivity ;
+        sh:message "A coach observation must be linked to the engineering activity during which it was recorded."@en
+    ] ;
+    sh:property [
+        sh:path secav:observationStatement ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "A coach observation must include a verbatim statement of what was observed."@en
+    ] .

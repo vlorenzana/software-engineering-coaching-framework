@@ -538,3 +538,197 @@ secav:precedes a owl:ObjectProperty ;
     rdfs:range secav:EngineeringActivity ;
     rdfs:label "precedes"@en ;
     rdfs:comment "Expresses that one engineering activity must complete before the next begins, preserving pipeline stage order."@en .
+
+# ---------------------------------------------------------------------------
+# Organizational Change Adoption
+# Derived from: coaching-governance/guides/ (Conductas Observables - Cambio Organizacional)
+# Models the five adoption pillars, the seven observable adoption behaviors,
+# adoption measurement methods, and the ChangeAgent stakeholder role.
+# ---------------------------------------------------------------------------
+
+# § Adoption Pillars — named dimensions of organizational adoption measurement.
+
+secav:AdoptionPillar a owl:Class ;
+    rdfs:label "Adoption Pillar"@en ;
+    rdfs:comment "A named dimension used to categorize and measure observable adoption behaviors in an organizational change programme."@en .
+
+secav:LeadershipModelingPillar a owl:Class ;
+    rdfs:subClassOf secav:AdoptionPillar ;
+    rdfs:label "Leadership Modeling Pillar"@en ;
+    rdfs:comment "Leaders and PMs visibly use and publicly endorse the new way of working, legitimising the change and eliminating dual-process ambiguity."@en .
+
+secav:EfficientCollaborationPillar a owl:Class ;
+    rdfs:subClassOf secav:AdoptionPillar ;
+    rdfs:label "Efficient Collaboration Pillar"@en ;
+    rdfs:comment "Teams keep project documentation centralised and replace long status meetings with short, blocker-focused synchronisations."@en .
+
+secav:OpenCommunicationPillar a owl:Class ;
+    rdfs:subClassOf secav:AdoptionPillar ;
+    rdfs:label "Open Communication Pillar"@en ;
+    rdfs:comment "Team members surface doubts, errors, and bottlenecks early and transparently, enabling fast resolution without blame."@en .
+
+secav:ContinuousAdaptabilityPillar a owl:Class ;
+    rdfs:subClassOf secav:AdoptionPillar ;
+    rdfs:label "Continuous Adaptability Pillar"@en ;
+    rdfs:comment "All members autonomously apply guides and training materials before escalating basic queries, demonstrating self-directed learning."@en .
+
+secav:FeedbackAndInnovationPillar a owl:Class ;
+    rdfs:subClassOf secav:AdoptionPillar ;
+    rdfs:label "Feedback and Innovation Pillar"@en ;
+    rdfs:comment "All members contribute constructive suggestions in retrospective sessions, enabling real-time process adjustment based on direct experience."@en .
+
+# § Observable Adoption Behaviors — concrete, measurable behaviors that
+# evidence effective incorporation of a new way of working.
+# Modeled as subclass of Evidence: each behavior is observable and provides
+# evidence of ChangeAdaptabilityCompetency.
+
+secav:AdoptionBehavior a owl:Class ;
+    rdfs:subClassOf secav:Evidence ;
+    rdfs:label "Adoption Behavior"@en ;
+    rdfs:comment "A concrete, measurable behavior that evidences effective incorporation of a new way of working into the organizational culture."@en .
+
+secav:LeaderDigitalToolAdoption a owl:Class ;
+    rdfs:subClassOf secav:AdoptionBehavior ;
+    rdfs:label "Leader Digital Tool Adoption"@en ;
+    rdfs:comment "Leaders and PMs use new digital tools as the primary communication channel, replacing traditional email and eliminating dual-process ambiguity."@en .
+
+secav:PublicRecognitionOfNewBehaviors a owl:Class ;
+    rdfs:subClassOf secav:AdoptionBehavior ;
+    rdfs:label "Public Recognition of New Behaviors"@en ;
+    rdfs:comment "Leaders publicly recognise collaborators who apply new behaviors and methodologies, reinforcing desired culture and accelerating peer adoption."@en .
+
+secav:CentralizedDocumentationPractice a owl:Class ;
+    rdfs:subClassOf secav:AdoptionBehavior ;
+    rdfs:label "Centralized Documentation Practice"@en ;
+    rdfs:comment "Teams maintain project documentation centralised and up-to-date in shared platforms, enabling visibility, async work, and avoiding duplication."@en .
+
+secav:FocusedSynchronizationPractice a owl:Class ;
+    rdfs:subClassOf secav:AdoptionBehavior ;
+    rdfs:label "Focused Synchronization Practice"@en ;
+    rdfs:comment "Teams replace long follow-up meetings with brief synchronisations focused on blockers, optimising effective work time."@en .
+
+secav:EarlyTransparentCommunication a owl:Class ;
+    rdfs:subClassOf secav:AdoptionBehavior ;
+    rdfs:label "Early Transparent Communication"@en ;
+    rdfs:comment "Team members express doubts, errors, and bottlenecks early and transparently, enabling fast problem resolution without blame assignment."@en .
+
+secav:AutonomousGuideApplication a owl:Class ;
+    rdfs:subClassOf secav:AdoptionBehavior ;
+    rdfs:label "Autonomous Guide Application"@en ;
+    rdfs:comment "Members autonomously apply guides and training materials before escalating basic queries, demonstrating proactivity and reducing support overload."@en .
+
+secav:ConstructiveRetrospectiveFeedback a owl:Class ;
+    rdfs:subClassOf secav:AdoptionBehavior ;
+    rdfs:label "Constructive Retrospective Feedback"@en ;
+    rdfs:comment "Members contribute constructive suggestions about the new model in retrospective sessions, enabling real-time process adjustment."@en .
+
+# § Adoption Measurement — methods for observing and tracking adoption behaviors.
+
+secav:AdoptionMeasurement a owl:Class ;
+    rdfs:subClassOf secav:Measurement ;
+    rdfs:label "Adoption Measurement"@en ;
+    rdfs:comment "A measurement of the degree to which adoption behaviors are present in a team or organization."@en .
+
+secav:PulseSurveyMeasurement a owl:Class ;
+    rdfs:subClassOf secav:AdoptionMeasurement ;
+    rdfs:label "Pulse Survey Measurement"@en ;
+    rdfs:comment "Brief biweekly or monthly pulse surveys (e.g., eNPS) used to measure adoption progress and cultural alignment."@en .
+
+secav:DirectRitualObservation a owl:Class ;
+    rdfs:subClassOf secav:AdoptionMeasurement ;
+    rdfs:label "Direct Ritual Observation"@en ;
+    rdfs:comment "Direct observation of team rituals (stand-ups, retrospectives, planning sessions) to detect the presence or absence of adoption behaviors."@en .
+
+# § Change Adaptability Competency — the competency evidenced by adoption behaviors.
+
+secav:ChangeAdaptabilityCompetency a owl:Class ;
+    rdfs:subClassOf secav:Competency ;
+    rdfs:label "Change Adaptability Competency"@en ;
+    rdfs:comment "The competency to internalize, apply, and advocate for new ways of working within an organizational change programme."@en .
+
+# § Change Agent — stakeholder who facilitates adoption.
+
+secav:ChangeAgent a owl:Class ;
+    rdfs:subClassOf secav:Stakeholder ;
+    rdfs:label "Change Agent"@en ;
+    rdfs:comment "A stakeholder — facilitator, leader, or PM — who actively models, advocates, and removes barriers for the adoption of a new way of working."@en .
+
+# § New Object Properties
+
+secav:belongsToPillar a owl:ObjectProperty ;
+    rdfs:domain secav:AdoptionBehavior ;
+    rdfs:range secav:AdoptionPillar ;
+    rdfs:label "belongs to pillar"@en ;
+    rdfs:comment "Links an adoption behavior to the adoption pillar it belongs to."@en .
+
+secav:measuresAdoption a owl:ObjectProperty ;
+    rdfs:domain secav:AdoptionMeasurement ;
+    rdfs:range secav:AdoptionBehavior ;
+    rdfs:label "measures adoption"@en ;
+    rdfs:comment "Links an adoption measurement to the specific behavior it quantifies."@en .
+
+secav:facilitatedBy a owl:ObjectProperty ;
+    rdfs:domain secav:AdoptionBehavior ;
+    rdfs:range secav:ChangeAgent ;
+    rdfs:label "facilitated by"@en ;
+    rdfs:comment "Links an adoption behavior to the change agent responsible for enabling its adoption."@en .
+
+# § New Datatype Property
+
+secav:adoptionTarget a owl:DatatypeProperty ;
+    rdfs:domain secav:AdoptionBehavior ;
+    rdfs:range xsd:string ;
+    rdfs:label "adoption target"@en ;
+    rdfs:comment "The organizational role expected to exhibit this behavior: 'leaders', 'teams', or 'all'."@en .
+
+# ---------------------------------------------------------------------------
+# Coach Observation Model
+# Derived from: coaching-governance/guides/coach-observation-checklist.md
+# Models the two types of field observations a coach records — positive
+# behaviors and alert signals — across all eight engineering activity groups.
+# ---------------------------------------------------------------------------
+
+# § Coach Observation — an observable fact recorded during a coaching session.
+# Subclass of Evidence: each observation provides direct empirical input
+# for competency assessment or coaching intervention planning.
+
+secav:CoachObservation a owl:Class ;
+    rdfs:subClassOf secav:Evidence ;
+    rdfs:label "Coach Observation"@en ;
+    rdfs:comment "A concrete, directly observable fact recorded by a coach during a team session — something seen, heard, or read, not an inference."@en .
+
+secav:PositiveBehaviorObservation a owl:Class ;
+    rdfs:subClassOf secav:CoachObservation ;
+    rdfs:label "Positive Behavior Observation"@en ;
+    rdfs:comment "A coach observation of a desired engineering behavior that provides evidence of competency. Contributes to CompetencyAssessment."@en .
+
+secav:AlertBehaviorObservation a owl:Class ;
+    rdfs:subClassOf secav:CoachObservation ;
+    rdfs:label "Alert Behavior Observation"@en ;
+    rdfs:comment "A coach observation of a problematic or absent behavior that signals risk and triggers a coaching intervention."@en .
+
+# § Observation Properties
+
+secav:observedDuring a owl:ObjectProperty ;
+    rdfs:domain secav:CoachObservation ;
+    rdfs:range secav:EngineeringActivity ;
+    rdfs:label "observed during"@en ;
+    rdfs:comment "Links a coach observation to the engineering activity group in which it was recorded."@en .
+
+secav:observationStatement a owl:DatatypeProperty ;
+    rdfs:domain secav:CoachObservation ;
+    rdfs:range xsd:string ;
+    rdfs:label "observation statement"@en ;
+    rdfs:comment "Verbatim description of the observable behavior — phrased in terms of what can be seen, heard, or read directly."@en .
+
+secav:evidencesCompetency a owl:ObjectProperty ;
+    rdfs:domain secav:PositiveBehaviorObservation ;
+    rdfs:range secav:Competency ;
+    rdfs:label "evidences competency"@en ;
+    rdfs:comment "Links a positive observation to the competency it provides evidence for."@en .
+
+secav:triggersIntervention a owl:ObjectProperty ;
+    rdfs:domain secav:AlertBehaviorObservation ;
+    rdfs:range secav:CoachingIntervention ;
+    rdfs:label "triggers intervention"@en ;
+    rdfs:comment "Links an alert observation to the coaching intervention it warrants."@en .
