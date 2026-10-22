@@ -170,7 +170,7 @@ El coach revisa esta lista con el equipo al inicio de cada sprint o en la retros
 | Hook pre-commit activo | Precondición de `secav:CodeImplementation`; violación es `secav:DefectRecord` |
 | Cobertura de pruebas > 80 % | `secav:AcceptanceCriterion` de `secav:TestingActivity` |
 | Ausencia de acción preventiva como señal de coaching | `secav:ReviewFinding` o `secav:WorkProductEvidence` que activa `secav:CoachingIntervention` |
-| Acción preventiva acordada tras intervención | `secav:PreventiveAction` en `secav:SprintRetrospective` |
+| Acción preventiva acordada tras intervención | `secav:PreventiveAction` en `secavo:SprintRetrospective` |
 | Estado cognitivo del ingeniero como precondición | Análogo a `secav:ReviewerReadiness` en `secav:CodeImplementation` |
 
 ---

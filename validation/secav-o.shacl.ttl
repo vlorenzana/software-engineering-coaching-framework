@@ -116,3 +116,31 @@ secav:SelfReviewShape
         sh:class secav:Artifact ;
         sh:message "A self-review must identify the artifact the engineer evaluated before submitting the formal review request."@en
     ] .
+
+secav:AIReviewPromptConfigurationShape
+    a sh:NodeShape ;
+    sh:targetClass secav:AIReviewPromptConfiguration ;
+    sh:property [
+        sh:path secav:hasContextDefinition ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "An AI review prompt configuration must include a context definition (step 1)."@en
+    ] ;
+    sh:property [
+        sh:path secav:hasImpactAnalysisInstruction ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "An AI review prompt configuration must include an impact analysis instruction (step 2)."@en
+    ] ;
+    sh:property [
+        sh:path secav:hasSecurityEvaluationInstruction ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "An AI review prompt configuration must include a security evaluation instruction (step 3)."@en
+    ] ;
+    sh:property [
+        sh:path secav:hasTestGenerationInstruction ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "An AI review prompt configuration must include a test generation instruction (step 4)."@en
+    ] .

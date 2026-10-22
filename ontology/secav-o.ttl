@@ -367,3 +367,104 @@ secav:coverageThreshold a owl:DatatypeProperty ;
     rdfs:range xsd:decimal ;
     rdfs:label "coverage threshold"@en ;
     rdfs:comment "The minimum code coverage percentage (0.0–1.0) required before a push is permitted."@en .
+
+# ---------------------------------------------------------------------------
+# AI-Assisted Code Review Extension
+# Derived from: coaching-governance/guides/ai-assisted-code-review.md §6
+# These classes and properties model the layered pipeline, review dimensions,
+# prompt configuration, risk triage, and pipeline ordering used in
+# AI-assisted code review workflows.
+# ---------------------------------------------------------------------------
+
+# § Review Dimensions — named focus areas that partition responsibility
+# between AI and human reviewers within a single HumanValidationActivity.
+
+secav:ReviewDimension a owl:Class ;
+    rdfs:label "Review Dimension"@en ;
+    rdfs:comment "A named classification of review focus area (e.g., SyntaxStyle, BusinessLogic, Security) that determines which agent — AI or human — holds primary responsibility."@en .
+
+secav:aiPrimaryForDimension a owl:ObjectProperty ;
+    rdfs:domain secav:AISystem ;
+    rdfs:range secav:ReviewDimension ;
+    rdfs:label "AI primary for dimension"@en ;
+    rdfs:comment "The AI system holds primary review responsibility for this dimension."@en .
+
+secav:humanPrimaryForDimension a owl:ObjectProperty ;
+    rdfs:domain secav:HumanValidationActivity ;
+    rdfs:range secav:ReviewDimension ;
+    rdfs:label "human primary for dimension"@en ;
+    rdfs:comment "The human reviewer holds primary review responsibility for this dimension."@en .
+
+# § Prompt Configuration — quality requirement for structuring AI review passes.
+
+secav:QualityActivityRequirement a owl:Class ;
+    rdfs:subClassOf secav:QualityCriterion ;
+    rdfs:label "Quality Activity Requirement"@en ;
+    rdfs:comment "A structured precondition that must be satisfied for an engineering activity to produce reliable output."@en .
+
+secav:AIReviewPromptConfiguration a owl:Class ;
+    rdfs:subClassOf secav:QualityActivityRequirement ;
+    rdfs:label "AI Review Prompt Configuration"@en ;
+    rdfs:comment "The 4-step prompt configuration sequence (context → impact → security → test generation) required before an AI review pass."@en .
+
+secav:hasContextDefinition a owl:DatatypeProperty ;
+    rdfs:domain secav:AIReviewPromptConfiguration ;
+    rdfs:range xsd:string ;
+    rdfs:label "has context definition"@en ;
+    rdfs:comment "Step 1: the prompt instruction that provides codebase and business context to the AI reviewer."@en .
+
+secav:hasImpactAnalysisInstruction a owl:DatatypeProperty ;
+    rdfs:domain secav:AIReviewPromptConfiguration ;
+    rdfs:range xsd:string ;
+    rdfs:label "has impact analysis instruction"@en ;
+    rdfs:comment "Step 2: the prompt instruction directing the AI to analyze the impact of the change on existing functionality."@en .
+
+secav:hasSecurityEvaluationInstruction a owl:DatatypeProperty ;
+    rdfs:domain secav:AIReviewPromptConfiguration ;
+    rdfs:range xsd:string ;
+    rdfs:label "has security evaluation instruction"@en ;
+    rdfs:comment "Step 3: the prompt instruction directing the AI to evaluate the change for security vulnerabilities."@en .
+
+secav:hasTestGenerationInstruction a owl:DatatypeProperty ;
+    rdfs:domain secav:AIReviewPromptConfiguration ;
+    rdfs:range xsd:string ;
+    rdfs:label "has test generation instruction"@en ;
+    rdfs:comment "Step 4: the prompt instruction directing the AI to propose or verify test cases for the change."@en .
+
+# § Review Observation — evidence that a configuration or process step was applied.
+
+secav:ReviewObservation a owl:Class ;
+    rdfs:subClassOf secav:Evidence ;
+    rdfs:label "Review Observation"@en ;
+    rdfs:comment "Evidence that a specific review configuration or process step (e.g., AIReviewPromptConfiguration) was applied and linked to a ReviewRecord."@en .
+
+# § Risk-Based Triage — classification and escape tracking.
+
+secav:ReviewRiskLevel a owl:DatatypeProperty ;
+    rdfs:domain secav:EngineeringActivity ;
+    rdfs:range xsd:string ;
+    rdfs:label "review risk level"@en ;
+    rdfs:comment "Risk classification assigned to a PR before routing: 'Routine', 'Attention', or 'SecurityCritical'. SecurityCritical triggers requiresHumanValidation."@en .
+
+secav:ReviewEscapeObservation a owl:Class ;
+    rdfs:subClassOf secav:DefectRecord ;
+    rdfs:label "Review Escape Observation"@en ;
+    rdfs:comment "A defect record documenting a false negative: a high-risk PR that passed a lower review tier than its risk level required."@en .
+
+# § Pipeline Stages — deterministic and CI activities, and ordering.
+
+secav:DeterministicAnalysisActivity a owl:Class ;
+    rdfs:subClassOf secav:EngineeringActivity ;
+    rdfs:label "Deterministic Analysis Activity"@en ;
+    rdfs:comment "A pipeline stage that applies deterministic tools (linters, static scanners, formatters) before AI or human review passes."@en .
+
+secav:ContinuousIntegrationActivity a owl:Class ;
+    rdfs:subClassOf secav:EngineeringActivity ;
+    rdfs:label "Continuous Integration Activity"@en ;
+    rdfs:comment "A pipeline stage that runs automated tests and integration checks as the final gate before merge."@en .
+
+secav:precedes a owl:ObjectProperty ;
+    rdfs:domain secav:EngineeringActivity ;
+    rdfs:range secav:EngineeringActivity ;
+    rdfs:label "precedes"@en ;
+    rdfs:comment "Expresses that one engineering activity must complete before the next begins, preserving pipeline stage order."@en .
