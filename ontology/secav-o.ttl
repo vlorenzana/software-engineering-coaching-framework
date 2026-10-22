@@ -1177,10 +1177,15 @@ secav:BrittleTest a owl:Class ;
 # Derived from: Guia de Buenas y Malas Practicas - Caminatas de Revision de Software
 # ---------------------------------------------------------------------------
 
-secav:CodeWalkthrough a owl:Class ;
+secav:Walkthrough a owl:Class ;
     rdfs:subClassOf secav:ReviewActivity ;
+    rdfs:label "Walkthrough"@en ;
+    rdfs:comment "Generic walkthrough activity: the author/presenter guides reviewers through a work product in a structured session with assigned roles. Specializations: CodeWalkthrough (source code artifacts) and DesignWalkthrough (design artifacts). Every walkthrough follows the three-phase lifecycle: preparation → WalkthroughExecution (live session) → WalkthroughReview (finding verification and coach sign-off)."@en .
+
+secav:CodeWalkthrough a owl:Class ;
+    rdfs:subClassOf secav:Walkthrough, secav:CodingActivity ;
     rdfs:label "Code Walkthrough"@en ;
-    rdfs:comment "Formal peer review in which the code author guides the team through architecture, logic, or design. Goal: conceptual validation, knowledge transfer, and early defect detection. Recommended scope: 200–400 lines, 45–60 min max."@en .
+    rdfs:comment "The walkthrough method applied to source code artifacts. The code author guides reviewers through architecture, logic, or design; goal: conceptual validation, knowledge transfer, and early defect detection. Recommended scope: 200–400 lines, 45–60 min max. Follows the three-phase walkthrough lifecycle: preparation → WalkthroughExecution → WalkthroughReview."@en .
 
 secav:WalkthroughAntipattern a owl:Class ;
     rdfs:subClassOf secav:ReviewAntipattern ;
@@ -1608,9 +1613,9 @@ secav:PlanningReview a owl:Class ;
 # ---------------------------------------------------------------------------
 
 secav:DesignWalkthrough a owl:Class ;
-    rdfs:subClassOf secav:ReviewActivity, secav:DesignActivity ;
+    rdfs:subClassOf secav:Walkthrough, secav:DesignActivity ;
     rdfs:label "Design Walkthrough"@en ;
-    rdfs:comment "The walkthrough method applied to design artifacts (wireframes, prototypes, UML diagrams, architecture documents). The design author/presenter guides reviewers through the artifact; reviewers record findings without debating solutions in the session. Distinct from CodeWalkthrough (source code) and from the more formal DesignReview (structured multidisciplinary session)."@en .
+    rdfs:comment "The walkthrough method applied to design artifacts (wireframes, prototypes, UML diagrams, architecture documents). The design author/presenter guides reviewers through the artifact; reviewers record findings without debating solutions in the session. Distinct from CodeWalkthrough (source code) and from the more formal DesignReview (structured multidisciplinary session). Follows the three-phase walkthrough lifecycle: preparation → WalkthroughExecution → WalkthroughReview."@en .
 
 secav:WalkthroughExecution a owl:Class ;
     rdfs:subClassOf secav:ReviewActivity ;

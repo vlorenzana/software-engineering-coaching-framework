@@ -333,6 +333,15 @@ This checklist allows the coach to record, during any observation session, the p
 | Group 11 | At the start of each sprint and at each weekly status meeting — risk register review |
 | Group 12 | Before, during, and after each scheduled code walkthrough session |
 | Group 13 | Before, during, and at the close of each design review (prototype, wireframe, or specification) |
+| Group 14 | Before, during, and after each integration test design review session |
+| Group 15 | Before, during, and after each system test design review session |
+| Group 16 | Before, during, and after each acceptance test design review session |
+| Group 17 | After each test execution phase (unit, integration, system, acceptance) — results review |
+| Group 18 | Before and during high-level design sessions; at the architecture review session |
+| Group 19 | Any time a review method is being selected or a formal inspection is planned or executed |
+| Group 20 | Before and during release preparation; at the release review gate |
+| Group 21 | At sprint planning — before the plan is endorsed; at planning review session |
+| Group 22 | Before, during, and after any design walkthrough or code walkthrough session (full lifecycle: preparation → execution → follow-up review) |
 
 ✓ signals are recorded as `secav:WorkProductEvidence` or `secav:ReviewFinding` and feed the `secav:CompetencyAssessment` of the cycle.
 
@@ -346,7 +355,9 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 
 > **Source:** Guide to Good and Bad Practices — Software Review Walkthroughs  
 > **When to observe:** Before, during, and at the close of each scheduled walkthrough session.  
-> **Primary SECAV-O term:** `secav:CodeWalkthrough` (subclass of `secav:ReviewActivity`)
+> **Primary SECAV-O term:** `secav:CodeWalkthrough` (subclass of `secav:Walkthrough` and `secav:CodingActivity`)
+>
+> **Lifecycle:** `CodeWalkthrough` follows the three-phase walkthrough lifecycle defined in Group 22: **preparation** (this sub-section) → **`secav:WalkthroughExecution`** (live session, §12.2) → **`secav:WalkthroughReview`** (finding verification and coach sign-off, §12.3). `DesignWalkthrough` (Group 22.1) follows the same lifecycle applied to design artifacts.
 
 ### 12.1 Preparation
 
