@@ -1524,3 +1524,58 @@ secav:AcceptanceTestResultsReview a owl:Class ;
     rdfs:subClassOf secav:ReviewActivity ;
     rdfs:label "Acceptance Test Results Review"@en ;
     rdfs:comment "Review of acceptance test execution results with stakeholder participation to make a go/no-go decision for release. The final quality gate before production deployment. Requires coach sign-off and recorded findings."@en .
+
+# ---------------------------------------------------------------------------
+# Additional Lifecycle Phases
+# ---------------------------------------------------------------------------
+
+# --- High Level Design (precedes detailed Design in the lifecycle) ---
+
+secav:HighLevelDesign a owl:Class ;
+    rdfs:subClassOf secav:DesignActivity ;
+    rdfs:label "High Level Design"@en ;
+    rdfs:comment "The activity of defining the overall architecture of the system: major components, their responsibilities, communication patterns, data models, and key technology decisions. Produces a high-level design artifact that constrains all subsequent detailed design and implementation decisions. Occurs after Requirements Review and before detailed Design."@en .
+
+secav:HighLevelDesignImplementation a owl:Class ;
+    rdfs:subClassOf secav:ImplementationActivity, secav:HighLevelDesign ;
+    rdfs:label "High Level Design Implementation"@en ;
+    rdfs:comment "The act of producing the high-level design artifact — architecture documents, component diagrams, ADRs (Architecture Decision Records), or equivalent."@en .
+
+secav:HighLevelDesignArtifact a owl:Class ;
+    rdfs:subClassOf secav:Artifact ;
+    rdfs:label "High Level Design Artifact"@en ;
+    rdfs:comment "A document or diagram representing the system architecture: component breakdown, interface contracts, data flows, technology stack decisions, and architectural constraints. The reviewable work product for the High Level Design Review."@en .
+
+secav:HighLevelDesignReview a owl:Class ;
+    rdfs:subClassOf secav:ReviewActivity, secav:HighLevelDesign ;
+    rdfs:label "High Level Design Review"@en ;
+    rdfs:comment "Peer review, walkthrough, or formal inspection of the high-level design artifact to verify architectural soundness, alignment with requirements, scalability, security considerations, and feasibility before detailed design begins. Defects found here are the least expensive to correct in the lifecycle."@en .
+
+# --- Review Methods (cross-cutting — applicable to artifacts from any lifecycle phase) ---
+
+secav:PeerReview a owl:Class ;
+    rdfs:subClassOf secav:ReviewActivity ;
+    rdfs:label "Peer Review"@en ;
+    rdfs:comment "A synchronous or asynchronous review method in which one or two peers examine a work product and record findings. Less formal than a walkthrough or inspection but still requires documented findings and coach sign-off. Specializations include CodeReview (source code), UnitTestDesignReview (test code), DesignReview (design artifacts), RequirementsReview (requirements), and HighLevelDesignReview (architecture). Suitable for lower-criticality artifacts or when time constraints prevent a full walkthrough."@en .
+
+secav:FormalInspection a owl:Class ;
+    rdfs:subClassOf secav:ReviewActivity ;
+    rdfs:label "Formal Inspection"@en ;
+    rdfs:comment "A rigorous, role-based review method (Fagan-style or equivalent) with defined entry and exit criteria, assigned roles (Moderator, Reader, Inspectors, Scribe), a structured inspection meeting, and a mandatory follow-up phase verifying that all recorded defects are corrected. The most thorough review method — preferred for critical artifacts such as requirements documents, high-level architecture, and critical unit tests. Produces causal analysis data used for process improvement."@en .
+
+# --- Release ---
+
+secav:Release a owl:Class ;
+    rdfs:subClassOf secav:EngineeringActivity ;
+    rdfs:label "Release"@en ;
+    rdfs:comment "The activity of packaging, versioning, and deploying the system to the target environment (staging, production, or customer delivery). Produces a release artifact containing deployment manifests, release notes, and rollback procedures. Follows successful Acceptance Test Results Review."@en .
+
+secav:ReleaseArtifact a owl:Class ;
+    rdfs:subClassOf secav:Artifact ;
+    rdfs:label "Release Artifact"@en ;
+    rdfs:comment "A collection of artifacts produced by the Release activity: release notes, deployment plan, environment configuration, versioned build, rollback procedure, and go/no-go checklist. The reviewable work product for the Release Review."@en .
+
+secav:ReleaseReview a owl:Class ;
+    rdfs:subClassOf secav:ReviewActivity, secav:Release ;
+    rdfs:label "Release Review"@en ;
+    rdfs:comment "A structured review of the release readiness package (release notes, deployment plan, rollback plan, open defect list, environment health) before or immediately after production deployment. Confirms that all quality gates were completed, known risks are documented, and a rollback path exists. Requires coach sign-off and recorded findings."@en .

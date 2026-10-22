@@ -604,6 +604,94 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 
 ---
 
+## Group 18 — High Level Design & Review
+
+> **Key principle:** High-level design (architecture) defects are the most expensive defects in the lifecycle. A flawed architectural decision propagates into every downstream phase. Every system must have a reviewable high-level design artifact before detailed design begins — and that artifact must go through at least a peer review, with formal inspection recommended for critical systems.
+
+| # | Observable signal | Type | SECAV-O Term |
+|---|------------------|------|--------------|
+| 18.01 | A high-level design artifact exists before detailed design work begins — architecture decisions are not made implicitly during implementation | ✓ | `secav:HighLevelDesignArtifact` |
+| 18.02 | The artifact covers major components, their responsibilities, inter-component interfaces, data flows, and key technology decisions | ✓ | `secav:HighLevelDesign` |
+| 18.03 | Architectural decisions are captured as Architecture Decision Records (ADRs) or equivalent — decision, rationale, alternatives considered, and consequences | ✓ | `secav:HighLevelDesignArtifact` |
+| 18.04 | Non-functional requirements (scalability, security, reliability, performance) are addressed explicitly in the architecture — not deferred | ✓ | `secav:HighLevelDesign` |
+| 18.05 | The high-level design is traceable to specific requirements — each architectural choice can be connected to a requirement that motivates it | ✓ | `secav:HighLevelDesign` |
+| 18.06 | The team can explain how the architecture handles the main failure modes of the system | ✓ | `secav:HighLevelDesign` |
+| 18.07 | The high-level design artifact is submitted as a formal review request with change description and acceptance criteria before the review session | ✓ | `secav:FormalReviewRequest` |
+| 18.08 | The high-level design review covers architectural soundness, requirement traceability, scalability risk, security boundaries, and deployment feasibility | ✓ | `secav:HighLevelDesignReview` |
+| 18.09 | For critical systems, the high-level design review uses formal inspection (with assigned roles: Moderator, Reader, Inspectors, Scribe) rather than informal peer review | ✓ | `secav:FormalInspection` |
+| 18.10 | Detailed design or implementation begins before the high-level design review is complete — architectural defects will propagate | ⚠ | `secav:ReviewAntipattern` |
+| 18.11 | Architecture decisions are made verbally or in Slack without being captured in a reviewable artifact — decisions are irretrievable when challenged | ⚠ | `secav:ReviewAntipattern` |
+| 18.12 | Non-functional requirements are absent from the architecture — the system will fail under production load or security audit | ⚠ | `secav:ReviewAntipattern` |
+| 18.13 | All findings from the high-level design review (defects, risks, ADR gaps, explicit "no defects found") are recorded before closing the session | ✓ | `secav:producesReviewFinding` · `secav:proposedSolution` (optional) |
+| 18.14 | The coach issues a process sign-off confirming the high-level design review was conducted acceptably | ✓ | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
+| 18.15 | The high-level design review closes without written findings or the coach sign-off is not issued | ⚠ | absence of `secav:producesReviewFinding` or `secav:CoachReviewSignOff` |
+
+### Escalation notes — Group 18
+
+- ⚠ signal 18.10: implementation proceeding without high-level design review is a `secavo:QualityPlanningConcern` — escalate immediately.
+- ⚠ signal 18.11: verbal-only decisions indicate an architecture governance gap; record a `secavo:ImprovementAction` to introduce ADR practice.
+- ⚠ signal 18.12: treat as a risk (`secav:ProjectRisk`) requiring a mitigation plan and response before system test.
+
+---
+
+## Group 19 — Review Method Selection: Peer Review vs. Walkthrough vs. Formal Inspection
+
+> **Key principle:** Not all artifacts carry the same risk. The review method must match the criticality of the artifact. Requirements, high-level architecture, and critical test designs warrant formal inspection. Less critical artifacts can be reviewed by peer review or walkthrough. Choosing an insufficient method for a high-risk artifact is an antipattern.
+
+| # | Observable signal | Type | SECAV-O Term |
+|---|------------------|------|--------------|
+| 19.01 | The team can articulate why they chose a given review method (peer review, walkthrough, or formal inspection) for the artifact — not just because it is habit | ✓ | `secav:PeerReview` · `secav:CodeWalkthrough` · `secav:FormalInspection` |
+| 19.02 | Critical artifacts (requirements, high-level architecture, critical unit tests) are reviewed by formal inspection or walkthrough — not by informal async peer review alone | ✓ | `secav:FormalInspection` |
+| 19.03 | Formal inspections have a designated Moderator who enforces entry criteria, controls the session, and manages follow-up verification | ✓ | `secav:FormalInspection` |
+| 19.04 | Formal inspections include a Reader role who presents the artifact, allowing inspectors to focus on detecting defects rather than navigating the document | ✓ | `secav:FormalInspection` |
+| 19.05 | A Scribe captures every defect finding during the inspection meeting — findings are not reconstructed from memory after the session | ✓ | `secav:FormalInspection` · `secav:producesReviewFinding` |
+| 19.06 | Peer reviews specify a focus area (logic, security, interface, performance) rather than reviewing everything at once with no declared goal | ✓ | `secav:PeerReview` |
+| 19.07 | The inspection follow-up phase verifies that all recorded defects have been corrected — verification is not skipped because "the fix was obvious" | ✓ | `secav:FormalInspection` |
+| 19.08 | Formal inspection causal analysis data (defect type, phase injected) is recorded and used in retrospectives for process improvement | ✓ | `secav:FormalInspection` · `secavo:phaseInjected` |
+| 19.09 | A peer review is used for a critical requirements or architecture artifact — the method is insufficient for the artifact's defect impact | ⚠ | `secav:ReviewAntipattern` |
+| 19.10 | Formal inspection roles are assigned but participants do not prepare before the session — entry criteria failure, the inspection should not proceed | ⚠ | `secav:ReviewAntipattern` |
+| 19.11 | Inspection findings are lost because no Scribe was designated or the record was not preserved after the session | ⚠ | `secav:WalkthroughWithoutRecord` |
+| 19.12 | All findings from any review session (peer review, walkthrough, or formal inspection) are recorded with severity and proposed resolution before the session closes | ✓ | `secav:producesReviewFinding` · `secav:walkthroughSeverity` · `secav:proposedSolution` (optional) |
+| 19.13 | The coach issues a process sign-off confirming the session was conducted acceptably under the declared review method | ✓ | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
+
+### Escalation notes — Group 19
+
+- ⚠ signal 19.09: the coach must document a `secavo:QualityPlanningConcern` if a critical artifact was reviewed only by informal peer review. The review may need to be repeated with a stronger method.
+- ⚠ signal 19.10: the inspection must not proceed without preparation. Escalate as a rescheduling request.
+- ⚠ signal 19.11: session is invalid without a findings record; the coach cannot issue sign-off and must document accordingly.
+
+---
+
+## Group 20 — Release & Release Review
+
+> **Key principle:** Release is not the end of quality governance — it is the point where all prior quality gates either prove their value or reveal their gaps. A release review is a mandatory quality checkpoint that confirms all gates were completed, known risks are documented, and a rollback path exists. No release should proceed without a documented release readiness record.
+
+| # | Observable signal | Type | SECAV-O Term |
+|---|------------------|------|--------------|
+| 20.01 | A release artifact package exists before the release: release notes, deployment plan, environment configuration, versioned build, and rollback procedure | ✓ | `secav:ReleaseArtifact` · `secav:Release` |
+| 20.02 | Release notes document all changes in this release and link to the requirements or user stories that motivated them | ✓ | `secav:ReleaseArtifact` |
+| 20.03 | A rollback procedure exists and has been tested or validated — not a theoretical plan that has never been exercised | ✓ | `secav:ReleaseArtifact` |
+| 20.04 | The deployment plan identifies environment-specific risks and has been reviewed by someone with production environment knowledge | ✓ | `secav:ReleaseArtifact` |
+| 20.05 | The release review verifies that all mandatory quality gates were completed: RequirementsReview, HighLevelDesignReview, DesignReview, code review, and all test phase reviews | ✓ | `secav:ReleaseReview` |
+| 20.06 | Open defects are classified by severity with an explicit accept/defer/resolve decision for each before the release proceeds | ✓ | `secav:ReleaseReview` |
+| 20.07 | The AcceptanceTestResultsReview has been completed and stakeholder go/no-go is documented before the release review | ✓ | `secav:AcceptanceTestResultsReview` · `secav:ReleaseReview` |
+| 20.08 | A release proceeds to production without a completed release review — all prior quality gates are undermined by the last-mile bypass | ⚠ | absence of `secav:ReleaseReview` |
+| 20.09 | The rollback procedure has never been tested — the release assumes success and has no recovery path | ⚠ | `secav:ProjectRisk` |
+| 20.10 | Open defects are accepted for production without a written rationale and business owner sign-off | ⚠ | `secav:ReviewAntipattern` |
+| 20.11 | Release notes are incomplete or absent — users and operators cannot determine what changed or what risks exist | ⚠ | `secav:ReviewAntipattern` |
+| 20.12 | One or more mandatory quality gates (requirements review, design review, test design review, results review) were skipped and this was not documented as an explicit exception | ⚠ | `secav:MissingRequirementsReview` · `secav:ReviewAntipattern` |
+| 20.13 | All findings from the release review (quality gate gaps, open defects, risks, or explicit "all gates confirmed, release approved") are recorded before the release proceeds | ✓ | `secav:producesReviewFinding` · `secav:proposedSolution` (optional) |
+| 20.14 | The coach issues a process sign-off confirming the release review was conducted acceptably and all quality gates were verified | ✓ | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
+| 20.15 | The release review closes without written findings or coach sign-off — the release readiness cannot be traced | ⚠ | absence of `secav:producesReviewFinding` or `secav:CoachReviewSignOff` |
+
+### Escalation notes — Group 20
+
+- ⚠ signal 20.08: production deployment without a release review is the highest-severity bypass in the lifecycle. Escalate immediately and document as a `secavo:QualityPlanningConcern`.
+- ⚠ signal 20.09: an untested rollback plan is a `secav:ProjectRisk` — require a rollback rehearsal before the next production release.
+- ⚠ signal 20.12: document each skipped quality gate as a gap finding in the release review record. If the pattern repeats, escalate via the formal dissent and escalation protocol.
+
+---
+
 ## Related documents
 
 | Document | Relationship |
@@ -617,4 +705,4 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 | `templates/engineer-coaching-assessment.md` | ✓ evidence feeds the competency assessment |
 | `coaching-governance/guides/software-walkthroughs.md` | Complete protocol for group 12 (code walkthroughs) |
 | `coaching-governance/guides/design-review.md` | Complete protocol for group 13 (design reviews) |
-| `ontology/secav-o.ttl` | Full 22-phase lifecycle model — phases 7–12 and 15–22 defined in the Development Lifecycle section |
+| `ontology/secav-o.ttl` | Full lifecycle model including High Level Design, review methods (PeerReview, FormalInspection), and Release phases |

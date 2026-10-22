@@ -437,3 +437,45 @@ secav:AcceptanceTestResultsReviewShape
         sh:class secav:TestExecutionResultArtifact ;
         sh:message "An acceptance test results review must identify the test execution result artifact being reviewed. This is the final quality gate before production deployment."@en
     ] .
+
+secav:HighLevelDesignReviewShape
+    a sh:NodeShape ;
+    sh:targetClass secav:HighLevelDesignReview ;
+    sh:property [
+        sh:path secav:evaluates ;
+        sh:minCount 1 ;
+        sh:class secav:HighLevelDesignArtifact ;
+        sh:message "A high-level design review must identify the architecture artifact being reviewed — component diagram, ADR collection, or equivalent."@en
+    ] .
+
+secav:FormalInspectionShape
+    a sh:NodeShape ;
+    sh:targetClass secav:FormalInspection ;
+    sh:property [
+        sh:path secav:evaluates ;
+        sh:minCount 1 ;
+        sh:class secav:Artifact ;
+        sh:message "A formal inspection must identify the artifact under inspection."@en
+    ] ;
+    sh:property [
+        sh:path secav:producesReviewFinding ;
+        sh:minCount 1 ;
+        sh:class secav:ReviewFinding ;
+        sh:message "A formal inspection must record at least one finding — including an explicit 'no defects found' record when the artifact is clean. Causal analysis of findings is required for process improvement."@en
+    ] .
+
+secav:ReleaseReviewShape
+    a sh:NodeShape ;
+    sh:targetClass secav:ReleaseReview ;
+    sh:property [
+        sh:path secav:evaluates ;
+        sh:minCount 1 ;
+        sh:class secav:ReleaseArtifact ;
+        sh:message "A release review must identify the release artifact package (release notes, deployment plan, rollback procedure) being reviewed."@en
+    ] ;
+    sh:property [
+        sh:path secav:producesReviewFinding ;
+        sh:minCount 1 ;
+        sh:class secav:ReviewFinding ;
+        sh:message "A release review must record at least one finding — including an explicit 'release approved, all quality gates confirmed' when no blocking issues remain."@en
+    ] .
