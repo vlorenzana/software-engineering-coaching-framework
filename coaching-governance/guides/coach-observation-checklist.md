@@ -164,6 +164,55 @@ Este checklist permite al coach registrar, durante cualquier sesión de observac
 
 ---
 
+## 9. Adopción Organizacional del Nuevo Modelo de Trabajo
+
+> Actividad SECAV-O: `secav:AdoptionBehavior` y sus siete subclases, agrupadas por `secav:AdoptionPillar`
+>
+> **Contexto:** Este grupo observa si los líderes, equipos e individuos han internalizado el nuevo modelo de trabajo en sus comportamientos cotidianos. No es supervisión individual — es una señal colectiva de adopción cultural. El facilitador del cambio (`secav:ChangeAgent`) es quien activa intervenciones cuando aparecen señales de alerta sistémicas.
+>
+> **Frecuencia recomendada:** evaluación quincenal o mensual. Usar observación directa en rituales + pulso eNPS (`secav:PulseSurveyMeasurement`, `secav:DirectRitualObservation`).
+
+### Pilar 1 — Liderazgo y Modelado (Líderes / PMs)
+
+| # | Tipo | Conducta observable | Término SECAV-O |
+|---|------|---------------------|-----------------|
+| 9.1 | ✓ | Los líderes y PMs usan las nuevas herramientas digitales como canal principal de comunicación — no el correo tradicional | `secav:LeaderDigitalToolAdoption` |
+| 9.2 | ✓ | Los líderes reconocen públicamente (en reuniones o canales institucionales) a colaboradores que aplican las nuevas conductas y metodologías | `secav:PublicRecognitionOfNewBehaviors` |
+| 9.3 | ⚠ | Los líderes continúan usando el correo electrónico como canal principal, manteniendo ambigüedad de proceso dual | ausencia de `secav:LeaderDigitalToolAdoption` |
+| 9.4 | ⚠ | Los reconocimientos públicos señalan errores o incumplimientos — los comportamientos nuevos nunca se celebran | ausencia de `secav:PublicRecognitionOfNewBehaviors` |
+
+### Pilar 2 — Colaboración Eficiente (Equipos)
+
+| # | Tipo | Conducta observable | Término SECAV-O |
+|---|------|---------------------|-----------------|
+| 9.5 | ✓ | El equipo mantiene la documentación del proyecto centralizada y actualizada en plataformas compartidas (repositorio único por proyecto) | `secav:CentralizedDocumentationPractice` |
+| 9.6 | ✓ | El equipo reemplaza reuniones largas de seguimiento por sincronizaciones breves centradas en bloqueantes | `secav:FocusedSynchronizationPractice` |
+| 9.7 | ⚠ | La documentación existe en silos — archivos locales, hilos de correo, chats privados — sin acceso centralizado | ausencia de `secav:CentralizedDocumentationPractice` |
+| 9.8 | ⚠ | Las reuniones de seguimiento semanales continúan con el mismo formato largo sin transición hacia syncs cortos orientados a bloqueantes | ausencia de `secav:FocusedSynchronizationPractice` |
+
+### Pilar 3 — Comunicación Abierta (Equipos)
+
+| # | Tipo | Conducta observable | Término SECAV-O |
+|---|------|---------------------|-----------------|
+| 9.9 | ✓ | Los miembros del equipo expresan dudas, errores y bloqueantes de forma temprana y transparente — los registros de riesgos e impedimentos se actualizan pronto | `secav:EarlyTransparentCommunication` |
+| 9.10 | ⚠ | Los miembros retienen dudas o errores hasta que escalan — los problemas emergen tarde, en producción o en la retrospectiva | ausencia de `secav:EarlyTransparentCommunication` |
+
+### Pilar 4 — Adaptabilidad Continuada (Todos)
+
+| # | Tipo | Conducta observable | Término SECAV-O |
+|---|------|---------------------|-----------------|
+| 9.11 | ✓ | Los miembros aplican guías y materiales de capacitación de forma autónoma antes de escalar consultas básicas | `secav:AutonomousGuideApplication` |
+| 9.12 | ⚠ | Los miembros escalan consultas básicas sin consultar primero las guías o materiales disponibles, generando sobrecarga de soporte | ausencia de `secav:AutonomousGuideApplication` |
+
+### Pilar 5 — Feedback e Innovación (Todos)
+
+| # | Tipo | Conducta observable | Término SECAV-O |
+|---|------|---------------------|-----------------|
+| 9.13 | ✓ | Los miembros contribuyen propuestas constructivas sobre el nuevo modelo en las sesiones de retrospectiva — las propuestas se implementan | `secav:ConstructiveRetrospectiveFeedback` |
+| 9.14 | ⚠ | Las retrospectivas no producen propuestas de ajuste del equipo — el formato es declarativo o de queja sin acción | ausencia de `secav:ConstructiveRetrospectiveFeedback` |
+
+---
+
 ## Resumen de uso del checklist
 
 | Cuándo usar cada grupo | Actividad / Sprint |
@@ -174,10 +223,13 @@ Este checklist permite al coach registrar, durante cualquier sesión de observac
 | Grupos 5–6 | Durante o inmediatamente después de sesiones de revisión / inspección |
 | Grupo 7 | Revisión de PR con cambios de pruebas; revisión de cobertura sprint |
 | Grupo 8 | PRs con código asistido por IA; configuración de herramientas IA del equipo |
+| Grupo 9 | Quincenalmente o mensualmente — evaluación de adopción cultural del nuevo modelo de trabajo |
 
 Las señales ✓ se registran como `secav:WorkProductEvidence` o `secav:ReviewFinding` y alimentan la `secav:CompetencyAssessment` del ciclo.
 
 Las señales ⚠ que aparecen más de una vez en el sprint deben escalar a `secav:CoachingIntervention`. Si aparecen en múltiples miembros del equipo, documentar una `secavo:ImprovementAction` en la retrospectiva.
+
+Para el Grupo 9, las señales ⚠ sistémicas (presentes en más de la mitad del equipo en dos evaluaciones consecutivas) deben derivar en una intervención del `secav:ChangeAgent` responsable — no solo del coach técnico.
 
 ---
 
