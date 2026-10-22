@@ -66,3 +66,23 @@ secav:CoachingInterventionShape
         sh:class secav:Competency ;
         sh:message "A coaching intervention should identify the competency it targets."@en
     ] .
+
+secav:ReviewAntipatternShape
+    a sh:NodeShape ;
+    sh:targetClass secav:ReviewAntipattern ;
+    sh:property [
+        sh:path secav:triggers ;
+        sh:minCount 1 ;
+        sh:class secav:CoachingIntervention ;
+        sh:message "A review antipattern should trigger at least one coaching intervention."@en
+    ] .
+
+secav:FormalReviewRequestShape
+    a sh:NodeShape ;
+    sh:targetClass secav:FormalReviewRequest ;
+    sh:property [
+        sh:path secav:requestDescription ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "A formal review request must include a description of what changed, why, and the acceptance criteria."@en
+    ] .

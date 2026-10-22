@@ -121,3 +121,125 @@ secav:criterionStatement a owl:DatatypeProperty ;
 
 secav:assessmentRationale a owl:DatatypeProperty ;
     rdfs:domain secav:CompetencyAssessment ; rdfs:range xsd:string ; rdfs:label "assessment rationale"@en .
+
+# ---------------------------------------------------------------------------
+# Review Antipatterns
+# Derived from: coaching-governance/guides/peer-review-antipatterns.md
+# A ReviewAntipattern is observable Evidence of a process degradation in a
+# ReviewActivity. As Evidence it can trigger a CoachingIntervention.
+# ---------------------------------------------------------------------------
+
+secav:ReviewAntipattern a owl:Class ;
+    rdfs:subClassOf secav:Evidence ;
+    rdfs:label "Review Antipattern"@en ;
+    rdfs:comment "An observable degradation pattern in a review activity that reduces review quality and may trigger a coaching intervention."@en .
+
+secav:ManualStyleReview a owl:Class ;
+    rdfs:subClassOf secav:ReviewAntipattern ;
+    rdfs:label "Manual Style Review"@en ;
+    rdfs:comment "Style and formatting issues are debated manually instead of being delegated to automated linters in CI/CD."@en .
+
+secav:OversizedReviewSession a owl:Class ;
+    rdfs:subClassOf secav:ReviewAntipattern ;
+    rdfs:label "Oversized Review Session"@en ;
+    rdfs:comment "A review session exceeds 60 continuous minutes or 400 LOC, causing analytical fatigue and reduced defect detection."@en .
+
+secav:MissingReviewContext a owl:Class ;
+    rdfs:subClassOf secav:ReviewAntipattern ;
+    rdfs:label "Missing Review Context"@en ;
+    rdfs:comment "The review request lacks a clear description of what changed, why, and the acceptance criteria, forcing the reviewer to infer intent."@en .
+
+secav:PrematureReviewRequest a owl:Class ;
+    rdfs:subClassOf secav:ReviewAntipattern ;
+    rdfs:label "Premature Review Request"@en ;
+    rdfs:comment "A formal review is requested before automated tests pass or while the artifact is still in draft state, invalidating prior review effort."@en .
+
+secav:NonEmpathicReviewFeedback a owl:Class ;
+    rdfs:subClassOf secav:ReviewAntipattern ;
+    rdfs:label "Non-Empathic Review Feedback"@en ;
+    rdfs:comment "Review comments target the author rather than the artifact, generating defensiveness and eroding psychological safety."@en .
+
+secav:InsufficientAICodeScrutiny a owl:Class ;
+    rdfs:subClassOf secav:ReviewAntipattern ;
+    rdfs:label "Insufficient AI Code Scrutiny"@en ;
+    rdfs:comment "AI-assisted code is approved without exhaustive human validation of business logic, introducing unaudited hallucinations or duplications."@en .
+
+# ---------------------------------------------------------------------------
+# Reviewer Readiness
+# The bio-cognitive precondition state of the reviewer before a ReviewActivity.
+# Modeled as a QualityCriterion: a condition that must be met for the
+# ReviewActivity to produce reliable ReviewFinding evidence.
+# ---------------------------------------------------------------------------
+
+secav:ReviewerReadiness a owl:Class ;
+    rdfs:subClassOf secav:QualityCriterion ;
+    rdfs:label "Reviewer Readiness"@en ;
+    rdfs:comment "The bio-cognitive precondition state of the reviewer. When unmet, defect-detection rate and feedback quality degrade."@en .
+
+secav:ReviewerEnergyCondition a owl:Class ;
+    rdfs:subClassOf secav:ReviewerReadiness ;
+    rdfs:label "Reviewer Energy Condition"@en ;
+    rdfs:comment "Complex reviews are scheduled during peak mental clarity windows (typically morning); never under extreme end-of-day fatigue."@en .
+
+secav:ReviewerFocusCondition a owl:Class ;
+    rdfs:subClassOf secav:ReviewerReadiness ;
+    rdfs:label "Reviewer Focus Condition"@en ;
+    rdfs:comment "A 30–60 minute focus block is reserved with notifications silenced, preventing context-switching losses."@en .
+
+secav:ReviewerCriticalAnalysisCondition a owl:Class ;
+    rdfs:subClassOf secav:ReviewerReadiness ;
+    rdfs:label "Reviewer Critical Analysis Condition"@en ;
+    rdfs:comment "Reviewer ignores style details already covered by automation and focuses cognitive energy on architecture, input security, and business logic."@en .
+
+secav:ReviewerAssertiveClosureCondition a owl:Class ;
+    rdfs:subClassOf secav:ReviewerReadiness ;
+    rdfs:label "Reviewer Assertive Closure Condition"@en ;
+    rdfs:comment "Reviewer qualifies contributions explicitly: approves when code fulfills its purpose with minor issues, leaving suggestions as optional improvements."@en .
+
+# ---------------------------------------------------------------------------
+# Review Request
+# The artifact submitted to trigger a ReviewActivity (e.g., a Pull Request).
+# A FormalReviewRequest requires a description and passing automated tests.
+# A DraftReviewRequest is not yet eligible for formal review.
+# ---------------------------------------------------------------------------
+
+secav:ReviewRequest a owl:Class ;
+    rdfs:subClassOf secav:Artifact ;
+    rdfs:label "Review Request"@en ;
+    rdfs:comment "An artifact (e.g., Pull Request) submitted to initiate a ReviewActivity."@en .
+
+secav:FormalReviewRequest a owl:Class ;
+    rdfs:subClassOf secav:ReviewRequest ;
+    rdfs:label "Formal Review Request"@en ;
+    rdfs:comment "A review request where automated tests pass, the artifact is complete, and a description of what, why, and acceptance criteria is present."@en .
+
+secav:DraftReviewRequest a owl:Class ;
+    rdfs:subClassOf secav:ReviewRequest ;
+    rdfs:label "Draft Review Request"@en ;
+    rdfs:comment "A work-in-progress review request not yet eligible for formal review."@en .
+
+# ---------------------------------------------------------------------------
+# New Object Properties
+# ---------------------------------------------------------------------------
+
+secav:hasAntipattern a owl:ObjectProperty ;
+    rdfs:domain secav:ReviewActivity ;
+    rdfs:range secav:ReviewAntipattern ;
+    rdfs:label "has antipattern"@en ;
+    rdfs:comment "Links a review activity to an observed degradation pattern."@en .
+
+secav:hasReviewerReadiness a owl:ObjectProperty ;
+    rdfs:domain secav:ReviewActivity ;
+    rdfs:range secav:ReviewerReadiness ;
+    rdfs:label "has reviewer readiness"@en ;
+    rdfs:comment "Links a review activity to the bio-cognitive precondition state observed for the reviewer."@en .
+
+# ---------------------------------------------------------------------------
+# New Datatype Property
+# ---------------------------------------------------------------------------
+
+secav:requestDescription a owl:DatatypeProperty ;
+    rdfs:domain secav:ReviewRequest ;
+    rdfs:range xsd:string ;
+    rdfs:label "request description"@en ;
+    rdfs:comment "Structured description of the review request: what changed, why, and acceptance criteria."@en .
