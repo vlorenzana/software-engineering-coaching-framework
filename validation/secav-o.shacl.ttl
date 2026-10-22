@@ -271,3 +271,19 @@ secav:RiskResponsePlanShape
         sh:datatype xsd:string ;
         sh:message "A risk response plan must describe the prevention action."@en
     ] .
+
+secav:CodeWalkthroughShape
+    a sh:NodeShape ;
+    sh:targetClass secav:CodeWalkthrough ;
+    sh:property [
+        sh:path secav:walkthroughFocus ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "A code walkthrough must declare its focus (e.g., 'architecture', 'logic', 'security', 'concurrency', 'knowledge-transfer')."@en
+    ] ;
+    sh:property [
+        sh:path secav:evaluates ;
+        sh:minCount 1 ;
+        sh:class secav:Artifact ;
+        sh:message "A code walkthrough must identify the artifact (source file, module, or PR) it reviews."@en
+    ] .

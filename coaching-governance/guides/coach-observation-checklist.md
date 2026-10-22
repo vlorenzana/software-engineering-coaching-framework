@@ -294,12 +294,63 @@ Este checklist permite al coach registrar, durante cualquier sesión de observac
 | Grupo 9 | Quincenalmente o mensualmente — evaluación de adopción cultural del nuevo modelo de trabajo |
 | Grupo 10 | Mensualmente o por sprint — observación del líder técnico; revisión trimestral de indicadores 10.12–10.15 |
 | Grupo 11 | Al inicio de cada sprint y en cada junta semanal de seguimiento — revisión del registro de riesgos |
+| Grupo 12 | Antes, durante y después de cada caminata de revisión de código programada |
 
 Las señales ✓ se registran como `secav:WorkProductEvidence` o `secav:ReviewFinding` y alimentan la `secav:CompetencyAssessment` del ciclo.
 
 Las señales ⚠ que aparecen más de una vez en el sprint deben escalar a `secav:CoachingIntervention`. Si aparecen en múltiples miembros del equipo, documentar una `secavo:ImprovementAction` en la retrospectiva.
 
 Para el Grupo 9, las señales ⚠ sistémicas (presentes en más de la mitad del equipo en dos evaluaciones consecutivas) deben derivar en una intervención del `secav:ChangeAgent` responsable — no solo del coach técnico.
+
+---
+
+## Grupo 12 — Caminatas de Revisión de Software (`secav:CodeWalkthrough`)
+
+> **Fuente:** Guia de Buenas y Malas Practicas - Caminatas de Revision de Software  
+> **Cuándo observar:** Antes, durante y al cierre de cada sesión de walkthrough programada.  
+> **Término SECAV-O principal:** `secav:CodeWalkthrough` (subclase de `secav:ReviewActivity`)
+
+### 12.1 Preparación
+
+| # | Señal observable | Tipo | Término SECAV-O |
+|---|-----------------|------|-----------------|
+| 12.01 | El autor delimita el alcance a 200–400 líneas de código antes de convocar | ✓ | `secav:CodeWalkthrough` · `secav:walkthroughLineCount` |
+| 12.02 | Los materiales (código, contexto, objetivo) se distribuyen con al menos 24 h de anticipación | ✓ | `secav:CodeWalkthrough` · `secav:WorkProductEvidence` |
+| 12.03 | Se asignan explícitamente los tres roles: Autor/Presentador, Moderador, Escribano | ✓ | `secav:WalkthroughRole` |
+| 12.04 | Se declara el foco de revisión (arquitectura, lógica, seguridad, concurrencia, transferencia de conocimiento) | ✓ | `secav:walkthroughFocus` |
+| 12.05 | La sesión se convoca sin materiales previos ni roles definidos (improvisada) | ⚠ | `secav:ImprovisedWalkthrough` |
+| 12.06 | El alcance supera 1 000 líneas o la sesión está programada para más de 2 horas | ⚠ | `secav:OversizedWalkthrough` |
+| 12.07 | No se designa moderador para la sesión | ⚠ | `secav:UnmoderatedWalkthrough` |
+
+### 12.2 Ejecución
+
+| # | Señal observable | Tipo | Término SECAV-O |
+|---|-----------------|------|-----------------|
+| 12.08 | El autor dedica los primeros 5–10 min a explicar el contexto de negocio del código | ✓ | `secav:CodeWalkthrough` |
+| 12.09 | Las observaciones se dirigen al código, no a la persona ("este método…" no "tú hiciste…") | ✓ | `secav:PositiveBehaviorObservation` |
+| 12.10 | El moderador usa un "Parking Lot" para apartar temas fuera del foco declarado | ✓ | `secav:WalkthroughRole` |
+| 12.11 | Los hallazgos se clasifican en tiempo real: Bloqueante / Mejora / Aclaración | ✓ | `secav:ReviewFinding` · `secav:walkthroughSeverity` |
+| 12.12 | El debate deriva en estilo/formato que podría resolverse con un linter | ⚠ | `secav:StyleDebateDuringWalkthrough` |
+| 12.13 | El autor responde a observaciones de forma defensiva o interpreta preguntas como ataques | ⚠ | `secav:DefensiveAuthorAttitude` |
+| 12.14 | Un revisor monopoliza la sesión con preferencias personales, bloqueando el avance | ⚠ | `secav:WalkthroughMonopolization` |
+| 12.15 | Se intenta refactorizar código complejo en vivo durante la sesión | ⚠ | `secav:LiveRefactoringDuringWalkthrough` |
+
+### 12.3 Cierre y Seguimiento
+
+| # | Señal observable | Tipo | Término SECAV-O |
+|---|-----------------|------|-----------------|
+| 12.16 | Todos los action items se registran en la herramienta de seguimiento (Jira / GitHub Issues) con responsable asignado | ✓ | `secav:ReviewFinding` · `secav:MeetingAgreement` |
+| 12.17 | Cada hallazgo queda clasificado por severidad (Bloqueante / Mejora / Aclaración) antes de cerrar la sesión | ✓ | `secav:walkthroughSeverity` |
+| 12.18 | El equipo verifica que los cambios derivados de la caminata fueron aplicados antes del merge | ✓ | `secav:WorkProductEvidence` |
+| 12.19 | La sesión cierra sin ningún registro escrito — solo acuerdos verbales | ⚠ | `secav:WalkthroughWithoutRecord` |
+| 12.20 | Se hace merge del código sin haber atendido las observaciones registradas | ⚠ | `secav:IgnoredWalkthroughFeedback` |
+| 12.21 | Se convoca una nueva caminata completa para verificar correcciones menores que podrían revisarse de forma asíncrona | ⚠ | `secav:UnnecessaryRewalkthrough` |
+
+### Notas de escalamiento — Grupo 12
+
+- Las señales ⚠ 12.05, 12.06 o 12.07 presentes en la convocatoria deben resolverse **antes** de iniciar la sesión; el coach puede solicitar cancelar o reagendar si no se subsanan.
+- Las señales ⚠ 12.13 o 12.14 persistentes en múltiples sesiones deben derivar en una `secav:CoachingIntervention` individual con el autor o revisor involucrado.
+- La señal ⚠ 12.20 es bloqueante: el coach debe escalar a una `secav:CoachingIntervention` y documentar el hallazgo en `templates/rca-defect-analysis.md` si el código ya llegó a producción.
 
 ---
 
@@ -314,3 +365,4 @@ Para el Grupo 9, las señales ⚠ sistémicas (presentes en más de la mitad del
 | `coaching-governance/guides/ai-assisted-code-review.md` | Contexto completo del grupo 8 |
 | `templates/rca-defect-analysis.md` | Cuando una señal ⚠ deriva en un defecto P1/P2 |
 | `templates/engineer-coaching-assessment.md` | Las evidencias ✓ alimentan la evaluación de competencias |
+| `coaching-governance/guides/software-walkthroughs.md` | Protocolo completo del grupo 12 (caminatas de revisión) |

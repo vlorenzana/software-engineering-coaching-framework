@@ -1060,3 +1060,90 @@ secav:contingencyAction a owl:DatatypeProperty ;
     rdfs:range xsd:string ;
     rdfs:label "contingency action"@en ;
     rdfs:comment "The reactive action to execute if the risk event materializes despite prevention efforts."@en .
+
+# ---------------------------------------------------------------------------
+# Code Walkthrough
+# Derived from: Guia de Buenas y Malas Practicas - Caminatas de Revision de Software
+# ---------------------------------------------------------------------------
+
+secav:CodeWalkthrough a owl:Class ;
+    rdfs:subClassOf secav:ReviewActivity ;
+    rdfs:label "Code Walkthrough"@en ;
+    rdfs:comment "Formal peer review in which the code author guides the team through architecture, logic, or design. Goal: conceptual validation, knowledge transfer, and early defect detection. Recommended scope: 200–400 lines, 45–60 min max."@en .
+
+secav:WalkthroughAntipattern a owl:Class ;
+    rdfs:subClassOf secav:ReviewAntipattern ;
+    rdfs:label "Walkthrough Antipattern"@en ;
+    rdfs:comment "A problematic practice specific to code walkthrough sessions that undermines their effectiveness."@en .
+
+secav:ImprovisedWalkthrough a owl:Class ;
+    rdfs:subClassOf secav:WalkthroughAntipattern ;
+    rdfs:label "Improvised Walkthrough"@en ;
+    rdfs:comment "Convening the team without prior context, materials, or defined roles — reviewers must understand the domain in real time, reducing analysis quality."@en .
+
+secav:OversizedWalkthrough a owl:Class ;
+    rdfs:subClassOf secav:WalkthroughAntipattern ;
+    rdfs:label "Oversized Walkthrough"@en ;
+    rdfs:comment "Attempting to review more than 1,000 lines or scheduling sessions longer than 2 hours; leads to reviewer fatigue and superficial analysis."@en .
+
+secav:UnmoderatedWalkthrough a owl:Class ;
+    rdfs:subClassOf secav:WalkthroughAntipattern ;
+    rdfs:label "Unmoderated Walkthrough"@en ;
+    rdfs:comment "Running a walkthrough session without a designated moderator to control timing, focus, and pace."@en .
+
+secav:StyleDebateDuringWalkthrough a owl:Class ;
+    rdfs:subClassOf secav:WalkthroughAntipattern ;
+    rdfs:label "Style Debate During Walkthrough"@en ;
+    rdfs:comment "Consuming walkthrough time debating formatting or naming style issues that automated linters should handle automatically."@en .
+
+secav:LiveRefactoringDuringWalkthrough a owl:Class ;
+    rdfs:subClassOf secav:WalkthroughAntipattern ;
+    rdfs:label "Live Refactoring During Walkthrough"@en ;
+    rdfs:comment "Attempting to rewrite complex code in front of all attendees during the session instead of deferring changes to post-session tasks."@en .
+
+secav:WalkthroughMonopolization a owl:Class ;
+    rdfs:subClassOf secav:WalkthroughAntipattern ;
+    rdfs:label "Walkthrough Monopolization"@en ;
+    rdfs:comment "A single reviewer consistently derails the session toward personal style preferences, preventing the group from advancing through the material."@en .
+
+secav:DefensiveAuthorAttitude a owl:Class ;
+    rdfs:subClassOf secav:WalkthroughAntipattern ;
+    rdfs:label "Defensive Author Attitude"@en ;
+    rdfs:comment "The code author interprets review observations or design questions as personal attacks rather than as collaborative improvement input."@en .
+
+secav:WalkthroughWithoutRecord a owl:Class ;
+    rdfs:subClassOf secav:WalkthroughAntipattern ;
+    rdfs:label "Walkthrough Without Record"@en ;
+    rdfs:comment "Concluding a walkthrough with only verbal agreements and no written action items registered in a tracking tool — findings evaporate without follow-up."@en .
+
+secav:IgnoredWalkthroughFeedback a owl:Class ;
+    rdfs:subClassOf secav:WalkthroughAntipattern ;
+    rdfs:label "Ignored Walkthrough Feedback"@en ;
+    rdfs:comment "Merging code without addressing or formally responding to the observations registered during the walkthrough."@en .
+
+secav:UnnecessaryRewalkthrough a owl:Class ;
+    rdfs:subClassOf secav:WalkthroughAntipattern ;
+    rdfs:label "Unnecessary Re-walkthrough"@en ;
+    rdfs:comment "Scheduling a full walkthrough to verify minor fixes (e.g., renaming a variable) that could be confirmed via async review."@en .
+
+secav:WalkthroughRole a owl:Class ;
+    rdfs:label "Walkthrough Role"@en ;
+    rdfs:comment "A designated role in a code walkthrough session: Autor/Presentador, Moderador, or Escribano."@en .
+
+secav:walkthroughFocus a owl:DatatypeProperty ;
+    rdfs:domain secav:CodeWalkthrough ;
+    rdfs:range xsd:string ;
+    rdfs:label "walkthrough focus"@en ;
+    rdfs:comment "The declared review focus of the walkthrough session: 'architecture', 'logic', 'security', 'concurrency', or 'knowledge-transfer'."@en .
+
+secav:walkthroughLineCount a owl:DatatypeProperty ;
+    rdfs:domain secav:CodeWalkthrough ;
+    rdfs:range xsd:integer ;
+    rdfs:label "walkthrough line count"@en ;
+    rdfs:comment "Number of lines of code reviewed in the walkthrough. Recommended maximum: 400 lines per session."@en .
+
+secav:walkthroughSeverity a owl:DatatypeProperty ;
+    rdfs:domain secav:ReviewFinding ;
+    rdfs:range xsd:string ;
+    rdfs:label "walkthrough severity"@en ;
+    rdfs:comment "Severity classification of a walkthrough finding: 'Bloqueante' (blocks merge), 'Mejora' (improvement opportunity), or 'Aclaración' (clarification needed)."@en .
