@@ -38,6 +38,8 @@ The following matrix shows the recommended responsibility split per review dimen
 |---|---|---|
 | Syntax and style | Full automation — flags deviations from style guides | Minimal supervision; trust the linter and AI |
 | Optimization | Proposes refactoring for performance and algorithmic complexity | Evaluates whether the proposed refactoring is necessary and readable |
+| Edge case detection | AI-assisted — request the tool to generate boundary cases and search for unexpected null values | Validates that generated cases are realistic and cover the actual domain |
+| Architecture and design | Limited — can flag obvious pattern violations | Full human focus — validates design patterns, coupling, and system extensibility |
 | Business logic | Limited — can infer basic context but lacks global product vision | Critical validation — ensures code meets product requirements |
 | Security | Early detection of common vulnerabilities (OWASP Top 10, API leaks) | Deep analysis of the threat model and authorization logic |
 

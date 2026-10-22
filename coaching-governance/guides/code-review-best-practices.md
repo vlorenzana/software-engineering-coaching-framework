@@ -164,6 +164,29 @@ Key ontology points:
 
 ---
 
+## 10. Reviewer readiness and cognitive preparation
+
+Code review is a high analytical-demand task. Detection of subtle defects and empathic interaction both degrade when the reviewer is not in optimal conditions.
+
+| Individual factor | Optimal condition |
+|---|---|
+| Energy and rest | Conduct priority reviews only when rested — ideally in the morning or after a structured break. Avoid reviewing during extreme mental fatigue or at the end of extended work sessions. |
+| Focus blocks | Reserve dedicated blocks of 30–60 minutes, free of notifications, direct messages, and meetings. Interruptions destroy the mental map of the code being analysed. |
+| Cognitive load limits | Do not exceed 60 continuous minutes or 400 LOC per session. Beyond these thresholds, defect-detection rate drops sharply. (Consistent with §1 limits.) |
+| Emotional state and disposition | Approach code with a constructive and objective mindset. If frustration or stress from other tasks is present, postpone the review to avoid biased or impatient comments. |
+
+**Why this matters for coaching:** The reviewer's readiness state is an observable precondition for a `secav:ReviewActivity`. When a coach notices patterns of after-hours reviews, oversized sessions, or emotionally charged feedback, those are coaching signals about working conditions and review culture, not individual performance defects.
+
+**Technical execution sequence** — when beginning a review in a focus block, apply these steps in order:
+
+1. **Context comprehension** — read the pull request description and associated tickets before looking at any line of code.
+2. **AI filter execution** — review automated security and static analysis reports to discard superficial issues before investing human attention.
+3. **Human security verification** — manually inspect access control, input validation, and data sanitization logic.
+4. **Maintainability evaluation** — verify that variable and function names are self-descriptive and that the code will be comprehensible to future developers.
+5. **Constructive feedback** — write comments specific to the code, not the author. Use questions rather than direct orders when the issue is open to interpretation.
+
+---
+
 ## Sources
 
 - Google LLC. *Google Engineering Practices Documentation — Code Review*. [https://google.github.io/eng-practices/review/](https://google.github.io/eng-practices/review/)

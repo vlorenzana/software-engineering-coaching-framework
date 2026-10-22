@@ -95,6 +95,23 @@ The review pipeline stages are ordered via `secav:precedes`:
 
 `ReviewRiskLevel = SecurityCritical` is the trigger condition for `requiresHumanValidation`; the other levels do not remove human review but reduce its mandatory scope.
 
+## Version 8 — Reviewer readiness and cognitive preparation alignment
+
+The reviewer readiness section in `coaching-governance/guides/code-review-best-practices.md` (§10) introduces precondition concepts that are observable before a `ReviewActivity` begins. These are modeled as coaching-observable conditions rather than activity properties.
+
+| Guide concept | Core alignment | Rationale |
+|---|---|---|
+| `ReviewerReadinessCondition` | subclass of `Evidence` | The reviewer's cognitive state at session start is an observable, recordable condition that affects review quality. |
+| `CognitiveFatigueObservation` | subclass of `MeasurementObservation` → `Evidence` | Patterns of after-hours reviews, oversized sessions, or session overruns are measurable coaching signals. |
+| `ReviewSessionLimit` | DataProperty on `ReviewActivity` (maxLOC: 400, maxMinutes: 60) | The LOC and time limits are constraints on the review activity, consistent with §1 of the guide. |
+| `TechnicalExecutionSequence` | subclass of `QualityActivityRequirement` | The 5-step ordered execution sequence (context → AI filter → human security → maintainability → feedback) is a quality precondition for the `HumanValidationActivity`. |
+
+The `TechnicalExecutionSequence` is distinct from `AIReviewPromptConfiguration` (Version 7): the prompt configuration governs how the AI tool is instructed, while the execution sequence governs how the human reviewer proceeds step by step.
+
+`CognitiveFatigueObservation` instances are coaching inputs, not performance measures. They should link to `ImprovementAction` (subclass of `CoachingIntervention`) targeting working-condition changes, not individual competency gaps.
+
+The two new role-matrix dimensions (edge case detection and architecture/design) extend `ReviewDimension` from Version 7 without new classes — they are additional named values of the existing `ReviewDimension` DataProperty.
+
 ## Modeling boundary
 This extension does not assert that risk probability, impact, competency levels, or metric thresholds have universal values. Those values are data collected during coaching and should remain context-specific.
 
