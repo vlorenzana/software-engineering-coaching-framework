@@ -110,6 +110,7 @@ El coach puede usar la experiencia del asistente como evidencia para la `secav:C
 | Documento | Relación |
 |---|---|
 | `templates/defect-log.csv` | Registro donde se consolidan los datos de cada ticket cerrado |
+| `templates/rca-defect-analysis.md` | Plantilla de Análisis de Causa Raíz (RCA) para defectos P1/P2 — complementa cada fila del log con la cadena de 5 Porqués y el plan de acciones correctivas y preventivas |
 | `templates/metrics-register.csv` | Métricas de defectos por sprint |
 | `templates/annual-coaching-plan.md` | Donde se documenta la designación del Asistente de Calidad |
 | `coaching-governance/guides/project-kickoff-alignment.md` | Los objetivos de calidad acordados definen los umbrales de las métricas de defectos |

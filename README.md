@@ -217,6 +217,7 @@ Institutional / Project Objectives -> Project Planning & Quality Governance -> T
 - `examples/example-engineer-development-record.md` — **(proposal)** fully completed example of the engineer development record (fictional engineer Valeria Montes, including a coach change in July).
 - `templates/metrics-register.csv` — metric collection register.
 - `templates/defect-log.csv` — defect phase-injected / phase-detected log.
+- `templates/rca-defect-analysis.md` — Root Cause Analysis (RCA) template for P1/P2 defects: environment metadata, impact summary, software lifecycle timeline, 5-Whys engineering analysis, SMART corrective action plan, systemic preventive actions, and coaching intervention. Links SECAV-O antipattern classes to root-cause categories.
 - `templates/competency-trend.csv` — competency progression tracker.
 - `templates/coaching-backlog.csv` — coaching improvement-action tracker.
 
