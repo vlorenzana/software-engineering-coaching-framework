@@ -118,6 +118,18 @@ A completed pilot should produce:
 6. framework revisions;
 7. evidence supporting any factual claims made about the pilot.
 
+## Experimental design — control and experimental groups
+
+Pilots that test a specific review scenario from the catalog (`review-scenarios-catalog.md`) must define two groups before data collection begins.
+
+**Control group** — applies current review practices without modification. Produces the `Baseline` against which experimental results are compared.
+
+**Experimental group** — adopts one or more scenarios from the catalog. The selected scenario ID must be recorded in the pilot description before the pilot starts.
+
+Assignment criteria, group size, and potential selection biases must be documented. A team too small for parallel groups may run a sequential A/B design (control period first, then experimental period) using the same engineers, provided the period boundary is documented as a variable.
+
+Both groups collect the same metrics. No metric is interpreted in isolation. See `review-scenarios-catalog.md` for the recommended comparison metrics per scenario type.
+
 ## Limitations
 
 A small pilot cannot establish industry-wide effectiveness. Results should be reported as context-specific observations unless replicated evidence supports broader conclusions.

@@ -54,6 +54,24 @@ The package currently retains the placeholder namespace `https://example.org/sec
 | onboarding / launch -> `Risk` | `communicatesRisk` | Reuses the existing risk-governance model rather than duplicating risks. |
 | preparation -> `EngineeringActivity` / `Competency` | `preparesMemberForActivity` / `preparesMemberForCompetency` | Keeps preparation connected to the core activity/competency model. |
 
+## Version 6 — Review scenario catalog alignment
+
+The review-scenario catalog (`pilot/review-scenarios-catalog.md`) introduces 50 candidate review scenarios classified as H (human-only), HA (human-AI), and AA (AI-AI). These are aligned with the existing SECAV-O core as follows:
+
+| Catalog concept | Core alignment | Rationale |
+|---|---|---|
+| `ReviewScenario` | subclass of `QualityActivityRequirement` | A review scenario is a specific form of quality activity requirement scoped to a pilot. |
+| `ReviewScenarioExecution` | subclass of `ReviewObservation` → `MeasurementObservation` | Executing a scenario produces review observations that are measurable evidence. |
+| `ControlGroupBaseline` | subclass of `Baseline` → `Evidence` | The control group's initial state is a baseline used for comparison. |
+| `ExperimentalGroupBaseline` | subclass of `Baseline` → `Evidence` | The experimental group's initial state is a separate baseline for the same comparison. |
+| `ScenarioComparisonTrend` | subclass of `CompetencyTrend` → `Evidence` | The difference between control and experimental baselines over time is derived longitudinal evidence. |
+
+The control/experimental group design maps to the existing governance path:
+
+`ProjectPlanningParticipation -> ReviewScenario (QualityActivityRequirement) -> ReviewScenarioExecution (ReviewObservation) -> ControlGroupBaseline / ExperimentalGroupBaseline -> ScenarioComparisonTrend -> CoachingObjective`
+
+This keeps the pilot experimental design fully traceable through the existing SECAV-O evidence and measurement model without introducing a parallel quality-management structure.
+
 ## Modeling boundary
 This extension does not assert that risk probability, impact, competency levels, or metric thresholds have universal values. Those values are data collected during coaching and should remain context-specific.
 
