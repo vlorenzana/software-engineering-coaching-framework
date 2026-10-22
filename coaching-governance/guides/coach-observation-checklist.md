@@ -135,6 +135,8 @@ This checklist allows the coach to record, during any observation session, the p
 | 4.8 | ⚠ | The team does not know what the CI pipeline checks — they only know "if it passes, fine" | `secav:DeterministicAnalysisActivity` without team ownership |
 | 4.9 | ✓ | The complete CI pipeline (build, test, static analysis) runs on every PR and its result is visible to the whole team | `secav:ContinuousIntegrationActivity` |
 | 4.10 | ⚠ | The CI pipeline fails intermittently and the team normalizes it — failures are treated as "noise" rather than a signal | `secav:ContinuousIntegrationActivity` compromised |
+| 4.11 | ✓ | The team enforces the CI gate as a review entry criterion: no PR is manually reviewed when automated checks (tests or linters) are in a failing state | `secav:AutomationGate` as review entry precondition |
+| 4.12 | ⚠ | A manual review begins while the CI pipeline is red — the team treats CI failure as a routine noise rather than a hard entry criterion | violation of `secav:AutomationGate` precondition |
 
 ---
 
@@ -166,6 +168,10 @@ This checklist allows the coach to record, during any observation session, the p
 | 5.20 | ✓ | When the team agrees on a fix direction during the session, a proposed solution is recorded alongside the finding | `secav:proposedSolution` (optional) |
 | 5.21 | ⚠ | The session ends without any written findings — only verbal comments | absence of `secav:producesReviewFinding` |
 | 5.22 | ⚠ | The coach issues neither a direct sign-off nor a remote endorsement — the review findings cannot be used as valid competency evidence | absence of `secav:CoachReviewSignOff` and `secav:CoachRemoteEndorsement` |
+| 5.23 | ✓ | PRs are scoped to at most 400 lines of changed code; larger changesets are split by the author before requesting review | absence of `secav:OversizedReviewSession`; `secav:FormalReviewRequest` within entry criteria |
+| 5.24 | ⚠ | The PR exceeds 400 lines of code without a documented justification or approved split plan — cognitive load increases and the probability of superficial approval rises | `secav:OversizedReviewSession` |
+| 5.25 | ✓ | Both reviewer and author respond within 24 business hours per review cycle — threads are not left open across days | `secav:WorkProductEvidence` (timely resolution) |
+| 5.26 | ⚠ | Review threads remain unresponded to beyond 24 business hours, accumulating context switch costs and merge conflicts | `secav:InfiniteCommentLoop` risk; flow impediment signal |
 
 ---
 
