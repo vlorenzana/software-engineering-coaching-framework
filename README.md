@@ -1,5 +1,7 @@
 ﻿# SECAV-O Coaching Lifecycle, Planning, Risk, Alignment and Ethics Artifacts
 
+> **Current version: v0.3.0** — See [Changelog](#changelog) for what changed in each release.
+
 This package extends the SECAV-O coaching operating model with six connected governance dimensions:
 
 1. team coaching from team inception / planning / launch, including member preparation and onboarding;
@@ -387,4 +389,4 @@ The extension uses the stable namespace `https://github.com/vlorenzana/software-
 
 ## Planning participation and quality advocacy
 
-Version 0.2.0 adds a formal governance role for the coach in project planning. The recommended model gives the coach an explicit voice in planning and, when granted by the adopting organization, a vote on decisions that materially affect quality, competency development and human validation. The coach can raise a documented quality-planning concern when reviews, peer reviews, inspections, unit-test activities or other material quality controls are omitted or weakened. If the residual risk remains material, the coach can record formal dissent and escalate through the defined management chain. SECAV-O does not create legal or managerial authority by itself and does not assume a universal veto right; actual decision rights are defined by each adopting organization.
+Version 0.2.0 introduced a formal governance role for the coach in project planning. The recommended model gives the coach an explicit voice in planning and, when granted by the adopting organization, a vote on decisions that materially affect quality, competency development and human validation. The coach can raise a documented quality-planning concern when reviews, peer reviews, inspections, unit-test activities or other material quality controls are omitted or weakened. If the residual risk remains material, the coach can record formal dissent and escalate through the defined management chain. SECAV-O does not create legal or managerial authority by itself and does not assume a universal veto right; actual decision rights are defined by each adopting organization.
