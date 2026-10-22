@@ -692,6 +692,89 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 
 ---
 
+## Group 21 — Planning & Planning Review
+
+> **Key principle:** The plan is a work product. A sprint or iteration plan that omits mandatory review activities (RequirementsReview, DesignReview, test design reviews) creates invisible quality debt from day one. The Planning Review is the coach's quality gate on the plan itself — not on the work described in it. Endorsing a plan without a RequirementsReview is an ethical obligation violation (Code of Ethics, Principle 17).
+
+| # | Observable signal | Type | SECAV-O Term |
+|---|------------------|------|--------------|
+| 21.01 | A written plan artifact exists before the sprint or iteration begins — tasks, owners, and deadlines are documented, not only communicated verbally | ✓ | `secav:PlanningArtifact` · `secav:PlanningActivity` |
+| 21.02 | The plan schedules at least one `secav:RequirementsReview` for every feature entering implementation in this sprint — the planning gate is satisfied | ✓ | `secav:RequirementsReview` · `secav:PlanningArtifact` |
+| 21.03 | Review activities in the plan identify a facilitator, scheduled date, and participant list — not just a placeholder task | ✓ | `secav:PlanningArtifact` |
+| 21.04 | The plan includes time estimates for review activities — reviews are not squeezed out when implementation tasks run over | ✓ | `secav:PlanningActivity` |
+| 21.05 | The plan distinguishes between production activities (design, implementation, test design) and review activities — each is a separately scheduled task | ✓ | `secav:PlanningArtifact` |
+| 21.06 | The coach reviews the plan before endorsing the sprint — not during the sprint when review activities can no longer be scheduled | ✓ | `secav:PlanningReview` |
+| 21.07 | The planning review confirms that mandatory quality gates are present: RequirementsReview, HighLevelDesignReview (if architecture changed), test design reviews | ✓ | `secav:PlanningReview` |
+| 21.08 | The planning review finds no RequirementsReview in the plan — the coach withholds endorsement and documents a QualityPlanningConcern | ✓ | `secavo:QualityPlanningConcern` · `secav:MissingRequirementsReview` |
+| 21.09 | The sprint plan contains only implementation tasks — no review, testing, or quality gate activities appear | ⚠ | `secav:MissingRequirementsReview` · `secav:ReviewAntipattern` |
+| 21.10 | Review activities in the plan have no identified owner or date — they are planning placeholders with no commitment | ⚠ | `secav:ReviewAntipattern` |
+| 21.11 | The coach endorses the plan without checking for a RequirementsReview — planning gate violation (Code of Ethics, Principle 17) | ⚠ | `secav:MissingRequirementsReview` |
+| 21.12 | Review activities added to the plan after implementation already started — retroactive scheduling does not satisfy the planning gate | ⚠ | `secav:MissingRequirementsReview` |
+| 21.13 | All findings from the planning review (missing gates, incomplete review scheduling, or explicit "plan approved, all gates present") are recorded | ✓ | `secav:producesReviewFinding` · `secav:proposedSolution` (optional) |
+| 21.14 | The coach issues a process sign-off confirming the planning review was conducted and the plan meets quality gate requirements | ✓ | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
+| 21.15 | The sprint begins without a completed planning review or coach sign-off on the plan | ⚠ | absence of `secav:PlanningReview` or `secav:CoachReviewSignOff` |
+
+### Escalation notes — Group 21
+
+- ⚠ signal 21.09: a plan with no review activities is a `secavo:QualityPlanningConcern` — the coach must withhold endorsement and request plan corrections.
+- ⚠ signal 21.11: this is a Code of Ethics Principle 17 violation — self-disclose and address through coaching practice improvement.
+- ⚠ signal 21.12: retroactive scheduling is not a planning gate fix; record as a `secav:MissingRequirementsReview` observation even if the review subsequently occurs.
+
+---
+
+## Group 22 — Design Walkthrough, Walkthrough Execution & Walkthrough Review
+
+> **Key principle:** A walkthrough has three distinct lifecycle phases — preparation, execution, and follow-up review. Running only the session (execution) without structured preparation or finding verification produces a discussion meeting, not a quality review. Design walkthroughs are the application of this method to design artifacts; they have different focus areas from code walkthroughs but the same three-phase lifecycle and the same requirement for recorded findings and coach sign-off.
+
+### 22.1 — Design Walkthrough (applying walkthrough method to design artifacts)
+
+| # | Observable signal | Type | SECAV-O Term |
+|---|------------------|------|--------------|
+| 22.01 | A design walkthrough is declared with a specific focus area before the session (e.g., usability, data model, interaction flow, architecture) | ✓ | `secav:DesignWalkthrough` · `secav:walkthroughFocus` |
+| 22.02 | The design artifact is distributed to all participants before the session — no one sees it for the first time in the meeting | ✓ | `secav:DesignWalkthrough` |
+| 22.03 | The design author presents the artifact and answers questions — reviewers focus on identifying issues, not on debating solutions in the session | ✓ | `secav:DesignWalkthrough` · `secav:WalkthroughRole` |
+| 22.04 | A Moderator controls session scope, preventing discussion from drifting into implementation details or adjacent design decisions | ✓ | `secav:DesignWalkthrough` · `secav:WalkthroughRole` |
+| 22.05 | A Scribe captures all findings in real time — no reconstruction of findings from memory after the session | ✓ | `secav:DesignWalkthrough` · `secav:WalkthroughRole` |
+| 22.06 | Design walkthrough feedback distinguishes between design flaws (must be corrected) and preferences (can be deferred or declined) | ✓ | `secav:ReviewFinding` · `secav:walkthroughSeverity` |
+| 22.07 | Design walkthroughs stay within scope — reviewers do not introduce requirement changes or cross-artifact disputes during the session | ✓ | `secav:DesignWalkthrough` |
+| 22.08 | The design walkthrough is held as an unstructured discussion without a declared focus or pre-distributed material | ⚠ | `secav:ImprovisedWalkthrough` |
+| 22.09 | Reviewers critique design aesthetics (colors, typography) instead of usability flows or structural correctness | ⚠ | `secav:PrematureDetailFocus` · `secav:WalkthroughAntipattern` |
+| 22.10 | The session ends without a written list of findings and action items | ⚠ | `secav:WalkthroughWithoutRecord` |
+
+### 22.2 — Walkthrough Execution (the live session)
+
+| # | Observable signal | Type | SECAV-O Term |
+|---|------------------|------|--------------|
+| 22.11 | Walkthrough entry criteria are confirmed before starting: artifact distributed, all roles assigned, participants prepared | ✓ | `secav:WalkthroughExecution` |
+| 22.12 | The session follows the planned walkthrough focus — the moderator redirects off-topic discussion back to the declared scope | ✓ | `secav:WalkthroughExecution` · `secav:walkthroughFocus` |
+| 22.13 | Each finding recorded during the session has: a description, severity (Blocking / Improvement / Clarification), and location in the artifact | ✓ | `secav:WalkthroughExecution` · `secav:walkthroughSeverity` |
+| 22.14 | The session ends with a closing status: accepted (no blocking findings), conditional (blocking findings to be verified), or rejected (major rework needed) | ✓ | `secav:WalkthroughExecution` |
+| 22.15 | The walkthrough session runs without a Scribe — findings are not captured in real time | ⚠ | `secav:WalkthroughWithoutRecord` |
+| 22.16 | Participants debate and attempt to solve blocking findings during the session rather than registering them and moving on | ⚠ | `secav:LiveRefactoringDuringWalkthrough` |
+| 22.17 | All findings from the walkthrough execution are recorded before the session closes — including an explicit "no defects found" if the artifact is clean | ✓ | `secav:producesReviewFinding` · `secav:WalkthroughExecution` |
+
+### 22.3 — Walkthrough Review (post-session finding verification)
+
+| # | Observable signal | Type | SECAV-O Term |
+|---|------------------|------|--------------|
+| 22.18 | The author addresses all Blocking findings from the walkthrough execution before the artifact is merged or advanced to the next phase | ✓ | `secav:WalkthroughReview` |
+| 22.19 | The Moderator (or delegate) verifies that corrections are adequate for each Blocking finding — corrections are not assumed correct without review | ✓ | `secav:WalkthroughReview` |
+| 22.20 | Improvement and Clarification findings are explicitly accepted, deferred with justification, or converted to open action items — not silently ignored | ✓ | `secav:WalkthroughReview` · `secav:MeetingAgreement` |
+| 22.21 | The walkthrough review produces a closing record: final state of each finding (resolved / deferred / declined) with rationale | ✓ | `secav:WalkthroughReview` · `secav:producesReviewFinding` |
+| 22.22 | The artifact is merged or advanced before Blocking findings from the walkthrough execution are addressed — IgnoredWalkthroughFeedback | ⚠ | `secav:IgnoredWalkthroughFeedback` |
+| 22.23 | No walkthrough review takes place — the walkthrough lifecycle closes with execution only and finding follow-up is never verified | ⚠ | absence of `secav:WalkthroughReview` |
+| 22.24 | The coach issues a process sign-off confirming the full walkthrough lifecycle was completed: preparation, execution, and finding verification | ✓ | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
+| 22.25 | The walkthrough lifecycle closes without coach sign-off or without a written closing record | ⚠ | absence of `secav:WalkthroughReview` or `secav:CoachReviewSignOff` |
+
+### Escalation notes — Group 22
+
+- ⚠ signal 22.08 or 22.10: the walkthrough did not meet minimum standards — findings cannot be considered valid. The coach must withhold sign-off and document the gap.
+- ⚠ signal 22.22: each instance must be documented as `secav:IgnoredWalkthroughFeedback`; two instances in the same engineer in the same sprint justify an individual coaching intervention.
+- ⚠ signal 22.23: the walkthrough lifecycle is incomplete; the coach sign-off cannot be issued until the WalkthroughReview is performed.
+- ⚠ signal 22.25: pending sign-off must appear as an open `secav:MeetingAgreement` in the next meeting.
+
+---
+
 ## Related documents
 
 | Document | Relationship |

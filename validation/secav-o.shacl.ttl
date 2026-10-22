@@ -479,3 +479,67 @@ secav:ReleaseReviewShape
         sh:class secav:ReviewFinding ;
         sh:message "A release review must record at least one finding — including an explicit 'release approved, all quality gates confirmed' when no blocking issues remain."@en
     ] .
+
+secav:PlanningReviewShape
+    a sh:NodeShape ;
+    sh:targetClass secav:PlanningReview ;
+    sh:property [
+        sh:path secav:evaluates ;
+        sh:minCount 1 ;
+        sh:class secav:PlanningArtifact ;
+        sh:message "A planning review must identify the plan artifact being reviewed (sprint plan, iteration plan, or work breakdown)."@en
+    ] ;
+    sh:property [
+        sh:path secav:producesReviewFinding ;
+        sh:minCount 1 ;
+        sh:class secav:ReviewFinding ;
+        sh:message "A planning review must record at least one finding — including an explicit 'plan approved, all mandatory review activities scheduled' when requirements are met."@en
+    ] .
+
+secav:DesignWalkthroughShape
+    a sh:NodeShape ;
+    sh:targetClass secav:DesignWalkthrough ;
+    sh:property [
+        sh:path secav:evaluates ;
+        sh:minCount 1 ;
+        sh:class secav:DesignArtifact ;
+        sh:message "A design walkthrough must identify the design artifact (wireframe, prototype, diagram, or specification) being walked through."@en
+    ] ;
+    sh:property [
+        sh:path secav:walkthroughFocus ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "A design walkthrough must declare its review focus (e.g., 'usability', 'architecture', 'data-model', 'interaction-flow')."@en
+    ] .
+
+secav:WalkthroughExecutionShape
+    a sh:NodeShape ;
+    sh:targetClass secav:WalkthroughExecution ;
+    sh:property [
+        sh:path secav:evaluates ;
+        sh:minCount 1 ;
+        sh:class secav:Artifact ;
+        sh:message "A walkthrough execution must identify the artifact being walked through in the live session."@en
+    ] ;
+    sh:property [
+        sh:path secav:producesReviewFinding ;
+        sh:minCount 1 ;
+        sh:class secav:ReviewFinding ;
+        sh:message "A walkthrough execution must record all findings captured during the live session — including an explicit 'no defects found' record when the artifact is clean."@en
+    ] .
+
+secav:WalkthroughReviewShape
+    a sh:NodeShape ;
+    sh:targetClass secav:WalkthroughReview ;
+    sh:property [
+        sh:path secav:producesReviewFinding ;
+        sh:minCount 1 ;
+        sh:class secav:ReviewFinding ;
+        sh:message "A walkthrough review must record the follow-up state of each finding from the walkthrough execution — confirming corrections were adequate or flagging remaining issues."@en
+    ] ;
+    sh:property [
+        sh:path secav:hasSignOff ;
+        sh:minCount 1 ;
+        sh:class secav:CoachReviewSignOff ;
+        sh:message "The walkthrough lifecycle closes with a coach sign-off issued during the walkthrough review, confirming all findings were addressed."@en
+    ] .

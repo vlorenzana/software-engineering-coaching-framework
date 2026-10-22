@@ -1579,3 +1579,45 @@ secav:ReleaseReview a owl:Class ;
     rdfs:subClassOf secav:ReviewActivity, secav:Release ;
     rdfs:label "Release Review"@en ;
     rdfs:comment "A structured review of the release readiness package (release notes, deployment plan, rollback plan, open defect list, environment health) before or immediately after production deployment. Confirms that all quality gates were completed, known risks are documented, and a rollback path exists. Requires coach sign-off and recorded findings."@en .
+
+# ---------------------------------------------------------------------------
+# Planning Phases
+# ---------------------------------------------------------------------------
+
+secav:PlanningActivity a owl:Class ;
+    rdfs:subClassOf secav:EngineeringActivity ;
+    rdfs:label "Planning Activity"@en ;
+    rdfs:comment "The activity of creating a work plan — sprint plan, iteration plan, or feature plan — that schedules engineering phases, review activities, and quality gates. Produces a PlanningArtifact reviewed in the Planning Review."@en .
+
+secav:PlanningArtifact a owl:Class ;
+    rdfs:subClassOf secav:Artifact ;
+    rdfs:label "Planning Artifact"@en ;
+    rdfs:comment "A sprint plan, iteration plan, or work breakdown document that schedules all lifecycle phases including mandatory review activities. The reviewable work product for the Planning Review."@en .
+
+secav:PlanningReview a owl:Class ;
+    rdfs:subClassOf secav:ReviewActivity, secav:PlanningActivity ;
+    rdfs:label "Planning Review"@en ;
+    rdfs:comment "Coach review of a sprint or iteration plan to verify that all mandatory quality gates are scheduled before implementation begins. In particular, confirms that at least one RequirementsReview is in the plan (Code of Ethics Principle 17). A plan without required review activities must not be endorsed — the coach documents a QualityPlanningConcern and requests corrections."@en .
+
+# ---------------------------------------------------------------------------
+# Walkthrough Lifecycle Phases
+# Walkthroughs decompose into three sub-phases analogous to test lifecycle:
+#   1. Walkthrough preparation (selecting artifacts, assigning roles, distributing material)
+#   2. WalkthroughExecution  — the live session (presenting, finding capture)
+#   3. WalkthroughReview     — post-session: corrections verified, findings closed
+# ---------------------------------------------------------------------------
+
+secav:DesignWalkthrough a owl:Class ;
+    rdfs:subClassOf secav:ReviewActivity, secav:DesignActivity ;
+    rdfs:label "Design Walkthrough"@en ;
+    rdfs:comment "The walkthrough method applied to design artifacts (wireframes, prototypes, UML diagrams, architecture documents). The design author/presenter guides reviewers through the artifact; reviewers record findings without debating solutions in the session. Distinct from CodeWalkthrough (source code) and from the more formal DesignReview (structured multidisciplinary session)."@en .
+
+secav:WalkthroughExecution a owl:Class ;
+    rdfs:subClassOf secav:ReviewActivity ;
+    rdfs:label "Walkthrough Execution"@en ;
+    rdfs:comment "The live execution phase of a walkthrough session — the meeting in which the author/presenter walks reviewers through the artifact and reviewers capture findings in real time. Distinct from walkthrough preparation (artifact selection, role assignment, material distribution) and from WalkthroughReview (post-session finding verification). Requires a designated Scribe capturing all findings before the session ends."@en .
+
+secav:WalkthroughReview a owl:Class ;
+    rdfs:subClassOf secav:ReviewActivity ;
+    rdfs:label "Walkthrough Review"@en ;
+    rdfs:comment "The post-session review phase of a walkthrough: verifying that all recorded findings have been addressed by the author, that corrections are adequate, and that no new defects were introduced. Closes the walkthrough lifecycle. Requires coach sign-off and a finding record confirming the follow-up state of each finding from the WalkthroughExecution."@en .
