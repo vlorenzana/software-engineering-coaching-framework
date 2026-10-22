@@ -1762,6 +1762,42 @@ secav:remoteEndorsementDate a owl:DatatypeProperty ;
 
 secav:endorsedObserverReport a owl:ObjectProperty ;
     rdfs:domain secav:CoachRemoteEndorsement ;
-    rdfs:range secav:CoachAbsenceRecord ;
+    rdfs:range secav:ObserverReport ;
     rdfs:label "endorsed observer report"@en ;
-    rdfs:comment "Links the remote endorsement to the CoachAbsenceRecord that documents the absence, the designated observer, and the observer's findings. This traceability chain — absence → observer report → coach endorsement → non-provisional findings — is required for the endorsement to be valid."@en .
+    rdfs:comment "Links the remote endorsement to the ObserverReport that documents who observed the session, when, and what findings were recorded. The ObserverReport is the artifact the coach reviews before issuing the remote endorsement. Traceability chain: CoachAbsenceRecord (absence + designated observer) → ObserverReport (session findings) → CoachRemoteEndorsement (coach acceptance)."@en .
+
+# ---------------------------------------------------------------------------
+# Observer report — independent artifact filed by the designated observer
+# Distinct from CoachAbsenceRecord: the absence record establishes context
+# (why the coach was absent, who was designated); the observer report is the
+# designated observer's own account of what happened in the session.
+# ---------------------------------------------------------------------------
+
+secav:ObserverReport a owl:Class ;
+    rdfs:subClassOf secav:Artifact ;
+    rdfs:label "Observer Report"@en ;
+    rdfs:comment "A structured report filed by the designated observer documenting what occurred during a session the coach did not attend. Contains the observer's identity, the date of the session, and a summary of findings. Required before a CoachRemoteEndorsement can be issued. Distinct from CoachAbsenceRecord, which records the coach's absence and the designation of the observer — not the observed findings themselves."@en .
+
+secav:reportedBy a owl:ObjectProperty ;
+    rdfs:domain secav:ObserverReport ;
+    rdfs:range secav:Stakeholder ;
+    rdfs:label "reported by"@en ;
+    rdfs:comment "The designated observer who filed this report. Must be a trained team member previously designated by the coach in the corresponding CoachAbsenceRecord."@en .
+
+secav:observerReportDate a owl:DatatypeProperty ;
+    rdfs:domain secav:ObserverReport ;
+    rdfs:range xsd:date ;
+    rdfs:label "observer report date"@en ;
+    rdfs:comment "The date on which the designated observer filed this report. Should be the date of the session or immediately after."@en .
+
+secav:reportedFindings a owl:DatatypeProperty ;
+    rdfs:domain secav:ObserverReport ;
+    rdfs:range xsd:string ;
+    rdfs:label "reported findings"@en ;
+    rdfs:comment "A structured summary of the findings the designated observer recorded during the session. Must include explicit statement when no defects were found. This field is the primary basis on which the coach decides whether to issue a CoachRemoteEndorsement."@en .
+
+secav:hasObserverReport a owl:ObjectProperty ;
+    rdfs:domain secav:CoachAbsenceRecord ;
+    rdfs:range secav:ObserverReport ;
+    rdfs:label "has observer report"@en ;
+    rdfs:comment "Links the coach absence record to the observer's report filed after the session. When a designated observer was named in the CoachAbsenceRecord and attended, the resulting ObserverReport is linked here. This link completes the traceability chain required for a CoachRemoteEndorsement."@en .

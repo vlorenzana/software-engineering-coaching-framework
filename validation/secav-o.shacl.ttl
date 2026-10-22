@@ -19,9 +19,11 @@ secav:EngineeringActivityShape
 # Reusable certification constraint — allows either direct sign-off (coach present)
 # or remote endorsement (designated observer attended; coach reviewed the report).
 # Reference with sh:node in any review shape that requires certification.
+# sh:xone enforces mutual exclusivity: the session was either directly witnessed
+# (CoachReviewSignOff) or endorsed remotely (CoachRemoteEndorsement) — never both.
 secav:ReviewCertifiedShape
     a sh:NodeShape ;
-    sh:or (
+    sh:xone (
         [
             sh:property [
                 sh:path secav:hasSignOff ;
@@ -37,7 +39,7 @@ secav:ReviewCertifiedShape
             ]
         ]
     ) ;
-    sh:message "A review activity must be certified by either a direct coach sign-off (secav:CoachReviewSignOff, coach personally present) or a remote endorsement (secav:CoachRemoteEndorsement, designated observer attended and coach reviewed their report — Principles 16 and 18)."@en .
+    sh:message "A review activity must be certified by exactly one mechanism: a direct coach sign-off (secav:CoachReviewSignOff, coach personally present) or a remote endorsement (secav:CoachRemoteEndorsement, designated observer attended and coach reviewed their ObserverReport). Both simultaneously is invalid — Principles 16 and 18."@en .
 
 secav:ReviewActivityShape
     a sh:NodeShape ;
@@ -90,8 +92,30 @@ secav:CoachRemoteEndorsementShape
     sh:property [
         sh:path secav:endorsedObserverReport ;
         sh:minCount 1 ;
-        sh:class secav:CoachAbsenceRecord ;
-        sh:message "A remote endorsement must reference the coach absence record that documents the designated observer and their findings — without this link the endorsement is untraced and invalid."@en
+        sh:class secav:ObserverReport ;
+        sh:message "A remote endorsement must reference an ObserverReport — not the absence record. The ObserverReport identifies the observer and records their session findings. Without this link the endorsement is untraced and invalid."@en
+    ] .
+
+secav:ObserverReportShape
+    a sh:NodeShape ;
+    sh:targetClass secav:ObserverReport ;
+    sh:property [
+        sh:path secav:reportedBy ;
+        sh:minCount 1 ;
+        sh:class secav:Stakeholder ;
+        sh:message "An observer report must identify the designated observer who filed it — observer identity is required for the traceability chain leading to a CoachRemoteEndorsement."@en
+    ] ;
+    sh:property [
+        sh:path secav:observerReportDate ;
+        sh:minCount 1 ;
+        sh:datatype xsd:date ;
+        sh:message "An observer report must record the date the report was filed."@en
+    ] ;
+    sh:property [
+        sh:path secav:reportedFindings ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "An observer report must include a findings summary — including an explicit 'no defects found' statement when the session was clean. This is the primary basis for the coach's remote endorsement decision."@en
     ] .
 
 secav:AIAssistedActivityShape
@@ -596,7 +620,21 @@ secav:CoachAbsenceRecordShape
         sh:path secav:absenceConsequence ;
         sh:minCount 1 ;
         sh:datatype xsd:string ;
-        sh:message "A coach absence record must document the consequence: for review activities 'no sign-off issued, findings provisional'; for other activities 'no observation recorded'."@en
+        sh:message "A coach absence record must document the consequence: for review activities 'no sign-off issued, findings provisional unless remote endorsement is issued'; for other activities 'no observation recorded'."@en
+    ] ;
+    sh:property [
+        sh:path secav:designatedObserver ;
+        sh:maxCount 1 ;
+        sh:class secav:Stakeholder ;
+        sh:severity sh:Warning ;
+        sh:message "A coach absence record for a critical or review session should identify the designated observer. Without a named observer, no ObserverReport can be filed and no CoachRemoteEndorsement can be issued."@en
+    ] ;
+    sh:property [
+        sh:path secav:hasObserverReport ;
+        sh:maxCount 1 ;
+        sh:class secav:ObserverReport ;
+        sh:severity sh:Warning ;
+        sh:message "When a designated observer was named, an ObserverReport should be linked to this absence record. Without it, the traceability chain required for a CoachRemoteEndorsement is incomplete."@en
     ] .
 
 # CoachingRecommendation — advisory finding; must be described so it can be tracked and evaluated

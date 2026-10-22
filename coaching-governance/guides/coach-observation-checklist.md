@@ -16,14 +16,15 @@ This checklist allows the coach to record, during any observation session, the p
 
 | Rule | When | SECAV-O Term |
 |------|------|--------------|
-| **Ideal: coach attends every session.** The goal is full presence across all phases. Absence is the exception, not the norm. | All phases | `secav:CoachObservation` · `secav:observedDuring` |
-| **Every absence must be documented before the session** with reason and consequence. Undocumented absence (no observation AND no absence record) is the worst case — there is no evidence of what occurred. | Any missed session | `secav:CoachAbsenceRecord` · `secav:absenceReason` · `secav:absenceConsequence` |
+| **Prioritize presence at high-risk sessions.** The coach should attend all sessions involving critical artifacts, new or low-competency team members, high-complexity phases, or phases with a history of defect injection. For routine sessions with experienced team members, **risk-based sampling** (a documented subset per sprint) is permitted — provided criteria, coverage targets, and rationale are in the coaching plan. | All phases | `secav:CoachObservation` · `secav:observedDuring` |
+| **Planned non-attendance (within approved sample):** the session falls outside the coaching plan's coverage for this sprint. No absence record required — mark it as non-observed in the coverage table. This is an expected sampling outcome, not a gap. | Sampling plan sessions | coaching plan coverage table |
+| **Unplanned absence (session was within intended coverage):** the coach must record a `secav:CoachAbsenceRecord` before the session, not retroactively. The record must state the reason and the consequence. Undocumented absence is the worst case — there is no evidence of what occurred. | Unplanned missed session | `secav:CoachAbsenceRecord` · `secav:absenceReason` · `secav:absenceConsequence` |
 | **Absence ≠ approval.** The coach not attending a session does not constitute endorsement, sign-off, or certification of what occurred in that session. | All phases | absence of `secav:CoachObservation` is a gap, not a neutral record |
-| **For review activities (peer review, walkthrough, inspection, results review): no sign-off without presence.** If the coach was absent, findings are provisional and the session cannot be used as formal competency evidence until the coach reviews the designated observer's report and decides to endorse remotely (Principle 16). | Review phases | absence of `secav:CoachReviewSignOff` |
-| **For non-review activities (planning, design, implementation, test execution): no observation record.** If absent, the coach records a `secav:CoachAbsenceRecord` and there is no `secav:CoachObservation` for that session. | Production phases | `secav:CoachAbsenceRecord` |
-| **Designate a trained observer for critical sessions.** When absence is unavoidable for a high-risk phase, the coach must name a designated observer before the session begins, not after. | Critical sessions | `secav:designatedObserver` on `secav:CoachAbsenceRecord` |
+| **For review activities (peer review, walkthrough, inspection, results review):** the session must be certified via either (a) a direct `secav:CoachReviewSignOff` when the coach was present, or (b) a `secav:CoachRemoteEndorsement` when absent — issued only after the coach reviews the designated observer's `secav:ObserverReport`. Both mechanisms are mutually exclusive. Findings remain provisional until one is issued. | Review phases | `secav:CoachReviewSignOff` **or** `secav:CoachRemoteEndorsement` + `secav:ObserverReport` |
+| **For non-review activities (planning, design, implementation, test execution): no observation record.** If absent (unplanned), the coach records a `secav:CoachAbsenceRecord` and there is no `secav:CoachObservation` for that session. | Production phases | `secav:CoachAbsenceRecord` |
+| **Designate a trained observer for critical sessions.** When unplanned absence is unavoidable for a high-risk phase, the coach must name a `secav:designatedObserver` before the session begins, not after. The observer files a `secav:ObserverReport` immediately after the session. | Critical sessions | `secav:designatedObserver` on `secav:CoachAbsenceRecord` · `secav:ObserverReport` |
 
-> **How to apply this rule per checklist group:** before completing any group's observation signals for a session, confirm coach presence. If the coach was not present: (a) do not record ✓ or ⚠ signals for that session, (b) record a `secav:CoachAbsenceRecord`, and (c) if the session was a review activity, note that sign-off is withheld.
+> **How to apply this rule per checklist group:** before completing any group's observation signals for a session, confirm coach presence and coverage status. If the coach was not present: (a) do not record ✓ or ⚠ signals for that session; (b) if the session was within the intended coverage (unplanned absence), record a `secav:CoachAbsenceRecord`; if it was outside the approved sample, mark it in the coaching plan as non-observed — no absence record required; (c) if the session was a review activity and no direct sign-off applies, determine whether a `secav:CoachRemoteEndorsement` via a designated observer's `secav:ObserverReport` is appropriate (Principle 16).
 
 ---
 
@@ -73,7 +74,7 @@ This checklist allows the coach to record, during any observation session, the p
 | 1.4 | ✓ | The engineer can verbally explain the requirement before coding | `secav:WorkProductEvidence` |
 | 1.5 | ✓ | The sprint or feature work plan explicitly includes a peer review, walkthrough, or formal inspection of requirements before implementation starts | `secav:RequirementsReview` in work plan |
 | 1.6 | ✓ | The requirements review session produces at least one documented finding — including explicit "no defects found" — before coding begins | `secav:producesReviewFinding` · `secav:RequirementsDefect` |
-| 1.7 | ✓ | The coach issues a sign-off confirming the requirements review was conducted acceptably before authorizing implementation | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
+| 1.7 | ✓ | The coach certifies the requirements review via direct sign-off (when present) or remote endorsement via a designated observer's `secav:ObserverReport` (when absent — Principle 16), confirming the session was conducted acceptably before implementation begins | `secav:CoachReviewSignOff` **or** `secav:CoachRemoteEndorsement` |
 | 1.8 | ✓ | Review participants flag "vague", "ambiguous", "unclear", or "incomplete" defects using explicit labels — not generic comments | `secav:VagueRequirement` / `secav:AmbiguousRequirement` / `secav:UnclearRequirement` / `secav:IncompleteRequirement` |
 | 1.9 | ⚠ | A user story enters the sprint without defined acceptance criteria | `secav:HappyPathOnlyReview` (risk) |
 | 1.10 | ⚠ | The team starts coding with ambiguous requirements without requesting clarification | `secav:AmbiguousRequirement` unresolved; `secav:MissingReviewContext` |
@@ -618,7 +619,7 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 | # | Observable signal | Type | SECAV-O Term |
 |---|------------------|------|--------------|
 | 17.01 | Unit test execution results are recorded in a structured report (pass/fail counts, coverage, failing test names) — not communicated verbally | ✓ | `secav:TestExecutionResultArtifact` · `secav:UnitTestExecution` |
-| 17.02 | The unit test results review assesses defect density against defined thresholds before authorizing integration | ✓ | `secav:UnitTestResultsReview` |
+| 17.02 | The unit test results review assesses defect density against defined thresholds before integration begins | ✓ | `secav:UnitTestResultsReview` |
 | 17.03 | Coverage data is reviewed for gaps (untested paths) not just total coverage percentage | ✓ | `secav:UnitTestResultsReview` |
 | 17.04 | Flaky or intermittently failing tests are flagged as findings — not dismissed or re-run without investigation | ✓ | `secav:ReviewFinding` |
 | 17.05 | The team proceeds to integration testing based on CI pass status alone, without a reviewed results report | ⚠ | absence of `secav:UnitTestResultsReview` |
@@ -712,7 +713,7 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 | 19.10 | Formal inspection roles are assigned but participants do not prepare before the session — entry criteria failure, the inspection should not proceed | ⚠ | `secav:ReviewAntipattern` |
 | 19.11 | Inspection findings are lost because no Scribe was designated or the record was not preserved after the session | ⚠ | `secav:WalkthroughWithoutRecord` |
 | 19.12 | All findings from any review session (peer review, walkthrough, or formal inspection) are recorded with severity and proposed resolution before the session closes | ✓ | `secav:producesReviewFinding` · `secav:walkthroughSeverity` · `secav:proposedSolution` (optional) |
-| 19.13 | The coach issues a process sign-off confirming the session was conducted acceptably under the declared review method | ✓ | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
+| 19.13 | The coach certifies the session via direct sign-off (when present) or remote endorsement via a designated observer's `secav:ObserverReport` (when absent — Principle 16), confirming the session was conducted acceptably under the declared review method | ✓ | `secav:CoachReviewSignOff` **or** `secav:CoachRemoteEndorsement` |
 | 19.14 | A review session (peer review, walkthrough, or formal inspection) closes without the coach issuing a process sign-off — findings cannot be used as formal competency evidence | ⚠ | absence of `secav:CoachReviewSignOff` |
 
 ### Escalation notes — Group 19
