@@ -899,3 +899,152 @@ secav:agreementStatus a owl:DatatypeProperty ;
     rdfs:range xsd:string ;
     rdfs:label "agreement status"@en ;
     rdfs:comment "Current tracking status of the agreement: 'open', 'completed', or 'cancelled'."@en .
+
+# ---------------------------------------------------------------------------
+# Software Project Risk Management
+# Derived from: Software Development Risk Register (Gestión de Riesgos de Software)
+# Models the four risk categories, the P×I evaluation matrix (scales 1–5),
+# the four response strategies, the risk response plan, and the risk register
+# artifact. Risks with P×I ≥ 12 require an active prevention plan.
+# ---------------------------------------------------------------------------
+
+# § Risk Categories
+
+secav:ProjectRisk a owl:Class ;
+    rdfs:label "Project Risk"@en ;
+    rdfs:comment "A software project risk composed of a root cause, a risk event, and a project impact description; evaluated by probability (1–5) and impact (1–5) scores whose product yields the risk priority score."@en .
+
+secav:TechnicalRisk a owl:Class ;
+    rdfs:subClassOf secav:ProjectRisk ;
+    rdfs:label "Technical Risk"@en ;
+    rdfs:comment "A risk arising from architectural decisions, technical debt, integration failures, performance degradation, or security vulnerabilities."@en .
+
+secav:ManagementRisk a owl:Class ;
+    rdfs:subClassOf secav:ProjectRisk ;
+    rdfs:label "Management Risk"@en ;
+    rdfs:comment "A risk arising from estimation errors, scope drift, planning deficiencies, or milestone misalignment."@en .
+
+secav:OrganizationalRisk a owl:Class ;
+    rdfs:subClassOf secav:ProjectRisk ;
+    rdfs:label "Organizational Risk"@en ;
+    rdfs:comment "A risk arising from staff turnover, commercial priority shifts, or budget constraints."@en .
+
+secav:ExternalRisk a owl:Class ;
+    rdfs:subClassOf secav:ProjectRisk ;
+    rdfs:label "External Risk"@en ;
+    rdfs:comment "A risk arising from third-party API providers, regulatory changes, license constraints, or cloud service instability."@en .
+
+# § Risk Register — living artifact tracking all active risks.
+
+secav:RiskRegister a owl:Class ;
+    rdfs:subClassOf secav:Artifact ;
+    rdfs:label "Risk Register"@en ;
+    rdfs:comment "A living artifact containing the active set of identified, evaluated, and tracked project risks; reviewed weekly or at the start of each sprint. Risks with P×I ≥ 12 require an active prevention plan."@en .
+
+# § Risk Response Strategies — the four standard responses.
+
+secav:RiskResponseStrategy a owl:Class ;
+    rdfs:label "Risk Response Strategy"@en ;
+    rdfs:comment "A standard approach for responding to an identified project risk: Mitigate, Avoid, Transfer, or Accept."@en .
+
+secav:MitigateStrategy a owl:Class ;
+    rdfs:subClassOf secav:RiskResponseStrategy ;
+    rdfs:label "Mitigate Strategy"@en ;
+    rdfs:comment "Reduce the probability or impact of the risk through preventive actions taken before the risk event occurs."@en .
+
+secav:AvoidStrategy a owl:Class ;
+    rdfs:subClassOf secav:RiskResponseStrategy ;
+    rdfs:label "Avoid Strategy"@en ;
+    rdfs:comment "Alter the project plan to eliminate the threat or its root cause entirely."@en .
+
+secav:TransferStrategy a owl:Class ;
+    rdfs:subClassOf secav:RiskResponseStrategy ;
+    rdfs:label "Transfer Strategy"@en ;
+    rdfs:comment "Move the responsibility or impact of the risk to a third party (e.g., insurance, vendor SLA, external contractor)."@en .
+
+secav:AcceptStrategy a owl:Class ;
+    rdfs:subClassOf secav:RiskResponseStrategy ;
+    rdfs:label "Accept Strategy"@en ;
+    rdfs:comment "Acknowledge the risk and prepare a contingency plan to activate if it materializes; used when mitigation cost outweighs the risk impact."@en .
+
+# § Risk Response Plan — prevention + contingency for a specific risk.
+
+secav:RiskResponsePlan a owl:Class ;
+    rdfs:label "Risk Response Plan"@en ;
+    rdfs:comment "A concrete plan combining a prevention action and a contingency action for a project risk, with an identified owner."@en .
+
+# § Risk Object Properties
+
+secav:tracksRisk a owl:ObjectProperty ;
+    rdfs:domain secav:RiskRegister ;
+    rdfs:range secav:ProjectRisk ;
+    rdfs:label "tracks risk"@en ;
+    rdfs:comment "Links a risk register to a project risk it monitors."@en .
+
+secav:hasResponseStrategy a owl:ObjectProperty ;
+    rdfs:domain secav:ProjectRisk ;
+    rdfs:range secav:RiskResponseStrategy ;
+    rdfs:label "has response strategy"@en ;
+    rdfs:comment "Links a project risk to its chosen response strategy (Mitigate, Avoid, Transfer, or Accept)."@en .
+
+secav:hasResponsePlan a owl:ObjectProperty ;
+    rdfs:domain secav:ProjectRisk ;
+    rdfs:range secav:RiskResponsePlan ;
+    rdfs:label "has response plan"@en ;
+    rdfs:comment "Links a project risk to its concrete prevention and contingency plan."@en .
+
+secav:riskOwner a owl:ObjectProperty ;
+    rdfs:domain secav:ProjectRisk ;
+    rdfs:range secav:Stakeholder ;
+    rdfs:label "risk owner"@en ;
+    rdfs:comment "The stakeholder responsible for monitoring this risk and activating its response plan when needed."@en .
+
+# § Risk Datatype Properties
+
+secav:riskRootCause a owl:DatatypeProperty ;
+    rdfs:domain secav:ProjectRisk ;
+    rdfs:range xsd:string ;
+    rdfs:label "risk root cause"@en ;
+    rdfs:comment "The condition that creates the risk (the 'Due to [Root Cause]' clause in the standard risk syntax)."@en .
+
+secav:riskEvent a owl:DatatypeProperty ;
+    rdfs:domain secav:ProjectRisk ;
+    rdfs:range xsd:string ;
+    rdfs:label "risk event"@en ;
+    rdfs:comment "The uncertain event that may occur if the root cause is not addressed (the 'there is a possibility that [Risk Event]' clause)."@en .
+
+secav:riskImpactDescription a owl:DatatypeProperty ;
+    rdfs:domain secav:ProjectRisk ;
+    rdfs:range xsd:string ;
+    rdfs:label "risk impact description"@en ;
+    rdfs:comment "The project consequence if the risk event materializes (the 'which would cause [Impact]' clause)."@en .
+
+secav:riskProbability a owl:DatatypeProperty ;
+    rdfs:domain secav:ProjectRisk ;
+    rdfs:range xsd:integer ;
+    rdfs:label "risk probability"@en ;
+    rdfs:comment "Probability score 1–5: 1=Rare (<10%), 2=Unlikely (10-30%), 3=Possible (30-60%), 4=Probable (60-85%), 5=Almost Certain (>85%)."@en .
+
+secav:riskImpact a owl:DatatypeProperty ;
+    rdfs:domain secav:ProjectRisk ;
+    rdfs:range xsd:integer ;
+    rdfs:label "risk impact"@en ;
+    rdfs:comment "Impact score 1–5: 1=Insignificant, 2=Minor (<5%), 3=Moderate (5-15% sprint reajustment), 4=Major (15-30% milestone delay), 5=Catastrophic (project viability at risk)."@en .
+
+secav:riskScore a owl:DatatypeProperty ;
+    rdfs:domain secav:ProjectRisk ;
+    rdfs:range xsd:integer ;
+    rdfs:label "risk score"@en ;
+    rdfs:comment "Combined priority score (P×I). Risks with score ≥ 12 require an active prevention plan and priority review at every sprint start."@en .
+
+secav:preventionAction a owl:DatatypeProperty ;
+    rdfs:domain secav:RiskResponsePlan ;
+    rdfs:range xsd:string ;
+    rdfs:label "prevention action"@en ;
+    rdfs:comment "The proactive action taken before the risk materializes to reduce its probability or impact."@en .
+
+secav:contingencyAction a owl:DatatypeProperty ;
+    rdfs:domain secav:RiskResponsePlan ;
+    rdfs:range xsd:string ;
+    rdfs:label "contingency action"@en ;
+    rdfs:comment "The reactive action to execute if the risk event materializes despite prevention efforts."@en .

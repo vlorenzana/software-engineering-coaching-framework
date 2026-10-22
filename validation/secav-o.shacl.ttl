@@ -1,5 +1,6 @@
 @prefix secav: <https://github.com/vlorenzana/software-engineering-coaching-framework/ontology/secav-o#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 # Initial governance/data-quality shapes.
 # These constraints validate RDF data structure. They do not claim empirical
@@ -205,4 +206,46 @@ secav:MeetingAgreementShape
         sh:minCount 1 ;
         sh:datatype xsd:date ;
         sh:message "A meeting agreement must have a due date."@en
+    ] .
+
+secav:ProjectRiskShape
+    a sh:NodeShape ;
+    sh:targetClass secav:ProjectRisk ;
+    sh:property [
+        sh:path secav:riskProbability ;
+        sh:minCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 1 ;
+        sh:maxInclusive 5 ;
+        sh:message "A project risk must have a probability score between 1 and 5."@en
+    ] ;
+    sh:property [
+        sh:path secav:riskImpact ;
+        sh:minCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 1 ;
+        sh:maxInclusive 5 ;
+        sh:message "A project risk must have an impact score between 1 and 5."@en
+    ] ;
+    sh:property [
+        sh:path secav:riskOwner ;
+        sh:minCount 1 ;
+        sh:class secav:Stakeholder ;
+        sh:message "A project risk must have an identified owner."@en
+    ] ;
+    sh:property [
+        sh:path secav:hasResponsePlan ;
+        sh:minCount 1 ;
+        sh:class secav:RiskResponsePlan ;
+        sh:message "A project risk must have at least one response plan (prevention + contingency)."@en
+    ] .
+
+secav:RiskResponsePlanShape
+    a sh:NodeShape ;
+    sh:targetClass secav:RiskResponsePlan ;
+    sh:property [
+        sh:path secav:preventionAction ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "A risk response plan must describe the prevention action."@en
     ] .
