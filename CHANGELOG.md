@@ -4,11 +4,41 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-10-22
+
 ### Added
 
 - `coaching-governance/guides/robust-process-criteria.md` — new formal quality level for the framework: **robust process**, positioned between minimum reasonable quality and aspirational quality. Defines five criteria (CR-1 to CR-5): inspections over critical products; dynamic behavior design with UML activity or sequence diagrams; documentation of resulting defects with `secavo:phaseInjected` and `secavo:phaseDetected`; individual reviews that generate findings; and a justified coach waiver when they do not. Introduces the proposed term `secavo:CoachWaiver`. Additional criteria pending incorporation.
 - `coaching-governance/docs/internal-audit-checklist.md` — structured checklist for internal audit functions auditing SECAV-O coaching processes. 67 criteria organized into 11 areas: team inception and launch, member preparation and onboarding, initial growth baseline, annual coaching plan, sprint planning, evidence collection and coaching interventions, retrospective and replanning, risk management, Coach Committee governance, ethics and confidentiality, and traceability. Each criterion specifies the evidence to request and provides a pass/fail result field and observation column. Includes a summary table aggregating compliance results by area.
 - `coaching-governance/docs/cmmi-mapping.md` — mapping of SECAV-O processes and artifacts to CMMI for Development (CMMI-DEV) v2.0 practice areas. Covers OT, OPF, OPD, MA, PQA, PMC, RSKM, VER, and PR. For each practice area, lists the specific CMMI practice, the SECAV-O implementation, and the primary artifacts that provide appraisal evidence. Includes a cross-reference artifact locator table and notes for appraisers on longitudinal evidence, metric interpretation, the distinction between coaching and performance management, and tailoring expectations.
+- `coaching-governance/docs/coach-code-of-ethics.md` — five new principles (19–23), bringing the code to 23 principles:
+  - **Principle 19 — Prohibition on dismissal recommendations.** The coach must not recommend, suggest, or imply that a team member should be dismissed or removed, explicitly or implicitly. Reports contain observable findings only; personnel verdicts and suitability conclusions rest exclusively with management.
+  - **Principle 20 — Engineer autonomy and non-coercion.** The coach presents findings once, clearly and with evidence. The coach must not argue, repeat insistence, or pressure the engineer to change. A declined recommendation is recorded — not debated. Material quality risks from a declined recommendation are escalated as `secavo:QualityPlanningConcern` through the formal escalation protocol only.
+  - **Principle 21 — Technical training at the engineer's request and within coach competence.** The coach may deliver technical training only when explicitly requested by the engineer and only within domains where the coach has verified competence. When the request falls outside the coach's knowledge, the coach acknowledges the gap immediately and records it in the coaching log and management report.
+  - **Principle 22 — Design review authority and process compliance.** The coach's authority to raise a compliance finding extends only to deviations from formally adopted processes, standards, and acceptance criteria. Findings must be classified as either `secav:ProcessComplianceFinding` (deviation from a documented obligation) or `secav:CoachingRecommendation` (advisory improvement not yet formalized). Personal preferences may not be enforced as compliance findings.
+  - **Principle 23 — Design consultation at the engineer's request and within coach qualifications.** The coach does not volunteer unsolicited design opinions. When an engineer asks a design question, the coach may respond only within their declared `secav:CoachConsultingScope`. Limits must be declared immediately and without deflection. The engineer retains full accountability for all design decisions.
+- `coaching-governance/guides/coach-observation-checklist.md` — two new cross-cutting rule sections aligned with Principles 22 and 23: **Coach review authority and finding type** (process compliance finding vs. coaching recommendation classification gate, `secav:ProcessComplianceFinding`, `secav:referencedProcessRequirement`, `secav:CoachingRecommendation`); and **Design consultation at the engineer's request** (`secav:DesignConsultation`, `secav:CoachConsultingScope`, `secav:coachQualified`, `secav:consultationDomain`). Fixed namespace prefix on `secav:CoachAbsenceRecord` and `secav:CoachObservation` references in the absence cross-cutting rule.
+
+### Added — Ontology (`ontology/secav-o.ttl`)
+
+- `secav:requiredReviewCompetency` — ObjectProperty on `secav:Artifact`; declares the competency level required to review an artifact responsibly. Primarily applicable to `secav:CriticalUnitTest`, mandating formal peer review rather than automated gate execution alone.
+- `secav:ProcessComplianceFinding` — subclass of `secav:ReviewFinding`; documents a deviation from a formally adopted process requirement. Grounded in Principle 22.
+- `secav:CoachingRecommendation` — subclass of `secav:ReviewFinding`; advisory improvement not backed by an adopted process requirement. Engineer may accept or decline (Principle 20). Distinct from `secav:ProcessComplianceFinding`.
+- `secav:referencedProcessRequirement` — DatatypeProperty on `secav:ProcessComplianceFinding`; required field citing the specific document, standard, checklist section, or acceptance criterion the artifact deviates from.
+- `secav:DesignConsultation` — subclass of `secav:EngineeringActivity`; ad-hoc technical Q&A initiated by an engineer. Coach may respond only when qualified in the domain asked (Principle 23).
+- `secav:CoachConsultingScope` — subclass of `secav:Artifact`; declared document listing the design domains and technologies in which the coach is qualified to consult. Must be available to the team and management.
+- `secav:consultingDomain` — DatatypeProperty on `secav:CoachConsultingScope`; one named domain per value.
+- `secav:scopeDeclarationDate` — DatatypeProperty (`xsd:date`) on `secav:CoachConsultingScope`; date the scope was last reviewed. Recommended review cadence: every six months.
+- `secav:consultationDomain` — DatatypeProperty on `secav:DesignConsultation`; the specific domain the engineer's question concerned.
+- `secav:coachQualified` — DatatypeProperty (`xsd:boolean`) on `secav:DesignConsultation`; records whether the coach's response fell within their declared consulting scope.
+
+### Fixed — Ontology and validation
+
+- `validation/secav-o.shacl.ttl` — updated SHACL constraints to cover `secav:ProcessComplianceFinding` (requires `secav:referencedProcessRequirement`) and `secav:DesignConsultation` (requires `secav:coachQualified` and `secav:consultationDomain`).
+
+### Fixed — Metadata
+
+- `CITATION.cff` — updated `version` to `0.3.0`, `date-released` to `2026-10-22`, and `abstract` to reflect the 23-principle code of ethics.
 
 ## [0.2.0] - 2026-10-07
 
