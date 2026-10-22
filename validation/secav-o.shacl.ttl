@@ -272,6 +272,16 @@ secav:RiskResponsePlanShape
         sh:message "A risk response plan must describe the prevention action."@en
     ] .
 
+secav:UnitTestDesignReviewShape
+    a sh:NodeShape ;
+    sh:targetClass secav:UnitTestDesignReview ;
+    sh:property [
+        sh:path secav:evaluates ;
+        sh:minCount 1 ;
+        sh:class secav:UnitTestDesignArtifact ;
+        sh:message "A unit test design review must identify the test artifact being reviewed — test code is a work product requiring individual peer review, not just CI execution."@en
+    ] .
+
 secav:DesignReviewShape
     a sh:NodeShape ;
     sh:targetClass secav:DesignReview ;
