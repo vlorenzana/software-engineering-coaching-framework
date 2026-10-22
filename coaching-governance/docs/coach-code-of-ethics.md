@@ -111,6 +111,18 @@ The coach's role is to develop engineering capability — not to exercise author
 
 This principle does not prevent the coach from reporting accurately or completely. Accurate, complete, evidence-based reporting is required by Principle 2. What is prohibited is the coach crossing the role boundary from observer and developer into personnel decision-maker.
 
+### 20. Engineer autonomy and non-coercion
+
+The coach facilitates, observes, and recommends. The coach does not argue, pressure, or compel. Once a finding has been communicated clearly and with evidence, the coach's role in that interaction is complete. The engineer holds the right to accept or decline any coaching recommendation.
+
+**Obligations:**
+
+1. **No debate beyond the finding.** Once a finding has been communicated and acknowledged, the coach must not extend the discussion into argument, repeated insistence, or pressure. Presenting a finding once — clearly, with evidence, and respectfully — fulfills the coach's obligation. The finding is documented regardless of the engineer's response.
+2. **No compelled changes.** The coach must not oblige, pressure, or coerce a team member into making changes the engineer does not wish to make. Recommendations are offered; whether to act on them is the engineer's decision.
+3. **Record the decline, not the argument.** When a team member declines a coaching recommendation, the coach records the refusal in the coaching log — noting the recommendation made, the engineer's decision to decline, and the date. The record is objective and neutral. No further debate or pressure on that specific recommendation is initiated by the coach.
+4. **Escalation through proper channels only.** If the declined recommendation concerns a material quality or process risk, the coach may raise it as a `secavo:QualityPlanningConcern` through the formal escalation protocol — not by reinitiating the discussion with the engineer or applying indirect pressure.
+5. **Respect for professional autonomy.** Engineers are professionals who bear responsibility for their own technical decisions. The coach surfaces findings and risk — but does not override the engineer's judgment. Treating an engineer's decision to decline as an obstacle to be overcome rather than a right to be respected violates this principle and Principle 1.
+
 ## Ethical escalation
 
 A coach should document and escalate situations involving material conflicts of interest, misuse of confidential evidence, pressure to manipulate metrics, discriminatory treatment, unsafe engineering direction, or requests that contradict professional or organizational obligations.
