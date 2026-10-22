@@ -36,6 +36,8 @@ All notable changes to this project will be documented in this file.
 
 - `validation/secav-o.shacl.ttl` — updated SHACL constraints to cover `secav:ProcessComplianceFinding` (requires `secav:referencedProcessRequirement`) and `secav:DesignConsultation` (requires `secav:coachQualified` and `secav:consultationDomain`).
 
+- `coaching-governance/guides/peer-review-antipatterns.md` — catalog of the most frequent operational and cultural errors in peer reviews, derived from source document *Antiprácticas de Inspección de Código*. Six antipatterns with observable impact, coach signal, and mitigation strategy: (1) reviewing style manually instead of delegating to automation; (2) overly long sessions exceeding 60 minutes or 400 LOC; (3) missing initial context in the PR description; (4) reviewing unfinished or WIP code; (5) non-empathic feedback directed at the person rather than the artifact; (6) inadequate scrutiny of AI-assisted code. Includes a mental verification checklist for the efficient reviewer (biological energy, isolation, critical focus, assertive closure) and a SECAV-O integration table mapping each antipattern to its corresponding ontology term and coaching signal. Counterpart to `coaching-governance/guides/code-review-best-practices.md`.
+
 ### Added — Remote observer traceability
 
 - `ontology/secav-o.ttl` — three new terms completing the remote certification chain:
