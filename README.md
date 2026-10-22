@@ -9,6 +9,40 @@ This package extends the SECAV-O coaching operating model with six connected gov
 5. a Code of Ethics for coaches; and
 6. formal coach participation in project planning, quality advocacy, documented dissent and proportional escalation when material quality activities are omitted or weakened.
 
+## Changelog
+
+### v0.3.0
+
+Five model extensions integrated into `ontology/secav-o.ttl`, with SHACL shapes, guide updates, and new templates.
+
+**Organizational Change Adoption**
+New classes: `AdoptionPillar` (5 subclasses: LeadershipModeling, EfficientCollaboration, OpenCommunication, ContinuousAdaptability, FeedbackAndInnovation), `AdoptionBehavior` (7 subclasses — one per observable behavior from the change adoption matrix), `AdoptionMeasurement` (PulseSurveyMeasurement, DirectRitualObservation), `ChangeAdaptabilityCompetency`, `ChangeAgent`. Properties: `belongsToPillar`, `measuresAdoption`, `facilitatedBy`, `adoptionTarget`. Checklist Group 9 added.
+
+**Coach Observation Model**
+New classes: `CoachObservation` (subclass of `Evidence`), `PositiveBehaviorObservation`, `AlertBehaviorObservation`. Properties: `observedDuring`, `observationStatement`, `evidencesCompetency`, `triggersIntervention`. Coach observation checklist connected to ontology terms.
+
+**Technical Leadership Behaviors**
+New classes: `TechnicalLeadershipDimension` (3 subclasses: PeopleAndMentoring 35%, ArchitectureAndCode 30%, StrategyAndImpact 35%), `LeaderBehavior` (subclass of `Evidence`) with 10 subclasses (PsychologicalSafetyPromotion, ActiveMentorship, EffectiveDelegation, TechnicalDebtNegotiation, ArchitectureDecisionDocumentation, TeamShielding, DeliveryConsistencyBehavior, ContinuousFeedbackBehavior, TechnicalDiversityBehavior, HolisticProductVisionBehavior), `TechnicalLeader`, `TechnicalLeadershipCompetency`. Property: `belongsToDimension`. Checklist Group 10 added.
+
+**Coaching Meeting & Minutes**
+New classes: `CoachingMeeting` (subclass of `CoachingIntervention`), `MeetingMinutes` (subclass of `Artifact`), `MeetingAgreement`. Properties: `producesMinutes`, `hasAgreement`, `agreementOwner`, `agreementDueDate`, `agreementStatus`. Template: `templates/coach-meeting-minutes.md`.
+
+**Software Project Risk Management**
+New classes: `ProjectRisk` (4 category subclasses: TechnicalRisk, ManagementRisk, OrganizationalRisk, ExternalRisk), `RiskRegister` (subclass of `Artifact`), `RiskResponseStrategy` (4 subclasses: MitigateStrategy, AvoidStrategy, TransferStrategy, AcceptStrategy), `RiskResponsePlan`. Properties: `tracksRisk`, `hasResponseStrategy`, `hasResponsePlan`, `riskOwner`, `riskProbability` (1–5), `riskImpact` (1–5), `riskScore` (P×I — threshold ≥ 12), `riskRootCause`, `riskEvent`, `riskImpactDescription`, `preventionAction`, `contingencyAction`. SHACL: `ProjectRiskShape` validates P/I scales and requires owner and response plan. Checklist Group 11 added.
+
+**Other changes**
+- SHACL shapes added for all new classes; `xsd:` prefix declaration added to `secav-o.shacl.ttl`
+- Ontology diagrams in README updated to reflect full v0.3 class hierarchy (core pattern + expanded class hierarchy with 9 subgraph groups)
+- Coach observation checklist extended to 11 groups (Groups 9–11 cover adoption, leadership, and risk)
+
+---
+
+### v0.2.0
+
+Added coaching governance extension (`secav-o-coaching-governance-extension.ttl`): annual coaching plan, coaching sprints, sprint retrospectives, institutional alignment, risk management, coach ethics, metrics model, competency growth scale, and formal coach participation in project planning with quality advocacy and escalation protocol.
+
+---
+
 ## Ontology Overview
 
 ### Core pattern
