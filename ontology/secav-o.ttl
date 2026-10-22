@@ -243,3 +243,127 @@ secav:requestDescription a owl:DatatypeProperty ;
     rdfs:range xsd:string ;
     rdfs:label "request description"@en ;
     rdfs:comment "Structured description of the review request: what changed, why, and acceptance criteria."@en .
+
+# ---------------------------------------------------------------------------
+# Preventive Actions (Shift-Left)
+# Derived from: coaching-governance/guides/shift-left-prevention.md
+# A PreventiveAction is an EngineeringActivity performed proactively — earlier
+# in the lifecycle — to prevent defects before they reach peer review.
+# ---------------------------------------------------------------------------
+
+secav:PreventiveAction a owl:Class ;
+    rdfs:subClassOf secav:EngineeringActivity ;
+    rdfs:label "Preventive Action"@en ;
+    rdfs:comment "An engineering activity performed proactively to prevent defects from reaching the review phase."@en .
+
+secav:AcceptanceCriteriaDefinition a owl:Class ;
+    rdfs:subClassOf secav:PreventiveAction, secav:RequirementsActivity ;
+    rdfs:label "Acceptance Criteria Definition"@en ;
+    rdfs:comment "Defining verifiable acceptance criteria (BDD/TDD) before writing production code, eliminating logical ambiguity at the source."@en .
+
+secav:APIContractDefinition a owl:Class ;
+    rdfs:subClassOf secav:PreventiveAction, secav:DesignActivity ;
+    rdfs:label "API Contract Definition"@en ;
+    rdfs:comment "Defining API contracts and interfaces before parallel module implementation, preventing integration defects."@en .
+
+secav:SelfReview a owl:Class ;
+    rdfs:subClassOf secav:PreventiveAction, secav:ReviewActivity ;
+    rdfs:label "Self Review"@en ;
+    rdfs:comment "The engineer reviews their own artifact after a brief pause before submitting a formal review request, catching obvious defects with a fresh read."@en .
+
+# ---------------------------------------------------------------------------
+# API Contract Artifact
+# The design artifact produced by APIContractDefinition.
+# ---------------------------------------------------------------------------
+
+secav:APIContractArtifact a owl:Class ;
+    rdfs:subClassOf secav:DesignArtifact ;
+    rdfs:label "API Contract Artifact"@en ;
+    rdfs:comment "A design artifact specifying the contract, interface, or protocol between modules or services, agreed before parallel implementation begins."@en .
+
+# ---------------------------------------------------------------------------
+# Automation Gates
+# Quality criteria enforced by automated tooling rather than human judgement.
+# Subclass of QualityCriterion: these are conditions that must be satisfied
+# for an EngineeringActivity to be considered complete.
+# ---------------------------------------------------------------------------
+
+secav:AutomationGate a owl:Class ;
+    rdfs:subClassOf secav:QualityCriterion ;
+    rdfs:label "Automation Gate"@en ;
+    rdfs:comment "A quality criterion enforced by automated tooling (linters, hooks, CI/CD checks) rather than human review."@en .
+
+secav:PreCommitHook a owl:Class ;
+    rdfs:subClassOf secav:AutomationGate ;
+    rdfs:label "Pre-Commit Hook"@en ;
+    rdfs:comment "Blocks local commits if unit tests fail or if exposed environment variables are detected."@en .
+
+secav:StrictTypingPolicy a owl:Class ;
+    rdfs:subClassOf secav:AutomationGate ;
+    rdfs:label "Strict Typing Policy"@en ;
+    rdfs:comment "Compiler-enforced type strictness (e.g., noImplicitAny in TypeScript) that prevents implicit type errors at runtime."@en .
+
+secav:CodeCoverageGate a owl:Class ;
+    rdfs:subClassOf secav:AutomationGate ;
+    rdfs:label "Code Coverage Gate"@en ;
+    rdfs:comment "A minimum code coverage threshold (e.g., >80%) enforced locally before a push is permitted."@en .
+
+# ---------------------------------------------------------------------------
+# Developer Cognitive State
+# The bio-cognitive precondition state of the engineer during implementation.
+# Parallel to ReviewerReadiness but applies to coding activities.
+# Modeled as QualityCriterion: a condition that must be met for a
+# CodeImplementation to produce low-defect-density artifacts.
+# ---------------------------------------------------------------------------
+
+secav:DeveloperCognitiveState a owl:Class ;
+    rdfs:subClassOf secav:QualityCriterion ;
+    rdfs:label "Developer Cognitive State"@en ;
+    rdfs:comment "The bio-cognitive precondition state of the engineer during implementation. When unmet, defect density in the artifact increases."@en .
+
+secav:DeepWorkCondition a owl:Class ;
+    rdfs:subClassOf secav:DeveloperCognitiveState ;
+    rdfs:label "Deep Work Condition"@en ;
+    rdfs:comment "45–60 minute focused coding blocks without external notifications, preserving the engineer's mental model of the logic."@en .
+
+secav:FatigueManagementCondition a owl:Class ;
+    rdfs:subClassOf secav:DeveloperCognitiveState ;
+    rdfs:label "Fatigue Management Condition"@en ;
+    rdfs:comment "Mandatory breaks after extended development blocks; accumulated fatigue degrades the ability to identify logical edge cases."@en .
+
+secav:SelfReviewCondition a owl:Class ;
+    rdfs:subClassOf secav:DeveloperCognitiveState ;
+    rdfs:label "Self-Review Condition"@en ;
+    rdfs:comment "A brief pause before self-reviewing local changes, allowing the engineer to detect obvious defects with a fresh perspective."@en .
+
+# ---------------------------------------------------------------------------
+# New Object Properties
+# ---------------------------------------------------------------------------
+
+secav:hasAutomationGate a owl:ObjectProperty ;
+    rdfs:domain secav:EngineeringActivity ;
+    rdfs:range secav:AutomationGate ;
+    rdfs:label "has automation gate"@en ;
+    rdfs:comment "Links an engineering activity to the automated quality gates that must pass before the activity is considered complete."@en .
+
+secav:hasDeveloperCognitiveState a owl:ObjectProperty ;
+    rdfs:domain secav:CodeImplementation ;
+    rdfs:range secav:DeveloperCognitiveState ;
+    rdfs:label "has developer cognitive state"@en ;
+    rdfs:comment "Links a code implementation activity to the bio-cognitive precondition state of the engineer performing it."@en .
+
+secav:prevents a owl:ObjectProperty ;
+    rdfs:domain secav:PreventiveAction ;
+    rdfs:range secav:DefectRecord ;
+    rdfs:label "prevents"@en ;
+    rdfs:comment "Expresses that a preventive action is intended to avoid a class of defects from being introduced into the artifact."@en .
+
+# ---------------------------------------------------------------------------
+# New Datatype Property
+# ---------------------------------------------------------------------------
+
+secav:coverageThreshold a owl:DatatypeProperty ;
+    rdfs:domain secav:CodeCoverageGate ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "coverage threshold"@en ;
+    rdfs:comment "The minimum code coverage percentage (0.0–1.0) required before a push is permitted."@en .

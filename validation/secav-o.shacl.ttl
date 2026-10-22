@@ -86,3 +86,33 @@ secav:FormalReviewRequestShape
         sh:datatype xsd:string ;
         sh:message "A formal review request must include a description of what changed, why, and the acceptance criteria."@en
     ] .
+
+secav:AutomationGateShape
+    a sh:NodeShape ;
+    sh:targetClass secav:AutomationGate ;
+    sh:property [
+        sh:path secav:criterionStatement ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "An automation gate must have a criterion statement describing what condition is enforced."@en
+    ] .
+
+secav:AcceptanceCriteriaDefinitionShape
+    a sh:NodeShape ;
+    sh:targetClass secav:AcceptanceCriteriaDefinition ;
+    sh:property [
+        sh:path secav:produces ;
+        sh:minCount 1 ;
+        sh:class secav:Artifact ;
+        sh:message "An acceptance criteria definition activity must produce at least one artifact (e.g., a test specification or BDD scenario document)."@en
+    ] .
+
+secav:SelfReviewShape
+    a sh:NodeShape ;
+    sh:targetClass secav:SelfReview ;
+    sh:property [
+        sh:path secav:evaluates ;
+        sh:minCount 1 ;
+        sh:class secav:Artifact ;
+        sh:message "A self-review must identify the artifact the engineer evaluated before submitting the formal review request."@en
+    ] .
