@@ -67,6 +67,8 @@ _
 | 3 | | | |
 
 > Add or remove rows as needed.
+>
+> **If a review session (peer review, walkthrough, or inspection) was discussed:** record whether the `secav:CoachReviewSignOff` was issued — Yes / No / Pending — in the Decision / Outcome column. A pending sign-off must appear as an open agreement in § 4.
 
 ---
 
@@ -99,6 +101,38 @@ Each row is a `secav:MeetingAgreement` with owner, deadline, and follow-up statu
 
 ---
 
+## 5b. Review Session Record *(complete only when meeting type is "Technical review / inspection")*
+
+> If this meeting is a peer review, walkthrough, or formal inspection session, the following fields are mandatory per `secav:CoachReviewSignOff` governance.
+
+| Field | Value |
+|-------|-------|
+| **Artifact reviewed** | [file / module / requirements section / design artifact] |
+| **Review type** | [ ] Peer code review  [ ] Walkthrough  [ ] Formal inspection  [ ] Unit test design review  [ ] Requirements review  [ ] Design review |
+| **Findings recorded** | [ ] Yes — count: __  [ ] No defects found (explicit)  [ ] Not recorded (session not valid) |
+| **Proposed solutions recorded** | [ ] Yes (for agreed-upon directions)  [ ] N/A |
+| **Coach sign-off issued** | [ ] Yes — `secav:CoachReviewSignOff` issued (date: _____)  [ ] No — findings are provisional, not valid as competency evidence |
+| **Sign-off statement** | _Brief statement confirming the session was conducted acceptably (or reason for withholding)_ |
+
+> If no sign-off is issued, note the reason here and in the agreements section (§ 4) with a follow-up action.
+
+---
+
+## 5c. Sprint Planning Gate *(complete only when meeting type is "Sprint planning")*
+
+> Verify the following before finalizing the sprint plan (per `secav:RequirementsReview` obligation and Code of Ethics Principle 17).
+
+- [ ] At least one `secav:RequirementsReview` session is included in the sprint work plan for features entering implementation this sprint
+- [ ] The RequirementsReview session has an assigned facilitator, scheduled date, and identified participants
+- [ ] The coach has endorsed the inclusion of the RequirementsReview in the plan (endorsement counts as the planning-gate sign-off — not as the post-session sign-off)
+- [ ] If no RequirementsReview is planned: a written justification is recorded below and the coach has approved the exception
+
+> **Exception justification (if applicable):** _
+
+> Features that begin implementation without a completed RequirementsReview are in `secav:MissingRequirementsReview` antipattern state — the highest-risk antipattern in the development lifecycle.
+
+---
+
 ## 6. Open Items
 
 Topics requiring additional information, analysis, or a follow-up session to resolve.
@@ -127,6 +161,7 @@ Topics requiring additional information, analysis, or a follow-up session to res
 > - [ ] § 1 complete — all participants recorded with name and role
 > - [ ] § 3 complete — at least one topic with decision or outcome
 > - [ ] § 4 complete — at least one agreement with owner and **explicit deadline**
+> - [ ] *(Sprint planning only)* At least one `secav:RequirementsReview` is included in the work plan before implementation begins — or a `secavo:QualityPlanningConcern` has been raised (Principle 17)
 
 These minutes were distributed to participants on: DD/MM/YYYY
 

@@ -64,6 +64,18 @@ The coach has an obligation to be present — as a silent, non-intervening obser
 
 Repeated failure to attend review sessions without a valid reason is an ethical concern that should be self-disclosed and addressed through coaching practice improvement (see Principle 12).
 
+### 17. Planning gate obligation for requirements review
+Before endorsing a sprint or iteration plan that includes implementation work, the coach must verify that at least one `secav:RequirementsReview` (peer review, walkthrough, or formal inspection of requirements) is explicitly scheduled in the work plan and will complete before implementation begins on those requirements.
+
+This is a distinct duty from the witness obligation (Principle 16). The coach's responsibility here is at planning time — not only at session time.
+
+**Obligations:**
+
+1. **Review the plan, not only the sessions.** The coach must check that the sprint plan includes a `secav:RequirementsReview` activity for any requirements being implemented in that sprint.
+2. **Withhold endorsement when the gate is missing.** If the plan proceeds to implementation without a scheduled requirements review, the coach must document a quality planning concern (`secavo:QualityPlanningConcern`) and, if not resolved, invoke the formal dissent and escalation protocol.
+3. **No retroactive satisfaction.** A requirements review conducted after implementation has already started does not fulfill the planning gate — it may still produce valuable findings, but the implementation risk materializes from day one of unreviewed requirements.
+4. **This is an ethical obligation, not only a process step.** Starting implementation on unreviewed requirements is the highest-risk lifecycle antipattern (`secav:MissingRequirementsReview`). Endorsing a plan that omits this gate makes the coach complicit in accepting that risk without disclosure.
+
 ## Ethical escalation
 
 A coach should document and escalate situations involving material conflicts of interest, misuse of confidential evidence, pressure to manipulate metrics, discriminatory treatment, unsafe engineering direction, or requests that contradict professional or organizational obligations.
