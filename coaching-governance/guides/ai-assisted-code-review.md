@@ -103,7 +103,7 @@ Google's AutoCommenter study found that AI-assisted review went beyond tradition
 False positives erode trust quickly and cause reviewers to ignore even legitimate alerts [7][9]. Actions to take:
 
 - Tune sensitivity thresholds based on observed false positive rate.
-e- Tag AI suggestions as: **accepted**, **dismissed**, or **false positive**. Available reports from early adopters of this practice suggest action rates above 30%, though figures vary significantly by tool and context.
+- Tag AI suggestions as: **accepted**, **dismissed**, or **false positive**. Available reports from early adopters of this practice suggest action rates above 30%, though figures vary significantly by tool and context.
 - AI review comments are adopted at low rates in available studies (reported range: 1–19%); quality of suggestions matters more than quantity.
 - Measure the impact of tuning on PR cycle time and escaped defects [7].
 
@@ -163,6 +163,8 @@ Review false positives periodically and retune [11].
 
 ## 6. SECAV-O integration
 
+### 6.1 Core traceability concepts
+
 | Concept from this document | SECAV-O term |
 |---|---|
 | AI-assisted coding activity | `secav:AIAssistedActivity` (subclass of `secav:EngineeringActivity`) |
@@ -174,6 +176,74 @@ Review false positives periodically and retune [11].
 | Acceptance criteria applied | `secav:AcceptanceCriterion` |
 
 The AI system used must be recorded as a `secav:AISystem` instance linked via `secav:assistedByAI` from the generating `secav:EngineeringActivity`, not from the artifact or the review record.
+
+### 6.2 Role matrix and review dimensions
+
+The role matrix (section 2) introduces a per-dimension responsibility split that is modeled as a `secav:ReviewDimension` — a named classification of review focus area that determines which role (AI or human) holds primary responsibility.
+
+| Concept | SECAV-O term |
+|---|---|
+| Review focus dimension (syntax, optimization, business logic, security) | `secav:ReviewDimension` (DataProperty on `secav:HumanValidationActivity`) |
+| AI as primary agent for a dimension | `secav:aiPrimaryForDimension` (ObjectProperty linking `secav:AISystem` to `secav:ReviewDimension`) |
+| Human as primary agent for a dimension | `secav:humanPrimaryForDimension` (ObjectProperty linking `secav:HumanValidationActivity` to `secav:ReviewDimension`) |
+
+A `secav:ReviewDimension` is not a separate activity — it is an attribute of the single `secav:HumanValidationActivity` that describes which aspects were reviewed by which agent.
+
+### 6.3 Prompt configuration checklist
+
+The 4-step prompt configuration sequence (context → impact → security → test generation) is a precondition for a well-formed AI review pass. It is modeled as a `secav:QualityActivityRequirement` attached to the `secav:AIAssistedActivity` that performs the review pass.
+
+| Concept | SECAV-O term |
+|---|---|
+| 4-step prompt configuration sequence | `secav:AIReviewPromptConfiguration` (subclass of `secav:QualityActivityRequirement`) |
+| Step 1 — context definition | `secav:hasContextDefinition` (DataProperty on `secav:AIReviewPromptConfiguration`) |
+| Step 2 — impact analysis | `secav:hasImpactAnalysisInstruction` (DataProperty) |
+| Step 3 — security evaluation | `secav:hasSecurityEvaluationInstruction` (DataProperty) |
+| Step 4 — test generation | `secav:hasTestGenerationInstruction` (DataProperty) |
+
+Evidence that the configuration was applied is recorded as a `secav:ReviewObservation` linked to the `secav:ReviewRecord`.
+
+### 6.4 Risk-based triage
+
+The risk triage table (section 3.4) classifies PRs before routing. Each classification is a `secav:Risk` instance attached to the `secav:EngineeringActivity` (the PR) via `secav:hasRisk`.
+
+| Concept | SECAV-O term |
+|---|---|
+| Risk level assigned to a PR | `secav:ReviewRiskLevel` (DataProperty on `secav:EngineeringActivity`; values: `Routine`, `Attention`, `SecurityCritical`) |
+| Mandatory human review gate | `secav:requiresHumanValidation` (already defined; triggered when `ReviewRiskLevel = SecurityCritical`) |
+| False negative — high-risk PR cleared at lower tier | `secav:ReviewEscapeObservation` (subclass of `secav:DefectObservation` → `secav:MeasurementObservation`) |
+
+### 6.5 Review pipeline stages
+
+The layered pipeline (section 3.3) is a sequence of `secav:EngineeringActivity` instances executed in order before a PR is merged.
+
+| Stage | SECAV-O term |
+|---|---|
+| Deterministic tools (linters, scanners) | `secav:DeterministicAnalysisActivity` (subclass of `secav:EngineeringActivity`) |
+| AI first-pass review | `secav:AIAssistedActivity` with `secav:ReviewDimension` = `SyntaxStyle` |
+| Human review | `secav:HumanValidationActivity` with `secav:ReviewDimension` = `BusinessLogic`, `Security` |
+| CI (tests, integration) | `secav:ContinuousIntegrationActivity` (subclass of `secav:EngineeringActivity`) |
+
+Each stage `secav:precedes` the next, preserving pipeline order in the ontology.
+
+### 6.6 Governance path for AI-assisted review
+
+The complete traceability chain for an AI-assisted code review is:
+
+```
+secav:AIAssistedActivity (code generation)
+  → secav:assistedByAI → secav:AISystem
+  → secav:requiresHumanValidation
+    → secav:AIReviewPromptConfiguration (QualityActivityRequirement)
+      → secav:DeterministicAnalysisActivity
+        → secav:AIAssistedActivity (review pass, ReviewDimension = SyntaxStyle)
+          → secav:HumanValidationActivity (ReviewDimension = BusinessLogic / Security)
+            → secav:ReviewFinding → secav:ReviewRecord (Evidence)
+              → secav:AcceptanceCriterion
+                → secav:ReviewRiskLevel → merge decision
+```
+
+This chain ensures that every AI-generated artifact that reaches production has a verifiable human validation record in the SECAV-O evidence model.
 
 ---
 
