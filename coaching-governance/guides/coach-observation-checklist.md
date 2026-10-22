@@ -129,7 +129,9 @@ This checklist allows the coach to record, during any observation session, the p
 
 ## 7. Unit Testing and Unit Test Design
 
-> SECAV-O activity: `secav:TestingActivity`
+> SECAV-O activity: `secav:TestingActivity`, `secav:UnitTestDesignReview`, `secav:TestSelectionForReview`
+>
+> **Key principle:** Unit test code is a work product. It requires individual peer review — preferably a formal inspection for tests covering critical system paths — independently of CI automation results.
 
 | # | Type | Observable behavior | SECAV-O Term |
 |---|------|---------------------|--------------|
@@ -138,11 +140,17 @@ This checklist allows the coach to record, during any observation session, the p
 | 7.3 | ✓ | Tests cover error paths and boundary values, not only the success flow | `secav:HappyPathOnlyReview` absent |
 | 7.4 | ✓ | Tests run in milliseconds — no network or filesystem dependencies in unit tests | `secav:QualityCriterion` (FIRST: Fast) |
 | 7.5 | ✓ | The team knows the project's coverage threshold and can justify it | `secav:CodeCoverageGate` with known `secav:coverageThreshold` |
-| 7.6 | ⚠ | Tests only validate the happy path — no tests for null, empty, or out-of-range values | `secav:HappyPathOnlyReview` |
-| 7.7 | ⚠ | Unit tests have external dependencies (database, API, system clock without injection) | `secav:QualityCriterion` (FIRST: Fast violated) |
-| 7.8 | ⚠ | Multiple tests fail when a single condition fails — high coupling between tests | `secav:QualityCriterion` (FIRST: Independent violated) |
-| 7.9 | ⚠ | The team increases coverage with trivial tests to pass the gate, without evaluating real cases | `secav:CodeCoverageGate` compromised in quality |
-| 7.10 | ⚠ | PRs do not include tests for new logic (only production code) | absence of associated `secav:TestingActivity` |
+| 7.6 | ✓ | Test code for critical modules is individually reviewed as a work product before merging — peer review, walkthrough, or inspection | `secav:UnitTestDesignReview` |
+| 7.7 | ✓ | The team identifies and schedules critical tests (payment, security, concurrency, data integrity paths) for formal review at sprint start | `secav:TestSelectionForReview` · `secav:CriticalUnitTest` |
+| 7.8 | ✓ | When critical tests are selected for review, a formal inspection is the preferred method over a walkthrough or simple peer review | `secav:CriticalUnitTest` → `secav:UnitTestDesignReview` (inspection intensity) |
+| 7.9 | ⚠ | Tests only validate the happy path — no tests for null, empty, or out-of-range values | `secav:HappyPathOnlyReview` |
+| 7.10 | ⚠ | Unit tests have external dependencies (database, API, system clock without injection) | `secav:QualityCriterion` (FIRST: Fast violated) |
+| 7.11 | ⚠ | Multiple tests fail when a single condition fails — high coupling between tests | `secav:QualityCriterion` (FIRST: Independent violated) |
+| 7.12 | ⚠ | The team increases coverage with trivial tests to pass the gate, without evaluating real cases | `secav:CodeCoverageGate` compromised in quality |
+| 7.13 | ⚠ | PRs do not include tests for new logic (only production code) | absence of associated `secav:TestingActivity` |
+| 7.14 | ⚠ | Test code on critical modules is merged without any individual peer review — CI passing is treated as sufficient validation | `secav:UnreviewedTestCode` |
+| 7.15 | ⚠ | Assertions in tests always pass regardless of the behavior under test (e.g., asserting a mock value instead of the actual unit result) | `secav:TautologicalAssertion` |
+| 7.16 | ⚠ | Tests fail intermittently for reasons unrelated to the behavior they verify (time-dependent, environment-dependent, order-dependent) | `secav:BrittleTest` |
 
 ---
 
