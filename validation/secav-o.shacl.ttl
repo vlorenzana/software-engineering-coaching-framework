@@ -272,6 +272,22 @@ secav:RiskResponsePlanShape
         sh:message "A risk response plan must describe the prevention action."@en
     ] .
 
+secav:DesignReviewShape
+    a sh:NodeShape ;
+    sh:targetClass secav:DesignReview ;
+    sh:property [
+        sh:path secav:designMaturityLevel ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "A design review must declare the design maturity level ('exploratory', 'conceptual', or 'final') so participants frame feedback appropriately."@en
+    ] ;
+    sh:property [
+        sh:path secav:evaluates ;
+        sh:minCount 1 ;
+        sh:class secav:Artifact ;
+        sh:message "A design review must identify the artifact (prototype, wireframe, or specification) being evaluated."@en
+    ] .
+
 secav:CodeWalkthroughShape
     a sh:NodeShape ;
     sh:targetClass secav:CodeWalkthrough ;

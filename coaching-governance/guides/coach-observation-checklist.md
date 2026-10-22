@@ -295,6 +295,7 @@ Este checklist permite al coach registrar, durante cualquier sesión de observac
 | Grupo 10 | Mensualmente o por sprint — observación del líder técnico; revisión trimestral de indicadores 10.12–10.15 |
 | Grupo 11 | Al inicio de cada sprint y en cada junta semanal de seguimiento — revisión del registro de riesgos |
 | Grupo 12 | Antes, durante y después de cada caminata de revisión de código programada |
+| Grupo 13 | Antes, durante y al cierre de cada revisión de diseño (prototipo, wireframe o especificación) |
 
 Las señales ✓ se registran como `secav:WorkProductEvidence` o `secav:ReviewFinding` y alimentan la `secav:CompetencyAssessment` del ciclo.
 
@@ -354,6 +355,54 @@ Para el Grupo 9, las señales ⚠ sistémicas (presentes en más de la mitad del
 
 ---
 
+## Grupo 13 — Revisiones de Diseño (`secav:DesignReview`)
+
+> **Fuente:** Guia de Mejores Practicas para Revision de Diseno  
+> **Cuándo observar:** Antes, durante y al cierre de cada revisión de prototipo, wireframe o especificación de diseño.  
+> **Término SECAV-O principal:** `secav:DesignReview` (subclase de `secav:ReviewActivity`)
+
+### 13.1 Preparación
+
+| # | Señal observable | Tipo | Término SECAV-O |
+|---|-----------------|------|-----------------|
+| 13.01 | El convocante declara explícitamente el objetivo de la revisión (usabilidad, arquitectura, flujo, viabilidad técnica) | ✓ | `secav:DesignReview` |
+| 13.02 | Se comparte el perfil de usuario (personas), el problema a resolver y las restricciones conocidas antes de la sesión | ✓ | `secav:DesignReview` · `secav:WorkProductEvidence` |
+| 13.03 | El prototipo o documentación se distribuye con al menos 24 h de anticipación | ✓ | `secav:DesignReview` |
+| 13.04 | Se declara el nivel de madurez del diseño (exploratorio / conceptual / final) para enmarcar el tipo de feedback esperado | ✓ | `secav:designMaturityLevel` |
+| 13.05 | La sesión se convoca sin objetivo concreto — la discusión deriva a detalles irrelevantes | ⚠ | `secav:UndefinedObjectiveReview` |
+| 13.06 | No se comparten personas, contexto del problema ni restricciones — los participantes evalúan visuals en lugar de soluciones | ⚠ | `secav:MissingUserContextReview` |
+| 13.07 | Los materiales se envían durante la sesión o menos de 2 h antes — los comentarios son reactivos e impulsivos | ⚠ | `secav:ImpulsiveReactionFeedback` |
+
+### 13.2 Facilitación y Dinámica
+
+| # | Señal observable | Tipo | Término SECAV-O |
+|---|-----------------|------|-----------------|
+| 13.08 | Los cuatro roles clave están presentes: Diseñador, Product Manager, Ingeniero/Dev y Stakeholder | ✓ | `secav:DesignReviewRole` |
+| 13.09 | Los revisores señalan fallas en la experiencia o inconsistencias con el negocio, no proponen soluciones directas | ✓ | `secav:ReviewFinding` |
+| 13.10 | El feedback se expresa usando el método "observación + impacto" (qué elemento y qué consecuencia tiene) | ✓ | `secav:observationImpactStatement` |
+| 13.11 | Los comentarios se fundamentan en heurísticas de usabilidad, investigación con usuarios o métricas clave | ✓ | `secav:ReviewFinding` |
+| 13.12 | Los revisores proponen soluciones específicas en lugar de identificar el problema de experiencia | ⚠ | `secav:SolutionCentricFeedback` |
+| 13.13 | Los comentarios son subjetivos y sin respaldo ("no me gusta este color", "yo lo haría diferente") | ⚠ | `secav:SubjectiveFeedback` |
+
+### 13.3 Seguimiento y Cierre
+
+| # | Señal observable | Tipo | Término SECAV-O |
+|---|-----------------|------|-----------------|
+| 13.14 | Al cierre se compila una lista priorizada de acción con responsables asignados | ✓ | `secav:MeetingAgreement` · `secav:ReviewFinding` |
+| 13.15 | Cada hallazgo queda clasificado: cambio indispensable para lanzamiento vs. mejora opcional para iteraciones futuras | ✓ | `secav:mandatoryForLaunch` |
+| 13.16 | Se documentan las decisiones tomadas: qué alternativas se aprobaron o descartaron y por qué | ✓ | `secav:ReviewFinding` · `secav:WorkProductEvidence` |
+| 13.17 | Se acuerda usar herramientas de anotación visual para el seguimiento asíncrono posterior | ✓ | `secav:MeetingAgreement` |
+| 13.18 | La sesión cierra sin registrar acuerdos ni responsables — solo comentarios verbales | ⚠ | `secav:UndocumentedDesignDecision` |
+| 13.19 | No se documenta por qué se descartaron alternativas — en la siguiente iteración se repiten las mismas discusiones | ⚠ | `secav:UndocumentedDesignDecision` |
+
+### Notas de escalamiento — Grupo 13
+
+- Las señales ⚠ 13.05, 13.06 o 13.07 deben resolverse **antes** de iniciar la sesión; el coach puede solicitar reagendar si la preparación es insuficiente.
+- La señal ⚠ 13.13 recurrente en un mismo revisor debe derivar en una `secav:CoachingIntervention` individual para reforzar el método "observación + impacto".
+- La señal ⚠ 13.18 equivale a una sesión sin valor rastreable; el coach debe solicitar documentar los acuerdos antes de 24 h o la revisión se considera no realizada.
+
+---
+
 ## Documentos relacionados
 
 | Documento | Relación |
@@ -366,3 +415,4 @@ Para el Grupo 9, las señales ⚠ sistémicas (presentes en más de la mitad del
 | `templates/rca-defect-analysis.md` | Cuando una señal ⚠ deriva en un defecto P1/P2 |
 | `templates/engineer-coaching-assessment.md` | Las evidencias ✓ alimentan la evaluación de competencias |
 | `coaching-governance/guides/software-walkthroughs.md` | Protocolo completo del grupo 12 (caminatas de revisión) |
+| `coaching-governance/guides/design-review.md` | Protocolo completo del grupo 13 (revisiones de diseño) |

@@ -1147,3 +1147,70 @@ secav:walkthroughSeverity a owl:DatatypeProperty ;
     rdfs:range xsd:string ;
     rdfs:label "walkthrough severity"@en ;
     rdfs:comment "Severity classification of a walkthrough finding: 'Bloqueante' (blocks merge), 'Mejora' (improvement opportunity), or 'Aclaración' (clarification needed)."@en .
+
+# ---------------------------------------------------------------------------
+# Design Review
+# Derived from: Guia de Mejores Practicas para Revision de Diseno
+# ---------------------------------------------------------------------------
+
+secav:DesignReview a owl:Class ;
+    rdfs:subClassOf secav:ReviewActivity ;
+    rdfs:label "Design Review"@en ;
+    rdfs:comment "A formal multidisciplinary review session that evaluates a design artifact (prototype, wireframe, or specification) for usability, technical feasibility, and business alignment. Not purely aesthetic — it is a strategic process to ensure the product solves real user problems."@en .
+
+secav:DesignReviewAntipattern a owl:Class ;
+    rdfs:subClassOf secav:ReviewAntipattern ;
+    rdfs:label "Design Review Antipattern"@en ;
+    rdfs:comment "A problematic practice specific to design review sessions that undermines feedback quality, alignment, or follow-through."@en .
+
+secav:UndefinedObjectiveReview a owl:Class ;
+    rdfs:subClassOf secav:DesignReviewAntipattern ;
+    rdfs:label "Undefined Objective Review"@en ;
+    rdfs:comment "Presenting a design without declaring a concrete review objective (e.g., usability, architecture, feasibility). Causes discussion to drift to irrelevant details."@en .
+
+secav:MissingUserContextReview a owl:Class ;
+    rdfs:subClassOf secav:DesignReviewAntipattern ;
+    rdfs:label "Missing User Context Review"@en ;
+    rdfs:comment "Running a design review without sharing user personas, the problem being solved, and known constraints beforehand — participants react to visuals instead of evaluating solutions."@en .
+
+secav:ImpulsiveReactionFeedback a owl:Class ;
+    rdfs:subClassOf secav:DesignReviewAntipattern ;
+    rdfs:label "Impulsive Reaction Feedback"@en ;
+    rdfs:comment "Providing unstructured, reactive comments during the session because materials were not shared 24 hours in advance."@en .
+
+secav:SubjectiveFeedback a owl:Class ;
+    rdfs:subClassOf secav:DesignReviewAntipattern ;
+    rdfs:label "Subjective Feedback"@en ;
+    rdfs:comment "Expressing personal taste instead of evidence-based critique ('I don't like this color'). Valid feedback must be grounded in usability heuristics, user research, or key metrics."@en .
+
+secav:SolutionCentricFeedback a owl:Class ;
+    rdfs:subClassOf secav:DesignReviewAntipattern ;
+    rdfs:label "Solution-Centric Feedback"@en ;
+    rdfs:comment "Reviewers proposing specific solutions instead of identifying experience failures or business inconsistencies — this constrains the designer's solution space unnecessarily."@en .
+
+secav:UndocumentedDesignDecision a owl:Class ;
+    rdfs:subClassOf secav:DesignReviewAntipattern ;
+    rdfs:label "Undocumented Design Decision"@en ;
+    rdfs:comment "Closing a design review without recording which alternatives were approved or discarded and the rationale — future reviewers lack context for incremental decisions."@en .
+
+secav:DesignReviewRole a owl:Class ;
+    rdfs:label "Design Review Role"@en ;
+    rdfs:comment "A designated role in a design review session: Designer (UX/visual), Product Manager (business value/MVP scope), Engineer/Dev (technical feasibility), or Stakeholder (brand and strategy alignment)."@en .
+
+secav:designMaturityLevel a owl:DatatypeProperty ;
+    rdfs:domain secav:DesignReview ;
+    rdfs:range xsd:string ;
+    rdfs:label "design maturity level"@en ;
+    rdfs:comment "The declared maturity stage of the artifact under review: 'exploratory' (strategic feedback needed), 'conceptual' (structural feedback), or 'final' (micro-interaction and polish review)."@en .
+
+secav:observationImpactStatement a owl:DatatypeProperty ;
+    rdfs:domain secav:ReviewFinding ;
+    rdfs:range xsd:string ;
+    rdfs:label "observation impact statement"@en ;
+    rdfs:comment "Structured feedback following the 'observation + impact' method: describes which design element causes a conflict and what consequence it has on user experience or business outcome."@en .
+
+secav:mandatoryForLaunch a owl:DatatypeProperty ;
+    rdfs:domain secav:ReviewFinding ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "mandatory for launch"@en ;
+    rdfs:comment "True if the finding represents a change indispensable before product launch; false if it is an optional improvement for future iterations."@en .
