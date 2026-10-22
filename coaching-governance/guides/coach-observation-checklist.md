@@ -103,6 +103,11 @@ This checklist allows the coach to record, during any observation session, the p
 | 5.15 | ⚠ | A reviewer dictates the solution instead of pointing out the problem and leaving the decision to the author | `secav:ReviewerDictatorship` |
 | 5.16 | ⚠ | The review only validates the happy path — no edge case or error case was questioned | `secav:HappyPathOnlyReview` |
 | 5.17 | ⚠ | Comments are ironic, sarcastic, or condescending — the tone is not deliberately punitive but damages psychological safety | `secav:NonEmpathicReviewFeedback` |
+| 5.18 | ✓ | All findings (defects, observations, or explicit "no defects found") are recorded in the tracking tool before closing the session | `secav:producesReviewFinding` |
+| 5.19 | ✓ | The coach issues a process sign-off confirming the review was conducted acceptably (roles followed, findings documented) | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
+| 5.20 | ✓ | When the team agrees on a fix direction during the session, a proposed solution is recorded alongside the finding | `secav:proposedSolution` (optional) |
+| 5.21 | ⚠ | The session ends without any written findings — only verbal comments | absence of `secav:producesReviewFinding` |
+| 5.22 | ⚠ | The coach does not issue a sign-off — the review findings cannot be used as valid competency evidence | absence of `secav:CoachReviewSignOff` |
 
 ---
 
@@ -124,6 +129,9 @@ This checklist allows the coach to record, during any observation session, the p
 | 6.10 | ⚠ | The inspection did not produce a documented `secav:ReviewRecord` | absence of `secav:ReviewRecord` |
 | 6.11 | ⚠ | The same defect type appears in multiple inspected modules (systemic pattern) | `secav:CoachingIntervention` → `secavo:ImprovementAction` |
 | 6.12 | ⚠ | Management uses inspection findings to evaluate the author's performance punitively | `secavo:QualityPlanningConcern` |
+| 6.13 | ✓ | All findings (defects, observations, or explicit "no defects found") are recorded before closing the inspection — including type, severity, and proposed solution when available | `secav:producesReviewFinding` · `secav:proposedSolution` (optional) |
+| 6.14 | ✓ | The coach issues a formal process sign-off confirming the inspection was conducted acceptably | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
+| 6.15 | ⚠ | The inspection closes without written findings or the sign-off is not issued — the session findings are not valid as competency evidence | absence of `secav:producesReviewFinding` or `secav:CoachReviewSignOff` |
 
 ---
 
@@ -362,6 +370,9 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 | 12.19 | The session closes without any written record — only verbal agreements | ⚠ | `secav:WalkthroughWithoutRecord` |
 | 12.20 | Code is merged without having addressed the recorded observations | ⚠ | `secav:IgnoredWalkthroughFeedback` |
 | 12.21 | A full new walkthrough is called to verify minor corrections that could be reviewed asynchronously | ⚠ | `secav:UnnecessaryRewalkthrough` |
+| 12.22 | All findings (defects, observations, or explicit "no defects found") are recorded with severity classification before closing the session — proposed solution included when the team agrees on a direction | ✓ | `secav:producesReviewFinding` · `secav:proposedSolution` (optional) |
+| 12.23 | The coach issues a process sign-off confirming the walkthrough was conducted acceptably (scope respected, roles present, findings documented) | ✓ | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
+| 12.24 | The walkthrough closes without written findings or the coach sign-off is not issued | ⚠ | absence of `secav:producesReviewFinding` or `secav:CoachReviewSignOff` |
 
 ### Escalation notes — Group 12
 
@@ -427,6 +438,9 @@ For Group 9, systemic ⚠ signals (present in more than half the team across two
 | 13.27 | The engineer rejects the proposal immediately without exploring alternative implementations | ⚠ | `secav:ImmediateTechnicalRejection` |
 | 13.28 | A stakeholder imposes a design decision by hierarchy without data or user-testing backing | ⚠ | `secav:HierarchyBasedDecision` |
 | 13.29 | A debate resolved in previous sessions is reopened without contributing new information | ⚠ | `secav:ReopeningClosedDebates` |
+| 13.30 | All findings (defects, experience failures, or explicit "no findings") are recorded before closing the review — with mandatory-for-launch classification and proposed solution when the team agrees | ✓ | `secav:producesReviewFinding` · `secav:mandatoryForLaunch` · `secav:proposedSolution` (optional) |
+| 13.31 | The coach issues a process sign-off confirming the design review was conducted acceptably (roles present, feedback evidence-based, findings documented) | ✓ | `secav:CoachReviewSignOff` · `secav:hasSignOff` |
+| 13.32 | The design review closes without written findings or the coach sign-off is not issued | ⚠ | absence of `secav:producesReviewFinding` or `secav:CoachReviewSignOff` |
 
 ### Escalation notes — Group 13
 

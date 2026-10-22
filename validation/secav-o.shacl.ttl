@@ -24,6 +24,34 @@ secav:ReviewActivityShape
         sh:minCount 1 ;
         sh:class secav:Artifact ;
         sh:message "A review activity should identify the artifact it evaluates."@en
+    ] ;
+    sh:property [
+        sh:path secav:producesReviewFinding ;
+        sh:minCount 1 ;
+        sh:class secav:ReviewFinding ;
+        sh:message "Every peer review, walkthrough, or inspection must record at least one finding — including an explicit 'no defects found' record when the artifact is clean."@en
+    ] ;
+    sh:property [
+        sh:path secav:hasSignOff ;
+        sh:minCount 1 ;
+        sh:class secav:CoachReviewSignOff ;
+        sh:message "Every review activity requires a coach process sign-off confirming the session was conducted acceptably before its findings are valid for competency assessment."@en
+    ] .
+
+secav:CoachReviewSignOffShape
+    a sh:NodeShape ;
+    sh:targetClass secav:CoachReviewSignOff ;
+    sh:property [
+        sh:path secav:signOffStatement ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "A coach review sign-off must include a statement confirming the process was conducted acceptably."@en
+    ] ;
+    sh:property [
+        sh:path secav:signOffDate ;
+        sh:minCount 1 ;
+        sh:datatype xsd:date ;
+        sh:message "A coach review sign-off must record the date of approval."@en
     ] .
 
 secav:AIAssistedActivityShape

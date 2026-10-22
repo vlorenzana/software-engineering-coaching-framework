@@ -1062,6 +1062,44 @@ secav:contingencyAction a owl:DatatypeProperty ;
     rdfs:comment "The reactive action to execute if the risk event materializes despite prevention efforts."@en .
 
 # ---------------------------------------------------------------------------
+# Review Process Record — mandatory outcomes for every peer review, walkthrough, or inspection
+# ---------------------------------------------------------------------------
+
+secav:CoachReviewSignOff a owl:Class ;
+    rdfs:label "Coach Review Sign-Off"@en ;
+    rdfs:comment "Formal coach approval certifying that a peer review, walkthrough, or inspection was conducted acceptably: roles were followed, process phases completed, and findings were documented. Required for every review activity before its findings are considered valid evidence for competency assessment. Does not imply the coach approved the code or design — only that the process itself met the minimum quality bar."@en .
+
+secav:producesReviewFinding a owl:ObjectProperty ;
+    rdfs:domain secav:ReviewActivity ;
+    rdfs:range secav:ReviewFinding ;
+    rdfs:label "produces review finding"@en ;
+    rdfs:comment "Links a review activity to its documented findings. At least one finding must be recorded for every review session — including an explicit 'no defects found' record when the artifact is clean."@en .
+
+secav:hasSignOff a owl:ObjectProperty ;
+    rdfs:domain secav:ReviewActivity ;
+    rdfs:range secav:CoachReviewSignOff ;
+    rdfs:label "has sign-off"@en ;
+    rdfs:comment "Links a review activity to the coach's formal process sign-off. A review without a sign-off is not considered a completed review for evidence purposes."@en .
+
+secav:signOffStatement a owl:DatatypeProperty ;
+    rdfs:domain secav:CoachReviewSignOff ;
+    rdfs:range xsd:string ;
+    rdfs:label "sign-off statement"@en ;
+    rdfs:comment "Brief coach statement confirming the review was conducted acceptably. Should note any significant deviations from the process and whether they were material enough to invalidate the session."@en .
+
+secav:signOffDate a owl:DatatypeProperty ;
+    rdfs:domain secav:CoachReviewSignOff ;
+    rdfs:range xsd:date ;
+    rdfs:label "sign-off date"@en ;
+    rdfs:comment "Date on which the coach issued the process sign-off for this review activity."@en .
+
+secav:proposedSolution a owl:DatatypeProperty ;
+    rdfs:domain secav:ReviewFinding ;
+    rdfs:range xsd:string ;
+    rdfs:label "proposed solution"@en ;
+    rdfs:comment "Optional: a candidate solution or corrective action for the finding, recorded during the review session when the team reaches a direction. Absence is acceptable — the fix may be deferred to the author without constraining their solution space."@en .
+
+# ---------------------------------------------------------------------------
 # Unit Test Review — test code as a reviewable work product
 # ---------------------------------------------------------------------------
 
