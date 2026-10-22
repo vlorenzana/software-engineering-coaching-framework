@@ -37,6 +37,7 @@ The following matrix shows the recommended responsibility split per review dimen
 | Dimension | AI role | Human role |
 |---|---|---|
 | Syntax and style | Full automation — flags deviations from style guides | Minimal supervision; trust the linter and AI |
+| Static security (SAST) | AI / SAST tools — scan for exposed credentials, known code injections, and third-party library vulnerabilities | Validates scope and severity of flagged issues; escalates to threat-model analysis |
 | Optimization | Proposes refactoring for performance and algorithmic complexity | Evaluates whether the proposed refactoring is necessary and readable |
 | Edge case detection | AI-assisted — request the tool to generate boundary cases and search for unexpected null values | Validates that generated cases are realistic and cover the actual domain |
 | Architecture and design | Limited — can flag obvious pattern violations | Full human focus — validates design patterns, coupling, and system extensibility |
@@ -100,6 +101,20 @@ When configuring prompts or agents for AI review, apply the following steps in s
 
 Google's AutoCommenter study found that AI-assisted review went beyond traditional static analysis for 66% of evaluated best-practice violations [5].
 
+For teams using a focused AI review session, a three-phase sequence provides additional structure beyond the 4-step prompt configuration above:
+
+**Phase A — Preparation and context (AI)**
+1. Provide the AI assistant with the repository context, the company style configuration file, and the assigned ticket description.
+2. Request an automated impact summary of the pull request to quickly understand which modules are affected.
+
+**Phase B — Security and robustness validation (hybrid)**
+3. Execute a prompt targeting memory leaks, infinite loops, and concurrency issues.
+4. Instruct the AI to generate test scripts that simulate corrupted, null, or excessively long input data.
+
+**Phase C — Semantic review and approval (human)**
+5. Audit AI suggestions to discard hallucinations — verify that proposed methods actually exist in the current version of the framework in use.
+6. Review the code constructively; ensure final PR comments are clear, considerate, and didactically useful to the author.
+
 ### 3.6 Manage false positives and alert fatigue
 
 False positives erode trust quickly and cause reviewers to ignore even legitimate alerts [7][9]. Actions to take:
@@ -144,7 +159,9 @@ Review false positives periodically and retune [11].
 - **Relying only on diff analysis.** Many tools analyze only changed lines and miss broader context.
 - **Ignoring the social dimension of review:** mentoring, shared team knowledge, and design discussion are not AI-replaceable [8].
 - **Treating AI suggestions as directives rather than proposals.** Use AI output as constructive input; final communication between reviewers must remain assertive and respectful. AI suggestions do not carry authority over human judgment.
-- **Using tools without a data privacy policy.** Before sending source code to any hosted model, verify that the provider's enterprise agreement guarantees that the code is not used to train public models.
+- **Using tools without a data privacy policy.** Before sending source code to any hosted model, verify that the provider's enterprise agreement guarantees that the code is not used to train public models. Proprietary code and API keys must never enter public AI services without an explicit data-exclusion clause.
+- **Attributing production failures to the AI tool.** The AI proposes; the human reviewer signs the approval. Any semantic failure or security breach introduced into production is the responsibility of the engineer who approved the change, not the tool.
+- **Using AI review only for defect detection, not for culture.** Offloading hard technical issues to AI before human interaction frees engineer conversations to focus on professional growth, design alternatives, and recognition of good work.
 
 ---
 

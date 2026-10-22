@@ -174,6 +174,7 @@ Code review is a high analytical-demand task. Detection of subtle defects and em
 | Focus blocks | Reserve dedicated blocks of 30–60 minutes, free of notifications, direct messages, and meetings. Interruptions destroy the mental map of the code being analysed. |
 | Cognitive load limits | Do not exceed 60 continuous minutes or 400 LOC per session. Beyond these thresholds, defect-detection rate drops sharply. (Consistent with §1 limits.) |
 | Emotional state and disposition | Approach code with a constructive and objective mindset. If frustration or stress from other tasks is present, postpone the review to avoid biased or impatient comments. |
+| Posture and ergonomics | Take a brief active break before starting. Visual and physical fatigue translates directly into superficial reviews that only validate visible syntax, missing deeper logic defects. |
 
 **Why this matters for coaching:** The reviewer's readiness state is an observable precondition for a `secav:ReviewActivity`. When a coach notices patterns of after-hours reviews, oversized sessions, or emotionally charged feedback, those are coaching signals about working conditions and review culture, not individual performance defects.
 
