@@ -213,6 +213,48 @@ Este checklist permite al coach registrar, durante cualquier sesión de observac
 
 ---
 
+## 10. Conductas de Liderazgo Técnico (Engineering Managers y Tech Leads)
+
+> Actividad SECAV-O: `secav:LeaderBehavior` y subclases, agrupadas por `secav:TechnicalLeadershipDimension`
+>
+> **Contexto:** Este grupo observa los comportamientos del líder técnico (Engineering Manager o Tech Lead) en sus tres dimensiones estratégicas: personas, arquitectura y estrategia. No evalúa la habilidad técnica individual, sino la capacidad de multiplicar el talento colectivo y alinear las soluciones con los objetivos del negocio.
+>
+> **Frecuencia recomendada:** mensual o por sprint, con revisión trimestral de los cuatro indicadores de evaluación (10.12–10.15).
+
+### Dimensión 1 — Personas y Mentoría (35% del peso del liderazgo)
+
+| # | Tipo | Conducta observable | Término SECAV-O |
+|---|------|---------------------|-----------------|
+| 10.1 | ✓ | El líder realiza sesiones 1-on-1 con cadencia regular y foco en el crecimiento profesional — no solo en el status del sprint | `secav:ActiveMentorship` |
+| 10.2 | ✓ | Los post-mortems de producción terminan con acciones de proceso o herramienta — nunca señalando a individuos | `secav:PsychologicalSafetyPromotion` |
+| 10.3 | ✓ | El líder define el "qué" y el "por qué" del cambio, pero otorga al equipo autonomía para decidir el "cómo" | `secav:EffectiveDelegation` |
+| 10.4 | ✓ | El líder entrega feedback constructivo al equipo en tiempo real y reconoce públicamente el trabajo bien hecho | `secav:ContinuousFeedbackBehavior` |
+| 10.5 | ⚠ | El líder revisa y aprueba cada decisión técnica menor — los ingenieros esperan instrucciones en lugar de tomar iniciativa | ausencia de `secav:EffectiveDelegation` (micromanagement) |
+| 10.6 | ⚠ | Los post-mortems terminan en señalamiento de individuos o en silencio — no se producen acciones de mejora | ausencia de `secav:PsychologicalSafetyPromotion` |
+| 10.7 | ⚠ | No existe cadencia de 1-on-1 — la interacción del líder con los ingenieros ocurre solo en reuniones grupales o cuando hay problemas | ausencia de `secav:ActiveMentorship` |
+
+### Dimensión 2 — Arquitectura y Código (30% del peso del liderazgo)
+
+| # | Tipo | Conducta observable | Término SECAV-O |
+|---|------|---------------------|-----------------|
+| 10.8 | ✓ | Las decisiones de arquitectura significativas están documentadas en ADRs accesibles a todo el equipo | `secav:ArchitectureDecisionDocumentation` |
+| 10.9 | ✓ | El equipo destina entre 15–20% del esfuerzo del sprint a salud de código (deuda técnica, refactoring, mantenimiento) — negociado con Product | `secav:TechnicalDebtNegotiation` |
+| 10.10 | ⚠ | Las decisiones de arquitectura se toman de forma informal o en conversaciones efímeras — no quedan registradas ni son revisables | ausencia de `secav:ArchitectureDecisionDocumentation` |
+| 10.11 | ⚠ | La deuda técnica nunca se presenta a Product como trabajo prioritario — se acumula sprint tras sprint sin negociación | ausencia de `secav:TechnicalDebtNegotiation` |
+
+### Dimensión 3 — Estrategia e Impacto (35% del peso del liderazgo)
+
+| # | Tipo | Conducta observable | Término SECAV-O |
+|---|------|---------------------|-----------------|
+| 10.12 | ✓ | El líder actúa como filtro frente a interrupciones externas — los ingenieros tienen bloques de trabajo profundo protegidos | `secav:TeamShielding` |
+| 10.13 | ✓ | Los despliegues tienen ritmos sostenibles — no hay rush de último momento que comprometa la estabilidad técnica | `secav:DeliveryConsistencyBehavior` |
+| 10.14 | ✓ | El líder comprende las métricas de negocio que el equipo impacta con su código | `secav:HolisticProductVisionBehavior` |
+| 10.15 | ✓ | El líder integra perspectivas técnicas diversas en las decisiones — los ingenieros junior y senior contribuyen en igualdad de condiciones | `secav:TechnicalDiversityBehavior` |
+| 10.16 | ⚠ | Los ingenieros reciben interrupciones directas de stakeholders y cambian de contexto constantemente — el líder no actúa como filtro | ausencia de `secav:TeamShielding` |
+| 10.17 | ⚠ | El líder favorece sistemáticamente una perspectiva técnica sin abrir espacio a otras voces del equipo | ausencia de `secav:TechnicalDiversityBehavior` |
+
+---
+
 ## Resumen de uso del checklist
 
 | Cuándo usar cada grupo | Actividad / Sprint |
@@ -224,6 +266,7 @@ Este checklist permite al coach registrar, durante cualquier sesión de observac
 | Grupo 7 | Revisión de PR con cambios de pruebas; revisión de cobertura sprint |
 | Grupo 8 | PRs con código asistido por IA; configuración de herramientas IA del equipo |
 | Grupo 9 | Quincenalmente o mensualmente — evaluación de adopción cultural del nuevo modelo de trabajo |
+| Grupo 10 | Mensualmente o por sprint — observación del líder técnico; revisión trimestral de indicadores 10.12–10.15 |
 
 Las señales ✓ se registran como `secav:WorkProductEvidence` o `secav:ReviewFinding` y alimentan la `secav:CompetencyAssessment` del ciclo.
 

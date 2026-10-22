@@ -732,3 +732,119 @@ secav:triggersIntervention a owl:ObjectProperty ;
     rdfs:range secav:CoachingIntervention ;
     rdfs:label "triggers intervention"@en ;
     rdfs:comment "Links an alert observation to the coaching intervention it warrants."@en .
+
+# ---------------------------------------------------------------------------
+# Technical Leadership Behaviors
+# Derived from: Guía de Buenos Comportamientos para Líderes de Desarrollo
+# Models the three strategic dimensions, six essential behaviors, and four
+# evaluation indicators for Engineering Managers and Tech Leads.
+# ---------------------------------------------------------------------------
+
+# § Technical Leadership Dimensions — the three strategic pillars.
+
+secav:TechnicalLeadershipDimension a owl:Class ;
+    rdfs:label "Technical Leadership Dimension"@en ;
+    rdfs:comment "A strategic dimension of technical leadership effectiveness (People, Architecture, Strategy)."@en .
+
+secav:PeopleAndMentoringDimension a owl:Class ;
+    rdfs:subClassOf secav:TechnicalLeadershipDimension ;
+    rdfs:label "People and Mentoring Dimension"@en ;
+    rdfs:comment "35% of leader effectiveness: psychological safety, active mentorship, and effective delegation."@en .
+
+secav:ArchitectureAndCodeDimension a owl:Class ;
+    rdfs:subClassOf secav:TechnicalLeadershipDimension ;
+    rdfs:label "Architecture and Code Dimension"@en ;
+    rdfs:comment "30% of leader effectiveness: technical debt management and architecture decision documentation."@en .
+
+secav:StrategyAndImpactDimension a owl:Class ;
+    rdfs:subClassOf secav:TechnicalLeadershipDimension ;
+    rdfs:label "Strategy and Impact Dimension"@en ;
+    rdfs:comment "35% of leader effectiveness: team shielding, delivery consistency, product vision, and technical diversity."@en .
+
+# § Technical Leader — stakeholder role.
+
+secav:TechnicalLeader a owl:Class ;
+    rdfs:subClassOf secav:Stakeholder ;
+    rdfs:label "Technical Leader"@en ;
+    rdfs:comment "An Engineering Manager or Tech Lead responsible for multiplying team talent, upholding technical standards, and aligning solutions with business objectives."@en .
+
+# § Technical Leadership Competency.
+
+secav:TechnicalLeadershipCompetency a owl:Class ;
+    rdfs:subClassOf secav:Competency ;
+    rdfs:label "Technical Leadership Competency"@en ;
+    rdfs:comment "The competency to lead an engineering team effectively across the people, architecture, and strategy dimensions."@en .
+
+# § Leader Behaviors — concrete, observable behaviors that evidence technical
+# leadership competency. Modeled as subclass of Evidence.
+
+secav:LeaderBehavior a owl:Class ;
+    rdfs:subClassOf secav:Evidence ;
+    rdfs:label "Leader Behavior"@en ;
+    rdfs:comment "A concrete, observable behavior of an Engineering Manager or Tech Lead that evidences technical leadership competency."@en .
+
+# People and Mentoring dimension behaviors
+
+secav:PsychologicalSafetyPromotion a owl:Class ;
+    rdfs:subClassOf secav:LeaderBehavior ;
+    rdfs:label "Psychological Safety Promotion"@en ;
+    rdfs:comment "Leader creates an environment where engineers take calculated risks and admit errors without fear of reprisal; post-mortems focus on correcting processes and tools, not blaming individuals."@en .
+
+secav:ActiveMentorship a owl:Class ;
+    rdfs:subClassOf secav:LeaderBehavior ;
+    rdfs:label "Active Mentorship"@en ;
+    rdfs:comment "Leader dedicates regular time to 1-on-1 sessions focused on professional growth, defining clear technical progression goals and assigning projects that challenge without causing burnout."@en .
+
+secav:EffectiveDelegation a owl:Class ;
+    rdfs:subClassOf secav:LeaderBehavior ;
+    rdfs:label "Effective Delegation"@en ;
+    rdfs:comment "Leader defines the 'what' and 'why' clearly but grants the team autonomy to decide the 'how'; provides the framework and constraints for sound architectural decisions without micromanagement."@en .
+
+# Architecture and Code dimension behaviors
+
+secav:TechnicalDebtNegotiation a owl:Class ;
+    rdfs:subClassOf secav:LeaderBehavior ;
+    rdfs:label "Technical Debt Negotiation"@en ;
+    rdfs:comment "Leader negotiates with Product Managers to allocate 15–20% of sprint capacity to code health (refactoring, maintenance), balancing feature delivery with system sustainability."@en .
+
+secav:ArchitectureDecisionDocumentation a owl:Class ;
+    rdfs:subClassOf secav:LeaderBehavior ;
+    rdfs:label "Architecture Decision Documentation"@en ;
+    rdfs:comment "Leader documents architecture decisions in ADRs (Architecture Decision Records) transparently; promotes evidence-based open technical debates, avoiding imposing criteria without consensus."@en .
+
+# Strategy and Impact dimension behaviors
+
+secav:TeamShielding a owl:Class ;
+    rdfs:subClassOf secav:LeaderBehavior ;
+    rdfs:label "Team Shielding"@en ;
+    rdfs:comment "Leader acts as a filter against external interruptions, constant context switching, and unnecessary meetings; protects engineers' deep work blocks to ensure continuous, high-quality deliveries."@en .
+
+# § Leadership Evaluation Indicators — four observable evaluation criteria.
+
+secav:DeliveryConsistencyBehavior a owl:Class ;
+    rdfs:subClassOf secav:LeaderBehavior ;
+    rdfs:label "Delivery Consistency Behavior"@en ;
+    rdfs:comment "Leader maintains sustainable deployment rhythms without compromising technical stability."@en .
+
+secav:ContinuousFeedbackBehavior a owl:Class ;
+    rdfs:subClassOf secav:LeaderBehavior ;
+    rdfs:label "Continuous Feedback Behavior"@en ;
+    rdfs:comment "Leader delivers constructive feedback in real time and publicly recognizes work well done."@en .
+
+secav:TechnicalDiversityBehavior a owl:Class ;
+    rdfs:subClassOf secav:LeaderBehavior ;
+    rdfs:label "Technical Diversity Behavior"@en ;
+    rdfs:comment "Leader integrates diverse technical perspectives in solutions and promotes inclusion."@en .
+
+secav:HolisticProductVisionBehavior a owl:Class ;
+    rdfs:subClassOf secav:LeaderBehavior ;
+    rdfs:label "Holistic Product Vision Behavior"@en ;
+    rdfs:comment "Leader understands the business metrics behind the code their team produces."@en .
+
+# § New Property
+
+secav:belongsToDimension a owl:ObjectProperty ;
+    rdfs:domain secav:LeaderBehavior ;
+    rdfs:range secav:TechnicalLeadershipDimension ;
+    rdfs:label "belongs to dimension"@en ;
+    rdfs:comment "Links a leader behavior to the strategic leadership dimension it belongs to."@en .

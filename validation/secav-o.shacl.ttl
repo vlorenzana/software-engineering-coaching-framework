@@ -180,3 +180,13 @@ secav:CoachObservationShape
         sh:datatype xsd:string ;
         sh:message "A coach observation must include a verbatim statement of what was observed."@en
     ] .
+
+secav:LeaderBehaviorShape
+    a sh:NodeShape ;
+    sh:targetClass secav:LeaderBehavior ;
+    sh:property [
+        sh:path secav:belongsToDimension ;
+        sh:minCount 1 ;
+        sh:class secav:TechnicalLeadershipDimension ;
+        sh:message "A leader behavior must belong to at least one technical leadership dimension."@en
+    ] .
