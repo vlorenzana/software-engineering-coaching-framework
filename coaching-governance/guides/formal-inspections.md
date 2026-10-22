@@ -1,136 +1,136 @@
-﻿# Inspecciones Formales de Módulos Críticos
+﻿# Formal Inspections of Critical Modules
 
-## Propósito
+## Purpose
 
-No todos los artefactos del sistema merecen el mismo nivel de escrutinio. Las inspecciones formales son una actividad de revisión estructurada, más rigurosa que una revisión de código ordinaria, aplicada selectivamente a los módulos que concentran mayor riesgo de impacto.
+Not all system artifacts deserve the same level of scrutiny. Formal inspections are a structured review activity, more rigorous than an ordinary code review, applied selectively to modules that concentrate the greatest impact risk.
 
-Se recomienda que el arquitecto del sistema identifique los módulos críticos al inicio del proyecto, y que sobre esos módulos se planifiquen inspecciones formales respaldadas por el Líder Técnico y la gerencia, con el coach presente como observador.
+It is recommended that the system architect identify critical modules at the start of the project, and that formal inspections backed by the Technical Lead and management be planned for those modules, with the coach present as an observer.
 
 ---
 
-## 1. Rol del arquitecto: identificación de módulos críticos
+## 1. The architect's role: identifying critical modules
 
-El arquitecto es quien mejor conoce la distribución del riesgo técnico en el sistema. Su responsabilidad en este proceso es identificar, antes del inicio del desarrollo, qué módulos concentran mayor impacto potencial.
+The architect is who best understands the distribution of technical risk in the system. Their responsibility in this process is to identify, before development begins, which modules concentrate the greatest potential impact.
 
-Un **módulo crítico** es aquel cuyo fallo, defecto o degradación genera consecuencias desproporcionadas sobre el sistema o el negocio. La identificación no requiere unanimidad — requiere juicio técnico documentado.
+A **critical module** is one whose failure, defect, or degradation generates disproportionate consequences for the system or the business. Identification does not require unanimity — it requires documented technical judgment.
 
-### 1.1 Criterios de criticidad
+### 1.1 Criticality criteria
 
-El arquitecto puede aplicar uno o más de los siguientes criterios para designar un módulo como crítico:
+The architect may apply one or more of the following criteria to designate a module as critical:
 
-| Criterio | Descripción |
+| Criterion | Description |
 |---|---|
-| **Impacto de fallo** | Un defecto en este módulo provoca fallos en cascada, pérdida de datos, o indisponibilidad del servicio |
-| **Amplitud de uso** | El módulo es invocado por muchos otros componentes; un defecto se propaga ampliamente |
-| **Complejidad estructural** | Alta complejidad ciclomática, múltiples caminos de ejecución, condiciones de borde difíciles de cubrir con pruebas automatizadas |
-| **Seguridad o privacidad** | Maneja autenticación, autorización, cifrado, datos personales o información sensible |
-| **Integridad de datos** | Responsable de transacciones, consistencia entre sistemas, o integridad referencial |
-| **Novedad o incertidumbre** | Tecnología nueva para el equipo, patrón de diseño no probado en el contexto, o requisito ambiguo |
+| **Failure impact** | A defect in this module causes cascading failures, data loss, or service unavailability |
+| **Breadth of use** | The module is invoked by many other components; a defect propagates widely |
+| **Structural complexity** | High cyclomatic complexity, multiple execution paths, edge cases difficult to cover with automated tests |
+| **Security or privacy** | Handles authentication, authorization, encryption, personal data, or sensitive information |
+| **Data integrity** | Responsible for transactions, cross-system consistency, or referential integrity |
+| **Novelty or uncertainty** | Technology new to the team, unproven design pattern in context, or ambiguous requirement |
 
-La lista de módulos críticos debe ser documentada y compartida con el Líder Técnico, el coach y la gerencia al inicio del proyecto.
+The list of critical modules must be documented and shared with the Technical Lead, the coach, and management at the start of the project.
 
 ---
 
-## 2. La inspección formal
+## 2. The formal inspection
 
-Una inspección formal es una revisión estructurada en la que un grupo de participantes con roles definidos examina un artefacto (`secav:SourceCodeArtifact` u otro `secav:Artifact`) contra criterios de calidad explícitos (`secav:QualityCriterion`, `secav:AcceptanceCriterion`), con el objetivo de identificar defectos antes de que avancen al siguiente fase del desarrollo.
+A formal inspection is a structured review in which a group of participants with defined roles examines an artifact (`secav:SourceCodeArtifact` or other `secav:Artifact`) against explicit quality criteria (`secav:QualityCriterion`, `secav:AcceptanceCriterion`), with the goal of identifying defects before they advance to the next phase of development.
 
-La diferencia respecto a una revisión de código ordinaria es el grado de estructura: roles definidos, preparación individual obligatoria, reunión moderada, y registro formal de hallazgos (`secav:ReviewRecord`).
+The difference from an ordinary code review is the degree of structure: defined roles, mandatory individual preparation, moderated meeting, and formal recording of findings (`secav:ReviewRecord`).
 
-### 2.1 Fases del proceso
+### 2.1 Process phases
 
-| Fase | Responsable | Descripción |
+| Phase | Responsible | Description |
 |---|---|---|
-| **1. Planificación** | Coach + Líder Técnico | Seleccionar el módulo a inspeccionar, definir participantes, distribuir el material con anticipación (al menos 24–48 h antes de la reunión). |
-| **2. Preparación individual** | Todos los participantes | Cada inspector revisa el artefacto de forma independiente y anota observaciones, preguntas y posibles defectos antes de la reunión. La preparación individual es obligatoria — no puede sustituirse por la lectura durante la reunión. |
-| **3. Reunión de inspección** | Moderador designado | Revisión estructurada del artefacto. El autor escucha y responde preguntas; no defiende. El recorder documenta los hallazgos (`secav:ReviewFinding`). El coach asiste como observador silencioso: toma notas, no interviene verbalmente. |
-| **4. Rework** | Autor + Líder Técnico | El autor corrige los defectos identificados. El Líder Técnico puede orientar si la corrección requiere decisiones de diseño. |
-| **5. Seguimiento** | Coach | El coach verifica que los hallazgos críticos fueron corregidos antes de que el módulo avance. Las correcciones se registran en el `secav:ReviewRecord`. |
+| **1. Planning** | Coach + Technical Lead | Select the module to inspect, define participants, distribute the material in advance (at least 24–48 hours before the meeting). |
+| **2. Individual preparation** | All participants | Each inspector reviews the artifact independently and notes observations, questions, and potential defects before the meeting. Individual preparation is mandatory — it cannot be substituted by reading during the meeting. |
+| **3. Inspection meeting** | Designated moderator | Structured review of the artifact. The author listens and answers questions; they do not defend. The recorder documents findings (`secav:ReviewFinding`). The coach attends as a silent observer: takes notes, does not intervene verbally. |
+| **4. Rework** | Author + Technical Lead | The author corrects identified defects. The Technical Lead may provide guidance when the correction requires design decisions. |
+| **5. Follow-up** | Coach | The coach verifies that critical findings were corrected before the module advances. Corrections are recorded in the `secav:ReviewRecord`. |
 
 ---
 
-## 3. Roles y responsabilidades
+## 3. Roles and responsibilities
 
-| Rol | Función en la inspección |
+| Role | Function in the inspection |
 |---|---|
-| **Arquitecto** | Define qué módulos son críticos y por qué. Puede participar como inspector en módulos de su dominio. |
-| **Moderador designado** | Conduce la reunión, mantiene el foco en el artefacto y el tiempo de cada punto. Es un inspector del equipo designado para este rol — no el coach. |
-| **Autor del módulo** | Presenta el artefacto brevemente. Escucha y responde preguntas sin defender decisiones de diseño durante la reunión. |
-| **Inspectores** | Ingenieros del equipo o externos con competencia en el dominio. Revisaron el material individualmente y traen observaciones documentadas. |
-| **Recorder** | Documenta los hallazgos (`secav:ReviewFinding`) durante la reunión. Puede ser uno de los inspectores. |
-| **Líder Técnico** | Resuelve ambigüedades técnicas durante la reunión y apoya al autor en la fase de rework. Garantiza que la inspección tenga el tiempo y los participantes necesarios. |
-| **Coach** | Asiste como observador silencioso. No participa ni modera. Toma notas de observación que usa después de la reunión para retroalimentación grupal o individual. |
-| **Gerencia** | Autoriza el tiempo de la inspección. Reconoce los hallazgos como evidencia de calidad — no los usa como instrumento de evaluación de rendimiento individual. |
+| **Architect** | Defines which modules are critical and why. May participate as an inspector in modules within their domain. |
+| **Designated moderator** | Leads the meeting, maintains focus on the artifact and time per point. Is a team inspector designated for this role — not the coach. |
+| **Module author** | Briefly presents the artifact. Listens and answers questions without defending design decisions during the meeting. |
+| **Inspectors** | Engineers from the team or external parties with domain competence. They reviewed the material individually and bring documented observations. |
+| **Recorder** | Documents findings (`secav:ReviewFinding`) during the meeting. May be one of the inspectors. |
+| **Technical Lead** | Resolves technical ambiguities during the meeting and supports the author in the rework phase. Ensures the inspection has the necessary time and participants. |
+| **Coach** | Attends as a silent observer. Does not participate or moderate. Takes observation notes used after the meeting for group or individual feedback. |
+| **Management** | Authorizes the inspection time. Acknowledges findings as quality evidence — does not use them as an instrument for punitively evaluating the author's performance. |
 
 ---
 
-## 4. Rol del coach
+## 4. Coach's role
 
-El coach asiste a todas las reuniones de la inspección — con el moderador, con los inspectores, con el autor — como observador silencioso. No participa verbalmente en ninguna de ellas. Toma notas y da retroalimentación después.
+The coach attends all inspection meetings — with the moderator, with the inspectors, with the author — as a silent observer. They do not participate verbally in any of them. They take notes and give feedback afterward.
 
-- **Antes de la reunión:** verificar que la preparación individual se realizó. Si algún participante no preparó el material, coordina con el Líder Técnico para reprogramar.
-- **Durante la reunión:** observa y toma notas. No interviene, no modera, no comenta hallazgos. Registra: quién participa, cómo se formulan los comentarios (producto vs. persona), puntos de tensión, acuerdos y desacuerdos.
-- **Después de la reunión:** da retroalimentación — grupal si el patrón afecta a todo el equipo, individual si es específica de un participante. Usa los `secav:ReviewFinding` documentados como evidencia para la `secav:CompetencyAssessment`.
-- **Seguimiento de rework:** verifica que los hallazgos críticos fueron corregidos antes de que el módulo avance. Esta verificación puede hacerse sin reunión — revisando el `secav:ReviewRecord` actualizado.
-- **Si la inspección revela un patrón sistémico** (el mismo tipo de defecto aparece en varios módulos): documentar una `secav:CoachingIntervention` o `secavo:ImprovementAction` dirigida al equipo, no al autor individual.
-
----
-
-## 5. Soporte de gerencia y Líder Técnico
-
-Las inspecciones formales solo son efectivas si cuentan con respaldo explícito de la gerencia y el Líder Técnico:
-
-**Gerencia:**
-- Incluir las inspecciones en el plan del proyecto como actividades de calidad con tiempo asignado.
-- No tratar los hallazgos de una inspección como indicadores de rendimiento negativo del autor — los defectos encontrados antes de producción son éxitos del proceso, no fallos del individuo.
-- Si la gerencia omite las inspecciones planeadas sin justificación técnica, el coach puede documentar una `secavo:QualityPlanningConcern`.
-
-**Líder Técnico:**
-- Participar en al menos la fase de planificación y la reunión de los módulos de mayor riesgo.
-- Asegurar que el equipo tenga capacidad para la preparación individual — la preparación no se realiza dentro de la reunión.
-- Orientar el rework cuando los hallazgos implican decisiones de diseño más amplias.
+- **Before the meeting:** verify that individual preparation was performed. If any participant did not prepare the material, coordinate with the Technical Lead to reschedule.
+- **During the meeting:** observe and take notes. Does not intervene, moderate, or comment on findings. Records: who participates, how comments are framed (product vs. person), points of tension, agreements and disagreements.
+- **After the meeting:** gives feedback — group if the pattern affects the entire team, individual if specific to a participant. Uses documented `secav:ReviewFinding` as evidence for `secav:CompetencyAssessment`.
+- **Rework follow-up:** verifies that critical findings were corrected before the module advances. This verification can be done without a meeting — by reviewing the updated `secav:ReviewRecord`.
+- **If the inspection reveals a systemic pattern** (the same type of defect appears in multiple modules): document a `secav:CoachingIntervention` or `secavo:ImprovementAction` directed at the team, not the individual author.
 
 ---
 
-## 6. Outputs de la inspección
+## 5. Management and Technical Lead support
 
-| Output | Descripción | SECAV-O |
+Formal inspections are only effective when they have explicit backing from management and the Technical Lead:
+
+**Management:**
+- Include inspections in the project plan as quality activities with assigned time.
+- Do not treat inspection findings as indicators of negative performance for the author — defects found before production are successes of the process, not failures of the individual.
+- If management omits planned inspections without technical justification, the coach may document a `secavo:QualityPlanningConcern`.
+
+**Technical Lead:**
+- Participate in at least the planning phase and the meeting for the highest-risk modules.
+- Ensure the team has capacity for individual preparation — preparation does not happen inside the meeting.
+- Guide rework when findings involve broader design decisions.
+
+---
+
+## 6. Inspection outputs
+
+| Output | Description | SECAV-O |
 |---|---|---|
-| Registro de inspección | Artefacto, participantes, hallazgos, severidad, estado de corrección | `secav:ReviewRecord` |
-| Hallazgos documentados | Lista de defectos clasificados por tipo y severidad | `secav:ReviewFinding` |
-| Notas de observación del coach | Observaciones del coach durante la reunión, base para retroalimentación | `secav:WorkProductEvidence` |
-| Retroalimentación posterior | Grupal o individual, según el patrón observado | `secav:CoachingRecommendation` |
-| Evidencia de competencia | Hallazgos usados para informar la evaluación del autor e inspectores | `secav:ReviewFinding` → `secav:CompetencyAssessment` |
-| Intervención de coaching | Si hay un patrón sistémico en los hallazgos | `secav:CoachingIntervention`, `secavo:ImprovementAction` |
-| Preocupación de calidad | Si la inspección fue omitida o reducida sin justificación | `secavo:QualityPlanningConcern` |
+| Inspection record | Artifact, participants, findings, severity, correction status | `secav:ReviewRecord` |
+| Documented findings | List of defects classified by type and severity | `secav:ReviewFinding` |
+| Coach observation notes | Coach's observations during the meeting, basis for feedback | `secav:WorkProductEvidence` |
+| Subsequent feedback | Group or individual, according to observed pattern | `secav:CoachingRecommendation` |
+| Competency evidence | Findings used to inform competency assessment for author and inspectors | `secav:ReviewFinding` → `secav:CompetencyAssessment` |
+| Coaching intervention | If there is a systemic pattern in findings | `secav:CoachingIntervention`, `secavo:ImprovementAction` |
+| Quality concern | If the inspection was omitted or reduced without justification | `secavo:QualityPlanningConcern` |
 
 ---
 
-## 7. Integración con SECAV-O
+## 7. SECAV-O Integration
 
-| Concepto | Término SECAV-O |
+| Concept | SECAV-O term |
 |---|---|
-| Módulo crítico bajo inspección | `secav:SourceCodeArtifact` (o `secav:Artifact`) |
-| La inspección como actividad | `secav:CodeReview` (inspección formal de código); `secav:DesignReview` (inspección de diseño) |
-| Criterios de calidad evaluados | `secav:QualityCriterion`, `secav:AcceptanceCriterion` |
-| Registro de la inspección | `secav:ReviewRecord` (subclase de `secav:Artifact` y `secav:Evidence`) |
-| Hallazgos documentados | `secav:ReviewFinding` (subclase de `secav:Evidence`) |
-| Evidencia adicional producida | `secav:WorkProductEvidence` |
-| Evaluación de competencias derivada | `secav:CompetencyAssessment` |
-| Intervención por patrón sistémico | `secav:CoachingIntervention`, `secavo:ImprovementAction` |
-| Recomendación al equipo | `secav:CoachingRecommendation` |
-| Preocupación si inspección fue omitida | `secavo:QualityPlanningConcern` |
-| Riesgo documentado si no se realizan | `secavo:Risk` |
+| Critical module under inspection | `secav:SourceCodeArtifact` (or `secav:Artifact`) |
+| Inspection as activity | `secav:CodeReview` (formal code inspection); `secav:DesignReview` (design inspection) |
+| Quality criteria evaluated | `secav:QualityCriterion`, `secav:AcceptanceCriterion` |
+| Inspection record | `secav:ReviewRecord` (subclass of `secav:Artifact` and `secav:Evidence`) |
+| Documented findings | `secav:ReviewFinding` (subclass of `secav:Evidence`) |
+| Additional evidence produced | `secav:WorkProductEvidence` |
+| Derived competency assessment | `secav:CompetencyAssessment` |
+| Intervention for systemic pattern | `secav:CoachingIntervention`, `secavo:ImprovementAction` |
+| Recommendation to the team | `secav:CoachingRecommendation` |
+| Concern if inspection was omitted | `secavo:QualityPlanningConcern` |
+| Risk documented if not performed | `secavo:Risk` |
 
 ---
 
-## 8. Documentos relacionados
+## 8. Related documents
 
-| Documento | Relación |
+| Document | Relationship |
 |---|---|
-| `coaching-governance/guides/project-kickoff-alignment.md` | Las inspecciones formales deben incluirse como actividades de calidad en los objetivos de proyecto |
-| `coaching-governance/docs/project-planning-participation.md` | El coach puede levantar una `QualityPlanningConcern` si las inspecciones se omiten del plan |
-| `coaching-governance/guides/code-review-best-practices.md` | Base para revisiones ordinarias; las inspecciones formales aplican un estándar más riguroso |
-| `coaching-governance/guides/ai-assisted-code-review.md` | Módulos críticos con código generado por IA requieren inspección formal adicional |
-| `templates/quality-planning-dissent-and-escalation.md` | Mecanismo de escalación si la gerencia elimina inspecciones planeadas |
-| `templates/engineer-coaching-assessment.md` | Los hallazgos de inspección alimentan la evaluación de competencias |
+| `coaching-governance/guides/project-kickoff-alignment.md` | Formal inspections must be included as quality activities in project objectives |
+| `coaching-governance/docs/project-planning-participation.md` | The coach may raise a `QualityPlanningConcern` if inspections are omitted from the plan |
+| `coaching-governance/guides/code-review-best-practices.md` | Basis for ordinary reviews; formal inspections apply a more rigorous standard |
+| `coaching-governance/guides/ai-assisted-code-review.md` | Critical modules with AI-generated code require additional formal inspection |
+| `templates/quality-planning-dissent-and-escalation.md` | Escalation mechanism if management eliminates planned inspections |
+| `templates/engineer-coaching-assessment.md` | Inspection findings feed competency assessment |

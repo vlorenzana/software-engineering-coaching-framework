@@ -1,138 +1,138 @@
-# Criterio Mínimo de Calidad por Fase
+# Minimum Quality Criterion per Phase
 
-## Principio
+## Principle
 
-En cada fase productiva del desarrollo de software se generan artefactos que condicionan la calidad de todas las fases siguientes. Un defecto introducido en requerimientos que no se detecta hasta pruebas de sistema puede invalidar semanas de trabajo. Un diseño de pruebas unitarias defectuoso puede pasar inadvertido indefinidamente si nadie lo inspecciona.
+Every productive phase of software development generates artifacts that condition the quality of all subsequent phases. A defect introduced in requirements that is not detected until system testing can invalidate weeks of work. A defective unit test design can go unnoticed indefinitely if no one inspects it.
 
-**El criterio de calidad mínima razonable es: los artefactos críticos de cada fase deben ser inspeccionados antes de que esa fase concluya.**
+**The minimum reasonable quality criterion is: the critical artifacts of each phase must be inspected before that phase concludes.**
 
 ---
 
-## Definición: calidad mínima razonable
+## Definition: minimum reasonable quality
 
-> **Nota de alcance:** "Calidad mínima razonable" es un criterio propuesto por este framework, no un estándar universal reconocido por organismos de certificación. El objetivo es proporcionar un punto de referencia operativo concreto; no declarar automáticamente mala práctica en toda organización que opere de forma distinta.
+> **Scope note:** "Minimum reasonable quality" is a criterion proposed by this framework, not a universally recognized certification standard. The goal is to provide a concrete operational reference point — not to automatically declare bad practice for every organization that operates differently.
 
-La **calidad mínima razonable** es, según la propuesta de SECAV-O, el umbral por debajo del cual el riesgo de acumulación de defectos entre fases es inaceptable — independientemente de las restricciones de tiempo o presupuesto que se invoquen para justificarlo. No es el estándar de calidad al que aspirar, sino el piso a partir del cual este framework considera que la cobertura de inspección es insuficiente.
+**Minimum reasonable quality** is, according to the SECAV-O proposal, the threshold below which the risk of defect accumulation between phases is unacceptable — regardless of time or budget constraints invoked to justify it. It is not the quality standard to aspire to, but the floor below which this framework considers inspection coverage insufficient.
 
-La razón de establecer un *mínimo* en lugar de un *óptimo* es que la mayoría de las organizaciones no tienen capacidad para inspeccionar todos los productos de software que genera el desarrollo: requerimientos, diseño de arquitectura, diseño detallado, código, diseño de pruebas unitarias, diseño de pruebas de sistema, diseño de pruebas de aceptación, resultados de ejecución de pruebas, y otros derivados. Inspeccionar todo es un ideal al que conviene aproximarse progresivamente; presuponer que toda organización puede lograrlo desde el inicio es irreal.
+The reason for establishing a *minimum* rather than an *optimum* is that most organizations do not have the capacity to inspect every software artifact generated during development: requirements, architecture design, detailed design, code, unit test design, system test design, acceptance test design, test execution results, and other derivatives. Inspecting everything is an ideal to approximate progressively; assuming every organization can achieve it from the outset is unrealistic.
 
-Lo que sí es alcanzable en la mayoría de los proyectos — y lo que este framework establece como mínimo razonable — es **identificar los artefactos de mayor riesgo en cada fase y asegurar que al menos esos sean revisados formalmente por más de un revisor antes de avanzar a la siguiente fase**.
+What is achievable in most projects — and what this framework establishes as the reasonable minimum — is **identifying the highest-risk artifacts in each phase and ensuring that at least those are formally reviewed by more than one reviewer before advancing to the next phase**.
 
-| Nivel | Descripción |
+| Level | Description |
 |---|---|
-| **Por debajo del mínimo** | Mala práctica: ningún artefacto crítico de alguna fase es inspeccionado formalmente. Los defectos se acumulan entre fases y se detectan tarde, cuando su costo de corrección es máximo. |
-| **Calidad mínima razonable** | Los artefactos de mayor riesgo de cada fase son inspeccionados por más de un revisor antes de avanzar. Es el piso del framework. |
-| **Proceso robusto** | Las prácticas de calidad producen evidencia verificable de su efectividad: inspecciones sobre productos críticos, diseño de comportamiento dinámico con diagramas UML, hallazgos documentados en revisiones individuales, y waivers justificados cuando no los hay. Definido en `coaching-governance/guides/robust-process-criteria.md`. |
-| **Calidad aspiracional** | La mayoría o todos los artefactos de cada fase son inspeccionados. Las organizaciones maduran hacia este nivel de forma incremental (`coaching-governance/guides/incremental-adoption.md`). |
+| **Below minimum** | Bad practice: no critical artifact in any phase is formally inspected. Defects accumulate between phases and are detected late, when their correction cost is highest. |
+| **Minimum reasonable quality** | The highest-risk artifacts of each phase are inspected by more than one reviewer before advancing. This is the framework's floor. |
+| **Robust process** | Quality practices produce verifiable evidence of their effectiveness: inspections over critical products, dynamic behavior design with UML diagrams, findings documented in individual reviews, and justified waivers when none exist. Defined in `coaching-governance/guides/robust-process-criteria.md`. |
+| **Aspirational quality** | Most or all artifacts of each phase are inspected. Organizations mature toward this level incrementally (`coaching-governance/guides/incremental-adoption.md`). |
 
-Un segundo criterio que refuerza este mínimo: si la presión de tiempo lleva sistemáticamente a omitir inspecciones en alguna fase — cualquier fase — eso es una señal de que el plan de proyecto subestima el esfuerzo de calidad, no de que la inspección sea prescindible. El coach documenta estas omisiones como `secavo:QualityPlanningConcern`.
+A second criterion that reinforces this minimum: if time pressure systematically leads to omitting inspections in any phase — any phase — that is a signal that the project plan underestimates quality effort, not that inspection is dispensable. The coach documents these omissions as `secavo:QualityPlanningConcern`.
 
 ---
 
-## Modelo de fases e inspecciones
+## Phase and inspection model
 
-La siguiente tabla mapea las fases productivas del desarrollo de software, los artefactos que producen, el tipo de revisión en SECAV-O, y la guía del framework que establece el protocolo.
+The following table maps the productive phases of software development, the artifacts they produce, the SECAV-O review type, and the framework guide that establishes the protocol.
 
-| Fase | Artefacto inspeccionado | Actividad SECAV-O | Tipo de revisión | Guía del framework |
+| Phase | Inspected artifact | SECAV-O activity | Review type | Framework guide |
 |---|---|---|---|---|
-| **Requerimientos** | Documento de requerimientos, historias de usuario, casos de uso | `secav:RequirementsActivity` | `secav:DesignReview` sobre `secav:DesignArtifact` | `coaching-governance/guides/requirements-inspection.md` |
-| **Diseño de arquitectura** | Decisiones arquitectónicas, diagramas de componentes, ADRs | `secav:ApplicationDesign` | `secav:DesignReview` sobre `secav:DesignArtifact` | `coaching-governance/guides/formal-inspections.md` |
-| **Diseño detallado** | Diagramas de clases, contratos de API, especificaciones de módulo | `secav:DesignActivity` | `secav:DesignReview` sobre `secav:DesignArtifact` | `coaching-governance/guides/formal-inspections.md` |
-| **Implementación de código** | Código fuente de módulos críticos | `secav:CodingActivity` | `secav:CodeReview` sobre `secav:SourceCodeArtifact` | `coaching-governance/guides/formal-inspections.md`, `coaching-governance/guides/peer-review-sessions.md` |
-| **Diseño de pruebas unitarias** | Código y casos de prueba unitaria | `secav:UnitTestDesign` | `secav:UnitTestDesignReview` sobre `secav:UnitTestDesignArtifact` | `coaching-governance/guides/unit-test-review.md` |
-| **Diseño de pruebas de sistema** | Plan de pruebas de sistema, casos de prueba de integración | `secav:TestingActivity` | `secav:DesignReview` sobre `secav:DesignArtifact` | *(pendiente — ver §3)* |
-| **Diseño de pruebas de aceptación** | Criterios de aceptación, scripts de UAT | `secav:TestingActivity` | `secav:DesignReview` sobre `secav:DesignArtifact` | *(pendiente — ver §3)* |
+| **Requirements** | Requirements document, user stories, use cases | `secav:RequirementsActivity` | `secav:DesignReview` on `secav:DesignArtifact` | `coaching-governance/guides/requirements-inspection.md` |
+| **Architecture design** | Architectural decisions, component diagrams, ADRs | `secav:ApplicationDesign` | `secav:DesignReview` on `secav:DesignArtifact` | `coaching-governance/guides/formal-inspections.md` |
+| **Detailed design** | Class diagrams, API contracts, module specifications | `secav:DesignActivity` | `secav:DesignReview` on `secav:DesignArtifact` | `coaching-governance/guides/formal-inspections.md` |
+| **Code implementation** | Source code of critical modules | `secav:CodingActivity` | `secav:CodeReview` on `secav:SourceCodeArtifact` | `coaching-governance/guides/formal-inspections.md`, `coaching-governance/guides/peer-review-sessions.md` |
+| **Unit test design** | Unit test code and test cases | `secav:UnitTestDesign` | `secav:UnitTestDesignReview` on `secav:UnitTestDesignArtifact` | `coaching-governance/guides/unit-test-review.md` |
+| **System test design** | System test plan, integration test cases | `secav:TestingActivity` | `secav:DesignReview` on `secav:DesignArtifact` | *(pending — see §3)* |
+| **Acceptance test design** | Acceptance criteria, UAT scripts | `secav:TestingActivity` | `secav:DesignReview` on `secav:DesignArtifact` | *(pending — see §3)* |
 
 ---
 
-## 1. Criterios para seleccionar qué inspeccionar
+## 1. Criteria for selecting what to inspect
 
-No todos los artefactos de cada fase merecen inspección formal. El criterio de selección es el mismo en todas las fases: riesgo. Un artefacto es candidato a inspección formal si cumple al menos uno de estos criterios:
+Not every artifact in each phase warrants formal inspection. The selection criterion is the same across all phases: risk. An artifact is a candidate for formal inspection if it meets at least one of these criteria:
 
-| Criterio | Ejemplos |
+| Criterion | Examples |
 |---|---|
-| **Alcance de impacto** | El artefacto afecta a muchas funcionalidades o a muchos otros artefactos que dependen de él |
-| **Amplitud de uso** | Muchos ingenieros o módulos lo consultan como referencia |
-| **Complejidad estructural** | Alta ciclomática, lógica condicional anidada, múltiples casos de borde |
-| **Riesgo de seguridad o privacidad** | Maneja autenticación, autorización, datos personales, criptografía |
-| **Integridad de datos** | Afecta persistencia, consistencia transaccional o integridad referencial |
-| **Novedad tecnológica** | Usa una tecnología, patrón o dependencia con la que el equipo tiene poca experiencia |
+| **Impact scope** | The artifact affects many features or many other artifacts that depend on it |
+| **Breadth of use** | Many engineers or modules consult it as a reference |
+| **Structural complexity** | High cyclomatic complexity, nested conditional logic, multiple edge cases |
+| **Security or privacy risk** | Handles authentication, authorization, personal data, cryptography |
+| **Data integrity** | Affects persistence, transactional consistency, or referential integrity |
+| **Technology novelty** | Uses a technology, pattern, or dependency the team has little experience with |
 
-El arquitecto identifica los artefactos críticos para cada fase al inicio del sprint o al inicio del proyecto. La lista debe ser visible y acordada con el Líder Técnico.
-
----
-
-## 2. El coach en el modelo de fases
-
-El rol del coach es consistente en todas las fases: **observador silencioso** durante la sesión de inspección, con retroalimentación posterior al equipo, al individuo o a la organización.
-
-Lo que varía según la fase:
-
-- **Requerimientos:** el coach presta atención especial a si los revisores comparan interpretaciones independientes, ya que la ambigüedad solo es visible cuando dos revisores llegan a interpretaciones distintas.
-- **Diseño y arquitectura:** el coach observa si los revisores validan el diseño contra los criterios de aceptación del requerimiento que lo originó.
-- **Código:** el coach observa si la revisión cubre tanto la corrección funcional como los criterios de calidad no funcionales (seguridad, rendimiento, mantenibilidad).
-- **Diseño de pruebas unitarias:** el coach observa si los revisores evalúan los *casos* de prueba (qué se prueba) además de la *implementación* de las pruebas (cómo se prueba).
-- **Diseño de pruebas de sistema y aceptación:** el coach observa si los casos de prueba cubren los criterios de aceptación del requerimiento original y los casos de borde relevantes.
-
-En todos los casos, el coach registra sus observaciones como `secav:WorkProductEvidence` y las usa para alimentar la `secav:CompetencyAssessment` de los participantes después de la sesión.
+The architect identifies critical artifacts for each phase at sprint start or project start. The list must be visible and agreed upon with the Technical Lead.
 
 ---
 
-## 3. Fases sin guía específica aún
+## 2. The coach in the phase model
 
-El framework actualmente no tiene guías dedicadas para:
+The coach's role is consistent across all phases: **silent observer** during the inspection session, with post-session feedback to the team, individual, or organization.
 
-- **Diseño de pruebas de sistema** — planes de prueba que cubren integración entre módulos, interfaces externas y requisitos no funcionales.
-- **Diseño de pruebas de aceptación** — criterios de aceptación ejecutables, scripts de UAT, definición de "Done" verificable por el cliente.
+What varies by phase:
 
-En ausencia de guía específica, estas fases se rigen por el protocolo general de inspección formal (`coaching-governance/guides/formal-inspections.md`), adaptando el objeto inspeccionado del artefacto de código al artefacto de diseño de pruebas.
+- **Requirements:** the coach pays special attention to whether reviewers compare independent interpretations, since ambiguity is only visible when two reviewers arrive at different interpretations.
+- **Design and architecture:** the coach observes whether reviewers validate the design against the acceptance criteria of the originating requirement.
+- **Code:** the coach observes whether the review covers both functional correctness and non-functional quality criteria (security, performance, maintainability).
+- **Unit test design:** the coach observes whether reviewers evaluate the *test cases* (what is tested) in addition to the *test implementation* (how it is tested).
+- **System and acceptance test design:** the coach observes whether test cases cover the acceptance criteria of the original requirement and the relevant edge cases.
 
----
-
-## 4. Criterio de avance entre fases
-
-Un artefacto no debería avanzar a la siguiente fase si no ha pasado su inspección de calidad mínima. Esto no requiere que todos los hallazgos estén corregidos antes de avanzar — sí requiere que:
-
-1. Los hallazgos estén documentados en el `secav:ReviewRecord`.
-2. Los hallazgos críticos o bloqueantes estén asignados con responsable y plazo.
-3. El coach verifique en el seguimiento (Fase 5 de la inspección) que los hallazgos bloqueantes fueron resueltos.
-
-La presión de tiempo que lleva a omitir inspecciones es la causa más frecuente de acumulación de deuda técnica y de defectos de fase tardía. El coach documenta las omisiones como `secavo:QualityPlanningConcern` y las escala si el patrón es recurrente.
+In all cases, the coach records their observations as `secav:WorkProductEvidence` and uses them to feed the `secav:CompetencyAssessment` of participants after the session.
 
 ---
 
-## 5. Integración con SECAV-O
+## 3. Phases without a dedicated guide yet
 
-| Concepto | Término SECAV-O |
+The framework currently has no dedicated guides for:
+
+- **System test design** — test plans covering module integration, external interfaces, and non-functional requirements.
+- **Acceptance test design** — executable acceptance criteria, UAT scripts, customer-verifiable definition of Done.
+
+In the absence of a specific guide, these phases follow the general formal inspection protocol (`coaching-governance/guides/formal-inspections.md`), adapting the inspected object from a code artifact to a test design artifact.
+
+---
+
+## 4. Phase-advance criterion
+
+An artifact should not advance to the next phase without passing its minimum quality inspection. This does not require all findings to be corrected before advancing — it does require:
+
+1. Findings are documented in the `secav:ReviewRecord`.
+2. Critical or blocking findings are assigned with an owner and deadline.
+3. The coach verifies in follow-up (Phase 5 of the inspection) that blocking findings were resolved.
+
+Time pressure that leads to omitting inspections is the most frequent cause of technical debt accumulation and late-phase defects. The coach documents omissions as `secavo:QualityPlanningConcern` and escalates if the pattern is recurring.
+
+---
+
+## 5. Integration with SECAV-O
+
+| Concept | SECAV-O term |
 |---|---|
-| Fase de requerimientos | `secav:RequirementsActivity` |
-| Fase de diseño (arquitectura, detalle, pruebas) | `secav:DesignActivity`, `secav:ApplicationDesign`, `secav:UnitTestDesign` |
-| Fase de implementación de código | `secav:CodingActivity`, `secav:CodeImplementation` |
-| Fase de pruebas (sistema, aceptación) | `secav:TestingActivity` |
-| Artefacto de diseño o requerimiento | `secav:DesignArtifact` |
-| Artefacto de código | `secav:SourceCodeArtifact` |
-| Artefacto de prueba unitaria | `secav:UnitTestDesignArtifact` |
-| Revisión de diseño (requerimientos, arquitectura, pruebas de sistema/aceptación) | `secav:DesignReview` |
-| Revisión de código | `secav:CodeReview` |
-| Revisión de prueba unitaria | `secav:UnitTestDesignReview` |
-| Criterios de selección de artefactos críticos | `secav:QualityCriterion` |
-| Criterio de avance entre fases | `secav:AcceptanceCriterion` |
-| Hallazgo de la inspección | `secav:ReviewFinding` |
-| Registro de la inspección | `secav:ReviewRecord` |
-| Notas del coach | `secav:WorkProductEvidence` |
-| Omisión de inspección documentada | `secavo:QualityPlanningConcern` |
-| Evaluación de competencia derivada | `secav:CompetencyAssessment` |
+| Requirements phase | `secav:RequirementsActivity` |
+| Design phase (architecture, detail, testing) | `secav:DesignActivity`, `secav:ApplicationDesign`, `secav:UnitTestDesign` |
+| Code implementation phase | `secav:CodingActivity`, `secav:CodeImplementation` |
+| Testing phase (system, acceptance) | `secav:TestingActivity` |
+| Design or requirements artifact | `secav:DesignArtifact` |
+| Code artifact | `secav:SourceCodeArtifact` |
+| Unit test artifact | `secav:UnitTestDesignArtifact` |
+| Design review (requirements, architecture, system/acceptance tests) | `secav:DesignReview` |
+| Code review | `secav:CodeReview` |
+| Unit test review | `secav:UnitTestDesignReview` |
+| Critical artifact selection criteria | `secav:QualityCriterion` |
+| Phase-advance criterion | `secav:AcceptanceCriterion` |
+| Inspection finding | `secav:ReviewFinding` |
+| Inspection record | `secav:ReviewRecord` |
+| Coach observation notes | `secav:WorkProductEvidence` |
+| Documented inspection omission | `secavo:QualityPlanningConcern` |
+| Derived competency assessment | `secav:CompetencyAssessment` |
 
 ---
 
-## 6. Documentos relacionados
+## 6. Related documents
 
-| Documento | Relación |
+| Document | Relationship |
 |---|---|
-| `coaching-governance/guides/requirements-inspection.md` | Protocolo de inspección para la fase de requerimientos |
-| `coaching-governance/guides/formal-inspections.md` | Protocolo base de inspección formal — aplicable a diseño, arquitectura y código |
-| `coaching-governance/guides/peer-review-sessions.md` | Revisiones de pares — complemento de las inspecciones formales en fase de código |
-| `coaching-governance/guides/unit-test-review.md` | Protocolo de revisión para la fase de diseño de pruebas unitarias |
-| `coaching-governance/guides/defect-tracking.md` | Los defectos encontrados en cada fase se registran con `phaseInjected` correspondiente |
-| `coaching-governance/guides/project-kickoff-alignment.md` | La cobertura de inspecciones por fase debe incluirse en los objetivos de calidad del proyecto |
-| `coaching-governance/docs/metrics-model.md` | Métricas de defectos por fase — distribución de `phaseInjected` como indicador de cobertura de inspecciones |
+| `coaching-governance/guides/requirements-inspection.md` | Inspection protocol for the requirements phase |
+| `coaching-governance/guides/formal-inspections.md` | Base formal inspection protocol — applicable to design, architecture, and code |
+| `coaching-governance/guides/peer-review-sessions.md` | Peer reviews — complement to formal inspections in the code phase |
+| `coaching-governance/guides/unit-test-review.md` | Review protocol for the unit test design phase |
+| `coaching-governance/guides/defect-tracking.md` | Defects found in each phase are recorded with the corresponding `phaseInjected` |
+| `coaching-governance/guides/project-kickoff-alignment.md` | Inspection coverage by phase must be included in project quality objectives |
+| `coaching-governance/docs/metrics-model.md` | Defect metrics by phase — `phaseInjected` distribution as an indicator of inspection coverage |

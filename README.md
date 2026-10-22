@@ -295,7 +295,7 @@ Institutional / Project Objectives -> Project Planning & Quality Governance -> T
 ## Included artifacts
 
 ### Glossary
-- `coaching-governance/glossary/glossary.md` — authoritative definitions for all terms introduced or specialized by the framework: calidad mínima razonable, módulo crítico, inspección formal, revisión de pares, observador silencioso, asistente de calidad, principios FIRST, patrón AAA/GWT, BVA, phaseInjected/phaseDetected/detectionMethod, tasa de escape, Fail Fast, PoC, trazador de extremo a extremo, Go/Pivot/Stop, sprint de coaching, ImprovementAction, QualityPlanningConcern, acción preventiva/correctiva, and more. 30 entries across 8 thematic sections.
+- `coaching-governance/glossary/glossary.md` — authoritative definitions for all terms introduced or specialized by the framework: minimum reasonable quality, critical module, formal inspection, peer review, silent observer, quality assistant, FIRST principles, AAA/GWT pattern, BVA, phaseInjected/phaseDetected/detectionMethod, escape rate, Fail Fast, PoC, end-to-end tracer, Go/Pivot/Stop, coaching sprint, ImprovementAction, QualityPlanningConcern, preventive/corrective action, and more. 30 entries across 8 thematic sections.
 
 ### Operating model
 - `coaching-governance/docs/coach-role-profile.md` — authoritative role profile for the SECAV-O coach: nine activity domains (quality mastery, instruction/feedback, design promotion, quality planning, metrics, architecture support, AI adoption governance, audit collaboration, facilitation), SECAV-O mapping, and role boundaries.

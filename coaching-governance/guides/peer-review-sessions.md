@@ -1,129 +1,129 @@
-﻿# Revisiones de Pares: Protocolo de Observación del Coach
+﻿# Peer Reviews: Coach Observation Protocol
 
-## Propósito
+## Purpose
 
-Esta guía describe el protocolo de presencia del coach durante las revisiones de pares (`secav:CodeReview`, `secav:DesignReview`). El coach asiste pero no es un participante activo — su rol es observar, tomar notas y recoger evidencia. La revisión la conducen los ingenieros.
-
----
-
-## 1. Rol del coach: observador silencioso
-
-**El coach está presente pero no participa.**
-
-Esto significa:
-
-- No da su opinión técnica durante la sesión.
-- No aprueba ni rechaza hallazgos.
-- No media activamente en desacuerdos.
-- No corrige a los ingenieros en voz alta durante la reunión.
-
-El coach toma notas. Sus observaciones se convierten en `secav:ReviewFinding` y `secav:WorkProductEvidence` que informan la `secav:CompetencyAssessment` posterior, y pueden derivar en una `secav:CoachingIntervention` en la sesión individual, no en la revisión misma.
-
-> La razón de esta restricción es estructural: si el coach interviene, los ingenieros dejan de resolver y esperan su juicio. La revisión deja de ser de pares.
+This guide describes the coach's presence protocol during peer reviews (`secav:CodeReview`, `secav:DesignReview`). The coach attends but is not an active participant — their role is to observe, take notes, and collect evidence. The review is conducted by the engineers.
 
 ---
 
-## 2. Principio central: revisar el producto, no a la persona
+## 1. Coach's role: silent observer
 
-Desde el inicio de la sesión, los ingenieros deben enfocar la revisión en el artefacto — el código, el diseño, el documento — no en el autor.
+**The coach is present but does not participate.**
 
-Indicadores de que el foco está en el producto:
+This means:
 
-- Los comentarios se formulan sobre el artefacto: *"Este bloque no maneja el caso nulo"*, no *"nunca manejas los casos nulos"*.
-- Las preguntas se dirigen al código: *"¿Qué sucede aquí si el valor es negativo?"*
-- El autor escucha sin ponerse a la defensiva, porque el objeto de evaluación es el artefacto.
-- El desacuerdo técnico se trata como una pregunta abierta sobre el producto, no como un juicio sobre la competencia del autor.
+- They do not offer their technical opinion during the session.
+- They do not approve or reject findings.
+- They do not actively mediate disagreements.
+- They do not correct engineers aloud during the meeting.
 
-El coach anota cuando los comentarios derivan hacia juicios sobre la persona. Esa observación alimenta una conversación posterior con quien corresponda — fuera de la sesión.
+The coach takes notes. Their observations become `secav:ReviewFinding` and `secav:WorkProductEvidence` that inform the subsequent `secav:CompetencyAssessment`, and may derive into a `secav:CoachingIntervention` in the individual session, not in the review itself.
 
----
-
-## 3. Disciplina de foco: observación del coach cuando el equipo se desvía
-
-Si el coach nota que los ingenieros se están desenfocando — debatiendo temas ajenos al artefacto, derivando hacia diseño de nuevas funcionalidades, discutiendo procesos no relacionados, o prolongando un punto sin avanzar — el coach lo registra como observación.
-
-**El coach no interviene verbalmente.** Puede usar una señal acordada previamente con el equipo (por ejemplo, una tarjeta visible, un gesto establecido) para indicar que el tiempo del punto está consumiéndose, si el equipo así lo solicitó al inicio. Fuera de eso, no interrumpe.
-
-El patrón de desvíos sistemáticos es una señal de coaching: puede indicar que los criterios de revisión no están claros, que la sesión está mal acotada, o que el equipo necesita práctica en la disciplina de revisión. El coach lleva esto a la próxima sesión individual o retrospectiva.
+> The reason for this restriction is structural: if the coach intervenes, engineers stop resolving and wait for their judgment. The review ceases to be a peer review.
 
 ---
 
-## 4. Desacuerdos no resueltos: punto pendiente y escalación al Líder de Proyecto
+## 2. Core principle: review the product, not the person
 
-Cuando los ingenieros no llegan a un acuerdo en un punto de la revisión y consideran que ya lo han debatido suficientemente, el procedimiento es:
+From the start of the session, engineers must focus the review on the artifact — the code, the design, the document — not on the author.
 
-1. **Marcar el punto como pendiente** — no seguir debatiendo. El punto se registra en el `secav:ReviewRecord` como hallazgo sin resolución.
-2. **Continuar con el resto de la revisión** — no bloquear toda la sesión por un único punto en disputa.
-3. **Al final de la sesión**, el equipo notifica al **Líder de Proyecto** sobre los puntos pendientes para que los resuelva o escale a quien corresponda.
+Indicators that the focus is on the product:
 
-El coach anota los puntos pendientes durante la sesión. No decide ni desempata — eso es responsabilidad del Líder de Proyecto.
+- Comments are directed at the artifact: *"This block does not handle the null case,"* not *"you never handle null cases."*
+- Questions are directed at the code: *"What happens here if the value is negative?"*
+- The author listens without becoming defensive, because the object of evaluation is the artifact.
+- Technical disagreement is treated as an open question about the product, not as a judgment about the author's competence.
 
-### Criterio para declarar un punto "suficientemente debatido"
-
-Un punto está suficientemente debatido cuando:
-- Las dos posiciones han sido expresadas con sus argumentos técnicos.
-- Ninguna nueva evidencia o argumento ha emergido en las últimas rondas de intercambio.
-- El debate ha superado un tiempo proporcional a la importancia del punto (orientativo: más de 5–10 minutos en un punto sin avance es señal de escalación).
+The coach notes when comments drift toward judgments about the person. That observation feeds a subsequent conversation with whoever is appropriate — outside the session.
 
 ---
 
-## 5. Notas del coach: qué registrar
+## 3. Focus discipline: coach observation when the team drifts
 
-Durante la sesión el coach registra:
+If the coach notices that engineers are losing focus — debating topics unrelated to the artifact, drifting toward designing new features, discussing unrelated processes, or prolonging a point without moving forward — the coach records it as an observation.
 
-| Qué observar | Por qué importa |
+**The coach does not intervene verbally.** They may use a signal previously agreed with the team (for example, a visible card, an established gesture) to indicate that time on the point is being consumed, if the team requested this at the start. Beyond that, they do not interrupt.
+
+The pattern of systematic drifts is a coaching signal: it may indicate that the review criteria are not clear, that the session is poorly scoped, or that the team needs practice in review discipline. The coach brings this to the next individual session or retrospective.
+
+---
+
+## 4. Unresolved disagreements: pending point and escalation to the Project Lead
+
+When engineers cannot reach agreement on a review point and consider it sufficiently debated, the procedure is:
+
+1. **Mark the point as pending** — do not continue debating. The point is recorded in the `secav:ReviewRecord` as an unresolved finding.
+2. **Continue with the rest of the review** — do not block the entire session over a single disputed point.
+3. **At the end of the session,** the team notifies the **Project Lead** about the pending points so they can resolve or escalate them as appropriate.
+
+The coach notes pending points during the session. They do not decide or cast a tie-breaking vote — that is the Project Lead's responsibility.
+
+### Criterion for declaring a point "sufficiently debated"
+
+A point is sufficiently debated when:
+- Both positions have been expressed with their technical arguments.
+- No new evidence or argument has emerged in the last rounds of exchange.
+- The debate has exceeded a time proportional to the importance of the point (guideline: more than 5–10 minutes on a point without progress is a signal for escalation).
+
+---
+
+## 5. Coach notes: what to record
+
+During the session the coach records:
+
+| What to observe | Why it matters |
 |---|---|
-| Quién participa y quién no | Distribución de participación — señal de dominio o inhibición |
-| Cómo se formulan los comentarios (producto vs. persona) | Indicador de cultura de revisión |
-| Puntos donde el debate se extiende sin resolución | Candidatos a escalación; posible ambigüedad de criterios |
-| Desvíos de foco | Señal de que los criterios de revisión no son suficientemente claros |
-| Decisiones técnicas acordadas | Evidencia de razonamiento colectivo |
-| Puntos marcados como pendientes | A trasladar al Líder de Proyecto |
-| Hallazgos técnicos significativos | `secav:ReviewFinding` que informan `secav:CompetencyAssessment` |
+| Who participates and who does not | Participation distribution — signal of mastery or inhibition |
+| How comments are framed (product vs. person) | Indicator of review culture |
+| Points where debate extends without resolution | Candidates for escalation; possible ambiguity of criteria |
+| Focus drifts | Signal that review criteria are not sufficiently clear |
+| Agreed technical decisions | Evidence of collective reasoning |
+| Points marked as pending | To be transferred to the Project Lead |
+| Significant technical findings | `secav:ReviewFinding` informing `secav:CompetencyAssessment` |
 
-Las notas del coach son internas al proceso de coaching. No se comparten con la gerencia como evaluación de rendimiento individual.
-
----
-
-## 6. Después de la sesión: retroalimentación y uso de las observaciones
-
-Inmediatamente después de la sesión o en un momento acordado próximo, el coach da retroalimentación basada en sus notas. La forma depende del patrón observado:
-
-- **Retroalimentación grupal** — cuando el patrón afecta a todo el equipo (por ejemplo, la revisión derivó sistemáticamente hacia juicios sobre la persona, o los desvíos de foco fueron recurrentes). Se da en un espacio colectivo del equipo.
-- **Retroalimentación individual** — cuando la observación es específica de un participante (por ejemplo, un ingeniero que no había preparado el material, o cuyo tono fue consistentemente descalificador). Se da en privado.
-
-En ambos casos las observaciones son del coach — no del autor, los inspectores ni la gerencia. Se derivan de los hechos observados, no de juicios sobre la persona.
-
-Las observaciones del coach se usan además en:
-
-1. **Retrospectiva del sprint** — si el patrón de desvíos o desacuerdos es sistemático, el coach lo introduce como tema de mejora (`secavo:ImprovementAction`).
-2. **Evaluación de competencias** — los hallazgos técnicos y de proceso informan la `secav:CompetencyAssessment` de cada ingeniero en `secav:ReviewCompetency`.
+The coach's notes are internal to the coaching process. They are not shared with management as individual performance evaluations.
 
 ---
 
-## 7. Integración con SECAV-O
+## 6. After the session: feedback and use of observations
 
-| Concepto | Término SECAV-O |
+Immediately after the session or at an agreed nearby moment, the coach gives feedback based on their notes. The form depends on the observed pattern:
+
+- **Group feedback** — when the pattern affects the entire team (for example, the review systematically drifted toward judgments about the person, or focus drifts were recurrent). Given in a collective team space.
+- **Individual feedback** — when the observation is specific to a participant (for example, an engineer who had not prepared the material, or whose tone was consistently dismissive). Given in private.
+
+In both cases the observations belong to the coach — not to the author, inspectors, or management. They derive from observed facts, not from judgments about the person.
+
+The coach's observations are also used in:
+
+1. **Sprint retrospective** — if the pattern of drifts or disagreements is systematic, the coach introduces it as an improvement topic (`secavo:ImprovementAction`).
+2. **Competency assessment** — technical and process findings inform each engineer's `secav:CompetencyAssessment` in `secav:ReviewCompetency`.
+
+---
+
+## 7. SECAV-O Integration
+
+| Concept | SECAV-O term |
 |---|---|
-| La revisión de pares como actividad | `secav:CodeReview` o `secav:DesignReview` (subclases de `secav:ReviewActivity`) |
-| Registro de la sesión | `secav:ReviewRecord` (subclase de `secav:Artifact` y `secav:Evidence`) |
-| Hallazgos documentados | `secav:ReviewFinding` (subclase de `secav:Evidence`) |
-| Punto no resuelto registrado | `secav:ReviewFinding` con estado "pendiente" |
-| Notas de observación del coach | `secav:WorkProductEvidence` |
-| Evaluación de competencias posterior | `secav:CompetencyAssessment` sobre `secav:ReviewCompetency` |
-| Feedback posterior al ingeniero | `secav:CoachingRecommendation` |
-| Intervención si hay patrón sistémico | `secav:CoachingIntervention`, `secavo:ImprovementAction` |
+| Peer review as activity | `secav:CodeReview` or `secav:DesignReview` (subclasses of `secav:ReviewActivity`) |
+| Session record | `secav:ReviewRecord` (subclass of `secav:Artifact` and `secav:Evidence`) |
+| Documented findings | `secav:ReviewFinding` (subclass of `secav:Evidence`) |
+| Unresolved point recorded | `secav:ReviewFinding` with "pending" status |
+| Coach observation notes | `secav:WorkProductEvidence` |
+| Subsequent competency assessment | `secav:CompetencyAssessment` on `secav:ReviewCompetency` |
+| Subsequent feedback to the engineer | `secav:CoachingRecommendation` |
+| Intervention if there is a systemic pattern | `secav:CoachingIntervention`, `secavo:ImprovementAction` |
 
 ---
 
-## 8. Documentos relacionados
+## 8. Related documents
 
-| Documento | Relación |
+| Document | Relationship |
 |---|---|
-| `coaching-governance/guides/code-review-best-practices.md` | Prácticas de revisión para autor y revisor; complementa este protocolo |
-| `coaching-governance/guides/peer-review-antipatterns.md` | Antipatrones operativos y culturales frecuentes — señales de coaching derivadas de revisiones |
-| `coaching-governance/guides/formal-inspections.md` | Proceso más riguroso para módulos críticos; el coach tiene rol de moderador (no observador silencioso) |
-| `coaching-governance/guides/coach-team-behaviors.md` | Comportamientos del líder de equipo que el coach observa, incluyendo en sesiones de revisión |
-| `templates/sprint-retrospective.md` | Espacio para introducir patrones de revisión como tema de mejora |
-| `templates/engineer-coaching-assessment.md` | Plantilla donde se registran las observaciones de competencia derivadas |
-| `templates/engineer-development-record.md` | Registro longitudinal que acumula la evidencia de revisiones por ciclo |
+| `coaching-governance/guides/code-review-best-practices.md` | Review practices for author and reviewer; complements this protocol |
+| `coaching-governance/guides/peer-review-antipatterns.md` | Frequent operational and cultural antipatterns — coaching signals derived from reviews |
+| `coaching-governance/guides/formal-inspections.md` | More rigorous process for critical modules; the coach has a moderator role (not silent observer) |
+| `coaching-governance/guides/coach-team-behaviors.md` | Team leader behaviors the coach observes, including in review sessions |
+| `templates/sprint-retrospective.md` | Space to introduce review patterns as an improvement topic |
+| `templates/engineer-coaching-assessment.md` | Template where derived competency observations are recorded |
+| `templates/engineer-development-record.md` | Longitudinal record accumulating review evidence by cycle |

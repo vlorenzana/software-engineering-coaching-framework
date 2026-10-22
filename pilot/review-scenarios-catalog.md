@@ -1,172 +1,172 @@
-# Catálogo de Escenarios de Revisión — Pilotos SECAV-O
+# Review Scenarios Catalog — SECAV-O Pilots
 
 ## Status
 
-Draft v0.1 — escenarios propuestos, sin resultados de piloto.
+Draft v0.1 — proposed scenarios, no pilot results yet.
 
-## Propósito
+## Purpose
 
-Este catálogo registra 50 propuestas de revisión de código clasificadas por tipo de interacción y modo de ejecución. Cada escenario es candidato a implementarse como actividad de ingeniería observable dentro del framework SECAV-O, con evidencia recolectable a través del modelo de `ReviewObservation` y `MeasurementObservation`.
+This catalog records 50 code review proposals classified by interaction type and execution mode. Each scenario is a candidate for implementation as an observable engineering activity within the SECAV-O framework, with evidence collectable through the `ReviewObservation` and `MeasurementObservation` model.
 
-Los escenarios sirven como insumo para diseñar pilotos con grupo de control y grupo experimental, permitiendo comparar prácticas actuales contra propuestas específicas antes de adoptarlas formalmente.
+The scenarios serve as input for designing pilots with a control group and an experimental group, enabling comparison of current practices against specific proposals before formally adopting them.
 
-Fuente original: *50 Ideas de Revisiones de Código: Humano, Humano-AI, AI-AI — Framework SECAV-O* (documento de propuestas, 2026).
+Original source: *50 Code Review Ideas: Human, Human-AI, AI-AI — SECAV-O Framework* (proposals document, 2026).
 
 ---
 
-## Diseño experimental: grupo de control y grupo experimental
+## Experimental design: control group and experimental group
 
-### Principio
+### Principle
 
-El framework no presupone que ninguno de los 50 escenarios mejore la calidad del software. El propósito del diseño experimental es generar evidencia observable para cada propuesta antes de adoptarla formalmente en el proceso de ingeniería.
+The framework does not presuppose that any of the 50 scenarios improves software quality. The purpose of the experimental design is to generate observable evidence for each proposal before formally adopting it in the engineering process.
 
-### Grupo de control
+### Control group
 
-El grupo de control aplica las prácticas de revisión actuales del equipo sin modificación durante el período de observación. Sus resultados constituyen la `Baseline` contra la cual se comparan los hallazgos del grupo experimental.
+The control group applies the team's current review practices without modification during the observation period. Its results constitute the `Baseline` against which the experimental group's findings are compared.
 
-El grupo de control:
-- no adopta ningún escenario del catálogo durante el período activo del piloto;
-- registra el mismo conjunto de métricas que el grupo experimental;
-- puede usar las herramientas y procesos que ya utiliza normalmente.
+The control group:
+- does not adopt any scenario from the catalog during the active pilot period;
+- records the same set of metrics as the experimental group;
+- may use the tools and processes it already uses normally.
 
-### Grupo experimental
+### Experimental group
 
-El grupo experimental adopta uno o más escenarios seleccionados del catálogo durante el período de observación. La selección debe justificarse antes del inicio del piloto, con criterios de aceptación y métricas acordadas con el coach.
+The experimental group adopts one or more scenarios selected from the catalog during the observation period. The selection must be justified before the pilot starts, with acceptance criteria and metrics agreed with the coach.
 
-El grupo experimental:
-- incorpora el escenario seleccionado junto a sus prácticas habituales, salvo que el diseño del piloto requiera sustitución explícita;
-- documenta cualquier ajuste al escenario durante la ejecución como variante observada;
-- no puede cambiar de escenario a mitad del período sin documentar el cambio como evento.
+The experimental group:
+- incorporates the selected scenario alongside its usual practices, unless the pilot design requires explicit substitution;
+- documents any adjustment to the scenario during execution as an observed variant;
+- cannot switch scenarios mid-period without documenting the change as an event.
 
-### Criterios de asignación
+### Assignment criteria
 
-- La asignación a cada grupo debe documentarse antes de iniciar la recolección de datos.
-- Se recomiendan grupos de 2–4 ingenieros como mínimo para que los resultados sean comparables.
-- El coach documenta los criterios de asignación y los posibles sesgos de selección en el registro del piloto.
-- Un equipo pequeño puede ejecutar los grupos en secuencia (rollover A/B): control durante las primeras semanas, experimental después, comparando los mismos ingenieros antes/después.
+- Assignment to each group must be documented before data collection begins.
+- Groups of 2–4 engineers minimum are recommended so that results are comparable.
+- The coach documents the assignment criteria and possible selection biases in the pilot record.
+- A small team can run the groups sequentially (A/B rollover): control during the first weeks, experimental afterwards, comparing the same engineers before and after.
 
-### Métricas de comparación
+### Comparison metrics
 
-Las métricas definidas en `pilot-protocol.md` aplican a ambos grupos. Se recomienda registrar adicionalmente:
+The metrics defined in `pilot-protocol.md` apply to both groups. Additionally recording the following is recommended:
 
-| Métrica | Descripción |
+| Metric | Description |
 |---|---|
-| Escenario aplicado | ID y nombre del escenario |
-| Tiempo de revisión por PR / artefacto | Minutos desde apertura hasta aprobación |
-| Hallazgos por categoría | Seguridad, lógica, estilo, cobertura de tests |
-| Hallazgos tardíos | Encontrados post-merge o en producción |
-| Comprensión del revisor | ¿Puede el revisor explicar el código revisado? (evidencia observable) |
-| Dependencia pasiva de AI | Proporción de aprobaciones sin verificación humana sustantiva |
+| Applied scenario | Scenario ID and name |
+| Review time per PR / artifact | Minutes from opening to approval |
+| Findings by category | Security, logic, style, test coverage |
+| Late findings | Found post-merge or in production |
+| Reviewer comprehension | Can the reviewer explain the reviewed code? (observable evidence) |
+| Passive AI dependency | Proportion of approvals without substantive human verification |
 
-Ninguna métrica debe interpretarse de forma aislada.
-
----
-
-## Catálogo de escenarios
-
-Clasificación: **H** = Humano puro · **HA** = Humano-AI · **AA** = AI-AI  
-Modo: **Individual** · **Pares** · **Inspección** formal
+No metric should be interpreted in isolation.
 
 ---
 
-### Grupo H — Humano puro (H-01 a H-10)
+## Scenario catalog
 
-| ID | Modo | Escenario | Objetivo |
+Classification: **H** = Pure Human · **HA** = Human-AI · **AA** = AI-AI  
+Mode: **Individual** · **Pair** · Formal **Inspection**
+
+---
+
+### Group H — Pure Human (H-01 to H-10)
+
+| ID | Mode | Scenario | Objective |
 |---|---|---|---|
-| H-01 | Individual | Self-review con checklist de seguridad OWASP antes de commit | Revisor repasa su propio diff con lista OWASP Top 10 |
-| H-02 | Individual | Desk-check con traza a requisitos — sin AI | Verifica cada línea contra el requisito funcional correspondiente |
-| H-03 | Pares | Walkthrough síncrono de 30 min — autor explica lógica | Par enfocado en lógica, no en estilo |
-| H-04 | Inspección | Inspección Fagan formal: planning, overview, preparation, inspection, rework, follow-up | Proceso formal con roles moderador / autor / inspector |
-| H-05 | Pares | Peer review asincrónico con límite de 200–400 LOC por hora | Evita fatiga de revisión; foco en defectos |
-| H-06 | Individual | Lectura de código con preguntas de seguridad: ¿dónde entra el dato del usuario? | Taint analysis mental |
-| H-07 | Inspección | Inspection con checklist de defectos comunes del proyecto (Known Pitfalls Doc) | Mantener documento vivo de errores pasados del equipo |
-| H-08 | Pares | Review de competencia: ¿este código preserva el skill del ingeniero junior? | Evalúa si el junior comprende el código AI generado |
-| H-09 | Individual | Revisión de evidencias: tests unitarios, logs, capturas — no aprobar sin evidencia observable | No aprobar sin evidencia observable registrada |
-| H-10 | Inspección | Role-based inspection: security, test y domain expert revisan el mismo PR | Roles separados por área de competencia |
+| H-01 | Individual | Self-review with OWASP security checklist before commit | Reviewer checks their own diff against the OWASP Top 10 list |
+| H-02 | Individual | Desk-check with requirement traceability — no AI | Verifies each line against the corresponding functional requirement |
+| H-03 | Pair | 30-min synchronous walkthrough — author explains logic | Pair focused on logic, not style |
+| H-04 | Inspection | Formal Fagan inspection: planning, overview, preparation, inspection, rework, follow-up | Formal process with moderator / author / inspector roles |
+| H-05 | Pair | Asynchronous peer review with 200–400 LOC per hour limit | Prevents review fatigue; focus on defects |
+| H-06 | Individual | Code reading with security questions: where does user data enter? | Mental taint analysis |
+| H-07 | Inspection | Inspection with project-specific defect checklist (Known Pitfalls Doc) | Maintain a living document of past team errors |
+| H-08 | Pair | Competency review: does this code preserve the junior engineer's skill? | Evaluates whether the junior understands AI-generated code |
+| H-09 | Individual | Evidence review: unit tests, logs, screenshots — do not approve without observable evidence | Do not approve without recorded observable evidence |
+| H-10 | Inspection | Role-based inspection: security, test, and domain expert review the same PR | Separate roles by competency area |
 
-**Piloto recomendado:** H-01 a H-10 son candidatos para el grupo experimental del **Piloto 1** (mes 6–12). No requieren herramientas adicionales y son los de menor riesgo de adopción.
+**Recommended pilot:** H-01 to H-10 are candidates for the experimental group in **Pilot 1** (months 6–12). They require no additional tools and carry the lowest adoption risk.
 
 ---
 
-### Grupo HA — Humano-AI (HA-11 a HA-30)
+### Group HA — Human-AI (HA-11 to HA-30)
 
-| ID | Modo | Escenario | Objetivo |
+| ID | Mode | Scenario | Objective |
 |---|---|---|---|
-| HA-11 | Individual | AI pre-review: Copilot / CodeRabbit hace primer pase, humano valida | AI marca estilo y bugs obvios; humano aporta juicio estratégico |
-| HA-12 | Pares | Human-in-the-loop: AI genera, humano hace spot-checks de coherencia lógica | Detecta violaciones de API legacy |
-| HA-13 | Inspección | AI + Checklist humano: AI genera checklist adaptado al PR, humano lo usa | Checklist dinámico por contexto de PR |
-| HA-14 | Individual | Revisión de comportamiento, no solo sintaxis: ¿qué hace el código AI? | Tratar el output AI como no confiable por defecto |
-| HA-15 | Pares | Known AI Pitfalls review: humano revisa lista de errores comunes de LLM (hallucinations de API) | Detectar métodos inventados por el LLM |
-| HA-16 | Inspección | Secure path review: humano obligatorio para authz, pagos, PII, shell exec de salida LLM | Rutas críticas siempre con validación manual |
-| HA-17 | Individual | Prompt-to-code traceability: revisar prompt que generó el código + output | Verifica si el prompt contenía constraints de seguridad |
-| HA-18 | Pares | AI explains, human decides: AI explica PR en lenguaje natural, humano aprueba | Reduce LGTM superficial (Gön et al. ICSME 2024: 64.7%) |
-| HA-19 | Individual | Feedback loop: humano corrige sugerencia AI, AI aprende | HITL para reducir falsos positivos acumulados |
-| HA-20 | Inspección | Two-stage: Stage 1 AI — estilo/seguridad básica; Stage 2 humano — arquitectura/dominio | Divide la revisión por nivel de riesgo |
-| HA-21 | Pares | AI-generated tests review: humano revisa si los tests de AI cubren edge cases reales | Los tests generados pueden ser débiles o tautológicos |
-| HA-22 | Individual | Requirement conformance check: LLM juzga conforme pero overcorrige — humano verifica | Riesgo de systematic overcorrection (Jin & Chen 2026) |
-| HA-23 | Inspección | SHACL/OWL validation: AI valida contra ontología SECAV-O, humano interpreta violaciones | Automatiza validación ontológica del framework |
-| HA-24 | Pares | Pair programming con Copilot: uno conduce, otro observa, AI sugiere | Driver/observer + AI como tercer participante |
-| HA-25 | Individual | AI debt flagging: AI marca deuda técnica, humano prioriza | Refactor continuo basado en señales AI |
-| HA-26 | Inspección | Evidence gate: no merge sin evidencia de validación humana registrada contra criterios de aceptación | Criterios de aceptación SECAV-O como puerta obligatoria |
-| HA-27 | Pares | Cross-file review: humano pide a AI analizar impacto cross-file que el diff no muestra | Taint analysis asistido más allá del diff |
-| HA-28 | Individual | Security review pre-commit: Copilot /security-review en diff no pusheado vs CodeQL post-push | Diferencia de cobertura entre pre y post push |
-| HA-29 | Pares | Competency check: ¿el junior puede explicar el código AI? Si no, requiere coaching | Preservar skill; evitar dependencia pasiva de AI |
-| HA-30 | Inspección | Retrospective de reviews: medir depth (no solo comment count) y late escapes | Métricas falsables de calidad de revisión |
+| HA-11 | Individual | AI pre-review: Copilot / CodeRabbit does first pass, human validates | AI flags style and obvious bugs; human contributes strategic judgment |
+| HA-12 | Pair | Human-in-the-loop: AI generates, human spot-checks for logical coherence | Detects legacy API violations |
+| HA-13 | Inspection | AI + human checklist: AI generates a PR-adapted checklist, human uses it | Dynamic checklist by PR context |
+| HA-14 | Individual | Behavior review, not just syntax: what does the AI code do? | Treat AI output as untrusted by default |
+| HA-15 | Pair | Known AI pitfalls review: human reviews list of common LLM errors (API hallucinations) | Detect methods invented by the LLM |
+| HA-16 | Inspection | Secure path review: human mandatory for authz, payments, PII, shell exec from LLM output | Critical paths always require manual validation |
+| HA-17 | Individual | Prompt-to-code traceability: review the prompt that generated the code + output | Verifies whether the prompt contained security constraints |
+| HA-18 | Pair | AI explains, human decides: AI explains PR in natural language, human approves | Reduces superficial LGTM (Gön et al. ICSME 2024: 64.7%) |
+| HA-19 | Individual | Feedback loop: human corrects AI suggestion, AI learns | HITL to reduce accumulated false positives |
+| HA-20 | Inspection | Two-stage: Stage 1 AI — basic style/security; Stage 2 human — architecture/domain | Splits review by risk level |
+| HA-21 | Pair | AI-generated tests review: human reviews whether AI tests cover real edge cases | Generated tests may be weak or tautological |
+| HA-22 | Individual | Requirement conformance check: LLM judges conformant but overcorrects — human verifies | Risk of systematic overcorrection (Jin & Chen 2026) |
+| HA-23 | Inspection | SHACL/OWL validation: AI validates against SECAV-O ontology, human interprets violations | Automates ontological validation of the framework |
+| HA-24 | Pair | Pair programming with Copilot: one drives, one observes, AI suggests | Driver/observer + AI as third participant |
+| HA-25 | Individual | AI debt flagging: AI marks technical debt, human prioritizes | Continuous refactor based on AI signals |
+| HA-26 | Inspection | Evidence gate: no merge without recorded evidence of human validation against acceptance criteria | SECAV-O acceptance criteria as a mandatory gate |
+| HA-27 | Pair | Cross-file review: human asks AI to analyze cross-file impact not shown in the diff | AI-assisted taint analysis beyond the diff |
+| HA-28 | Individual | Security review pre-commit: Copilot /security-review on unpushed diff vs CodeQL post-push | Coverage difference between pre- and post-push |
+| HA-29 | Pair | Competency check: can the junior explain the AI code? If not, coaching is required | Preserve skill; avoid passive AI dependency |
+| HA-30 | Inspection | Review retrospective: measure depth (not just comment count) and late escapes | Falsifiable metrics for review quality |
 
-**Piloto recomendado:** HA-11, HA-14, HA-16, HA-18, HA-20 para **Piloto 1** (mes 6–12). HA-21 a HA-30 para **Piloto 2** (mes 12–24, 12–20 ingenieros).
+**Recommended pilot:** HA-11, HA-14, HA-16, HA-18, HA-20 for **Pilot 1** (months 6–12). HA-21 to HA-30 for **Pilot 2** (months 12–24, 12–20 engineers).
 
 ---
 
-### Grupo AA — AI-AI (AA-31 a AA-50)
+### Group AA — AI-AI (AA-31 to AA-50)
 
-| ID | Modo | Escenario | Objetivo |
+| ID | Mode | Scenario | Objective |
 |---|---|---|---|
-| AA-31 | Individual | AI linter + AI security scanner: ESLint AI + Semgrep AI rules | Dos AIs con perspectivas diferentes sobre el mismo código |
-| AA-32 | Pares | AI-AI peer: CodeRabbit revisa PR generado por Copilot | Doble LLM como capa de revisión automatizada |
-| AA-33 | Inspección | CodeQL (deterministic) + Copilot Autofix (LLM) = detección + fix propuesto | GitHub Advanced Security integrado |
-| AA-34 | Individual | Snyk Code (static) + Snyk DeepCode AI (semantic) cross-check | Seguridad; dos motores complementarios sobre el mismo código |
-| AA-35 | Pares | SonarQube AI Quality Gate + Sonar AI vulnerability detection | Quality + security en pipeline CI |
-| AA-36 | Inspección | AI chain: AI-1 genera, AI-2 genera tests, AI-3 revisa tests vs requisitos | Pipeline AI multi-agente con validación cruzada |
-| AA-37 | Individual | LLM self-critique: mismo LLM revisa su propio código con prompt diferente (self-refine) | Self-review; evalúa límites de autocorrección de LLM |
-| AA-38 | Pares | AI-AI adversarial: AI atacante intenta explotar código, AI defensor parchea | Red team automatizado |
-| AA-39 | Inspección | Pixee / Corgea auto-remediation: scanner AI + fixer AI abre PR borrador | Auto-fix con revisión humana pendiente obligatoria |
-| AA-40 | Individual | Veracode ML-enhanced scanning + LLM explanation | Escaner enterprise con explicación en lenguaje natural |
-| AA-41 | Pares | Claude Code review loops con cap (evitar >50 rounds) — medir human approvals por PR | Método Anthropic; cap de iteraciones para evitar loops sin fin |
-| AA-42 | Inspección | Tool calling: Copilot code review con CodeQL + ESLint integrado (GitHub 2025) | Deterministic + LLM combinados en una sola herramienta |
-| AA-43 | Individual | AI coverage check: AI verifica que cada requisito tiene test, otro AI verifica calidad del test | Cobertura de requisitos con doble capa AI |
-| AA-44 | Pares | AI format gate: Prettier AI + AI commit message review | Higiene de código y mensajes de commit |
-| AA-45 | Inspección | AI secret scanning: GitHub secret scanning AI + AI false positive filter | Detección de secretos con filtro AI de falsos positivos |
-| AA-46 | Individual | Performance AI: AI predice regresión de performance, otro AI sugiere optimización | Prevención de degradación de rendimiento |
-| AA-47 | Pares | AI documentation sync: AI detecta código sin doc, AI genera doc, AI verifica doc vs código | Sincronización continua de documentación |
-| AA-48 | Inspección | Dependency AI: Dependabot AI + Snyk AI evalúan riesgo de dependencias AI-generadas | Supply chain de dependencias generadas por AI |
-| AA-49 | Individual | AI policy enforcement: OPA policy + LLM explica violación en lenguaje natural | Policy as code con explicación legible para el ingeniero |
-| AA-50 | Inspección | Full pipeline SECAV-O: OWL validator AI + SHACL AI + Evidence recorder AI + Report AI | Pipeline completo y automatizado del framework |
+| AA-31 | Individual | AI linter + AI security scanner: ESLint AI + Semgrep AI rules | Two AIs with different perspectives on the same code |
+| AA-32 | Pair | AI-AI peer: CodeRabbit reviews PR generated by Copilot | Dual LLM as an automated review layer |
+| AA-33 | Inspection | CodeQL (deterministic) + Copilot Autofix (LLM) = detection + proposed fix | GitHub Advanced Security integrated |
+| AA-34 | Individual | Snyk Code (static) + Snyk DeepCode AI (semantic) cross-check | Security; two complementary engines on the same code |
+| AA-35 | Pair | SonarQube AI Quality Gate + Sonar AI vulnerability detection | Quality + security in CI pipeline |
+| AA-36 | Inspection | AI chain: AI-1 generates, AI-2 generates tests, AI-3 reviews tests vs requirements | Multi-agent AI pipeline with cross-validation |
+| AA-37 | Individual | LLM self-critique: same LLM reviews its own code with a different prompt (self-refine) | Self-review; evaluates LLM autocorrection limits |
+| AA-38 | Pair | AI-AI adversarial: attacker AI tries to exploit code, defender AI patches it | Automated red team |
+| AA-39 | Inspection | Pixee / Corgea auto-remediation: AI scanner + AI fixer opens draft PR | Auto-fix with mandatory pending human review |
+| AA-40 | Individual | Veracode ML-enhanced scanning + LLM explanation | Enterprise scanner with natural-language explanation |
+| AA-41 | Pair | Claude Code review loops with cap (avoid >50 rounds) — measure human approvals per PR | Anthropic method; iteration cap to prevent endless loops |
+| AA-42 | Inspection | Tool calling: Copilot code review with CodeQL + ESLint integrated (GitHub 2025) | Deterministic + LLM combined in a single tool |
+| AA-43 | Individual | AI coverage check: AI verifies that each requirement has a test, another AI verifies test quality | Requirement coverage with dual AI layer |
+| AA-44 | Pair | AI format gate: Prettier AI + AI commit message review | Code hygiene and commit message quality |
+| AA-45 | Inspection | AI secret scanning: GitHub secret scanning AI + AI false positive filter | Secret detection with AI false positive filter |
+| AA-46 | Individual | Performance AI: AI predicts performance regression, another AI suggests optimization | Preventing performance degradation |
+| AA-47 | Pair | AI documentation sync: AI detects undocumented code, AI generates doc, AI verifies doc vs code | Continuous documentation synchronization |
+| AA-48 | Inspection | Dependency AI: Dependabot AI + Snyk AI evaluate risk of AI-generated dependencies | Supply chain of AI-generated dependencies |
+| AA-49 | Individual | AI policy enforcement: OPA policy + LLM explains violation in natural language | Policy as code with engineer-readable explanation |
+| AA-50 | Inspection | Full SECAV-O pipeline: OWL validator AI + SHACL AI + Evidence recorder AI + Report AI | Complete automated framework pipeline |
 
-**Piloto recomendado:** AA-33, AA-34, AA-42 para **Piloto 2** (mes 12–24). AA-50 es el objetivo de producción a largo plazo. Los escenarios AA requieren siempre un HA gate final para rutas críticas (authz, pagos, PII); no deben ejecutarse como única capa de revisión.
+**Recommended pilot:** AA-33, AA-34, AA-42 for **Pilot 2** (months 12–24). AA-50 is the long-term production objective. AA scenarios always require a final HA gate for critical paths (authz, payments, PII); they must not run as the sole review layer.
 
 ---
 
-## Mapa de pilotos
+## Pilot map
 
-| Piloto | Período orientativo | Tamaño del equipo | Escenarios recomendados (experimental) | Grupo de control |
+| Pilot | Indicative period | Team size | Recommended scenarios (experimental) | Control group |
 |---|---|---|---|---|
-| Piloto 1 | Mes 6–12 | 4–6 ingenieros | H-01 a H-10 + HA-11, HA-14, HA-16, HA-18, HA-20 | Prácticas actuales sin cambio |
-| Piloto 2 | Mes 12–24 | 12–20 ingenieros | HA-21 a HA-30 + AA-33, AA-34, AA-42 | Resultados de Piloto 1 como nueva línea base |
-| Producción | Mes 24+ | Escala | AA-31 a AA-50 con HA gate obligatorio | Métricas de Piloto 2 como referencia |
+| Pilot 1 | Months 6–12 | 4–6 engineers | H-01 to H-10 + HA-11, HA-14, HA-16, HA-18, HA-20 | Current practices unchanged |
+| Pilot 2 | Months 12–24 | 12–20 engineers | HA-21 to HA-30 + AA-33, AA-34, AA-42 | Pilot 1 results as new baseline |
+| Production | Month 24+ | Scale | AA-31 to AA-50 with mandatory HA gate | Pilot 2 metrics as reference |
 
 ---
 
-## Alineación ontológica (SECAV-O)
+## Ontological alignment (SECAV-O)
 
-Cada escenario del catálogo se instancia como una `QualityActivityRequirement` dentro de un `CoachingSprint`. Los hallazgos recolectados se registran como `ReviewObservation` (subclase de `MeasurementObservation` → `Evidence`).
+Each scenario in the catalog is instantiated as a `QualityActivityRequirement` within a `CoachingSprint`. Collected findings are recorded as `ReviewObservation` (subclass of `MeasurementObservation` → `Evidence`).
 
-El grupo de control y el grupo experimental producen `Baseline` distintos comparables a través de `CompetencyTrend`. La diferencia entre las dos `Baseline` es la evidencia observable del efecto del escenario.
+The control group and experimental group produce distinct `Baseline` instances comparable through `CompetencyTrend`. The difference between the two `Baseline` values is the observable evidence of the scenario's effect.
 
-Los escenarios HA-23 y AA-50 aplican directamente el modelo OWL/SHACL de SECAV-O como mecanismo de verificación automatizada, cerrando el ciclo entre framework conceptual y herramienta de validación.
+Scenarios HA-23 and AA-50 directly apply the SECAV-O OWL/SHACL model as an automated verification mechanism, closing the loop between the conceptual framework and the validation tool.
 
 ---
 
-## Fuentes
+## Sources
 
 - NIST SP 800-218 / 218A (SSDF)
 - OWASP Code Review Guide / OWASP Top 10 for LLM Apps

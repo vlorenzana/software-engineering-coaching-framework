@@ -1,141 +1,141 @@
-# Antipatrones en Revisiones de Pares: Guía de Observación para el Coach
+# Antipatterns in Peer Reviews: Coach Observation Guide
 
-## Propósito
+## Purpose
 
-Esta guía cataloga los errores operativos y culturales más frecuentes en las revisiones de pares (*peer review*) — cada uno con su impacto observable y su estrategia de mitigación. El coach utiliza estos antipatrones como señales de `secav:CoachingIntervention`: si un patrón aparece de forma recurrente en las sesiones que observa, es candidato a una conversación individual o grupal.
+This guide catalogs the most frequent operational and cultural errors in peer reviews — each with its observable impact and mitigation strategy. The coach uses these antipatterns as signals for `secav:CoachingIntervention`: if a pattern appears recurrently in observed sessions, it is a candidate for an individual or group conversation.
 
-Esta guía es el contrapunto a `coaching-governance/guides/code-review-best-practices.md`, que describe qué hacer. Esta guía describe qué evitar.
-
----
-
-## 1. Revisar estilo manualmente
-
-**Impacto:** El equipo gasta energía analítica en debates triviales — sangría, llaves, espacios — que desvían la atención del diseño y la lógica.
-
-**Señal observable para el coach:**
-- Los comentarios de la revisión se concentran en formato en lugar de arquitectura, seguridad o lógica de negocio.
-- Los ingenieros discuten convenciones de estilo durante la sesión en lugar de delegarla a herramientas.
-- El pipeline de CI/CD no tiene linters o formateadores configurados, o los ingenieros los ignoran.
-
-**Estrategia de mitigación:**
-Delegar el formato al 100 % a linters y formateadores automáticos en CI/CD. La energía humana en una revisión es un recurso escaso: debe invertirse en lo que la automatización no puede detectar.
-
-**Referencia:** `coaching-governance/guides/code-review-best-practices.md` §3.7 — Style and consistency.
+This guide is the counterpart to `coaching-governance/guides/code-review-best-practices.md`, which describes what to do. This guide describes what to avoid.
 
 ---
 
-## 2. Sesiones demasiado largas
+## 1. Reviewing style manually
 
-**Impacto:** La agudeza visual cae drásticamente después de 60 minutos continuos. Los errores complejos pasan desapercibidos cuando el revisor ya está en fatiga analítica.
+**Impact:** The team spends analytical energy on trivial debates — indentation, braces, spaces — diverting attention from design and logic.
 
-**Señal observable para el coach:**
-- Las sesiones de revisión superan 60 minutos continuos o 400 líneas de código (LOC) por bloque.
-- Los hallazgos documentados en la segunda mitad de la sesión son superficiales o de bajo impacto comparados con los de la primera.
-- Los ingenieros reportan agotamiento o pérdida de concentración al terminar revisiones largas.
+**Observable signal for the coach:**
+- Review comments concentrate on formatting instead of architecture, security, or business logic.
+- Engineers debate style conventions during the session instead of delegating it to tools.
+- The CI/CD pipeline has no linters or formatters configured, or engineers ignore them.
 
-**Estrategia de mitigación:**
-Limitar cada bloque de revisión a un máximo de 60 minutos o 400 LOC. Si el cambio es mayor, dividirlo en bloques con descanso entre ellos o en sesiones separadas.
+**Mitigation strategy:**
+Delegate formatting 100% to linters and automatic formatters in CI/CD. Human energy in a review is a scarce resource: it must be invested in what automation cannot detect.
 
-**Referencia:** `coaching-governance/guides/code-review-best-practices.md` §1 — Scope and size.
-
----
-
-## 3. Falta de contexto inicial
-
-**Impacto:** El revisor gasta tiempo intentando adivinar el propósito de los cambios, ralentizando el ciclo e incrementando el riesgo de aprobar código sin comprender su intención.
-
-**Señal observable para el coach:**
-- Los Pull Requests (PR) no incluyen descripción del *por qué*, *cómo* y criterios de aceptación.
-- Los revisores hacen preguntas al autor sobre el propósito del cambio durante la sesión — señal de que ese contexto no estaba disponible antes.
-- Los revisores reportan haber necesitado revisar tickets o documentos externos para entender el cambio.
-
-**Estrategia de mitigación:**
-Exigir que cada PR incluya una descripción estructurada con al menos: propósito del cambio, enfoque de implementación y criterios de aceptación. Esta es una responsabilidad del autor, no del revisor.
-
-**Referencia:** `coaching-governance/guides/code-review-best-practices.md` §2 — Preparing a change for review.
+**Reference:** `coaching-governance/guides/code-review-best-practices.md` §3.7 — Style and consistency.
 
 ---
 
-## 4. Código inacabado o en estado WIP
+## 2. Overly long sessions
 
-**Impacto:** Las revisiones prematuras invalidan el esfuerzo previo cuando el código cambia a mitad de la sesión. Generan retrabajo y erosionan la confianza del revisor en el proceso.
+**Impact:** Visual acuity drops dramatically after 60 continuous minutes. Complex errors go unnoticed when the reviewer is already in analytical fatigue.
 
-**Señal observable para el coach:**
-- Los revisores reciben PRs que todavía tienen TODOs sin resolver, pruebas que fallan, o cambios marcados como borradores.
-- El autor modifica el código mientras la revisión está en curso, invalidando comentarios ya escritos.
-- Los revisores expresan frustración porque sus comentarios quedan obsoletos entre revisión y revisión.
+**Observable signal for the coach:**
+- Review sessions exceed 60 continuous minutes or 400 lines of code (LOC) per block.
+- Findings documented in the second half of the session are superficial or low-impact compared to those from the first.
+- Engineers report exhaustion or loss of concentration after long reviews.
 
-**Estrategia de mitigación:**
-Usar el estado *Draft PR* para trabajo en progreso. La revisión formal solo se solicita cuando las pruebas automatizadas pasan completamente y el autor considera el código listo.
+**Mitigation strategy:**
+Limit each review block to a maximum of 60 minutes or 400 LOC. If the change is larger, split it into blocks with a break between them or into separate sessions.
 
----
-
-## 5. Falta de empatía en el feedback
-
-**Impacto:** Los comentarios percibidos como ataques personales destruyen la confianza del equipo y generan actitud defensiva, reduciendo la calidad del diálogo técnico en revisiones futuras.
-
-**Señal observable para el coach:**
-- Los comentarios se dirigen al autor: *"tú hiciste mal X"*, *"nunca manejas este caso"*.
-- El autor adopta postura defensiva — justifica sus decisiones en lugar de explorarlas.
-- Los ingenieros evitan someter su código a revisión o dilatan la solicitud de revisión.
-- Los comentarios no incluyen prefijos de severidad: no hay distinción entre sugerencias y bloqueantes.
-
-**Estrategia de mitigación:**
-Comentar siempre sobre el código, nunca sobre la persona. Usar formulaciones como *"el módulo X podría..."* en lugar de *"tú hiciste mal X"*. Etiquetar los comentarios con prefijos explícitos: `[Sugerencia]`, `[Bloqueante]`, `Nit:`.
-
-**Referencia:** `coaching-governance/guides/code-review-best-practices.md` §4 — How to give feedback.
+**Reference:** `coaching-governance/guides/code-review-best-practices.md` §1 — Scope and size.
 
 ---
 
-## 6. Falta de rigor con código asistido por IA
+## 3. Missing initial context
 
-**Impacto:** El código generado o modificado por asistentes automáticos puede contener alucinaciones lógicas, duplicación sutil o vulnerabilidades que no son detectables por inspección superficial. La aprobación automática de código de IA introduce deuda técnica y riesgos de seguridad no auditados.
+**Impact:** The reviewer spends time trying to guess the purpose of the changes, slowing the cycle and increasing the risk of approving code without understanding its intent.
 
-**Señal observable para el coach:**
-- Los revisores aprueban código de IA sin evidencia de que revisaron la lógica de negocio explícitamente.
-- El `secav:ReviewRecord` no indica que el artefacto fue producido con asistencia de IA (`secav:assistedByAI`).
-- Los ingenieros asumen que el código generado por IA es correcto si los tests pasan.
+**Observable signal for the coach:**
+- Pull Requests (PRs) do not include a description of the *why*, *how*, and acceptance criteria.
+- Reviewers ask the author about the purpose of the change during the session — a signal that context was not available beforehand.
+- Reviewers report having needed to review tickets or external documents to understand the change.
 
-**Estrategia de mitigación:**
-El revisor humano debe validar exhaustivamente la lógica de negocio de todo código asistido por IA — especialmente las condiciones de borde y los flujos de datos. La IA no sustituye la revisión humana; la revisión humana de código de IA es obligatoria, no opcional.
+**Mitigation strategy:**
+Require each PR to include a structured description with at least: purpose of the change, implementation approach, and acceptance criteria. This is the author's responsibility, not the reviewer's.
 
-**Referencia:** `coaching-governance/guides/code-review-best-practices.md` §9 — AI-assisted code and review; `coaching-governance/guides/ai-assisted-code-review.md`.
+**Reference:** `coaching-governance/guides/code-review-best-practices.md` §2 — Preparing a change for review.
 
 ---
 
-## 7. Lista de verificación mental del revisor eficiente
+## 4. Unfinished or WIP code
 
-Antes de iniciar una sesión de revisión, el ingeniero verifica su estado bio-cognitivo. El coach observa si el equipo aplica estas condiciones de manera sistemática o las omite bajo presión.
+**Impact:** Premature reviews invalidate prior effort when code changes mid-session. They generate rework and erode reviewers' trust in the process.
 
-| Fase | Control requerido | Señal de alerta para el coach |
+**Observable signal for the coach:**
+- Reviewers receive PRs that still have unresolved TODOs, failing tests, or changes marked as drafts.
+- The author modifies code while the review is in progress, invalidating comments already written.
+- Reviewers express frustration because their comments become obsolete between one review iteration and the next.
+
+**Mitigation strategy:**
+Use *Draft PR* status for work in progress. Formal review is only requested when automated tests pass completely and the author considers the code ready.
+
+---
+
+## 5. Lack of empathy in feedback
+
+**Impact:** Comments perceived as personal attacks destroy team trust and generate defensiveness, reducing the quality of technical dialogue in future reviews.
+
+**Observable signal for the coach:**
+- Comments are directed at the author: *"you did X wrong,"* *"you never handle this case."*
+- The author adopts a defensive posture — justifies decisions instead of exploring them.
+- Engineers avoid submitting their code for review or delay requesting review.
+- Comments do not include severity prefixes: no distinction between suggestions and blockers.
+
+**Mitigation strategy:**
+Always comment on the code, never on the person. Use phrasings like *"module X could..."* instead of *"you did X wrong."* Label comments with explicit prefixes: `[Suggestion]`, `[Blocker]`, `Nit:`.
+
+**Reference:** `coaching-governance/guides/code-review-best-practices.md` §4 — How to give feedback.
+
+---
+
+## 6. Lack of rigor with AI-assisted code
+
+**Impact:** Code generated or modified by automated assistants may contain logical hallucinations, subtle duplication, or vulnerabilities that are not detectable by superficial inspection. Automatic approval of AI code introduces unaudited technical debt and security risks.
+
+**Observable signal for the coach:**
+- Reviewers approve AI code without evidence that they explicitly reviewed the business logic.
+- The `secav:ReviewRecord` does not indicate that the artifact was produced with AI assistance (`secav:assistedByAI`).
+- Engineers assume that AI-generated code is correct if the tests pass.
+
+**Mitigation strategy:**
+The human reviewer must exhaustively validate the business logic of all AI-assisted code — especially boundary conditions and data flows. AI does not replace human review; human review of AI code is mandatory, not optional.
+
+**Reference:** `coaching-governance/guides/code-review-best-practices.md` §9 — AI-assisted code and review; `coaching-governance/guides/ai-assisted-code-review.md`.
+
+---
+
+## 7. Mental verification checklist for the efficient reviewer
+
+Before starting a review session, the engineer checks their bio-cognitive state. The coach observes whether the team applies these conditions systematically or omits them under pressure.
+
+| Phase | Required check | Alert signal for the coach |
 |---|---|---|
-| **Energía biológica** | Realizar revisiones complejas durante ventanas de mayor claridad mental (preferiblemente por la mañana); nunca bajo fatiga extrema al final de la jornada. | Revisiones sistemáticamente programadas al final del día o fuera del horario normal. |
-| **Aislamiento** | Bloquear 30–60 minutos en el calendario; silenciar notificaciones de Slack, Teams y correo para evitar pérdida de foco por cambios de contexto. | Los ingenieros revisan código entre reuniones o con notificaciones activas. |
-| **Análisis crítico** | Ignorar detalles estéticos ya cubiertos por herramientas automatizadas; enfocar la energía mental en arquitectura, seguridad de entradas y lógica de negocio. | Los hallazgos de revisión son mayoritariamente de estilo en lugar de diseño o seguridad. |
-| **Cierre asertivo** | Calificar los aportes de forma explícita: si el código cumple su propósito con detalles menores, aprobar el cambio y dejar sugerencias como mejoras opcionales. | Las revisiones terminan sin decisión clara — sin aprobación ni lista de bloqueantes definida. |
+| **Biological energy** | Perform complex reviews during windows of greatest mental clarity (preferably in the morning); never under extreme fatigue at the end of the day. | Reviews systematically scheduled at end-of-day or outside normal hours. |
+| **Isolation** | Block 30–60 minutes on the calendar; silence Slack, Teams, and email notifications to avoid focus loss from context switching. | Engineers review code between meetings or with active notifications. |
+| **Critical analysis** | Ignore aesthetic details already covered by automated tools; focus mental energy on architecture, input security, and business logic. | Review findings are mostly stylistic rather than design- or security-related. |
+| **Assertive closure** | Qualify contributions explicitly: if the code fulfills its purpose with minor details, approve the change and leave suggestions as optional improvements. | Reviews end without a clear decision — no approval or defined list of blockers. |
 
 ---
 
-## 8. Integración con SECAV-O
+## 8. SECAV-O Integration
 
-| Antipatrón | Término SECAV-O |
+| Antipattern | SECAV-O term |
 |---|---|
-| Revisión de estilo manual (sin automatización) | `secav:ReviewActivity` con hallazgos de bajo impacto; coaching signal sobre uso de herramientas |
-| Sesión demasiado larga | Condición previa de `secav:ReviewActivity` degradada; observable como precondición de `secav:HumanValidationActivity` |
-| Falta de contexto en el PR | `secav:Artifact` sin descripción adecuada; la trazabilidad del cambio es incompleta |
-| Código WIP en revisión formal | `secav:ReviewActivity` prematura; invalida potencial `secav:ReviewFinding` |
-| Feedback sin empatía | `secav:ReviewFinding` formulado sobre la persona, no el artefacto; señal para `secav:CoachingIntervention` |
-| Código IA sin escrutinio | `secav:HumanValidationActivity` incompleta; `secav:assistedByAI` sin validación registrada |
+| Manual style review (without automation) | `secav:ReviewActivity` with low-impact findings; coaching signal on tool usage |
+| Overly long session | Degraded `secav:ReviewActivity` precondition; observable as precondition of `secav:HumanValidationActivity` |
+| Missing context in PR | `secav:Artifact` without adequate description; change traceability is incomplete |
+| WIP code in formal review | Premature `secav:ReviewActivity`; invalidates potential `secav:ReviewFinding` |
+| Non-empathic feedback | `secav:ReviewFinding` directed at the person, not the artifact; signal for `secav:CoachingIntervention` |
+| AI code without scrutiny | Incomplete `secav:HumanValidationActivity`; `secav:assistedByAI` without recorded validation |
 
 ---
 
-## 9. Documentos relacionados
+## 9. Related documents
 
-| Documento | Relación |
+| Document | Relationship |
 |---|---|
-| `coaching-governance/guides/code-review-best-practices.md` | Prácticas positivas que son el contrapunto de cada antipatrón de esta guía |
-| `coaching-governance/guides/peer-review-sessions.md` | Protocolo del coach como observador silencioso en la sesión de revisión |
-| `coaching-governance/guides/ai-assisted-code-review.md` | Guía completa de revisión de código asistido por IA |
-| `coaching-governance/guides/formal-inspections.md` | Proceso de inspección formal para módulos críticos — mayor rigor que la revisión de pares |
-| `templates/engineer-coaching-assessment.md` | Plantilla donde se registran observaciones de competencia derivadas de revisiones |
-| `templates/defect-log.csv` | Registro de defectos que permite identificar patrones recurrentes por tipo y autor |
+| `coaching-governance/guides/code-review-best-practices.md` | Positive practices that are the counterpart of each antipattern in this guide |
+| `coaching-governance/guides/peer-review-sessions.md` | Protocol for the coach as silent observer during the review session |
+| `coaching-governance/guides/ai-assisted-code-review.md` | Complete guide for AI-assisted code review |
+| `coaching-governance/guides/formal-inspections.md` | Formal inspection process for critical modules — more rigorous than peer review |
+| `templates/engineer-coaching-assessment.md` | Template where competency observations derived from reviews are recorded |
+| `templates/defect-log.csv` | Defect log that allows identifying recurring patterns by type and author |

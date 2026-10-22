@@ -1,190 +1,190 @@
-﻿# Comportamientos del Líder de Equipo: Guía de Observación para el Coach
+﻿# Team Leader Behaviors: Coach Observation Guide
 
-## Propósito
+## Purpose
 
-Esta guía describe conductas concretas y verificables que el coach debe observar en el **líder de equipo** durante su trabajo diario. Cada conducta es un indicador observable que el coach puede recoger como `secav:Evidence` para informar una `secav:CompetencyAssessment` y, cuando corresponda, planificar una `secav:CoachingIntervention`.
+This guide describes concrete, verifiable behaviors that the coach must observe in the **team leader** during their daily work. Each behavior is an observable indicator that the coach can collect as `secav:Evidence` to inform a `secav:CompetencyAssessment` and, when appropriate, plan a `secav:CoachingIntervention`.
 
-A diferencia del Código de Ética (`coaching-governance/docs/coach-code-of-ethics.md`), que establece los principios del coach, esta guía es una herramienta de observación: le dice al coach qué señales positivas buscar y qué señales de alerta deben derivar en una intervención.
+Unlike the Code of Ethics (`coaching-governance/docs/coach-code-of-ethics.md`), which establishes the coach's principles, this guide is an observation tool: it tells the coach what positive signals to look for and what alert signals should lead to an intervention.
 
-> El coach no evalúa al líder como superior jerárquico — evalúa las conductas como evidencia de competencias de facilitación, liderazgo de equipo y toma de decisiones.
-
----
-
-## 1. Facilitación y protagonismo del equipo
-
-El líder de equipo efectivo hace que el equipo encuentre las respuestas, no las provee él. El coach observa el balance de participación y la distribución de la autoría de las soluciones.
-
-**Indicadores positivos (el coach los registra como evidencia de competencia):**
-
-- El líder hace preguntas en lugar de dar respuestas cuando el equipo tiene capacidad para encontrarlas. (*"¿Qué opciones ven para esto?"* en lugar de *"La solución es X."*)
-- El tiempo de habla está distribuido — ningún individuo domina la conversación de forma sistemática.
-- Cuando una idea o solución emerge del equipo, el líder la atribuye explícitamente a quien la propuso.
-- El líder invita a participar a los miembros más silenciosos antes de cerrar un punto.
-- En sesiones de planificación o revisión, el líder abre el espacio para que el equipo llegue a sus propias conclusiones antes de compartir su perspectiva.
-
-**Señales de alerta (el coach considera una intervención):**
-
-- El líder habla más del 50 % del tiempo en reuniones de equipo.
-- Las decisiones técnicas o de proceso se toman únicamente cuando el líder está presente.
-- Los miembros del equipo esperan la aprobación del líder antes de actuar, incluso en tareas dentro de su competencia.
-- Las ideas son recurrentemente atribuidas al líder, no a quien las originó.
+> The coach does not evaluate the leader as a hierarchical superior — they evaluate behaviors as evidence of facilitation competencies, team leadership, and decision-making.
 
 ---
 
-## 2. Toma de decisiones: consenso y restricciones visibles
+## 1. Facilitation and team ownership
 
-El coach observa si el líder ancla las decisiones en las restricciones reales del proyecto y si construye acuerdo antes de imponer.
+An effective team leader makes the team find the answers, not provide them themselves. The coach observes the balance of participation and the distribution of solution authorship.
 
-**Indicadores positivos:**
+**Positive indicators (the coach records them as competency evidence):**
 
-- Antes de proponer una votación, el líder agota el espacio de deliberación para buscar un acuerdo construido colectivamente.
-- Las restricciones del proyecto — plazos, presupuesto, requisitos técnicos, políticas — son explícitas y visibles durante la discusión.
-- Cuando se toma una decisión, el líder documenta brevemente el razonamiento y la restricción que la justificó.
-- El líder diferencia entre decisiones colectivas y decisiones que son responsabilidad individual del ingeniero en su área de competencia.
-- Cuando el equipo llega a una alternativa razonable dentro de las restricciones, el líder la acepta aunque no sea su preferencia.
+- The leader asks questions instead of giving answers when the team has the capacity to find them. (*"What options do you see for this?"* instead of *"The solution is X."*)
+- Speaking time is distributed — no individual systematically dominates the conversation.
+- When an idea or solution emerges from the team, the leader explicitly attributes it to whoever proposed it.
+- The leader invites quieter members to participate before closing a point.
+- In planning or review sessions, the leader opens the space for the team to reach their own conclusions before sharing their own perspective.
 
-**Señales de alerta:**
+**Alert signals (the coach considers an intervention):**
 
-- Las restricciones del proyecto son conocidas por el líder pero no están comunicadas al equipo.
-- Las decisiones se justifican con la autoridad del líder, no con criterios objetivos.
-- Se fuerza una votación antes de que todos los miembros hayan podido expresar su posición.
-- El resultado de las discusiones coincide sistemáticamente con la posición inicial del líder, independientemente del debate.
-
----
-
-## 3. Construcción de planes en los que el equipo cree
-
-El coach observa si el líder verifica el compromiso real del equipo con el plan — no solo el acuerdo nominal — y si tramita los desacuerdos de forma constructiva.
-
-**Indicadores positivos:**
-
-- Después de construir un plan, el líder verifica activamente si el equipo lo considera alcanzable; no asume que el silencio es acuerdo. (*"¿Ven alguna razón por la que este plan no funcione?"*)
-- Cuando alguien expresa una duda o desacuerdo, el líder escucha sin interrumpir y sin descartarlo como obstrucción.
-- Si hay un desacuerdo, el líder lo convierte en una conversación del equipo — involucra al resto en buscar una salida: *"¿Alguien ve una alternativa que resuelva la preocupación de X?"*
-- El líder distingue entre "el equipo acordó" y "el equipo se resignó" — y actúa ante el segundo.
-- Los desacuerdos que no pueden resolverse internamente y afectan compromisos organizacionales son documentados y escalados formalmente a gerencia, en lugar de suprimirse (`templates/quality-planning-dissent-and-escalation.md`).
-
-**Señales de alerta:**
-
-- El plan es presentado como cerrado antes de que el equipo haya podido cuestionarlo.
-- Las dudas expresadas se registran pero no modifican nada — se archivan sin respuesta real.
-- Cuando alguien discrepa, el líder lo resuelve unilateralmente.
-- Desacuerdos no resueltos internamente no se escalan — se ignoran o se suprimen.
-- El equipo ejecuta el plan sin poder explicar por qué fue construido de esa forma.
+- The leader speaks more than 50% of the time in team meetings.
+- Technical or process decisions are only made when the leader is present.
+- Team members wait for the leader's approval before acting, even in tasks within their competence.
+- Ideas are recurrently attributed to the leader, not to whoever originated them.
 
 ---
 
-## 4. Gestión participativa de riesgos
+## 2. Decision-making: consensus and visible constraints
 
-El coach observa si el líder guía al equipo en la identificación y mitigación de riesgos o si los gestiona en solitario.
+The coach observes whether the leader anchors decisions in the project's real constraints and whether they build agreement before imposing.
 
-**Indicadores positivos:**
+**Positive indicators:**
 
-- En cada retrospectiva, el líder propone revisar el registro de riesgos como un punto estructurado, no ocasional.
-- Las sesiones de identificación de riesgos se abren con preguntas: *"¿Qué podría impedirnos completar este objetivo?"*, *"¿Qué suposición estamos haciendo que podría resultar incorrecta?"*
-- El registro de riesgos se construye con el equipo; el líder reconoce los aportes específicos de cada miembro.
-- Cuando un riesgo se materializa, el líder guía al equipo a identificar una acción correctiva sin asignar culpa a personas.
-- Las acciones preventivas las propone el equipo antes de que el líder sugiera las suyas.
+- Before proposing a vote, the leader exhausts the deliberation space to seek a collectively built agreement.
+- Project constraints — deadlines, budget, technical requirements, policies — are explicit and visible during the discussion.
+- When a decision is made, the leader briefly documents the reasoning and the constraint that justified it.
+- The leader differentiates between collective decisions and decisions that are the individual engineer's responsibility within their area of competence.
+- When the team reaches a reasonable alternative within the constraints, the leader accepts it even if it is not their preference.
 
-**Señales de alerta:**
+**Alert signals:**
 
-- El registro de riesgos es elaborado solo por el líder y presentado al equipo como información, no como construcción colectiva.
-- Las sesiones de riesgos se omiten cuando el tiempo está ajustado.
-- Cuando un riesgo se materializa, la discusión se centra en quién falló, no en qué se puede aprender.
-- Las acciones preventivas y correctivas son asignadas por el líder sin consultar capacidad ni disponibilidad del equipo.
-
----
-
-## 5. Distribución del trabajo
-
-El coach observa si el líder asigna trabajo de acuerdo a las capacidades del equipo y si evita concentrar tareas en las mismas personas.
-
-**Indicadores positivos:**
-
-- La mayor parte del trabajo técnico del sprint está distribuida entre los ingenieros; el líder no concentra tareas de entrega en sí mismo.
-- Las asignaciones consideran el nivel de competencia actual de cada ingeniero y sus objetivos de desarrollo.
-- Se asignan tareas desafiantes a ingenieros cuyo objetivo de desarrollo incluye esa área — no solo a quien ya la domina.
-- El trabajo crítico está distribuido entre varios miembros; no se concentra en el ingeniero más senior de forma sistemática.
-- Cuando el líder asume una tarea operativa, lo hace explícitamente y de forma temporal, con criterio claro de cuándo la devuelve al equipo.
-
-**Señales de alerta:**
-
-- Las tareas más visibles o técnicamente complejas recaen sistemáticamente en el mismo ingeniero.
-- Las asignaciones ignoran los objetivos de desarrollo acordados y responden solo a la urgencia.
-- Ningún miembro del equipo puede explicar por qué le fue asignada su tarea.
+- Project constraints are known to the leader but not communicated to the team.
+- Decisions are justified with the leader's authority, not with objective criteria.
+- A vote is forced before all members have had the opportunity to express their position.
+- The outcome of discussions systematically coincides with the leader's initial position, regardless of the debate.
 
 ---
 
-## 6. Respeto y cultura de equipo
+## 3. Building plans the team believes in
 
-El coach observa el tono y los patrones de reconocimiento y corrección del líder — especialmente en situaciones de tensión o error.
+The coach observes whether the leader verifies the team's genuine commitment to the plan — not just nominal agreement — and whether they handle disagreements constructively.
 
-**Indicadores positivos:**
+**Positive indicators:**
 
-- **Corrige en privado, felicita en público.** Las correcciones de conducta ocurren en un espacio individual; el reconocimiento de logros se expresa en el espacio colectivo.
-- El líder mantiene el mismo tono de respeto en comunicaciones escritas que en conversaciones presenciales.
-- Trata a todos los miembros del equipo con el mismo nivel de consideración, independientemente de su antigüedad o relación personal.
-- Reconoce sus propios errores frente al equipo cuando corresponde — modela que equivocarse y corregir es parte del proceso.
-- No interrumpe a los miembros del equipo mientras exponen su razonamiento.
-- Distingue entre feedback sobre el trabajo y juicios sobre la persona.
+- After building a plan, the leader actively checks whether the team considers it achievable; they do not assume silence is agreement. (*"Do you see any reason why this plan wouldn't work?"*)
+- When someone expresses a doubt or disagreement, the leader listens without interrupting and without dismissing it as obstruction.
+- If there is a disagreement, the leader turns it into a team conversation — involves others in finding a resolution: *"Does anyone see an alternative that addresses X's concern?"*
+- The leader distinguishes between "the team agreed" and "the team resigned" — and acts on the second.
+- Disagreements that cannot be resolved internally and affect organizational commitments are formally documented and escalated to management, rather than suppressed (`templates/quality-planning-dissent-and-escalation.md`).
 
-**Señales de alerta:**
+**Alert signals:**
 
-- Las correcciones o críticas se realizan frente a otros miembros del equipo o en canales grupales.
-- El reconocimiento es escaso o genérico; los logros no se atribuyen a personas concretas.
-- El tono escrito es notablemente más cortante que el tono en conversaciones directas.
-- Ciertos miembros reciben sistemáticamente más atención u oportunidades que otros sin justificación en los objetivos de desarrollo.
+- The plan is presented as closed before the team has had the opportunity to question it.
+- Expressed doubts are recorded but change nothing — archived without real response.
+- When someone disagrees, the leader resolves it unilaterally.
+- Unresolved internal disagreements are not escalated — they are ignored or suppressed.
+- The team executes the plan without being able to explain why it was built that way.
 
 ---
 
-## 7. Lista de verificación de observación por sprint
+## 4. Participatory risk management
 
-El coach completa esta lista al final de cada sprint o ciclo de observación. Los ítems marcados como "No observado" o "Señal de alerta" son candidatos a una `secav:CoachingIntervention` en la siguiente sesión individual con el líder.
+The coach observes whether the leader guides the team in identifying and mitigating risks or manages them alone.
 
-| Conducta observada en el líder | Sí | Parcial | Señal de alerta | No observado |
+**Positive indicators:**
+
+- In each retrospective, the leader proposes reviewing the risk register as a structured point, not an occasional one.
+- Risk identification sessions open with questions: *"What could prevent us from completing this objective?"*, *"What assumption are we making that might turn out to be incorrect?"*
+- The risk register is built with the team; the leader acknowledges the specific contributions of each member.
+- When a risk materializes, the leader guides the team to identify a corrective action without assigning blame to individuals.
+- Preventive actions are proposed by the team before the leader suggests their own.
+
+**Alert signals:**
+
+- The risk register is developed solely by the leader and presented to the team as information, not as a collective construction.
+- Risk sessions are omitted when time is tight.
+- When a risk materializes, the discussion focuses on who failed, not on what can be learned.
+- Preventive and corrective actions are assigned by the leader without consulting the team's capacity or availability.
+
+---
+
+## 5. Work distribution
+
+The coach observes whether the leader assigns work according to the team's capabilities and whether they avoid concentrating tasks on the same individuals.
+
+**Positive indicators:**
+
+- Most of the sprint's technical work is distributed among engineers; the leader does not concentrate delivery tasks on themselves.
+- Assignments consider the current competency level of each engineer and their development objectives.
+- Challenging tasks are assigned to engineers whose development objective includes that area — not only to whoever already masters it.
+- Critical work is distributed among several members; it is not systematically concentrated on the most senior engineer.
+- When the leader takes on an operational task, they do so explicitly and temporarily, with a clear criterion for when they return it to the team.
+
+**Alert signals:**
+
+- The most visible or technically complex tasks systematically fall to the same engineer.
+- Assignments ignore agreed development objectives and respond only to urgency.
+- No team member can explain why they were assigned their task.
+
+---
+
+## 6. Respect and team culture
+
+The coach observes the leader's tone and patterns of recognition and correction — especially in situations of tension or error.
+
+**Positive indicators:**
+
+- **Correct in private, praise in public.** Behavioral corrections happen in an individual space; achievement recognition is expressed in the collective space.
+- The leader maintains the same tone of respect in written communications as in in-person conversations.
+- Treats all team members with the same level of consideration, regardless of seniority or personal relationship.
+- Acknowledges their own mistakes in front of the team when appropriate — models that making mistakes and correcting them is part of the process.
+- Does not interrupt team members while they are explaining their reasoning.
+- Distinguishes between feedback on the work and judgments about the person.
+
+**Alert signals:**
+
+- Corrections or criticism are delivered in front of other team members or in group channels.
+- Recognition is scarce or generic; achievements are not attributed to specific individuals.
+- The written tone is noticeably sharper than the tone in direct conversations.
+- Certain members systematically receive more attention or opportunities than others without justification in development objectives.
+
+---
+
+## 7. Per-sprint observation verification checklist
+
+The coach completes this list at the end of each sprint or observation cycle. Items marked "Not observed" or "Alert signal" are candidates for a `secav:CoachingIntervention` in the next individual session with the leader.
+
+| Behavior observed in the leader | Yes | Partial | Alert signal | Not observed |
 |---|---|---|---|---|
-| El equipo propuso y construyó soluciones sin esperar las respuestas del líder | | | | |
-| El tiempo de habla estuvo distribuido en reuniones | | | | |
-| Las restricciones del proyecto eran visibles y se usaron como base de decisiones | | | | |
-| Se buscó consenso antes de votar o decidir unilateralmente | | | | |
-| El líder verificó que el equipo cree en el plan — no asumió que el silencio es acuerdo | | | | |
-| Los desacuerdos con el plan fueron escuchados y tramitados constructivamente | | | | |
-| Los desacuerdos no resueltos internamente fueron escalados si correspondía | | | | |
-| El registro de riesgos fue revisado con el equipo en la retrospectiva | | | | |
-| El equipo propuso acciones preventivas — el líder no las dictó | | | | |
-| Las asignaciones de trabajo consideraron los objetivos de desarrollo de cada ingeniero | | | | |
-| Las correcciones a personas se dieron en privado; los logros se reconocieron en público | | | | |
+| The team proposed and built solutions without waiting for the leader's answers | | | | |
+| Speaking time was distributed in meetings | | | | |
+| Project constraints were visible and used as the basis for decisions | | | | |
+| Consensus was sought before voting or deciding unilaterally | | | | |
+| The leader verified the team believes in the plan — did not assume silence is agreement | | | | |
+| Disagreements with the plan were heard and handled constructively | | | | |
+| Unresolved internal disagreements were escalated when appropriate | | | | |
+| The risk register was reviewed with the team in the retrospective | | | | |
+| The team proposed preventive actions — the leader did not dictate them | | | | |
+| Work assignments considered each engineer's development objectives | | | | |
+| Corrections to individuals were given in private; achievements were recognized publicly | | | | |
 
 ---
 
-## 8. Integración con SECAV-O
+## 8. SECAV-O Integration
 
-| Conducta observada | Término SECAV-O |
+| Observed behavior | SECAV-O term |
 |---|---|
-| Observación de reuniones y actividades del líder | `secav:ReviewActivity`; `secav:EngineeringActivity` |
-| Evidencia de facilitación efectiva | `secav:WorkProductEvidence`, `secav:ReviewFinding` |
-| Evaluación de competencias de liderazgo | `secav:CompetencyAssessment` sobre `secav:Engineer` (el líder) |
-| Intervención cuando se detecta una señal de alerta | `secav:CoachingIntervention` |
-| Recomendación específica al líder | `secav:CoachingRecommendation` |
-| Plan de mejora acordado con el líder | `secavo:ImprovementAction` (subclase de `secav:CoachingIntervention`) |
-| Plan construido con el equipo | `secavo:AnnualCoachingPlan`, `secavo:SprintPlan` |
-| Ajuste al plan por desacuerdo | `secavo:ImprovementAction`, `secavo:PlanningDecision` |
-| Escalación formal de desacuerdo | `secavo:GovernanceDecision`; documentado en `secavo:SprintRetrospective` |
-| Riesgos identificados con el equipo | `secavo:Risk` en `secavo:SprintRetrospective` |
-| Acciones preventivas propuestas por el equipo | `secavo:PreventiveAction` |
-| Acciones correctivas al materializar un riesgo | `secavo:CorrectiveAction` |
+| Observation of leader meetings and activities | `secav:ReviewActivity`; `secav:EngineeringActivity` |
+| Evidence of effective facilitation | `secav:WorkProductEvidence`, `secav:ReviewFinding` |
+| Leadership competency assessment | `secav:CompetencyAssessment` on `secav:Engineer` (the leader) |
+| Intervention when an alert signal is detected | `secav:CoachingIntervention` |
+| Specific recommendation to the leader | `secav:CoachingRecommendation` |
+| Improvement plan agreed with the leader | `secavo:ImprovementAction` (subclass of `secav:CoachingIntervention`) |
+| Plan built with the team | `secavo:AnnualCoachingPlan`, `secavo:SprintPlan` |
+| Plan adjustment for disagreement | `secavo:ImprovementAction`, `secavo:PlanningDecision` |
+| Formal escalation of disagreement | `secavo:GovernanceDecision`; documented in `secavo:SprintRetrospective` |
+| Risks identified with the team | `secavo:Risk` in `secavo:SprintRetrospective` |
+| Preventive actions proposed by the team | `secavo:PreventiveAction` |
+| Corrective actions when a risk materializes | `secavo:CorrectiveAction` |
 
 ---
 
-## 9. Documentos relacionados
+## 9. Related documents
 
-| Documento | Relación |
+| Document | Relationship |
 |---|---|
-| `coaching-governance/docs/coach-code-of-ethics.md` | Principios éticos que guían la observación y la intervención del coach |
-| `coaching-governance/docs/coach-committee.md` | El Comité puede revisar patrones de observación entre coaches para calibración |
-| `coaching-governance/docs/project-planning-participation.md` | Participación formal del coach en planificación y escalación de calidad |
-| `templates/quality-planning-dissent-and-escalation.md` | Plantilla para documentar y escalar desacuerdos no resueltos internamente |
-| `coaching-governance/guides/risk-management.md` | Protocolo detallado de gestión de riesgos |
-| `templates/sprint-retrospective.md` | Espacio donde el coach registra observaciones del líder |
-| `templates/engineer-coaching-assessment.md` | Plantilla de evaluación de competencias para el líder observado |
-| `templates/engineer-development-record.md` | Registro longitudinal donde se acumulan las observaciones y evidencias del ciclo |
+| `coaching-governance/docs/coach-code-of-ethics.md` | Ethical principles guiding the coach's observation and intervention |
+| `coaching-governance/docs/coach-committee.md` | The Committee may review observation patterns across coaches for calibration |
+| `coaching-governance/docs/project-planning-participation.md` | Formal coach participation in planning and quality escalation |
+| `templates/quality-planning-dissent-and-escalation.md` | Template for documenting and escalating unresolved internal disagreements |
+| `coaching-governance/guides/risk-management.md` | Detailed risk management protocol |
+| `templates/sprint-retrospective.md` | Space where the coach records leader observations |
+| `templates/engineer-coaching-assessment.md` | Competency assessment template for the observed leader |
+| `templates/engineer-development-record.md` | Longitudinal record accumulating cycle observations and evidence |

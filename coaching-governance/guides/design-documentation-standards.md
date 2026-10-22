@@ -1,96 +1,96 @@
-# Estándares de Documentación de Diseño
+# Design Documentation Standards
 
-## Propósito
+## Purpose
 
-Esta guía establece qué artefactos de diseño son obligatorios en función de las características del sistema, y qué criterios de calidad aplican a cada uno. Los artefactos listados aquí son verificados durante las inspecciones formales de diseño (`secav:DesignReview`) como `secav:QualityCriterion` aplicados al `secav:DesignArtifact`.
+This guide establishes which design artifacts are mandatory based on system characteristics, and which quality criteria apply to each. The artifacts listed here are verified during formal design inspections (`secav:DesignReview`) as `secav:QualityCriterion` applied to `secav:DesignArtifact`.
 
-La ausencia de un artefacto obligatorio — cuando el sistema tiene las características que lo requieren — es un `secav:ReviewFinding` que debe resolverse antes de que el diseño avance a implementación.
+The absence of a mandatory artifact — when the system has the characteristics that require it — is a `secav:ReviewFinding` that must be resolved before the design advances to implementation.
 
 ---
 
-## 1. Diagramas de estados
+## 1. State diagrams
 
-### 1.1 Cuándo son obligatorios
+### 1.1 When they are mandatory
 
-Un diagrama de estados es obligatorio para cualquier entidad del sistema — clase, módulo, proceso, recurso externo, o flujo de negocio — que pueda encontrarse en más de un estado distinguible y cuyo comportamiento varíe según el estado en el que se encuentre.
+A state diagram is mandatory for any system entity — class, module, process, external resource, or business flow — that can be in more than one distinguishable state and whose behavior varies depending on which state it is in.
 
-Señales de que se necesita un diagrama de estados:
-- El código contiene enumeraciones o constantes que representan estados: `PENDING`, `ACTIVE`, `SUSPENDED`, `CLOSED`, `PROCESSING`, etc.
-- La lógica de negocio incluye condiciones del tipo "si el recurso está en estado X, entonces...".
-- Una operación es válida en algunos estados del objeto pero no en otros.
-- Existe un ciclo de vida del recurso con inicio y fin definidos.
+Signals that a state diagram is needed:
+- The code contains enumerations or constants representing states: `PENDING`, `ACTIVE`, `SUSPENDED`, `CLOSED`, `PROCESSING`, etc.
+- Business logic includes conditions of the type "if the resource is in state X, then..."
+- An operation is valid in some states of the object but not in others.
+- There is a resource lifecycle with a defined beginning and end.
 
-### 1.2 Qué debe contener
+### 1.2 What it must contain
 
-Un diagrama de estados completo y útil para los desarrolladores incluye:
+A complete and useful state diagram for developers includes:
 
-| Elemento | Descripción | Señal de omisión |
+| Element | Description | Signal of omission |
 |---|---|---|
-| **Estado inicial** | El estado en el que se encuentra el objeto al ser creado. Marcado visualmente con el símbolo estándar (círculo relleno → flecha). | Si no hay estado inicial explícito, los desarrolladores asumen distintos puntos de partida. |
-| **Estados finales** | Los estados en los que el objeto deja de existir o ya no puede transicionar. Marcado visualmente (círculo relleno dentro de círculo vacío). | Si no hay estados finales, no queda claro cuándo el ciclo de vida concluye. |
-| **Todos los estados posibles** | Cada estado distinguible que el objeto puede ocupar. | Estados implícitos en el código que no aparecen en el diagrama generan comportamientos no documentados. |
-| **Transiciones** | Aristas dirigidas entre estados, etiquetadas con el evento o condición que las dispara. | Transiciones sin etiqueta son ambiguas: los desarrolladores no saben qué las activa. |
-| **Condiciones de guarda** | Condiciones adicionales que deben cumplirse para que una transición ocurra (`[condición]`). | Sin guardas, los desarrolladores no saben cuándo una transición está disponible y cuándo no. |
-| **Acciones de transición** | Lo que hace el sistema al ejecutar la transición (`/ acción`), si aplica. | Acciones implícitas en el código que no aparecen en el diagrama crean divergencia entre diseño e implementación. |
+| **Initial state** | The state the object is in when created. Visually marked with the standard symbol (filled circle → arrow). | If there is no explicit initial state, developers assume different starting points. |
+| **Final states** | States in which the object ceases to exist or can no longer transition. Visually marked (filled circle inside an empty circle). | If there are no final states, it is not clear when the lifecycle concludes. |
+| **All possible states** | Every distinguishable state the object can occupy. | Implicit states in code that do not appear in the diagram generate undocumented behaviors. |
+| **Transitions** | Directed edges between states, labeled with the event or condition that triggers them. | Transitions without a label are ambiguous: developers do not know what activates them. |
+| **Guard conditions** | Additional conditions that must be met for a transition to occur (`[condition]`). | Without guards, developers do not know when a transition is available and when it is not. |
+| **Transition actions** | What the system does when executing the transition (`/ action`), when applicable. | Implicit actions in code that do not appear in the diagram create divergence between design and implementation. |
 
-### 1.3 Criterios de calidad del diagrama (verificados en inspección)
+### 1.3 Diagram quality criteria (verified in inspection)
 
-Los inspectores verifican estos criterios (`secav:QualityCriterion`) durante la revisión del diseño:
+Inspectors verify these criteria (`secav:QualityCriterion`) during the design review:
 
-| Criterio | Pregunta |
+| Criterion | Question |
 |---|---|
-| **Completo** | ¿Están todos los estados que aparecen en el código o en la lógica de negocio? |
-| **Estado inicial explícito** | ¿Hay exactamente un estado inicial marcado? |
-| **Estados finales explícitos** | ¿Están marcados todos los estados en los que el ciclo de vida concluye? |
-| **Transiciones etiquetadas** | ¿Todas las transiciones tienen etiqueta de evento o condición? |
-| **Sin transiciones implícitas** | ¿Puede un desarrollador determinar, solo con el diagrama, qué estado sigue dado un evento? |
-| **Consistente con el código** | ¿El diagrama refleja el comportamiento real del sistema, no el comportamiento deseado original? |
+| **Complete** | Are all states that appear in the code or business logic present? |
+| **Explicit initial state** | Is there exactly one marked initial state? |
+| **Explicit final states** | Are all states in which the lifecycle concludes marked? |
+| **Labeled transitions** | Do all transitions have an event or condition label? |
+| **No implicit transitions** | Can a developer determine, from the diagram alone, which state follows given an event? |
+| **Consistent with code** | Does the diagram reflect the system's actual behavior, not the originally desired behavior? |
 
-Un diagrama de estados que falla alguno de estos criterios es un `secav:ReviewFinding`. Un diagrama de estados ausente cuando el sistema tiene estados es un `secav:ReviewFinding` bloqueante para avanzar a implementación.
+A state diagram that fails any of these criteria is a `secav:ReviewFinding`. A missing state diagram when the system has states is a blocking `secav:ReviewFinding` for advancing to implementation.
 
-### 1.4 Por qué es obligatorio y no opcional
+### 1.4 Why it is mandatory, not optional
 
-Un diagrama de estados sirve a los desarrolladores de formas que el código no puede reemplazar:
+A state diagram serves developers in ways code cannot replace:
 
-- **Visibilidad global:** el código muestra cómo se implementa cada transición individualmente; el diagrama muestra todas las transiciones del ciclo de vida simultáneamente.
-- **Detección de estados trampa:** estados de los que no hay salida, o de los que solo hay salida hacia estados finales no intencionados, son visibles en el diagrama pero invisibles en el código hasta que ocurren.
-- **Detección de transiciones faltantes:** si un evento puede ocurrir en un estado y el diagrama no tiene transición para ese par (estado, evento), el comportamiento está indefinido — y eso es un defecto de diseño.
-- **Referencia durante mantenimiento:** cuando un desarrollador modifica el sistema meses después, el diagrama es la única forma de entender el ciclo de vida completo sin leer todo el código.
+- **Global visibility:** code shows how each transition is implemented individually; the diagram shows all lifecycle transitions simultaneously.
+- **Trap state detection:** states from which there is no exit, or from which the only exit leads to unintended final states, are visible in the diagram but invisible in code until they occur.
+- **Missing transition detection:** if an event can occur in a state and the diagram has no transition for that (state, event) pair, the behavior is undefined — and that is a design defect.
+- **Maintenance reference:** when a developer modifies the system months later, the diagram is the only way to understand the full lifecycle without reading all the code.
 
 ---
 
-## 2. Rol del coach en la revisión de documentación de diseño
+## 2. Coach's role in design documentation review
 
-El coach asiste como observador silencioso durante la inspección de artefactos de diseño. Observa específicamente:
+The coach attends as a silent observer during design artifact inspections. They specifically observe:
 
-- Si los inspectores verifican la presencia de los artefactos obligatorios antes de revisar su contenido.
-- Si los inspectores distinguen entre "el diagrama existe" y "el diagrama es correcto y completo".
-- Si los hallazgos de ausencia o incompletitud de diagramas se registran con suficiente detalle para que el diseñador pueda corregirlos sin nueva reunión.
+- Whether inspectors verify the presence of mandatory artifacts before reviewing their content.
+- Whether inspectors distinguish between "the diagram exists" and "the diagram is correct and complete."
+- Whether findings of diagram absence or incompleteness are recorded with sufficient detail for the designer to correct them without a new meeting.
 
-El coach registra como `secavo:QualityPlanningConcern` si la falta sistemática de diagramas de estados en los diseños revisados indica ausencia de un estándar de documentación acordado en el equipo.
-
----
-
-## 3. Integración con SECAV-O
-
-| Concepto | Término SECAV-O |
-|---|---|
-| Diagrama de estados como artefacto de diseño | `secav:DesignArtifact` |
-| Revisión del diagrama | `secav:DesignReview` |
-| Criterios de calidad del diagrama | `secav:QualityCriterion` |
-| Ausencia del diagrama o diagrama incompleto | `secav:ReviewFinding` |
-| Registro de la revisión | `secav:ReviewRecord` |
-| Patrón sistémico de ausencia de diagramas | `secavo:QualityPlanningConcern` |
-| Competencia desarrollada al producir diagramas completos | `secav:DesignCompetency` |
-| Evaluación de competencia derivada de la revisión | `secav:CompetencyAssessment` sobre `secav:DesignCompetency` |
+The coach records as `secavo:QualityPlanningConcern` if the systematic lack of state diagrams in reviewed designs indicates the absence of an agreed documentation standard in the team.
 
 ---
 
-## 4. Documentos relacionados
+## 3. SECAV-O Integration
 
-| Documento | Relación |
+| Concept | SECAV-O term |
 |---|---|
-| `coaching-governance/guides/formal-inspections.md` | Protocolo de inspección que aplica a los artefactos de diseño documentados aquí |
-| `coaching-governance/guides/minimum-quality-criteria.md` | La fase de diseño de arquitectura y detalle requiere inspección de sus artefactos críticos |
-| `coaching-governance/guides/requirements-inspection.md` | El glosario primario del documento de requerimientos debe definir los estados del dominio antes de que aparezcan en el diagrama de diseño |
-| `coaching-governance/glossary/glossary.md` | Definiciones de módulo crítico, inspección formal, QualityPlanningConcern |
+| State diagram as design artifact | `secav:DesignArtifact` |
+| Diagram review | `secav:DesignReview` |
+| Diagram quality criteria | `secav:QualityCriterion` |
+| Missing or incomplete diagram | `secav:ReviewFinding` |
+| Review record | `secav:ReviewRecord` |
+| Systemic pattern of missing diagrams | `secavo:QualityPlanningConcern` |
+| Competency developed by producing complete diagrams | `secav:DesignCompetency` |
+| Competency assessment derived from review | `secav:CompetencyAssessment` on `secav:DesignCompetency` |
+
+---
+
+## 4. Related documents
+
+| Document | Relationship |
+|---|---|
+| `coaching-governance/guides/formal-inspections.md` | Inspection protocol that applies to the design artifacts documented here |
+| `coaching-governance/guides/minimum-quality-criteria.md` | The architecture and detailed design phase requires inspection of its critical artifacts |
+| `coaching-governance/guides/requirements-inspection.md` | The primary glossary of the requirements document must define the domain states before they appear in the design diagram |
+| `coaching-governance/glossary/glossary.md` | Definitions of critical module, formal inspection, QualityPlanningConcern |

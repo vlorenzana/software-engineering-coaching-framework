@@ -1,178 +1,178 @@
-# Criterios de Proceso Robusto
+# Robust Process Criteria
 
-> **Estado:** criterios CR-1 a CR-5 definidos — criterios adicionales pendientes de incorporación (ver tabla de resumen).
+> **Status:** criteria CR-1 to CR-5 defined — additional criteria pending incorporation (see summary table).
 
-## Principio
+## Principle
 
-Un proceso de desarrollo puede cumplir el criterio de calidad mínima razonable (`coaching-governance/guides/minimum-quality-criteria.md`) y aun así presentar señales de fragilidad: revisiones que no encuentran nada, diseño de comportamiento implícito no documentado, defectos que no se registran. El **proceso robusto** es el nivel siguiente: aquel en que las prácticas de calidad producen evidencia consistente, verificable y autoexplicativa de que están funcionando.
+A development process can meet the minimum reasonable quality criterion (`coaching-governance/guides/minimum-quality-criteria.md`) and still show signs of fragility: reviews that find nothing, implicit behavioral design that is undocumented, defects that are not recorded. The **robust process** is the next level: one in which quality practices produce consistent, verifiable, and self-explanatory evidence that they are working.
 
-La distinción fundamental entre calidad mínima y proceso robusto es que el proceso robusto genera su propia evidencia de efectividad. No basta con realizar las prácticas; las prácticas deben producir hallazgos observables que confirmen que se ejecutaron con rigor.
+The fundamental distinction between minimum quality and robust process is that the robust process generates its own evidence of effectiveness. It is not enough to perform the practices; the practices must produce observable findings that confirm they were executed with rigor.
 
 ---
 
-## Criterios
+## Criteria
 
-### CR-1 — Las inspecciones se realizan sobre los productos críticos
+### CR-1 — Inspections are performed on critical products
 
-Los artefactos de mayor riesgo de cada fase productiva son inspeccionados formalmente por más de un revisor antes de que la fase concluya, siguiendo los criterios de selección definidos en `coaching-governance/guides/minimum-quality-criteria.md` §1.
+The highest-risk artifacts of each productive phase are formally inspected by more than one reviewer before the phase concludes, following the selection criteria defined in `coaching-governance/guides/minimum-quality-criteria.md` §1.
 
-En un proceso robusto esto no es opcional ni dependiente de la presión de tiempo: si un artefacto crítico no fue inspeccionado, el coach documenta una `secavo:QualityPlanningConcern` y escala si el patrón se repite.
+In a robust process this is not optional or dependent on time pressure: if a critical artifact was not inspected, the coach documents a `secavo:QualityPlanningConcern` and escalates if the pattern repeats.
 
-**Evidencia que el coach observa:**
+**Evidence the coach observes:**
 
-- `secav:ReviewRecord` existente por cada artefacto crítico identificado en el sprint.
-- Participación de al menos dos revisores en cada inspección.
-- Ausencia de inspección sobre artefacto crítico → `secavo:QualityPlanningConcern` documentada.
+- A `secav:ReviewRecord` exists for each critical artifact identified in the sprint.
+- At least two reviewers participated in each inspection.
+- Absence of inspection on a critical artifact → documented `secavo:QualityPlanningConcern`.
 
 **SECAV-O:** `secav:DesignReview`, `secav:CodeReview`, `secav:UnitTestDesignReview`, `secav:ReviewRecord`, `secavo:QualityPlanningConcern`.
 
 ---
 
-### CR-2 — El comportamiento dinámico se diseña con diagramas UML de actividad o de secuencia
+### CR-2 — Dynamic behavior is designed with UML activity or sequence diagrams
 
-Toda lógica cuyo comportamiento varía según el flujo de control, la interacción entre actores o el orden de mensajes entre componentes debe estar modelada explícitamente mediante al menos uno de los siguientes diagramas UML:
+Any logic whose behavior varies according to control flow, actor interaction, or the order of messages between components must be explicitly modeled using at least one of the following UML diagrams:
 
-- **Diagrama de actividad / flujo:** para lógica de proceso, flujos de trabajo, algoritmos con ramificaciones y bucles.
-- **Diagrama de secuencia:** para interacciones entre componentes, servicios, actores o capas en un orden temporal definido.
+- **Activity / flow diagram:** for process logic, workflows, algorithms with branches and loops.
+- **Sequence diagram:** for interactions between components, services, actors, or layers in a defined temporal order.
 
-La ausencia de estos diagramas cuando el comportamiento es dinámico equivale a diseño implícito: los ingenieros deben inferir el comportamiento del código, lo que eleva el riesgo de defectos de integración, interpretaciones divergentes y dificultad de revisión.
+The absence of these diagrams when behavior is dynamic amounts to implicit design: engineers must infer behavior from code, which increases the risk of integration defects, divergent interpretations, and review difficulty.
 
-Este criterio complementa el estándar de diagramas de estado de `coaching-governance/guides/design-documentation-standards.md`, que ya establece el requisito de diagramas de estado para entidades con comportamiento variable por estado.
+This criterion complements the state diagram standard in `coaching-governance/guides/design-documentation-standards.md`, which already establishes the requirement for state diagrams for entities with state-dependent behavior.
 
-**Cuándo aplica cada diagrama:**
+**When each diagram applies:**
 
-| Situación | Diagrama requerido |
+| Situation | Required diagram |
 |---|---|
-| Lógica de proceso con ramificaciones (if/else, bucles, condiciones de guarda) | Actividad / flujo |
-| Interacción entre dos o más componentes, servicios o actores con orden de mensajes | Secuencia |
-| Entidad con comportamiento que depende de su estado interno | Estado (`design-documentation-standards.md`) |
-| Combinaciones de las anteriores | Uno o más de los anteriores, según aplique |
+| Process logic with branches (if/else, loops, guard conditions) | Activity / flow |
+| Interaction between two or more components, services, or actors with message ordering | Sequence |
+| Entity whose behavior depends on its internal state | State (`design-documentation-standards.md`) |
+| Combinations of the above | One or more of the above, as applicable |
 
-**Criterios de calidad del diagrama:**
+**Diagram quality criteria:**
 
-Un diagrama de actividad o secuencia es válido como artefacto de diseño inspeccionable si cumple:
+An activity or sequence diagram is valid as an inspectable design artifact if it meets:
 
-1. Es consistente con el código o la especificación que modela — no es decorativo ni está desactualizado.
-2. Cubre los flujos principales y los flujos alternativos o de error más relevantes.
-3. En diagramas de actividad: los puntos de decisión tienen condiciones de guarda explícitas en todas las ramas.
-4. En diagramas de secuencia: cada mensaje incluye el nombre de la operación o evento; los retornos relevantes están representados.
-5. Es legible sin necesidad de consultar el código para interpretar el flujo.
+1. It is consistent with the code or specification it models — it is not decorative or out of date.
+2. It covers the main flows and the most relevant alternative or error flows.
+3. In activity diagrams: decision points have explicit guard conditions on all branches.
+4. In sequence diagrams: each message includes the operation or event name; relevant return values are represented.
+5. It is readable without needing to consult the code to interpret the flow.
 
-La ausencia de un diagrama requerido es un hallazgo bloqueante en la revisión del artefacto de diseño (`secav:ReviewFinding` de tipo `missingRequiredDiagram`). La omisión sistemática a lo largo de varios sprints activa una `secavo:QualityPlanningConcern`.
+The absence of a required diagram is a blocking finding in the design artifact review (`secav:ReviewFinding` of type `missingRequiredDiagram`). Systematic omission across multiple sprints triggers a `secavo:QualityPlanningConcern`.
 
-**Evidencia que el coach observa:**
+**Evidence the coach observes:**
 
-- `secav:DesignArtifact` incluye diagrama de actividad o secuencia cuando el comportamiento es dinámico.
-- El diagrama es inspeccionado como parte del `secav:ReviewRecord` del artefacto de diseño.
-- Hallazgos de revisión referenciando inconsistencias o ausencias en los diagramas.
+- `secav:DesignArtifact` includes an activity or sequence diagram when behavior is dynamic.
+- The diagram is inspected as part of the `secav:ReviewRecord` of the design artifact.
+- Review findings referencing inconsistencies or absences in the diagrams.
 
 **SECAV-O:** `secav:DesignArtifact`, `secav:DesignReview`, `secav:ReviewFinding`, `secav:DesignActivity`, `secav:DesignCompetency`, `secavo:QualityPlanningConcern`.
 
 ---
 
-### CR-3 — Los defectos resultantes de inspecciones y revisiones se documentan
+### CR-3 — Defects resulting from inspections and reviews are documented
 
-Cada hallazgo generado en una inspección o revisión se registra en el sistema de seguimiento con los campos mínimos requeridos por el modelo de métricas:
+Every finding generated in an inspection or review is recorded in the tracking system with the minimum fields required by the metrics model:
 
-- categoría del defecto;
-- severidad;
-- fase donde fue inyectado (`phaseInjected`);
-- fase donde fue detectado (`phaseDetected`);
-- artefacto afectado;
-- actividad de ingeniería asociada;
-- acción de corrección asignada con responsable.
+- defect category;
+- severity;
+- phase where it was injected (`phaseInjected`);
+- phase where it was detected (`phaseDetected`);
+- affected artifact;
+- associated engineering activity;
+- correction action assigned with owner.
 
-La documentación de defectos no es un trámite administrativo: es la fuente de datos que permite identificar patrones de inyección, evaluar la efectividad de las revisiones y calibrar los objetivos del coaching. Un proceso que realiza revisiones pero no documenta los hallazgos no puede demostrar que las revisiones funcionan.
+Defect documentation is not administrative paperwork: it is the data source that enables identifying injection patterns, evaluating review effectiveness, and calibrating coaching objectives. A process that conducts reviews but does not document findings cannot demonstrate that the reviews work.
 
-**SECAV-O:** `secavo:DefectObservation` con `secavo:phaseInjected` y `secavo:phaseDetected`, `secav:ReviewFinding`, `secav:ReviewRecord`, `coaching-governance/guides/defect-tracking.md`.
+**SECAV-O:** `secavo:DefectObservation` with `secavo:phaseInjected` and `secavo:phaseDetected`, `secav:ReviewFinding`, `secav:ReviewRecord`, `coaching-governance/guides/defect-tracking.md`.
 
 ---
 
-### CR-4 y CR-5 — Las revisiones individuales generan hallazgos; donde no los generan, el coach emite un waiver justificado
+### CR-4 and CR-5 — Individual reviews generate findings; where they do not, the coach issues a justified waiver
 
-#### CR-4 — Las revisiones producen hallazgos
+#### CR-4 — Reviews produce findings
 
-Una revisión individual que no produce ningún hallazgo es, en la mayoría de los casos, una señal de revisión superficial o de preparación insuficiente — no de un artefacto perfecto. La ausencia sistemática de hallazgos en revisiones individuales es el indicador más claro de que la práctica se está ejecutando como formalidad y no como actividad de calidad.
+An individual review that produces no findings is, in most cases, a signal of superficial review or insufficient preparation — not of a perfect artifact. The systematic absence of findings in individual reviews is the clearest indicator that the practice is being executed as a formality rather than as a quality activity.
 
-En un proceso robusto, se espera que las revisiones produzcan hallazgos. La cantidad esperada depende de la complejidad del artefacto, la experiencia del revisor y el estado del proceso, pero **cero hallazgos repetidos en revisiones sucesivas sin justificación** es un patrón que el coach debe intervenir.
+In a robust process, reviews are expected to produce findings. The expected quantity depends on artifact complexity, reviewer experience, and process maturity, but **zero findings repeated across successive reviews without justification** is a pattern the coach must intervene in.
 
-El coach observa los `secav:ReviewRecord` de cada revisor individual y evalúa si el número y tipo de hallazgos son consistentes con la complejidad del artefacto revisado.
+The coach observes the `secav:ReviewRecord` of each individual reviewer and evaluates whether the number and type of findings are consistent with the complexity of the reviewed artifact.
 
-#### CR-5 — Waiver del coach cuando la revisión no genera hallazgos
+#### CR-5 — Coach waiver when the review produces no findings
 
-Cuando una revisión individual legítimamente no produce hallazgos — porque el artefacto fue corregido exhaustivamente antes de la revisión, porque el revisor tiene evidencia objetiva de que el artefacto cumple todos los criterios de aceptación, o porque el artefacto es de baja complejidad y alcance acotado — el coach emite un **waiver** que justifica la ausencia de hallazgos.
+When an individual review legitimately produces no findings — because the artifact was exhaustively corrected before review, because the reviewer has objective evidence that the artifact meets all acceptance criteria, or because the artifact is low-complexity with bounded scope — the coach issues a **waiver** that justifies the absence of findings.
 
-El waiver documenta:
+The waiver documents:
 
-1. **Identidad del artefacto y del revisor.**
-2. **Justificación objetiva:** por qué se considera que la ausencia de hallazgos es legítima en este caso (no es una opinión; debe referenciarse evidencia: historial de correcciones previas, complejidad reducida, alcance acotado, etc.).
-3. **Criterio de validez:** qué criterios de aceptación fueron verificados y cómo.
-4. **Firma del coach** y fecha.
+1. **Identity of the artifact and reviewer.**
+2. **Objective justification:** why the absence of findings is considered legitimate in this case (not an opinion; evidence must be referenced: prior correction history, reduced complexity, bounded scope, etc.).
+3. **Validity criterion:** which acceptance criteria were verified and how.
+4. **Coach signature** and date.
 
-El waiver no exime al revisor de la preparación requerida; confirma que el coach verificó que la ausencia de hallazgos tiene una explicación objetiva. Un waiver sin justificación objetiva es inválido.
+The waiver does not exempt the reviewer from the required preparation; it confirms that the coach verified that the absence of findings has an objective explanation. A waiver without objective justification is invalid.
 
-**Cuándo NO emitir waiver:**
+**When NOT to issue a waiver:**
 
-- El revisor no preparó individualmente el artefacto antes de la sesión.
-- El artefacto es de alta complejidad y no hay evidencia de preparación exhaustiva.
-- El patrón de cero hallazgos se repite en el mismo revisor en múltiples sprints sin justificación cambiante.
+- The reviewer did not individually prepare the artifact before the session.
+- The artifact is highly complex and there is no evidence of exhaustive preparation.
+- The pattern of zero findings repeats in the same reviewer across multiple sprints without a changing justification.
 
-En esos casos, el coach registra una `secav:CoachingIntervention` dirigida al desarrollo de la competencia de revisión del ingeniero.
+In those cases, the coach records a `secav:CoachingIntervention` targeting the development of the engineer's review competency.
 
 **SECAV-O (CR-4):** `secav:ReviewRecord`, `secav:ReviewFinding`, `secav:CompetencyAssessment`, `secav:ReviewCompetency`, `secav:CoachingIntervention`.
 
-**SECAV-O (CR-5):** `secavo:CoachWaiver` *(término propuesto — ver §SECAV-O)*, `secav:ReviewRecord`.
+**SECAV-O (CR-5):** `secavo:CoachWaiver` *(proposed term — see §SECAV-O)*, `secav:ReviewRecord`.
 
 ---
 
-## SECAV-O — término propuesto
+## SECAV-O — proposed term
 
-El criterio CR-5 introduce un concepto nuevo que requiere representación en la ontología:
+Criterion CR-5 introduces a new concept that requires representation in the ontology:
 
-| Término propuesto | Clase / Property | Descripción |
+| Proposed term | Class / Property | Description |
 |---|---|---|
-| `secavo:CoachWaiver` | Clase | Documento emitido por el coach que justifica objetivamente la ausencia de hallazgos en una revisión individual. |
-| `secavo:waiverJustification` | Data property (`xsd:string`) | Texto de justificación objetiva del waiver. |
-| `secavo:waiverIssuedBy` | Object property → `secav:Coach` | Coach que emite el waiver. |
-| `secavo:waiverForReviewRecord` | Object property → `secav:ReviewRecord` | El registro de revisión al que aplica el waiver. |
-| `secavo:waiverDate` | Data property (`xsd:date`) | Fecha de emisión. |
+| `secavo:CoachWaiver` | Class | Document issued by the coach that objectively justifies the absence of findings in an individual review. |
+| `secavo:waiverJustification` | Data property (`xsd:string`) | Text of the objective waiver justification. |
+| `secavo:waiverIssuedBy` | Object property → `secav:Coach` | Coach who issues the waiver. |
+| `secavo:waiverForReviewRecord` | Object property → `secav:ReviewRecord` | The review record to which the waiver applies. |
+| `secavo:waiverDate` | Data property (`xsd:date`) | Date of issuance. |
 
-> Estos términos son propuestos y deben añadirse a `ontology/secav-o-coaching-governance-extension.ttl` cuando se incorpore el criterio al baseline del framework.
+> These terms are proposed and must be added to `ontology/secav-o-coaching-governance-extension.ttl` when the criterion is incorporated into the framework baseline.
 
 ---
 
-## Resumen de criterios (estado actual)
+## Criteria summary (current status)
 
-| ID | Criterio | Estado |
+| ID | Criterion | Status |
 |---|---|---|
-| CR-1 | Inspecciones sobre productos críticos | Definido |
-| CR-2 | Comportamiento dinámico diseñado con diagramas UML de actividad o secuencia | Definido |
-| CR-3 | Defectos resultantes de revisiones documentados | Definido |
-| CR-4 | Las revisiones individuales generan hallazgos | Definido |
-| CR-5 | Waiver del coach justificado cuando la revisión no genera hallazgos | Definido |
-| CR-6… | *(pendientes de incorporación)* | Pendiente |
+| CR-1 | Inspections over critical products | Defined |
+| CR-2 | Dynamic behavior designed with UML activity or sequence diagrams | Defined |
+| CR-3 | Defects resulting from reviews documented | Defined |
+| CR-4 | Individual reviews generate findings | Defined |
+| CR-5 | Justified coach waiver when the review produces no findings | Defined |
+| CR-6… | *(pending incorporation)* | Pending |
 
 ---
 
-## Relación con la escala de calidad del framework
+## Relationship to the framework quality scale
 
-| Nivel | Descripción |
+| Level | Description |
 |---|---|
-| **Por debajo del mínimo** | No se inspeccionan artefactos críticos. Los defectos se acumulan entre fases. |
-| **Calidad mínima razonable** (`minimum-quality-criteria.md`) | Los artefactos críticos de cada fase son inspeccionados por más de un revisor. |
-| **Proceso robusto** *(este documento)* | Las prácticas de calidad producen evidencia verificable de su efectividad: hallazgos documentados, diseño de comportamiento explícito, waivers justificados cuando las revisiones no generan hallazgos. |
-| **Calidad aspiracional** | Definida en `coaching-governance/guides/minimum-quality-criteria.md` — la mayoría o todos los artefactos de cada fase son inspeccionados; las organizaciones maduran hacia este nivel de forma incremental. |
+| **Below minimum** | Critical artifacts are not inspected. Defects accumulate between phases. |
+| **Minimum reasonable quality** (`minimum-quality-criteria.md`) | Critical artifacts of each phase are inspected by more than one reviewer. |
+| **Robust process** *(this document)* | Quality practices produce verifiable evidence of their effectiveness: documented findings, explicit behavioral design, justified waivers when reviews produce no findings. |
+| **Aspirational quality** | Defined in `coaching-governance/guides/minimum-quality-criteria.md` — most or all artifacts of each phase are inspected; organizations mature toward this level incrementally. |
 
 ---
 
-## Documentos relacionados
+## Related documents
 
-| Documento | Relación |
+| Document | Relationship |
 |---|---|
-| `coaching-governance/guides/minimum-quality-criteria.md` | Nivel de calidad previo — piso del framework |
-| `coaching-governance/guides/design-documentation-standards.md` | Estándar de diagramas de estado — CR-2 lo complementa con actividad y secuencia |
-| `coaching-governance/guides/formal-inspections.md` | Protocolo de inspección formal — base de CR-1 |
-| `coaching-governance/guides/peer-review-sessions.md` | Protocolo de revisión de pares — base de CR-4 y CR-5 |
-| `coaching-governance/guides/requirements-inspection.md` | Inspección de requerimientos — instancia de CR-1 |
-| `coaching-governance/guides/defect-tracking.md` | Registro de defectos — base de CR-3 |
-| `coaching-governance/docs/metrics-model.md` | Modelo de métricas — interpretación de hallazgos y tendencias |
+| `coaching-governance/guides/minimum-quality-criteria.md` | Previous quality level — framework floor |
+| `coaching-governance/guides/design-documentation-standards.md` | State diagram standard — CR-2 complements it with activity and sequence diagrams |
+| `coaching-governance/guides/formal-inspections.md` | Formal inspection protocol — basis for CR-1 |
+| `coaching-governance/guides/peer-review-sessions.md` | Peer review protocol — basis for CR-4 and CR-5 |
+| `coaching-governance/guides/requirements-inspection.md` | Requirements inspection — instance of CR-1 |
+| `coaching-governance/guides/defect-tracking.md` | Defect recording — basis for CR-3 |
+| `coaching-governance/docs/metrics-model.md` | Metrics model — interpretation of findings and trends |

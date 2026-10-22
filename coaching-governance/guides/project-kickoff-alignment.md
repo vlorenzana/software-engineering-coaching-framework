@@ -1,126 +1,126 @@
-﻿# Alineación de Objetivos de Proyecto: Reunión Pre-Inicio
+﻿# Project Objective Alignment: Pre-Start Meeting
 
-## Propósito
+## Purpose
 
-Antes de iniciar un proyecto, se recomienda una reunión entre el **Líder Técnico**, el **Coach** y el **responsable de alta gerencia** para establecer los objetivos medibles que definirán el éxito del proyecto. Esta reunión fija el punto de referencia contra el que se medirán el avance del equipo y los resultados del coaching.
+Before starting a project, a meeting is recommended between the **Technical Lead**, the **Coach**, and the **senior management responsible** to establish the measurable objectives that will define the project's success. This meeting sets the reference point against which the team's progress and coaching results will be measured.
 
-Sin esta alineación explícita, los objetivos quedan implícitos o dispersos; el equipo optimiza para lo que percibe que se le evaluará, y el coach no tiene una base acordada para orientar las intervenciones de coaching.
+Without this explicit alignment, objectives remain implicit or scattered; the team optimizes for what they perceive they will be evaluated on, and the coach has no agreed basis to guide coaching interventions.
 
 ---
 
-## 1. Participantes
+## 1. Participants
 
-| Rol | Función en la reunión |
+| Role | Function in the meeting |
 |---|---|
-| **Responsable de alta gerencia** | Define y valida los objetivos organizacionales del proyecto (`secavo:InstitutionalObjective`, `secavo:ProjectObjective`). Autoriza los compromisos de recursos y plazos. |
-| **Líder Técnico** | Traduce los objetivos organizacionales a metas técnicas y operativas alcanzables. Señala restricciones técnicas que afecten la definición de metas. |
-| **Coach** | Verifica que los objetivos sean medibles y trazables. Propone al menos un objetivo de calidad de software si ninguno ha sido incluido. Conecta los objetivos del proyecto con el plan de coaching del ciclo (`secavo:AnnualCoachingPlan`). |
+| **Senior management responsible** | Defines and validates the project's organizational objectives (`secavo:InstitutionalObjective`, `secavo:ProjectObjective`). Authorizes resource and deadline commitments. |
+| **Technical Lead** | Translates organizational objectives into achievable technical and operational goals. Identifies technical constraints that affect goal definition. |
+| **Coach** | Verifies that objectives are measurable and traceable. Proposes at least one software quality objective if none has been included. Connects project objectives with the cycle coaching plan (`secavo:AnnualCoachingPlan`). |
 
 ---
 
-## 2. Criterios para los objetivos del proyecto
+## 2. Criteria for project objectives
 
-### 2.1 Pocos, pero significativos
+### 2.1 Few, but meaningful
 
-Los objetivos del proyecto deben ser pocos — suficientes para guiar el trabajo sin dispersar el foco. Un número excesivo de objetivos diluyye la atención y hace imposible la rendición de cuentas real.
+Project objectives must be few — sufficient to guide work without dispersing focus. An excessive number of objectives dilutes attention and makes real accountability impossible.
 
-### 2.2 Medibles y verificables
+### 2.2 Measurable and verifiable
 
-Cada objetivo debe poder evaluarse con datos observables al cierre del proyecto:
+Each objective must be evaluable with observable data at project close:
 
-- ¿Qué métrica lo representa? (`secavo:Metric`)
-- ¿Cuál es el umbral de éxito?
-- ¿Cómo y cuándo se mide? (`secavo:MeasurementObservation`)
+- What metric represents it? (`secavo:Metric`)
+- What is the success threshold?
+- How and when is it measured? (`secavo:MeasurementObservation`)
 
-### 2.3 Al menos un objetivo de calidad de software
+### 2.3 At least one software quality objective
 
-Se recomienda que al menos uno de los objetivos acordados con gerencia esté relacionado explícitamente con defectos o calidad de software. Ejemplos medibles:
+It is recommended that at least one of the objectives agreed with management be explicitly related to defects or software quality. Measurable examples:
 
-| Objetivo de calidad | Término SECAV-O |
+| Quality objective | SECAV-O term |
 |---|---|
-| Tasa de defectos encontrados en producción por debajo de un umbral | `secavo:DefectObservation` + umbral en `secavo:Metric` |
-| Porcentaje de cambios cubiertos por revisión de código | `secavo:ReviewObservation` + umbral en `secavo:Metric` |
-| Porcentaje de defectos detectados en revisión (vs. en producción) | `secavo:DefectObservation` por fase (`templates/defect-log.csv`) |
-| Tiempo medio de resolución de defectos críticos | `secavo:Metric` de tiempo; observado en `secavo:MeasurementObservation` |
+| Production defect rate below a threshold | `secavo:DefectObservation` + threshold in `secavo:Metric` |
+| Percentage of changes covered by code review | `secavo:ReviewObservation` + threshold in `secavo:Metric` |
+| Percentage of defects detected in review (vs. in production) | `secavo:DefectObservation` by phase (`templates/defect-log.csv`) |
+| Mean resolution time for critical defects | `secavo:Metric` of time; observed in `secavo:MeasurementObservation` |
 
-Incluir un objetivo de calidad garantiza que la calidad de ingeniería tenga representación explícita en los compromisos del proyecto — no solo como deuda técnica que se gestiona después.
-
----
-
-## 3. Objetivos del equipo
-
-Una vez establecidos los objetivos con gerencia, el equipo puede fijar sus propios objetivos internos. Estos **pueden ser más agresivos** que los compromisos con gerencia — son metas de excelencia, no el piso del contrato.
-
-El coach facilita esta sesión y verifica que:
-
-- Los objetivos del equipo estén alineados con los compromisos de gerencia y los alcancen o superen.
-- **El coach no permite objetivos de equipo menos exigentes que los acordados con gerencia.** Si el equipo propone metas más débiles, el coach señala la discrepancia y facilita la revisión.
-- El equipo comprende la diferencia entre el compromiso organizacional (mínimo acordado) y su aspiración interna (meta de excelencia).
+Including a quality objective ensures that engineering quality has explicit representation in project commitments — not just as technical debt managed after the fact.
 
 ---
 
-## 4. Objetivos individuales
+## 3. Team objectives
 
-De forma análoga, cada ingeniero puede establecer objetivos individuales alineados con los del equipo. Estos también pueden ser más agresivos — metas de desarrollo personal conectadas con las competencias que el proyecto va a demandar.
+Once objectives are established with management, the team may set their own internal objectives. These **can be more aggressive** than management commitments — they are excellence goals, not the floor of the contract.
 
-El coach es responsable de:
+The coach facilitates this session and verifies that:
 
-- Verificar que los objetivos individuales estén conectados con las competencias requeridas por el proyecto (`secav:CompetencyAssessment` como línea base).
-- **No permitir objetivos individuales menos exigentes que la contribución esperada al equipo.** Si un objetivo individual está por debajo del aporte mínimo esperado, el coach lo señala en la sesión de planificación individual.
-- Documentar los objetivos individuales en el plan de coaching del ciclo (`secavo:AnnualCoachingPlan`, `secavo:CoachingObjective`).
-
----
-
-## 5. Rol del coach en la reunión con gerencia
-
-El coach no es un espectador en esta reunión. Sus responsabilidades específicas son:
-
-- **Verificar que cada objetivo propuesto sea medible.** Si un objetivo no puede responderse con datos observables, lo señala en el momento — no después.
-- **Proponer o solicitar al menos un objetivo de calidad.** Si ninguno de los objetivos propuestos incluye una dimensión de defectos o calidad de software, el coach lo introduce como requisito del framework.
-- **Registrar los objetivos acordados** como `secavo:CoachingObjective` vinculados a `secavo:ProjectObjective` mediante `secavo:alignsWithProjectObjective`, y a `secavo:InstitutionalObjective` mediante `secavo:alignsWithInstitutionalObjective`.
-- **No permitir la dilución de objetivos.** Si durante la reunión los compromisos se debilitan sin justificación técnica válida, el coach puede documentar una preocupación formal de planificación (`secavo:QualityPlanningConcern`) siguiendo el mecanismo de `templates/quality-planning-dissent-and-escalation.md`.
+- Team objectives are aligned with management commitments and meet or exceed them.
+- **The coach does not allow team objectives less demanding than those agreed with management.** If the team proposes weaker goals, the coach identifies the discrepancy and facilitates revision.
+- The team understands the difference between the organizational commitment (agreed minimum) and their internal aspiration (excellence goal).
 
 ---
 
-## 6. Outputs esperados de la reunión
+## 4. Individual objectives
 
-| Output | Dónde se registra |
+Analogously, each engineer may establish individual objectives aligned with the team's. These may also be more aggressive — personal development goals connected to the competencies the project will demand.
+
+The coach is responsible for:
+
+- Verifying that individual objectives are connected to the competencies required by the project (`secav:CompetencyAssessment` as baseline).
+- **Not allowing individual objectives less demanding than the expected contribution to the team.** If an individual objective is below the minimum expected contribution, the coach identifies this in the individual planning session.
+- Documenting individual objectives in the cycle coaching plan (`secavo:AnnualCoachingPlan`, `secavo:CoachingObjective`).
+
+---
+
+## 5. Coach's role in the management meeting
+
+The coach is not a spectator in this meeting. Their specific responsibilities are:
+
+- **Verify that each proposed objective is measurable.** If an objective cannot be answered with observable data, they identify this in the moment — not afterward.
+- **Propose or request at least one quality objective.** If none of the proposed objectives includes a defect or software quality dimension, the coach introduces it as a framework requirement.
+- **Record the agreed objectives** as `secavo:CoachingObjective` linked to `secavo:ProjectObjective` via `secavo:alignsWithProjectObjective`, and to `secavo:InstitutionalObjective` via `secavo:alignsWithInstitutionalObjective`.
+- **Not allow objective dilution.** If during the meeting commitments are weakened without valid technical justification, the coach may document a formal planning concern (`secavo:QualityPlanningConcern`) following the mechanism in `templates/quality-planning-dissent-and-escalation.md`.
+
+---
+
+## 6. Expected outputs of the meeting
+
+| Output | Where it is recorded |
 |---|---|
-| Objetivos organizacionales del proyecto (pocos, medibles, con al menos uno de calidad) | `templates/annual-coaching-plan.md` §Institutional alignment |
-| Métricas y umbrales de éxito para cada objetivo | `templates/metrics-register.csv` |
-| Objetivos de equipo (igual o más agresivos que los organizacionales) | `templates/annual-coaching-plan.md` §Team objectives |
-| Objetivos individuales por ingeniero | `templates/engineer-development-record.md` §Competency plan |
-| Registro de preocupación formal si objetivos se diluyeron | `templates/quality-planning-dissent-and-escalation.md` |
+| Organizational project objectives (few, measurable, with at least one quality objective) | `templates/annual-coaching-plan.md` §Institutional alignment |
+| Metrics and success thresholds for each objective | `templates/metrics-register.csv` |
+| Team objectives (equal to or more aggressive than organizational ones) | `templates/annual-coaching-plan.md` §Team objectives |
+| Individual objectives per engineer | `templates/engineer-development-record.md` §Competency plan |
+| Record of formal concern if objectives were diluted | `templates/quality-planning-dissent-and-escalation.md` |
 
 ---
 
-## 7. Integración con SECAV-O
+## 7. SECAV-O Integration
 
-| Concepto | Término SECAV-O |
+| Concept | SECAV-O term |
 |---|---|
-| Objetivo organizacional del proyecto | `secavo:ProjectObjective` |
-| Objetivo institucional (nivel organización) | `secavo:InstitutionalObjective` |
-| Objetivo de coaching derivado del proyecto | `secavo:CoachingObjective` |
-| Alineación objetivo coaching ↔ proyecto | `secavo:alignsWithProjectObjective` |
-| Alineación objetivo coaching ↔ institucional | `secavo:alignsWithInstitutionalObjective` |
-| Métrica de éxito | `secavo:Metric` |
-| Medición de defectos como objetivo de calidad | `secavo:DefectObservation` (subClase de `secavo:MeasurementObservation`) |
-| Medición de revisiones de código | `secavo:ReviewObservation` (subClase de `secavo:MeasurementObservation`) |
-| Línea base individual de competencias | `secav:CompetencyAssessment` |
-| Preocupación formal si objetivos se diluyen | `secavo:QualityPlanningConcern` |
-| Plan de coaching actualizado | `secavo:AnnualCoachingPlan` |
-| Decisión de planificación documentada | `secavo:PlanningDecision` |
+| Organizational project objective | `secavo:ProjectObjective` |
+| Institutional objective (organization level) | `secavo:InstitutionalObjective` |
+| Coaching objective derived from the project | `secavo:CoachingObjective` |
+| Alignment coaching objective ↔ project | `secavo:alignsWithProjectObjective` |
+| Alignment coaching objective ↔ institutional | `secavo:alignsWithInstitutionalObjective` |
+| Success metric | `secavo:Metric` |
+| Defect measurement as quality objective | `secavo:DefectObservation` (subclass of `secavo:MeasurementObservation`) |
+| Code review measurement | `secavo:ReviewObservation` (subclass of `secavo:MeasurementObservation`) |
+| Individual competency baseline | `secav:CompetencyAssessment` |
+| Formal concern if objectives are diluted | `secavo:QualityPlanningConcern` |
+| Updated coaching plan | `secavo:AnnualCoachingPlan` |
+| Documented planning decision | `secavo:PlanningDecision` |
 
 ---
 
-## 8. Documentos relacionados
+## 8. Related documents
 
-| Documento | Relación |
+| Document | Relationship |
 |---|---|
-| `coaching-governance/docs/project-planning-participation.md` | Participación formal del coach en planificación y escalación |
-| `coaching-governance/docs/institutional-alignment.md` | Método para conectar objetivos de coaching con objetivos institucionales |
-| `templates/annual-coaching-plan.md` | Plan donde se registran los objetivos acordados |
-| `templates/quality-planning-dissent-and-escalation.md` | Mecanismo formal si los objetivos se diluyen sin justificación |
-| `templates/metrics-register.csv` | Registro de métricas y umbrales acordados |
-| `templates/defect-log.csv` | Registro de defectos para objetivos de calidad |
-| `templates/engineer-development-record.md` | Registro de objetivos individuales por ingeniero |
+| `coaching-governance/docs/project-planning-participation.md` | Formal coach participation in planning and escalation |
+| `coaching-governance/docs/institutional-alignment.md` | Method for connecting coaching objectives with institutional objectives |
+| `templates/annual-coaching-plan.md` | Plan where agreed objectives are recorded |
+| `templates/quality-planning-dissent-and-escalation.md` | Formal mechanism if objectives are diluted without justification |
+| `templates/metrics-register.csv` | Record of agreed metrics and thresholds |
+| `templates/defect-log.csv` | Defect log for quality objectives |
+| `templates/engineer-development-record.md` | Record of individual objectives per engineer |

@@ -1,154 +1,154 @@
-# Inspección de Requerimientos
+# Requirements Inspection
 
-## Propósito
+## Purpose
 
-Los defectos introducidos en la fase de requerimientos son los más costosos de corregir: cuanto más tarde se detectan, más trabajo invalidan. Una inspección formal de requerimientos (`secav:DesignReview` sobre un `secav:DesignArtifact`) permite detectar ambigüedades, vaguedades e inconsistencias antes de que se traduzcan en código incorrecto.
+Defects introduced in the requirements phase are the most costly to correct: the later they are detected, the more work they invalidate. A formal requirements inspection (`secav:DesignReview` on a `secav:DesignArtifact`) allows detecting ambiguities, vagueness, and inconsistencies before they translate into incorrect code.
 
-El coach asiste a estas inspecciones como observador — toma notas y da retroalimentación después de la sesión, siguiendo el mismo protocolo que en inspecciones formales de código (`coaching-governance/guides/formal-inspections.md`) y revisiones de pares (`coaching-governance/guides/peer-review-sessions.md`).
+The coach attends these inspections as an observer — takes notes and gives feedback after the session, following the same protocol as in formal code inspections (`coaching-governance/guides/formal-inspections.md`) and peer reviews (`coaching-governance/guides/peer-review-sessions.md`).
 
 ---
 
-## 1. Por qué se necesitan múltiples revisores
+## 1. Why multiple reviewers are needed
 
-Algunos tipos de defectos en requerimientos **solo pueden detectarse cuando hay más de un revisor**. La ambigüedad es el caso más claro: un requerimiento es ambiguo cuando admite dos o más interpretaciones válidas. Un revisor único no puede generar por sí solo dos interpretaciones distintas del mismo texto — simplemente lo leerá de una forma y no verá el problema.
+Some types of defects in requirements **can only be detected when there is more than one reviewer**. Ambiguity is the clearest case: a requirement is ambiguous when it admits two or more valid interpretations. A single reviewer cannot by themselves generate two distinct interpretations of the same text — they will simply read it one way and not see the problem.
 
-La inspección con múltiples revisores que trabajan de forma independiente y luego comparan sus interpretaciones es la técnica que hace visibles estas ambigüedades:
+The inspection with multiple reviewers who work independently and then compare their interpretations is the technique that makes these ambiguities visible:
 
 ```
-Revisor A lee el requerimiento → Interpretación A
-Revisor B lee el requerimiento → Interpretación B
+Reviewer A reads the requirement → Interpretation A
+Reviewer B reads the requirement → Interpretation B
           ↓
-  Interpretación A ≠ Interpretación B
+  Interpretation A ≠ Interpretation B
           ↓
-  El requerimiento es ambiguo → defecto detectado
+  The requirement is ambiguous → defect detected
 ```
 
-Esto hace que la preparación individual previa a la reunión sea especialmente crítica en inspecciones de requerimientos: los revisores deben anotar su interpretación del requerimiento **antes** de escuchar la de los demás. Una vez que se conoce la interpretación del compañero, el sesgo de confirmación impide ver la propia con independencia.
+This makes individual preparation before the meeting especially critical in requirements inspections: reviewers must note their interpretation of the requirement **before** hearing others'. Once the colleague's interpretation is known, confirmation bias prevents seeing one's own independently.
 
 ---
 
-## 2. Tipos de defectos que detecta la inspección
+## 2. Types of defects the inspection detects
 
-| Tipo de defecto | Descripción | ¿Requiere múltiples revisores para detectarse? |
+| Defect type | Description | Requires multiple reviewers to detect? |
 |---|---|---|
-| **Ambigüedad** | El requerimiento admite dos o más interpretaciones válidas | Sí — comparación de interpretaciones independientes |
-| **Vaguedad** | Lenguaje impreciso sin definición operacional: "rápido", "fácil de usar", "eficiente" | No necesariamente, pero se detecta mejor con múltiples perspectivas |
-| **Incompletitud** | Faltan casos, condiciones de borde, escenarios de error | No — un revisor con experiencia puede detectarla |
-| **Inconsistencia** | Dos requerimientos que se contradicen entre sí | Útil tener revisores de distintas áreas para ver la contradicción entre dominios |
-| **Inverificabilidad** | El requerimiento no puede probarse — no hay criterio observable de cumplimiento | No — pero se detecta mejor con quienes van a escribir las pruebas |
-| **Inviabilidad** | El requerimiento no puede implementarse como está descrito | Requiere revisor técnico que conozca las restricciones del sistema |
+| **Ambiguity** | The requirement admits two or more valid interpretations | Yes — comparison of independent interpretations |
+| **Vagueness** | Imprecise language without operational definition: "fast," "easy to use," "efficient" | Not necessarily, but better detected with multiple perspectives |
+| **Incompleteness** | Missing cases, boundary conditions, error scenarios | No — an experienced reviewer can detect it |
+| **Inconsistency** | Two requirements that contradict each other | Useful to have reviewers from different areas to see the contradiction between domains |
+| **Unverifiability** | The requirement cannot be tested — there is no observable compliance criterion | No — but better detected by those who will write the tests |
+| **Infeasibility** | The requirement cannot be implemented as described | Requires a technical reviewer who knows the system's constraints |
 
 ---
 
-## 3. Proceso de inspección de requerimientos
+## 3. Requirements inspection process
 
-El proceso sigue las mismas cinco fases que la inspección formal de código (`coaching-governance/guides/formal-inspections.md`), con adaptaciones al objeto de revisión.
+The process follows the same five phases as the formal code inspection (`coaching-governance/guides/formal-inspections.md`), with adaptations to the object of review.
 
-| Fase | Responsable | Descripción |
+| Phase | Responsible | Description |
 |---|---|---|
-| **1. Planificación** | Líder Técnico / Arquitecto | Seleccionar los requerimientos a inspeccionar. Priorizar los de mayor riesgo: requerimientos que afectan muchas funcionalidades, que involucran integración con sistemas externos, o que han generado preguntas frecuentes. Distribuir el material con al menos 24–48 h de anticipación. |
-| **2. Preparación individual** | Todos los inspectores | Cada inspector lee los requerimientos de forma independiente y registra: (a) su interpretación de cada requerimiento, (b) términos que considera vagos o sin definición, (c) casos o condiciones que el requerimiento no cubre. La preparación es obligatoria — es el paso que hace posible detectar ambigüedades. |
-| **3. Reunión de inspección** | Moderador designado | Los inspectores comparan sus interpretaciones punto a punto. El moderador registra cada discrepancia como un `secav:ReviewFinding`. El coach asiste como observador silencioso — no interviene verbalmente. |
-| **4. Rework** | Autor del requerimiento | El autor revisa y reescribe los requerimientos donde se encontraron defectos, con apoyo del Líder Técnico o el Arquitecto para decisiones de alcance. |
-| **5. Seguimiento** | Coach | Verifica que los requerimientos marcados como defectuosos fueron corregidos antes de que avancen a diseño o implementación, revisando el `secav:ReviewRecord` actualizado. |
+| **1. Planning** | Technical Lead / Architect | Select the requirements to inspect. Prioritize the highest-risk ones: requirements that affect many functionalities, involve integration with external systems, or have frequently generated questions. Distribute material at least 24–48 hours in advance. |
+| **2. Individual preparation** | All inspectors | Each inspector reads the requirements independently and records: (a) their interpretation of each requirement, (b) terms they consider vague or undefined, (c) cases or conditions the requirement does not cover. Preparation is mandatory — it is the step that makes detecting ambiguities possible. |
+| **3. Inspection meeting** | Designated moderator | Inspectors compare their interpretations point by point. The moderator records each discrepancy as a `secav:ReviewFinding`. The coach attends as a silent observer — does not intervene verbally. |
+| **4. Rework** | Requirement author | The author revises and rewrites requirements where defects were found, with support from the Technical Lead or Architect for scope decisions. |
+| **5. Follow-up** | Coach | Verifies that requirements marked as defective were corrected before they advance to design or implementation, by reviewing the updated `secav:ReviewRecord`. |
 
 ---
 
-## 4. Glosario del documento de requerimientos
+## 4. Requirements document glossary
 
-### 4.1 Estructura recomendada: dos niveles
+### 4.1 Recommended structure: two levels
 
-Un documento de requerimientos debe incluir dos glosarios:
+A requirements document should include two glossaries:
 
-- **Glosario primario** — al inicio del documento, antes de los requerimientos. Contiene los términos sin los cuales el lector no puede interpretar correctamente los requerimientos. Si un término del glosario primario es ambiguo o interpretado de forma distinta por dos lectores, los requerimientos que lo usan heredan esa ambigüedad.
+- **Primary glossary** — at the beginning of the document, before the requirements. Contains terms without which the reader cannot correctly interpret the requirements. If a primary glossary term is ambiguous or interpreted differently by two readers, the requirements that use it inherit that ambiguity.
 
-- **Glosario secundario** — al final del documento. Contiene términos de apoyo: acrónimos, referencias a sistemas externos, convenciones de nomenclatura, términos técnicos que aparecen ocasionalmente pero no son centrales para la comprensión del documento.
+- **Secondary glossary** — at the end of the document. Contains support terms: acronyms, references to external systems, naming conventions, technical terms that appear occasionally but are not central to understanding the document.
 
-### 4.2 Los términos del glosario primario son productos de trabajo inspeccionables
+### 4.2 Primary glossary terms are inspectable work products
 
-Un término del glosario primario es un artefacto con el mismo riesgo de ambigüedad que un requerimiento. Al igual que con los requerimientos, **un término solo es inequívoco cuando dos o más revisores lo interpretan de la misma forma de forma independiente**. Un autor no puede detectar la ambigüedad de su propia definición porque la leerá con la interpretación que ya tiene en mente.
+A primary glossary term is an artifact with the same ambiguity risk as a requirement. As with requirements, **a term is only unambiguous when two or more reviewers interpret it the same way independently**. An author cannot detect the ambiguity of their own definition because they will read it with the interpretation they already have in mind.
 
-Los inspectores deben verificar cada término del glosario primario del mismo modo que verifican los requerimientos:
+Inspectors must verify each primary glossary term in the same way they verify requirements:
 
-| Criterio | Pregunta |
+| Criterion | Question |
 |---|---|
-| **¿Todos lo interpretan igual?** | Cada inspector anota su comprensión del término antes de la reunión y compara |
-| **¿La definición es operacional?** | ¿Permite decidir, sin ambigüedad, si algo pertenece o no al concepto? |
-| **¿Es consistente con otros términos?** | ¿Contradice o superpone el significado de otro término del glosario? |
-| **¿Refleja el dominio del negocio?** | ¿Coincide con el uso del término por parte de los stakeholders? |
+| **Does everyone interpret it the same way?** | Each inspector notes their understanding of the term before the meeting and compares |
+| **Is the definition operational?** | Does it allow deciding, without ambiguity, whether something belongs to the concept or not? |
+| **Is it consistent with other terms?** | Does it contradict or overlap the meaning of another glossary term? |
+| **Does it reflect the business domain?** | Does it coincide with stakeholders' use of the term? |
 
-Un término del glosario primario con dos interpretaciones distintas entre los inspectores es un `secav:ReviewFinding` que debe resolverse antes de que los requerimientos que lo usan sean aprobados.
+A primary glossary term with two different interpretations among inspectors is a `secav:ReviewFinding` that must be resolved before requirements using it are approved.
 
 ---
 
-## 5. Criterios de calidad de un requerimiento
+## 5. Quality criteria for a requirement
 
-Los inspectores evalúan cada requerimiento contra estos criterios (`secav:QualityCriterion`):
+Inspectors evaluate each requirement against these criteria (`secav:QualityCriterion`):
 
-| Criterio | Pregunta que responde |
+| Criterion | Question it answers |
 |---|---|
-| **Unívoco** | ¿Todos los lectores lo interpretan de la misma forma? |
-| **Verificable** | ¿Existe un criterio observable que confirme si está cumplido? (`secav:AcceptanceCriterion`) |
-| **Completo** | ¿Cubre los casos normales, los casos de error y los casos límite? |
-| **Consistente** | ¿Contradice algún otro requerimiento del sistema? |
-| **Factible** | ¿Puede implementarse dentro de las restricciones técnicas y de negocio conocidas? |
-| **Rastreable** | ¿Puede vincularse a una necesidad de negocio o a un objetivo del proyecto? |
+| **Unambiguous** | Do all readers interpret it the same way? |
+| **Verifiable** | Is there an observable criterion that confirms whether it is fulfilled? (`secav:AcceptanceCriterion`) |
+| **Complete** | Does it cover normal cases, error cases, and boundary cases? |
+| **Consistent** | Does it contradict any other system requirement? |
+| **Feasible** | Can it be implemented within known technical and business constraints? |
+| **Traceable** | Can it be linked to a business need or project objective? |
 
 ---
 
-## 6. Rol del coach
+## 6. Coach's role
 
-El coach asiste a la reunión de inspección como **observador silencioso**, consistente con el protocolo establecido para todas las reuniones de revisión:
+The coach attends the inspection meeting as a **silent observer**, consistent with the established protocol for all review meetings:
 
-- No participa verbalmente durante la sesión.
-- Toma notas de observación sobre el proceso: cómo comparan los inspectores sus interpretaciones, qué requerimientos generan más discrepancia, si los hallazgos se registran correctamente.
-- Verifica que el `secav:ReviewRecord` se está completando con los datos necesarios.
-- Da retroalimentación después de la sesión — grupal, individual, o a la organización — siguiendo el mismo criterio que en peer reviews e inspecciones formales.
+- Does not participate verbally during the session.
+- Takes observation notes on the process: how inspectors compare their interpretations, which requirements generate the most discrepancy, whether findings are recorded correctly.
+- Verifies that the `secav:ReviewRecord` is being completed with the necessary data.
+- Gives feedback after the session — group, individual, or organizational — following the same criteria as in peer reviews and formal inspections.
 
-### 6.1 Qué observa el coach específicamente
+### 6.1 What the coach specifically observes
 
-- **Preparación individual:** ¿vinieron los inspectores con sus anotaciones previas? Si no, el moderador debería reprogramar — el coach lo registra como señal de alerta.
-- **Profundidad del análisis:** ¿los inspectores están comparando interpretaciones o solo leyendo el requerimiento en voz alta sin contrastar?
-- **Registro de hallazgos:** ¿se están documentando los defectos con suficiente detalle para que el autor pueda corregirlos sin nueva reunión?
-- **Patrón de defectos:** si el mismo tipo de defecto (ej. vaguedad) aparece en la mayoría de los requerimientos, es una señal de proceso — no de un autor individual.
+- **Individual preparation:** did the inspectors come with their prior annotations? If not, the moderator should reschedule — the coach records this as an alert signal.
+- **Depth of analysis:** are inspectors comparing interpretations or just reading the requirement aloud without contrasting?
+- **Finding recording:** are defects being documented with sufficient detail for the author to correct them without a new meeting?
+- **Defect pattern:** if the same type of defect (e.g., vagueness) appears in the majority of requirements, it is a process signal — not of an individual author.
 
-### 6.2 Retroalimentación posterior
+### 6.2 Subsequent feedback
 
-| Destinatario | Cuándo | Qué |
+| Recipient | When | What |
 |---|---|---|
-| **Equipo (grupal)** | Si el patrón afecta al proceso colectivo de escritura de requerimientos | Tipo de defecto más frecuente, recomendaciones de mejora del proceso |
-| **Individual (privado)** | Si la observación es específica de un participante | Preparación insuficiente, dificultad para articular interpretaciones, etc. |
-| **Organización** | Si los requerimientos presentan defectos sistémicos que reflejan ausencia de un proceso de elicitación o criterios de aceptación | Escalación formal o recomendación al Comité de Coaches |
+| **Team (group)** | If the pattern affects the collective requirements writing process | Most frequent defect type, process improvement recommendations |
+| **Individual (private)** | If the observation is specific to a participant | Insufficient preparation, difficulty articulating interpretations, etc. |
+| **Organization** | If requirements exhibit systemic defects reflecting absence of an elicitation process or acceptance criteria | Formal escalation or recommendation to the Coaches Committee |
 
 ---
 
-## 7. Integración con SECAV-O
+## 7. SECAV-O Integration
 
-| Concepto | Término SECAV-O |
+| Concept | SECAV-O term |
 |---|---|
-| Documento de requerimientos inspeccionado | `secav:DesignArtifact` |
-| La inspección de requerimientos como actividad | `secav:DesignReview` (subclase de `secav:ReviewActivity` y `secav:DesignActivity`) |
-| Criterios de calidad evaluados | `secav:QualityCriterion` |
-| Criterio de verificabilidad del requerimiento | `secav:AcceptanceCriterion` |
-| Registro de la inspección | `secav:ReviewRecord` |
-| Término del glosario primario con interpretaciones discrepantes | `secav:ReviewFinding` |
-| Hallazgo (ambigüedad, vaguedad, inconsistencia en requerimiento) | `secav:ReviewFinding` |
-| Defecto registrado al cerrar | `secav:DefectRecord`; `secavo:DefectObservation` con `secavo:phaseInjected = "requirements"` |
-| Fase de detección | `secavo:phaseDetected = "requirements review"` |
-| Notas de observación del coach | `secav:WorkProductEvidence` |
-| Retroalimentación posterior del coach | `secav:CoachingRecommendation` |
-| Competencias desarrolladas en inspección | `secav:DesignCompetency`, `secav:ReviewCompetency` |
-| Intervención si hay patrón sistémico | `secav:CoachingIntervention`, `secavo:ImprovementAction` |
+| Inspected requirements document | `secav:DesignArtifact` |
+| Requirements inspection as activity | `secav:DesignReview` (subclass of `secav:ReviewActivity` and `secav:DesignActivity`) |
+| Quality criteria evaluated | `secav:QualityCriterion` |
+| Requirement verifiability criterion | `secav:AcceptanceCriterion` |
+| Inspection record | `secav:ReviewRecord` |
+| Primary glossary term with divergent interpretations | `secav:ReviewFinding` |
+| Finding (ambiguity, vagueness, inconsistency in requirement) | `secav:ReviewFinding` |
+| Defect recorded when closing | `secav:DefectRecord`; `secavo:DefectObservation` with `secavo:phaseInjected = "requirements"` |
+| Detection phase | `secavo:phaseDetected = "requirements review"` |
+| Coach observation notes | `secav:WorkProductEvidence` |
+| Subsequent coach feedback | `secav:CoachingRecommendation` |
+| Competencies developed in inspection | `secav:DesignCompetency`, `secav:ReviewCompetency` |
+| Intervention if systemic pattern | `secav:CoachingIntervention`, `secavo:ImprovementAction` |
 
 ---
 
-## 8. Documentos relacionados
+## 8. Related documents
 
-| Documento | Relación |
+| Document | Relationship |
 |---|---|
-| `coaching-governance/guides/formal-inspections.md` | Protocolo base de inspecciones formales — el mismo proceso aplicado a código |
-| `coaching-governance/guides/peer-review-sessions.md` | Mismo protocolo de observador silencioso para el coach |
-| `coaching-governance/guides/defect-tracking.md` | Los defectos encontrados en inspección de requerimientos se registran con phaseInjected = "requirements" |
-| `coaching-governance/docs/project-planning-participation.md` | La inspección de requerimientos debe ser incluida en el plan del proyecto |
-| `coaching-governance/guides/project-kickoff-alignment.md` | Los objetivos de calidad pueden incluir métricas de defectos encontrados en fase de requerimientos |
-| `templates/engineer-coaching-assessment.md` | La participación en inspecciones de requerimientos es evidencia de DesignCompetency |
+| `coaching-governance/guides/formal-inspections.md` | Base protocol for formal inspections — the same process applied to code |
+| `coaching-governance/guides/peer-review-sessions.md` | Same silent observer protocol for the coach |
+| `coaching-governance/guides/defect-tracking.md` | Defects found in requirements inspection are recorded with phaseInjected = "requirements" |
+| `coaching-governance/docs/project-planning-participation.md` | Requirements inspection must be included in the project plan |
+| `coaching-governance/guides/project-kickoff-alignment.md` | Quality objectives may include metrics for defects found in the requirements phase |
+| `templates/engineer-coaching-assessment.md` | Participation in requirements inspections is evidence of DesignCompetency |

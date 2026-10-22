@@ -1,188 +1,188 @@
-# Acciones Preventivas en el Desarrollo de Software: Guía Shift-Left
+# Preventive Actions in Software Development: Shift-Left Guide
 
-## Propósito
+## Purpose
 
-Esta guía describe las estrategias técnicas y bio-cognitivas que los ingenieros deben aplicar **antes** de someter su código a revisión de pares. Su objetivo es mitigar defectos en las fases más tempranas del ciclo de vida — cuando el costo de corrección es mínimo — en lugar de depender de la revisión para descubrirlos.
+This guide describes the technical and bio-cognitive strategies engineers must apply **before** submitting their code for peer review. Its goal is to mitigate defects in the earliest phases of the lifecycle — when the cost of correction is minimal — rather than depending on the review to discover them.
 
-El coach utiliza estas acciones como señales de `secav:PreventiveAction`: su presencia o ausencia en el trabajo diario del ingeniero es evidencia observable de competencia técnica y de auto-gestión cognitiva.
+The coach uses these actions as signals for `secav:PreventiveAction`: their presence or absence in the engineer's daily work is observable evidence of technical competence and cognitive self-management.
 
-> Las acciones preventivas no reemplazan la revisión de pares. Reducen el ruido en la revisión para que el revisor pueda enfocar su energía en lo que las herramientas no pueden detectar.
+> Preventive actions do not replace peer review. They reduce noise in the review so the reviewer can focus their energy on what automation cannot detect.
 
 ---
 
-## 1. Matriz de prevención temprana (Shift-Left)
+## 1. Early prevention matrix (Shift-Left)
 
-La mitigación eficiente de defectos ocurre en las fases iniciales del ciclo de vida. Intervenir tarde es costoso: un defecto encontrado en producción cuesta significativamente más que uno encontrado en la fase de requisitos.
+Efficient defect mitigation occurs in the initial phases of the lifecycle. Late intervention is costly: a defect found in production costs significantly more than one found in the requirements phase.
 
-| Fase | Acción preventiva | Impacto técnico |
+| Phase | Preventive action | Technical impact |
 |---|---|---|
-| **Mapeo de requisitos** | Criterios de Aceptación Claros (BDD/TDD) | Elimina la ambigüedad lógica antes de escribir la primera línea de código |
-| **Diseño arquitectónico** | Definición de Contratos e Interfaces API | Previene errores de integración y desacopla el desarrollo de módulos independientes |
-| **Codificación activa** | Análisis Estático Automático en el IDE | Detecta antipatrones, problemas de tipado y posibles fugas de memoria en tiempo real |
+| **Requirements mapping** | Clear Acceptance Criteria (BDD/TDD) | Eliminates logical ambiguity before writing the first line of code |
+| **Architectural design** | API Contract and Interface Definition | Prevents integration errors and decouples the development of independent modules |
+| **Active coding** | Automatic static analysis in the IDE | Detects antipatterns, typing problems, and possible memory leaks in real time |
 
-### 1.1 Criterios de aceptación claros (BDD/TDD)
+### 1.1 Clear acceptance criteria (BDD/TDD)
 
-**Por qué importa para el coaching:** Si el ingeniero no puede articular los criterios de aceptación de su tarea antes de comenzar a codificar, cualquier evidencia de implementación que produzca es de valor limitado — no hay contra qué evaluarla.
+**Why it matters for coaching:** If the engineer cannot articulate the acceptance criteria for their task before starting to code, any implementation evidence they produce is of limited value — there is nothing to evaluate it against.
 
-**Señal observable:**
-- El ingeniero formula criterios de aceptación en lenguaje verificable antes de escribir código de producción.
-- Las pruebas unitarias están escritas antes o junto con el código que prueban (TDD), no después.
-- El criterio de aceptación está registrado en el artefacto de la actividad (`secav:AcceptanceCriterion`).
+**Observable signal:**
+- The engineer formulates acceptance criteria in verifiable language before writing production code.
+- Unit tests are written before or alongside the code they test (TDD), not after.
+- The acceptance criterion is recorded in the activity's artifact (`secav:AcceptanceCriterion`).
 
-**Señal de alerta para el coach:**
-- El ingeniero inicia la implementación sin criterios de aceptación definidos.
-- Las pruebas se escriben solo para alcanzar un umbral de cobertura, no para verificar comportamiento.
+**Alert signal for the coach:**
+- The engineer starts implementation without defined acceptance criteria.
+- Tests are written only to reach a coverage threshold, not to verify behavior.
 
-### 1.2 Definición de contratos e interfaces API
+### 1.2 API contract and interface definition
 
-**Por qué importa para el coaching:** La integración es la fuente más frecuente de defectos tardíos. Un contrato definido antes de la implementación es evidencia de competencia de diseño (`secav:DesignCompetency`).
+**Why it matters for coaching:** Integration is the most frequent source of late defects. A contract defined before implementation is evidence of design competence (`secav:DesignCompetency`).
 
-**Señal observable:**
-- Las interfaces entre módulos o servicios están definidas y acordadas antes de que los equipos comiencen a implementarlos en paralelo.
-- El diseño del contrato aparece como artefacto revisable (`secav:DesignArtifact`) antes de la implementación.
+**Observable signal:**
+- Interfaces between modules or services are defined and agreed upon before teams begin implementing them in parallel.
+- The contract design appears as a reviewable artifact (`secav:DesignArtifact`) before implementation.
 
-**Señal de alerta para el coach:**
-- La integración entre módulos se resuelve en la fase de revisión o merge — señal de que el diseño fue omitido.
-- Los errores de integración son recurrentes en las revisiones de código del equipo.
+**Alert signal for the coach:**
+- Integration between modules is resolved in the review or merge phase — a signal that design was skipped.
+- Integration errors are recurrent in the team's code reviews.
 
-### 1.3 Análisis estático automático en el IDE
+### 1.3 Automatic static analysis in the IDE
 
-**Por qué importa para el coaching:** El análisis estático en tiempo real extiende la capacidad del ingeniero para detectar antipatrones, errores de tipado y fugas de memoria antes de que lleguen al pipeline de CI/CD.
+**Why it matters for coaching:** Real-time static analysis extends the engineer's ability to detect antipatterns, typing errors, and memory leaks before they reach the CI/CD pipeline.
 
-**Señal observable:**
-- El IDE del ingeniero tiene linters y analizadores estáticos activos y configurados según los estándares del proyecto.
-- Los warnings del analizador estático se atienden antes de hacer commit, no se acumulan.
+**Observable signal:**
+- The engineer's IDE has linters and static analyzers active and configured according to project standards.
+- Static analyzer warnings are addressed before committing, not allowed to accumulate.
 
-**Señal de alerta para el coach:**
-- El ingeniero desactiva o ignora los warnings del IDE de forma sistemática.
-- Los PR contienen violaciones de análisis estático que debieron haberse detectado localmente.
-
----
-
-## 2. Protocolo de automatización en el entorno local
-
-La automatización actúa como la primera línea de defensa, bloqueando errores mecánicos antes de que alcancen el repositorio compartido. El coach observa si el equipo tiene esta infraestructura activa y si los ingenieros la respetan.
-
-### 2.1 Hooks de Git pre-commit
-
-**Configuración recomendada:** Bloquear los commits locales si el código no supera las pruebas unitarias básicas o si contiene variables de entorno expuestas.
-
-**Señal observable:**
-- El repositorio tiene hooks pre-commit configurados y activos para todos los miembros del equipo.
-- Los ingenieros no desactivan los hooks para omitir el control (`--no-verify`).
-
-**Señal de alerta para el coach:**
-- Commits frecuentes que introducen variables de entorno expuestas o pruebas que fallan — señal de que el hook no está activo o se omite sistemáticamente.
-- El equipo percibe los hooks como obstáculos en lugar de como una red de seguridad.
-
-### 2.2 Políticas estrictas de tipado
-
-**Configuración recomendada:** Configurar el compilador para prohibir tipos implícitos (p. ej., `noImplicitAny` en TypeScript), reduciendo drásticamente los errores en tiempo de ejecución.
-
-**Señal observable:**
-- La configuración del compilador tiene el modo estricto activo y el proyecto compila sin warnings de tipado.
-- Los ingenieros resuelven los errores de tipado en el momento en que aparecen, no los suprimen con `any` o equivalentes.
-
-**Señal de alerta para el coach:**
-- Uso sistemático de `any`, casts sin justificación, o supresiones de warnings de tipado — señal de que la política no está siendo interiorizada como práctica de calidad.
-
-### 2.3 Pruebas unitarias automatizadas con umbral de cobertura
-
-**Configuración recomendada:** Definir un umbral mínimo de cobertura de código (Code Coverage > 80 %) aplicado localmente antes de permitir un push.
-
-**Señal observable:**
-- El pipeline local tiene configurada la verificación de cobertura como condición de push.
-- Las pruebas están escritas para verificar comportamiento, no solo para alcanzar el umbral numéricamente.
-
-**Señal de alerta para el coach:**
-- La cobertura es alta pero las pruebas son triviales — prueban getters/setters en lugar de lógica de negocio.
-- El ingeniero escribe pruebas al final del sprint para cumplir la métrica, no mientras desarrolla.
+**Alert signal for the coach:**
+- The engineer systematically disables or ignores IDE warnings.
+- PRs contain static analysis violations that should have been detected locally.
 
 ---
 
-## 3. Infraestructura cognitiva del desarrollador
+## 2. Automation protocol in the local environment
 
-El estado mental del ingeniero influye directamente en la densidad de defectos introducidos en el código. El coach observa si el equipo opera bajo condiciones cognitivas que favorecen la calidad o si trabaja sistemáticamente en condiciones que la degradan.
+Automation acts as the first line of defense, blocking mechanical errors before they reach the shared repository. The coach observes whether the team has this infrastructure active and whether engineers respect it.
 
-### 3.1 Bloques de trabajo enfocado (Deep Work)
+### 2.1 Git pre-commit hooks
 
-**Práctica recomendada:** Programar intervalos de codificación compleja de 45 a 60 minutos sin notificaciones externas (Slack, Teams, correo) para mantener el mapa mental de la lógica.
+**Recommended configuration:** Block local commits if the code does not pass basic unit tests or contains exposed environment variables.
 
-**Señal observable:**
-- Los ingenieros tienen bloques protegidos en su calendario para trabajo técnico profundo.
-- El equipo tiene acuerdos explícitos sobre tiempos de respuesta en canales síncronos durante bloques de desarrollo.
+**Observable signal:**
+- The repository has pre-commit hooks configured and active for all team members.
+- Engineers do not disable hooks to bypass the control (`--no-verify`).
 
-**Señal de alerta para el coach:**
-- Los ingenieros reportan que no pueden trabajar más de 20 minutos sin ser interrumpidos.
-- Los defectos recurrentes corresponden a casos de borde que se detectan fácilmente con concentración sostenida — señal de que el trabajo se realiza de forma fragmentada.
+**Alert signal for the coach:**
+- Frequent commits that introduce exposed environment variables or failing tests — a signal that the hook is not active or is systematically bypassed.
+- The team perceives hooks as obstacles rather than as a safety net.
 
-### 3.2 Límites de fatiga mental
+### 2.2 Strict typing policies
 
-**Práctica recomendada:** Establecer descansos obligatorios tras bloques extensos de desarrollo. La fatiga acumulada deteriora la capacidad de identificar *edge cases* lógicos.
+**Recommended configuration:** Configure the compiler to prohibit implicit types (e.g., `noImplicitAny` in TypeScript), dramatically reducing runtime errors.
 
-**Señal observable:**
-- El ingeniero hace pausas activas entre bloques de trabajo intenso en lugar de encadenarlos.
-- El equipo no programa tareas cognitivamente exigentes al final de jornadas ya saturadas.
+**Observable signal:**
+- The compiler configuration has strict mode active and the project compiles without typing warnings.
+- Engineers resolve typing errors as they appear, not suppressing them with `any` or equivalents.
 
-**Señal de alerta para el coach:**
-- Los defectos más frecuentes aparecen en código escrito en horarios de baja energía (tardes tarde, últimas horas del sprint).
-- Los ingenieros reportan agotamiento sistemático o no pueden explicar decisiones tomadas bajo presión.
+**Alert signal for the coach:**
+- Systematic use of `any`, unjustified casts, or typing warning suppressions — a signal that the policy is not being internalized as a quality practice.
 
-### 3.3 Auto-revisión antes del commit (Self-Review)
+### 2.3 Automated unit tests with coverage threshold
 
-**Práctica recomendada:** Tomar un descanso breve de 5 minutos antes de revisar los propios cambios locales, permitiendo detectar errores evidentes con una mirada fresca antes de someterlos a revisión de pares.
+**Recommended configuration:** Define a minimum code coverage threshold (Code Coverage > 80%) enforced locally before allowing a push.
 
-**Señal observable:**
-- Los PR del ingeniero tienen baja densidad de defectos triviales (typos, código comentado, imports sin usar) — señal de que hubo auto-revisión antes del envío.
-- El ingeniero puede describir qué revisó en su propio código antes de solicitar la revisión formal.
+**Observable signal:**
+- The local pipeline has coverage verification configured as a push condition.
+- Tests are written to verify behavior, not just to numerically reach the threshold.
 
-**Señal de alerta para el coach:**
-- Los revisores reportan que los PR llegan con errores que el propio autor hubiera detectado con una segunda lectura.
-- El ingeniero nunca hace pausa entre "terminar el código" y "abrir el PR".
+**Alert signal for the coach:**
+- Coverage is high but tests are trivial — they test getters/setters instead of business logic.
+- The engineer writes tests at the end of the sprint to meet the metric, not while developing.
 
 ---
 
-## 4. Lista de verificación por sprint: acciones preventivas
+## 3. Developer's cognitive infrastructure
 
-El coach revisa esta lista con el equipo al inicio de cada sprint o en la retrospectiva para evaluar si la infraestructura preventiva está activa.
+The engineer's mental state directly influences the density of defects introduced in the code. The coach observes whether the team operates under cognitive conditions that favor quality or whether it systematically works under conditions that degrade it.
 
-| Acción preventiva | Activo | Parcial | Ausente |
+### 3.1 Focused work blocks (Deep Work)
+
+**Recommended practice:** Schedule intervals of complex coding of 45 to 60 minutes without external notifications (Slack, Teams, email) to maintain the mental map of the logic.
+
+**Observable signal:**
+- Engineers have protected blocks in their calendar for deep technical work.
+- The team has explicit agreements on response times in synchronous channels during development blocks.
+
+**Alert signal for the coach:**
+- Engineers report they cannot work more than 20 minutes without being interrupted.
+- Recurring defects correspond to boundary cases easily detected with sustained concentration — a signal that work is performed in a fragmented manner.
+
+### 3.2 Mental fatigue limits
+
+**Recommended practice:** Establish mandatory breaks after extended development blocks. Accumulated fatigue deteriorates the ability to identify logical edge cases.
+
+**Observable signal:**
+- The engineer takes active breaks between intense work blocks instead of chaining them.
+- The team does not schedule cognitively demanding tasks at the end of already saturated days.
+
+**Alert signal for the coach:**
+- The most frequent defects appear in code written during low-energy hours (late afternoons, last hours of the sprint).
+- Engineers report systematic exhaustion or cannot explain decisions made under pressure.
+
+### 3.3 Self-review before commit (Self-Review)
+
+**Recommended practice:** Take a brief 5-minute break before reviewing one's own local changes, allowing detection of obvious errors with a fresh eye before submitting them for peer review.
+
+**Observable signal:**
+- The engineer's PRs have a low density of trivial defects (typos, commented-out code, unused imports) — a signal that there was a self-review before submission.
+- The engineer can describe what they reviewed in their own code before requesting the formal review.
+
+**Alert signal for the coach:**
+- Reviewers report that PRs arrive with errors the author would have detected with a second reading.
+- The engineer never pauses between "finishing the code" and "opening the PR."
+
+---
+
+## 4. Per-sprint verification checklist: preventive actions
+
+The coach reviews this list with the team at the start of each sprint or in the retrospective to assess whether the preventive infrastructure is active.
+
+| Preventive action | Active | Partial | Absent |
 |---|---|---|---|
-| Criterios de aceptación definidos antes de codificar | | | |
-| Contratos e interfaces API acordados antes de implementación paralela | | | |
-| Análisis estático automático activo en el IDE de todos los miembros | | | |
-| Hooks pre-commit configurados y respetados | | | |
-| Política de tipado estricto activa y sin supresiones injustificadas | | | |
-| Umbral de cobertura de pruebas unitarias activo en el pipeline local | | | |
-| Bloques de trabajo enfocado protegidos en el calendario del equipo | | | |
-| Acuerdos de equipo sobre límites de fatiga y descansos | | | |
-| Auto-revisión antes de abrir PR (práctica individual) | | | |
+| Acceptance criteria defined before coding | | | |
+| API contracts and interfaces agreed before parallel implementation | | | |
+| Automatic static analysis active in the IDE for all members | | | |
+| Pre-commit hooks configured and respected | | | |
+| Strict typing policy active with no unjustified suppressions | | | |
+| Unit test coverage threshold active in the local pipeline | | | |
+| Focused work blocks protected in the team calendar | | | |
+| Team agreements on fatigue limits and breaks | | | |
+| Self-review before opening PR (individual practice) | | | |
 
 ---
 
-## 5. Integración con SECAV-O
+## 5. SECAV-O Integration
 
-| Acción preventiva | Término SECAV-O |
+| Preventive action | SECAV-O term |
 |---|---|
-| Criterio de aceptación definido antes de codificar | `secav:AcceptanceCriterion` asociado a `secav:RequirementsActivity` |
-| Contrato de API como artefacto de diseño | `secav:DesignArtifact` producido en `secav:DesignActivity` |
-| Análisis estático automático | `secav:Measurement` asociado a `secav:CodeImplementation` |
-| Hook pre-commit activo | Precondición de `secav:CodeImplementation`; violación es `secav:DefectRecord` |
-| Cobertura de pruebas > 80 % | `secav:AcceptanceCriterion` de `secav:TestingActivity` |
-| Ausencia de acción preventiva como señal de coaching | `secav:ReviewFinding` o `secav:WorkProductEvidence` que activa `secav:CoachingIntervention` |
-| Acción preventiva acordada tras intervención | `secav:PreventiveAction` en `secavo:SprintRetrospective` |
-| Estado cognitivo del ingeniero como precondición | Análogo a `secav:ReviewerReadiness` en `secav:CodeImplementation` |
+| Acceptance criterion defined before coding | `secav:AcceptanceCriterion` associated with `secav:RequirementsActivity` |
+| API contract as design artifact | `secav:DesignArtifact` produced in `secav:DesignActivity` |
+| Automatic static analysis | `secav:Measurement` associated with `secav:CodeImplementation` |
+| Active pre-commit hook | Precondition of `secav:CodeImplementation`; violation is `secav:DefectRecord` |
+| Test coverage > 80% | `secav:AcceptanceCriterion` of `secav:TestingActivity` |
+| Absence of preventive action as coaching signal | `secav:ReviewFinding` or `secav:WorkProductEvidence` triggering `secav:CoachingIntervention` |
+| Preventive action agreed after intervention | `secav:PreventiveAction` in `secavo:SprintRetrospective` |
+| Engineer's cognitive state as precondition | Analogous to `secav:ReviewerReadiness` in `secav:CodeImplementation` |
 
 ---
 
-## 6. Documentos relacionados
+## 6. Related documents
 
-| Documento | Relación |
+| Document | Relationship |
 |---|---|
-| `coaching-governance/guides/peer-review-antipatterns.md` | Antipatrones en la revisión que estas acciones preventivas buscan evitar |
-| `coaching-governance/guides/code-review-best-practices.md` | Prácticas de revisión; las acciones preventivas reducen la carga de la revisión |
-| `coaching-governance/guides/unit-test-review.md` | Guía de revisión de diseño de pruebas unitarias |
-| `coaching-governance/guides/defect-tracking.md` | Registro de defectos que permite identificar si la prevención está funcionando |
-| `templates/sprint-retrospective.md` | Espacio donde el coach introduce el estado de la infraestructura preventiva como punto de mejora |
-| `templates/engineer-coaching-assessment.md` | Evaluación de competencias donde las acciones preventivas son evidencia observable |
-| `pilot/pilot-protocol.md` | El piloto puede usar la densidad de defectos pre-merge como métrica para evaluar el impacto de estas acciones |
+| `coaching-governance/guides/peer-review-antipatterns.md` | Review antipatterns that these preventive actions aim to avoid |
+| `coaching-governance/guides/code-review-best-practices.md` | Review practices; preventive actions reduce the review burden |
+| `coaching-governance/guides/unit-test-review.md` | Unit test design review guide |
+| `coaching-governance/guides/defect-tracking.md` | Defect log that allows identifying whether prevention is working |
+| `templates/sprint-retrospective.md` | Space where the coach introduces the state of preventive infrastructure as an improvement point |
+| `templates/engineer-coaching-assessment.md` | Competency assessment where preventive actions are observable evidence |
+| `pilot/pilot-protocol.md` | The pilot can use pre-merge defect density as a metric to evaluate the impact of these actions |

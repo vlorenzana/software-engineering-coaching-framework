@@ -1,445 +1,445 @@
-# Checklist de Observación del Coach por Actividad de Ingeniería
+# Coach Observation Checklist by Engineering Activity
 
-## Propósito
+## Purpose
 
-Este checklist permite al coach registrar, durante cualquier sesión de observación, las conductas positivas y las señales de alerta que el equipo exhibe en cada actividad de ingeniería. Cada fila es un observable: algo que el coach puede ver, escuchar o leer directamente — no una inferencia.
+This checklist allows the coach to record, during any observation session, the positive behaviors and alert signals the team exhibits in each engineering activity. Each row is an observable: something the coach can see, hear, or read directly — not an inference.
 
-**Convención de columnas:**
-- ✓ Conducta positiva — registrar como `secav:Evidence` para la evaluación de competencias
-- ⚠ Señal de alerta — considerar `secav:CoachingIntervention`
-
----
-
-## 1. Definición de Requisitos y Criterios de Aceptación
-
-> Actividad SECAV-O: `secav:RequirementsActivity`, `secav:AcceptanceCriteriaDefinition`
-
-| # | Tipo | Conducta observable | Término SECAV-O |
-|---|------|---------------------|-----------------|
-| 1.1 | ✓ | El equipo define criterios de aceptación antes de iniciar la codificación (formato Given/When/Then u otro explícito) | `secav:AcceptanceCriteriaDefinition` |
-| 1.2 | ✓ | Los criterios de aceptación producen un artefacto documentado (escenario BDD, especificación de prueba, ticket con AC completo) | `secav:AcceptanceCriteriaDefinition` → `secav:produces` → `secav:Artifact` |
-| 1.3 | ✓ | Los casos límite y caminos de error están explicitados en los criterios — no solo el happy path | `secav:AcceptanceCriterion` |
-| 1.4 | ✓ | El ingeniero puede explicar oralmente el requisito antes de codificar | `secav:WorkProductEvidence` |
-| 1.5 | ⚠ | La historia de usuario llega al sprint sin criterios de aceptación definidos | `secav:HappyPathOnlyReview` (riesgo) |
-| 1.6 | ⚠ | El equipo comienza a codificar con requisitos ambiguos sin solicitar clarificación | `secav:MissingReviewContext` (precondición) |
-| 1.7 | ⚠ | Los criterios de aceptación se escriben después de la implementación (post-hoc) | ausencia de `secav:AcceptanceCriteriaDefinition` como actividad preventiva |
-| 1.8 | ⚠ | No existe trazabilidad entre los criterios de aceptación y los casos de prueba automatizados | `secav:QualityCriterion` sin `secav:AutomationGate` |
+**Column convention:**
+- ✓ Positive behavior — record as `secav:Evidence` for competency assessment
+- ⚠ Alert signal — consider `secav:CoachingIntervention`
 
 ---
 
-## 2. Diseño y Contratos de API
+## 1. Requirements Definition and Acceptance Criteria
 
-> Actividad SECAV-O: `secav:DesignActivity`, `secav:APIContractDefinition`
+> SECAV-O activity: `secav:RequirementsActivity`, `secav:AcceptanceCriteriaDefinition`
 
-| # | Tipo | Conducta observable | Término SECAV-O |
-|---|------|---------------------|-----------------|
-| 2.1 | ✓ | El equipo define el contrato de API (esquema, endpoints, respuestas de error) antes de implementar el cliente o el servidor | `secav:APIContractDefinition` |
-| 2.2 | ✓ | Existe un artefacto de contrato versionado (OpenAPI, AsyncAPI, Protobuf, o equivalente) | `secav:APIContractArtifact` → `secav:DesignArtifact` |
-| 2.3 | ✓ | Los cambios de contrato de API generan una revisión de diseño antes de ser fusionados | `secav:DesignReview` |
-| 2.4 | ✓ | El arquitecto ha identificado y documentado los módulos críticos antes del inicio del desarrollo | `secav:SourceCodeArtifact` con criticidad documentada |
-| 2.5 | ⚠ | Las decisiones de diseño se toman durante la revisión de código (demasiado tarde) | `secav:LateArchitecturalDiscussion` |
-| 2.6 | ⚠ | El contrato de API no está documentado — el cliente infiere el comportamiento por el código del servidor | ausencia de `secav:APIContractArtifact` |
-| 2.7 | ⚠ | Los cambios de interfaz se introducen en el PR sin notificación previa a los consumidores | `secav:MissingReviewContext` |
-| 2.8 | ⚠ | La lista de módulos críticos no fue comunicada al coach ni al Líder Técnico al inicio del proyecto | ausencia de identificación de riesgo en `secav:DesignActivity` |
-
----
-
-## 3. Implementación y Estado Cognitivo del Desarrollador
-
-> Actividad SECAV-O: `secav:CodeImplementation`, `secav:DeveloperCognitiveState`
-
-| # | Tipo | Conducta observable | Término SECAV-O |
-|---|------|---------------------|-----------------|
-| 3.1 | ✓ | El ingeniero realiza una autorrevisión del diff completo antes de abrir el PR | `secav:SelfReview` |
-| 3.2 | ✓ | El ingeniero protege bloques de trabajo profundo (sin interrupciones durante la implementación de lógica compleja) | `secav:DeepWorkCondition` |
-| 3.3 | ✓ | El ingeniero respeta límites de carga cognitiva — no mezcla múltiples cambios no relacionados en un solo PR | `secav:FatigueManagementCondition` |
-| 3.4 | ✓ | El PR tiene un tamaño manejable (la mayoría de los cambios caben en una sesión de revisión de 60 min) | `secav:SelfReviewCondition` |
-| 3.5 | ⚠ | El ingeniero muestra signos visibles de fatiga al revisar o codificar (errores básicos repetidos, respuestas lentas) | `secav:FatigueManagementCondition` (ausente) |
-| 3.6 | ⚠ | El ingeniero fusiona código sin haber realizado autorrevisión — lo confirma al preguntar | ausencia de `secav:SelfReview` |
-| 3.7 | ⚠ | Los PRs llegan sistemáticamente con más de 500 líneas de cambio efectivo | `secav:OversizedPullRequest` |
-| 3.8 | ⚠ | El ingeniero trabaja en múltiples funcionalidades en paralelo dentro del mismo sprint sin señales de priorización | `secav:DeepWorkCondition` (comprometida) |
+| # | Type | Observable behavior | SECAV-O Term |
+|---|------|---------------------|--------------|
+| 1.1 | ✓ | The team defines acceptance criteria before starting coding (Given/When/Then format or another explicit format) | `secav:AcceptanceCriteriaDefinition` |
+| 1.2 | ✓ | Acceptance criteria produce a documented artifact (BDD scenario, test specification, ticket with complete AC) | `secav:AcceptanceCriteriaDefinition` → `secav:produces` → `secav:Artifact` |
+| 1.3 | ✓ | Edge cases and error paths are explicitly stated in the criteria — not only the happy path | `secav:AcceptanceCriterion` |
+| 1.4 | ✓ | The engineer can verbally explain the requirement before coding | `secav:WorkProductEvidence` |
+| 1.5 | ⚠ | A user story enters the sprint without defined acceptance criteria | `secav:HappyPathOnlyReview` (risk) |
+| 1.6 | ⚠ | The team starts coding with ambiguous requirements without requesting clarification | `secav:MissingReviewContext` (precondition) |
+| 1.7 | ⚠ | Acceptance criteria are written after implementation (post-hoc) | absence of `secav:AcceptanceCriteriaDefinition` as a preventive activity |
+| 1.8 | ⚠ | No traceability exists between acceptance criteria and automated test cases | `secav:QualityCriterion` without `secav:AutomationGate` |
 
 ---
 
-## 4. Puertas de Automatización (Pre-commit, Tipado, Cobertura)
+## 2. Design and API Contracts
 
-> Actividad SECAV-O: `secav:AutomationGate`, `secav:PreCommitHook`, `secav:StrictTypingPolicy`, `secav:CodeCoverageGate`
+> SECAV-O activity: `secav:DesignActivity`, `secav:APIContractDefinition`
 
-| # | Tipo | Conducta observable | Término SECAV-O |
-|---|------|---------------------|-----------------|
-| 4.1 | ✓ | El repositorio tiene hooks de pre-commit activos que bloquean código con errores de estilo o secretos expuestos | `secav:PreCommitHook` |
-| 4.2 | ✓ | El tipado estricto está habilitado (TypeScript strict, mypy, etc.) y el equipo lo respeta sin suprimir errores | `secav:StrictTypingPolicy` |
-| 4.3 | ✓ | La cobertura de pruebas tiene un umbral definido y el pipeline rechaza PRs que lo reducen | `secav:CodeCoverageGate` con `secav:coverageThreshold` |
-| 4.4 | ✓ | Los miembros del equipo pueden explicar qué comprueba cada gate y por qué existe | `secav:criterionStatement` presente y comunicado |
-| 4.5 | ⚠ | El equipo desactiva o suprime gates para desbloquear un deploy ("lo arreglamos después") | ausencia efectiva de `secav:AutomationGate` |
-| 4.6 | ⚠ | Existen errores de tipado suprimidos con comentarios `// @ts-ignore` o equivalentes sin justificación | `secav:StrictTypingPolicy` (comprometida) |
-| 4.7 | ⚠ | La cobertura de pruebas cae sprint a sprint sin que el equipo lo mencione ni lo tome como acción | `secav:CodeCoverageGate` sin seguimiento |
-| 4.8 | ⚠ | El equipo desconoce qué comprueba el pipeline de CI — solo saben "si pasa, bien" | `secav:DeterministicAnalysisActivity` sin apropiación del equipo |
-| 4.9 | ✓ | El pipeline de CI completo (build, test, análisis estático) se ejecuta en cada PR y su resultado es visible para todo el equipo | `secav:ContinuousIntegrationActivity` |
-| 4.10 | ⚠ | El pipeline de CI falla de forma intermitente y el equipo lo normaliza — los failures se consideran "ruido" en lugar de señal | `secav:ContinuousIntegrationActivity` comprometida |
+| # | Type | Observable behavior | SECAV-O Term |
+|---|------|---------------------|--------------|
+| 2.1 | ✓ | The team defines the API contract (schema, endpoints, error responses) before implementing the client or server | `secav:APIContractDefinition` |
+| 2.2 | ✓ | A versioned contract artifact exists (OpenAPI, AsyncAPI, Protobuf, or equivalent) | `secav:APIContractArtifact` → `secav:DesignArtifact` |
+| 2.3 | ✓ | API contract changes trigger a design review before being merged | `secav:DesignReview` |
+| 2.4 | ✓ | The architect has identified and documented critical modules before development starts | `secav:SourceCodeArtifact` with documented criticality |
+| 2.5 | ⚠ | Design decisions are made during code review (too late) | `secav:LateArchitecturalDiscussion` |
+| 2.6 | ⚠ | The API contract is undocumented — the client infers behavior from the server code | absence of `secav:APIContractArtifact` |
+| 2.7 | ⚠ | Interface changes are introduced in the PR without prior notification to consumers | `secav:MissingReviewContext` |
+| 2.8 | ⚠ | The critical module list was not communicated to the coach or Technical Lead at project start | absence of risk identification in `secav:DesignActivity` |
 
 ---
 
-## 5. Revisión de Código entre Pares
+## 3. Implementation and Developer Cognitive State
 
-> Actividad SECAV-O: `secav:CodeReview`, `secav:ReviewAntipattern` y subclases
+> SECAV-O activity: `secav:CodeImplementation`, `secav:DeveloperCognitiveState`
 
-| # | Tipo | Conducta observable | Término SECAV-O |
-|---|------|---------------------|-----------------|
-| 5.1 | ✓ | El revisor valida la intención del cambio antes de leer el diff (ticket, especificación, o descripción del PR) | `secav:FormalReviewRequest` con `secav:requestDescription` |
-| 5.2 | ✓ | Los comentarios de revisión se dirigen al código, no a la persona ("este bloque podría..." vs "tu código es...") | `secav:ReviewerAssertiveClosureCondition` |
-| 5.3 | ✓ | El revisor distingue entre observaciones bloqueantes y sugerencias opcionales | `secav:ReviewFinding` con severidad documentada |
-| 5.4 | ✓ | El revisor llega descansado y con el material leído cuando la sesión fue programada con anticipación | `secav:ReviewerEnergyCondition`, `secav:ReviewerFocusCondition` |
-| 5.5 | ✓ | El equipo cierra los hilos de comentarios explícitamente — no deja conversaciones abiertas indefinidamente | ausencia de `secav:InfiniteCommentLoop` |
-| 5.6 | ✓ | Los PRs incluyen descripción clara de qué cambió, por qué, y cómo probarlo | `secav:requestDescription` |
-| 5.7 | ⚠ | El revisor aprueba el PR sin comentarios en menos de 2 minutos (revisión de sello de goma) | `secav:RubberStampApproval` |
-| 5.8 | ⚠ | La revisión dura más de 90 minutos sin pausas — el revisor pierde concentración visible | `secav:OversizedReviewSession` |
-| 5.9 | ⚠ | El PR llega sin descripción o con descripción genérica ("fixes bug") | `secav:MissingReviewContext` |
-| 5.10 | ⚠ | El código llega en estado borrador (WIP) marcado como listo para revisión | `secav:PrematureReviewRequest` |
-| 5.11 | ⚠ | Los revisores señalan violaciones de estilo que deberían capturarse en el linter | `secav:ManualStyleReview` |
-| 5.12 | ⚠ | Un solo revisor aprueba consistentemente todos los PRs del equipo | `secav:SingleApproverBottleneck` |
-| 5.13 | ⚠ | Hay hilos de revisión que llevan más de 3 sprints sin resolverse | `secav:InfiniteCommentLoop` |
-| 5.14 | ⚠ | Los comentarios son punitivos o despectivos — "esto es un desastre", "¿cómo pensaste esto?" | `secav:PunitiveReviewApproach` |
-| 5.15 | ⚠ | Un revisor dicta la solución en lugar de señalar el problema y dejar la decisión al autor | `secav:ReviewerDictatorship` |
-| 5.16 | ⚠ | La revisión valida solo el happy path — ningún caso límite ni de error fue cuestionado | `secav:HappyPathOnlyReview` |
-| 5.17 | ⚠ | Los comentarios son irónicos, sarcásticos o condescendientes — el tono no es deliberadamente punitivo pero daña la seguridad psicológica | `secav:NonEmpathicReviewFeedback` |
+| # | Type | Observable behavior | SECAV-O Term |
+|---|------|---------------------|--------------|
+| 3.1 | ✓ | The engineer performs a self-review of the complete diff before opening the PR | `secav:SelfReview` |
+| 3.2 | ✓ | The engineer protects deep-work blocks (no interruptions while implementing complex logic) | `secav:DeepWorkCondition` |
+| 3.3 | ✓ | The engineer respects cognitive load limits — does not mix multiple unrelated changes in a single PR | `secav:FatigueManagementCondition` |
+| 3.4 | ✓ | The PR is a manageable size (most changes fit in a 60-min review session) | `secav:SelfReviewCondition` |
+| 3.5 | ⚠ | The engineer shows visible signs of fatigue when reviewing or coding (repeated basic errors, slow responses) | `secav:FatigueManagementCondition` (absent) |
+| 3.6 | ⚠ | The engineer merges code without having performed a self-review — confirmed when asked | absence of `secav:SelfReview` |
+| 3.7 | ⚠ | PRs consistently arrive with more than 500 lines of effective change | `secav:OversizedPullRequest` |
+| 3.8 | ⚠ | The engineer works on multiple features in parallel within the same sprint with no prioritization signals | `secav:DeepWorkCondition` (compromised) |
 
 ---
 
-## 6. Inspecciones Formales de Módulos Críticos
+## 4. Automation Gates (Pre-commit, Typing, Coverage)
 
-> Actividad SECAV-O: `secav:CodeReview` (inspección), `secav:HumanValidationActivity`
+> SECAV-O activity: `secav:AutomationGate`, `secav:PreCommitHook`, `secav:StrictTypingPolicy`, `secav:CodeCoverageGate`
 
-| # | Tipo | Conducta observable | Término SECAV-O |
-|---|------|---------------------|-----------------|
-| 6.1 | ✓ | El material de la inspección se distribuyó al menos 24–48 h antes de la reunión | `secav:ReviewerReadiness` |
-| 6.2 | ✓ | Todos los participantes llegaron a la reunión con observaciones documentadas (preparación individual realizada) | `secav:ReviewerCriticalAnalysisCondition` |
-| 6.3 | ✓ | El moderador mantiene el foco en el artefacto — no en el autor ni en soluciones | `secav:ReviewFinding` producido sin personalismos |
-| 6.4 | ✓ | El autor escucha y responde sin defender — no debate durante la reunión | `secav:WorkProductEvidence` (actitud observable) |
-| 6.5 | ✓ | El recorder documenta hallazgos con tipo y severidad durante la reunión | `secav:ReviewFinding` con registro formal |
-| 6.6 | ✓ | El coach verifica el rework de hallazgos críticos antes de que el módulo avance | `secav:ReviewRecord` actualizado |
-| 6.7 | ⚠ | Algún participante no preparó el material — la inspección se convierte en lectura en vivo | ausencia de `secav:ReviewerReadiness` |
-| 6.8 | ⚠ | La reunión de inspección fue cancelada o reducida sin justificación técnica | `secavo:QualityPlanningConcern` |
-| 6.9 | ⚠ | El autor defiende o argumenta sus decisiones durante la reunión en lugar de escuchar | `secav:PunitiveReviewApproach` (dinámica inversa) |
-| 6.10 | ⚠ | La inspección no produjo un `secav:ReviewRecord` documentado | ausencia de `secav:ReviewRecord` |
-| 6.11 | ⚠ | El mismo tipo de defecto aparece en múltiples módulos inspeccionados (patrón sistémico) | `secav:CoachingIntervention` → `secavo:ImprovementAction` |
-| 6.12 | ⚠ | La gerencia usa los hallazgos de la inspección para evaluar el rendimiento del autor de forma punitiva | `secavo:QualityPlanningConcern` |
+| # | Type | Observable behavior | SECAV-O Term |
+|---|------|---------------------|--------------|
+| 4.1 | ✓ | The repository has active pre-commit hooks that block code with style errors or exposed secrets | `secav:PreCommitHook` |
+| 4.2 | ✓ | Strict typing is enabled (TypeScript strict, mypy, etc.) and the team respects it without suppressing errors | `secav:StrictTypingPolicy` |
+| 4.3 | ✓ | Test coverage has a defined threshold and the pipeline rejects PRs that reduce it | `secav:CodeCoverageGate` with `secav:coverageThreshold` |
+| 4.4 | ✓ | Team members can explain what each gate checks and why it exists | `secav:criterionStatement` present and communicated |
+| 4.5 | ⚠ | The team disables or suppresses gates to unblock a deploy ("we'll fix it later") | effective absence of `secav:AutomationGate` |
+| 4.6 | ⚠ | Typing errors are suppressed with `// @ts-ignore` comments or equivalents without justification | `secav:StrictTypingPolicy` (compromised) |
+| 4.7 | ⚠ | Test coverage drops sprint over sprint without the team mentioning it or taking it as an action | `secav:CodeCoverageGate` without follow-up |
+| 4.8 | ⚠ | The team does not know what the CI pipeline checks — they only know "if it passes, fine" | `secav:DeterministicAnalysisActivity` without team ownership |
+| 4.9 | ✓ | The complete CI pipeline (build, test, static analysis) runs on every PR and its result is visible to the whole team | `secav:ContinuousIntegrationActivity` |
+| 4.10 | ⚠ | The CI pipeline fails intermittently and the team normalizes it — failures are treated as "noise" rather than a signal | `secav:ContinuousIntegrationActivity` compromised |
 
 ---
 
-## 7. Pruebas y Diseño de Pruebas Unitarias
+## 5. Peer Code Review
 
-> Actividad SECAV-O: `secav:TestingActivity`
+> SECAV-O activity: `secav:CodeReview`, `secav:ReviewAntipattern` and subclasses
 
-| # | Tipo | Conducta observable | Término SECAV-O |
-|---|------|---------------------|-----------------|
-| 7.1 | ✓ | Las pruebas tienen nombres que describen comportamiento, no implementación ("should return 404 when user not found") | `secav:WorkProductEvidence` |
-| 7.2 | ✓ | Cada prueba tiene un único punto de fallo identificable (principio FIRST: Independent) | `secav:QualityCriterion` |
-| 7.3 | ✓ | Las pruebas cubren caminos de error y valores límite, no solo el flujo exitoso | `secav:HappyPathOnlyReview` ausente |
-| 7.4 | ✓ | Las pruebas se ejecutan en milisegundos — sin dependencias de red o filesystem en pruebas unitarias | `secav:QualityCriterion` (FIRST: Fast) |
-| 7.5 | ✓ | El equipo sabe el umbral de cobertura del proyecto y puede justificarlo | `secav:CodeCoverageGate` con `secav:coverageThreshold` conocido |
-| 7.6 | ⚠ | Las pruebas solo validan el happy path — no hay pruebas de valores nulos, vacíos o fuera de rango | `secav:HappyPathOnlyReview` |
-| 7.7 | ⚠ | Las pruebas unitarias tienen dependencias externas (base de datos, API, reloj del sistema sin inyección) | `secav:QualityCriterion` (FIRST: Fast violado) |
-| 7.8 | ⚠ | Múltiples pruebas fallan cuando falla una sola condición — alto acoplamiento entre tests | `secav:QualityCriterion` (FIRST: Independent violado) |
-| 7.9 | ⚠ | El equipo aumenta la cobertura con pruebas triviales para pasar el gate, sin evaluar casos reales | `secav:CodeCoverageGate` comprometido en calidad |
-| 7.10 | ⚠ | Los PR no incluyen pruebas para la lógica nueva (solo código de producción) | ausencia de `secav:TestingActivity` asociada |
-
----
-
-## 8. Revisión de Código Asistida por IA
-
-> Actividad SECAV-O: `secav:AIAssistedActivity`, `secav:HumanValidationActivity`, `secav:AIReviewPromptConfiguration`, `secav:ReviewDimension`
-
-| # | Tipo | Conducta observable | Término SECAV-O |
-|---|------|---------------------|-----------------|
-| 8.1 | ✓ | El pipeline de revisión aplica herramientas deterministas (linter, scanner estático) antes de la revisión humana | `secav:DeterministicAnalysisActivity` → `secav:precedes` → revisión humana |
-| 8.2 | ✓ | El equipo configura el tool de IA con contexto del proyecto (framework, versión, convenciones de seguridad) | `secav:AIReviewPromptConfiguration` con `secav:hasContextDefinition` |
-| 8.3 | ✓ | La configuración incluye análisis de impacto, evaluación de seguridad y generación de casos de prueba | `secav:hasImpactAnalysisInstruction`, `secav:hasSecurityEvaluationInstruction`, `secav:hasTestGenerationInstruction` |
-| 8.4 | ✓ | Los revisores auditan las sugerencias de IA antes de aplicarlas — verifican que los métodos existen en la versión en uso | `secav:HumanValidationActivity` activa |
-| 8.5 | ✓ | Los PRs de código generado por IA son clasificados por riesgo antes de enrutarse (rutinario / atención / crítico) | `secav:ReviewRiskLevel` |
-| 8.6 | ✓ | El equipo monitorea falsos negativos — PRs de alto riesgo que pasaron como rutinarios | `secav:ReviewObservation` |
-| 8.7 | ⚠ | El equipo acepta sugerencias de la IA sin revisión crítica — no verifica que los métodos propuestos existan | `secav:InsufficientAICodeScrutiny` |
-| 8.8 | ⚠ | La IA es usada para aprobar o bloquear cambios de forma autónoma, sin revisión humana | violación de `secav:requiresHumanValidation` |
-| 8.9 | ⚠ | Los falsos positivos del tool de IA son altos y el equipo los ignora en lugar de ajustar la configuración | `secav:ReviewObservation` (alerta fatiga) |
-| 8.10 | ⚠ | El código generado por IA llega sin el historial de decisiones que explica el diseño | `secav:MissingReviewContext` |
-| 8.11 | ⚠ | Los módulos críticos con código generado por IA no reciben inspección formal adicional | ausencia de `secav:HumanValidationActivity` para `secav:AIAssistedActivity` en módulo crítico |
-| 8.12 | ⚠ | El equipo no cuestiona el código de IA porque "compila y los tests pasan" | `secav:RubberStampApproval` aplicado a código IA |
-| 8.13 | ✓ | Cada dimensión de revisión (impacto, seguridad, pruebas, contexto) está configurada explícitamente en el prompt de la herramienta de IA | `secav:ReviewDimension` |
-| 8.14 | ⚠ | PRs clasificados como rutinarios superan a producción con defectos significativos — el modelo de clasificación por riesgo tiene falsos negativos | `secav:ReviewEscapeObservation` |
+| # | Type | Observable behavior | SECAV-O Term |
+|---|------|---------------------|--------------|
+| 5.1 | ✓ | The reviewer validates the intent of the change before reading the diff (ticket, spec, or PR description) | `secav:FormalReviewRequest` with `secav:requestDescription` |
+| 5.2 | ✓ | Review comments are directed at the code, not the person ("this block could..." vs. "your code is...") | `secav:ReviewerAssertiveClosureCondition` |
+| 5.3 | ✓ | The reviewer distinguishes between blocking observations and optional suggestions | `secav:ReviewFinding` with documented severity |
+| 5.4 | ✓ | The reviewer arrives rested and having read the material when the session was scheduled in advance | `secav:ReviewerEnergyCondition`, `secav:ReviewerFocusCondition` |
+| 5.5 | ✓ | The team closes comment threads explicitly — does not leave conversations open indefinitely | absence of `secav:InfiniteCommentLoop` |
+| 5.6 | ✓ | PRs include a clear description of what changed, why, and how to test it | `secav:requestDescription` |
+| 5.7 | ⚠ | The reviewer approves the PR without comments in under 2 minutes (rubber-stamp review) | `secav:RubberStampApproval` |
+| 5.8 | ⚠ | The review lasts more than 90 minutes without breaks — the reviewer visibly loses concentration | `secav:OversizedReviewSession` |
+| 5.9 | ⚠ | The PR arrives without a description or with a generic one ("fixes bug") | `secav:MissingReviewContext` |
+| 5.10 | ⚠ | The code arrives in draft state (WIP) marked as ready for review | `secav:PrematureReviewRequest` |
+| 5.11 | ⚠ | Reviewers flag style violations that should be caught by the linter | `secav:ManualStyleReview` |
+| 5.12 | ⚠ | A single reviewer consistently approves all team PRs | `secav:SingleApproverBottleneck` |
+| 5.13 | ⚠ | There are review threads that have been unresolved for more than 3 sprints | `secav:InfiniteCommentLoop` |
+| 5.14 | ⚠ | Comments are punitive or dismissive — "this is a mess", "how did you think of this?" | `secav:PunitiveReviewApproach` |
+| 5.15 | ⚠ | A reviewer dictates the solution instead of pointing out the problem and leaving the decision to the author | `secav:ReviewerDictatorship` |
+| 5.16 | ⚠ | The review only validates the happy path — no edge case or error case was questioned | `secav:HappyPathOnlyReview` |
+| 5.17 | ⚠ | Comments are ironic, sarcastic, or condescending — the tone is not deliberately punitive but damages psychological safety | `secav:NonEmpathicReviewFeedback` |
 
 ---
 
-## 9. Adopción Organizacional del Nuevo Modelo de Trabajo
+## 6. Formal Inspections of Critical Modules
 
-> Actividad SECAV-O: `secav:AdoptionBehavior` y sus siete subclases, agrupadas por `secav:AdoptionPillar`
+> SECAV-O activity: `secav:CodeReview` (inspection), `secav:HumanValidationActivity`
+
+| # | Type | Observable behavior | SECAV-O Term |
+|---|------|---------------------|--------------|
+| 6.1 | ✓ | Inspection material was distributed at least 24–48 h before the meeting | `secav:ReviewerReadiness` |
+| 6.2 | ✓ | All participants arrived at the meeting with documented observations (individual preparation completed) | `secav:ReviewerCriticalAnalysisCondition` |
+| 6.3 | ✓ | The moderator keeps focus on the artifact — not on the author or solutions | `secav:ReviewFinding` produced without personalization |
+| 6.4 | ✓ | The author listens and responds without defending — does not debate during the meeting | `secav:WorkProductEvidence` (observable attitude) |
+| 6.5 | ✓ | The recorder documents findings with type and severity during the meeting | `secav:ReviewFinding` with formal record |
+| 6.6 | ✓ | The coach verifies rework of critical findings before the module advances | `secav:ReviewRecord` updated |
+| 6.7 | ⚠ | A participant did not prepare the material — the inspection becomes live reading | absence of `secav:ReviewerReadiness` |
+| 6.8 | ⚠ | The inspection meeting was cancelled or shortened without technical justification | `secavo:QualityPlanningConcern` |
+| 6.9 | ⚠ | The author defends or argues decisions during the meeting instead of listening | `secav:PunitiveReviewApproach` (inverse dynamic) |
+| 6.10 | ⚠ | The inspection did not produce a documented `secav:ReviewRecord` | absence of `secav:ReviewRecord` |
+| 6.11 | ⚠ | The same defect type appears in multiple inspected modules (systemic pattern) | `secav:CoachingIntervention` → `secavo:ImprovementAction` |
+| 6.12 | ⚠ | Management uses inspection findings to evaluate the author's performance punitively | `secavo:QualityPlanningConcern` |
+
+---
+
+## 7. Unit Testing and Unit Test Design
+
+> SECAV-O activity: `secav:TestingActivity`
+
+| # | Type | Observable behavior | SECAV-O Term |
+|---|------|---------------------|--------------|
+| 7.1 | ✓ | Tests have names that describe behavior, not implementation ("should return 404 when user not found") | `secav:WorkProductEvidence` |
+| 7.2 | ✓ | Each test has a single identifiable failure point (FIRST principle: Independent) | `secav:QualityCriterion` |
+| 7.3 | ✓ | Tests cover error paths and boundary values, not only the success flow | `secav:HappyPathOnlyReview` absent |
+| 7.4 | ✓ | Tests run in milliseconds — no network or filesystem dependencies in unit tests | `secav:QualityCriterion` (FIRST: Fast) |
+| 7.5 | ✓ | The team knows the project's coverage threshold and can justify it | `secav:CodeCoverageGate` with known `secav:coverageThreshold` |
+| 7.6 | ⚠ | Tests only validate the happy path — no tests for null, empty, or out-of-range values | `secav:HappyPathOnlyReview` |
+| 7.7 | ⚠ | Unit tests have external dependencies (database, API, system clock without injection) | `secav:QualityCriterion` (FIRST: Fast violated) |
+| 7.8 | ⚠ | Multiple tests fail when a single condition fails — high coupling between tests | `secav:QualityCriterion` (FIRST: Independent violated) |
+| 7.9 | ⚠ | The team increases coverage with trivial tests to pass the gate, without evaluating real cases | `secav:CodeCoverageGate` compromised in quality |
+| 7.10 | ⚠ | PRs do not include tests for new logic (only production code) | absence of associated `secav:TestingActivity` |
+
+---
+
+## 8. AI-Assisted Code Review
+
+> SECAV-O activity: `secav:AIAssistedActivity`, `secav:HumanValidationActivity`, `secav:AIReviewPromptConfiguration`, `secav:ReviewDimension`
+
+| # | Type | Observable behavior | SECAV-O Term |
+|---|------|---------------------|--------------|
+| 8.1 | ✓ | The review pipeline applies deterministic tools (linter, static scanner) before human review | `secav:DeterministicAnalysisActivity` → `secav:precedes` → human review |
+| 8.2 | ✓ | The team configures the AI tool with project context (framework, version, security conventions) | `secav:AIReviewPromptConfiguration` with `secav:hasContextDefinition` |
+| 8.3 | ✓ | The configuration includes impact analysis, security evaluation, and test case generation | `secav:hasImpactAnalysisInstruction`, `secav:hasSecurityEvaluationInstruction`, `secav:hasTestGenerationInstruction` |
+| 8.4 | ✓ | Reviewers audit AI suggestions before applying them — verifying that methods exist in the version in use | `secav:HumanValidationActivity` active |
+| 8.5 | ✓ | AI-generated code PRs are classified by risk before routing (routine / attention / critical) | `secav:ReviewRiskLevel` |
+| 8.6 | ✓ | The team monitors false negatives — high-risk PRs that passed as routine | `secav:ReviewObservation` |
+| 8.7 | ⚠ | The team accepts AI suggestions without critical review — does not verify that proposed methods exist | `secav:InsufficientAICodeScrutiny` |
+| 8.8 | ⚠ | AI is used to approve or block changes autonomously, without human review | violation of `secav:requiresHumanValidation` |
+| 8.9 | ⚠ | AI tool false positives are high and the team ignores them instead of adjusting the configuration | `secav:ReviewObservation` (alert fatigue) |
+| 8.10 | ⚠ | AI-generated code arrives without the decision history that explains the design | `secav:MissingReviewContext` |
+| 8.11 | ⚠ | Critical modules with AI-generated code do not receive additional formal inspection | absence of `secav:HumanValidationActivity` for `secav:AIAssistedActivity` in critical module |
+| 8.12 | ⚠ | The team does not question AI code because "it compiles and the tests pass" | `secav:RubberStampApproval` applied to AI code |
+| 8.13 | ✓ | Each review dimension (impact, security, tests, context) is explicitly configured in the AI tool prompt | `secav:ReviewDimension` |
+| 8.14 | ⚠ | PRs classified as routine reach production with significant defects — the risk classification model has false negatives | `secav:ReviewEscapeObservation` |
+
+---
+
+## 9. Organizational Adoption of the New Working Model
+
+> SECAV-O activity: `secav:AdoptionBehavior` and its seven subclasses, grouped by `secav:AdoptionPillar`
 >
-> **Contexto:** Este grupo observa si los líderes, equipos e individuos han internalizado el nuevo modelo de trabajo en sus comportamientos cotidianos. No es supervisión individual — es una señal colectiva de adopción cultural. El facilitador del cambio (`secav:ChangeAgent`) es quien activa intervenciones cuando aparecen señales de alerta sistémicas.
+> **Context:** This group observes whether leaders, teams, and individuals have internalized the new working model in their daily behaviors. It is not individual supervision — it is a collective signal of cultural adoption. The change agent (`secav:ChangeAgent`) activates interventions when systemic alert signals appear.
 >
-> **Frecuencia recomendada:** evaluación quincenal o mensual. Usar observación directa en rituales + pulso eNPS (`secav:PulseSurveyMeasurement`, `secav:DirectRitualObservation`).
+> **Recommended frequency:** biweekly or monthly. Use direct observation in rituals + eNPS pulse (`secav:PulseSurveyMeasurement`, `secav:DirectRitualObservation`).
 
-### Pilar 1 — Liderazgo y Modelado (Líderes / PMs)
+### Pillar 1 — Leadership and Modeling (Leaders / PMs)
 
-| # | Tipo | Conducta observable | Término SECAV-O |
-|---|------|---------------------|-----------------|
-| 9.1 | ✓ | Los líderes y PMs usan las nuevas herramientas digitales como canal principal de comunicación — no el correo tradicional | `secav:LeaderDigitalToolAdoption` |
-| 9.2 | ✓ | Los líderes reconocen públicamente (en reuniones o canales institucionales) a colaboradores que aplican las nuevas conductas y metodologías | `secav:PublicRecognitionOfNewBehaviors` |
-| 9.3 | ⚠ | Los líderes continúan usando el correo electrónico como canal principal, manteniendo ambigüedad de proceso dual | ausencia de `secav:LeaderDigitalToolAdoption` |
-| 9.4 | ⚠ | Los reconocimientos públicos señalan errores o incumplimientos — los comportamientos nuevos nunca se celebran | ausencia de `secav:PublicRecognitionOfNewBehaviors` |
+| # | Type | Observable behavior | SECAV-O Term |
+|---|------|---------------------|--------------|
+| 9.1 | ✓ | Leaders and PMs use new digital tools as the primary communication channel — not traditional email | `secav:LeaderDigitalToolAdoption` |
+| 9.2 | ✓ | Leaders publicly acknowledge (in meetings or institutional channels) collaborators who apply the new behaviors and methodologies | `secav:PublicRecognitionOfNewBehaviors` |
+| 9.3 | ⚠ | Leaders continue using email as the primary channel, maintaining dual-process ambiguity | absence of `secav:LeaderDigitalToolAdoption` |
+| 9.4 | ⚠ | Public acknowledgements flag errors or non-compliance — new behaviors are never celebrated | absence of `secav:PublicRecognitionOfNewBehaviors` |
 
-### Pilar 2 — Colaboración Eficiente (Equipos)
+### Pillar 2 — Efficient Collaboration (Teams)
 
-| # | Tipo | Conducta observable | Término SECAV-O |
-|---|------|---------------------|-----------------|
-| 9.5 | ✓ | El equipo mantiene la documentación del proyecto centralizada y actualizada en plataformas compartidas (repositorio único por proyecto) | `secav:CentralizedDocumentationPractice` |
-| 9.6 | ✓ | El equipo reemplaza reuniones largas de seguimiento por sincronizaciones breves centradas en bloqueantes | `secav:FocusedSynchronizationPractice` |
-| 9.7 | ⚠ | La documentación existe en silos — archivos locales, hilos de correo, chats privados — sin acceso centralizado | ausencia de `secav:CentralizedDocumentationPractice` |
-| 9.8 | ⚠ | Las reuniones de seguimiento semanales continúan con el mismo formato largo sin transición hacia syncs cortos orientados a bloqueantes | ausencia de `secav:FocusedSynchronizationPractice` |
+| # | Type | Observable behavior | SECAV-O Term |
+|---|------|---------------------|--------------|
+| 9.5 | ✓ | The team keeps project documentation centralized and up to date in shared platforms (single repository per project) | `secav:CentralizedDocumentationPractice` |
+| 9.6 | ✓ | The team replaces long status meetings with short synchronizations focused on blockers | `secav:FocusedSynchronizationPractice` |
+| 9.7 | ⚠ | Documentation exists in silos — local files, email threads, private chats — with no centralized access | absence of `secav:CentralizedDocumentationPractice` |
+| 9.8 | ⚠ | Weekly status meetings continue in the same long format with no transition toward short blocker-focused syncs | absence of `secav:FocusedSynchronizationPractice` |
 
-### Pilar 3 — Comunicación Abierta (Equipos)
+### Pillar 3 — Open Communication (Teams)
 
-| # | Tipo | Conducta observable | Término SECAV-O |
-|---|------|---------------------|-----------------|
-| 9.9 | ✓ | Los miembros del equipo expresan dudas, errores y bloqueantes de forma temprana y transparente — los registros de riesgos e impedimentos se actualizan pronto | `secav:EarlyTransparentCommunication` |
-| 9.10 | ⚠ | Los miembros retienen dudas o errores hasta que escalan — los problemas emergen tarde, en producción o en la retrospectiva | ausencia de `secav:EarlyTransparentCommunication` |
+| # | Type | Observable behavior | SECAV-O Term |
+|---|------|---------------------|--------------|
+| 9.9 | ✓ | Team members express doubts, errors, and blockers early and transparently — risk and impediment registers are updated promptly | `secav:EarlyTransparentCommunication` |
+| 9.10 | ⚠ | Members hold back doubts or errors until they escalate — problems surface late, in production or at the retrospective | absence of `secav:EarlyTransparentCommunication` |
 
-### Pilar 4 — Adaptabilidad Continuada (Todos)
+### Pillar 4 — Continuous Adaptability (Everyone)
 
-| # | Tipo | Conducta observable | Término SECAV-O |
-|---|------|---------------------|-----------------|
-| 9.11 | ✓ | Los miembros aplican guías y materiales de capacitación de forma autónoma antes de escalar consultas básicas | `secav:AutonomousGuideApplication` |
-| 9.12 | ⚠ | Los miembros escalan consultas básicas sin consultar primero las guías o materiales disponibles, generando sobrecarga de soporte | ausencia de `secav:AutonomousGuideApplication` |
+| # | Type | Observable behavior | SECAV-O Term |
+|---|------|---------------------|--------------|
+| 9.11 | ✓ | Members apply guides and training materials autonomously before escalating basic questions | `secav:AutonomousGuideApplication` |
+| 9.12 | ⚠ | Members escalate basic questions without first consulting available guides or materials, generating support overload | absence of `secav:AutonomousGuideApplication` |
 
-### Pilar 5 — Feedback e Innovación (Todos)
+### Pillar 5 — Feedback and Innovation (Everyone)
 
-| # | Tipo | Conducta observable | Término SECAV-O |
-|---|------|---------------------|-----------------|
-| 9.13 | ✓ | Los miembros contribuyen propuestas constructivas sobre el nuevo modelo en las sesiones de retrospectiva — las propuestas se implementan | `secav:ConstructiveRetrospectiveFeedback` |
-| 9.14 | ⚠ | Las retrospectivas no producen propuestas de ajuste del equipo — el formato es declarativo o de queja sin acción | ausencia de `secav:ConstructiveRetrospectiveFeedback` |
+| # | Type | Observable behavior | SECAV-O Term |
+|---|------|---------------------|--------------|
+| 9.13 | ✓ | Members contribute constructive proposals about the new model in retrospective sessions — proposals are implemented | `secav:ConstructiveRetrospectiveFeedback` |
+| 9.14 | ⚠ | Retrospectives produce no team-adjustment proposals — the format is declarative or complaint-based with no action | absence of `secav:ConstructiveRetrospectiveFeedback` |
 
 ---
 
-## 10. Conductas de Liderazgo Técnico (Engineering Managers y Tech Leads)
+## 10. Technical Leadership Behaviors (Engineering Managers and Tech Leads)
 
-> Actividad SECAV-O: `secav:LeaderBehavior` y subclases, agrupadas por `secav:TechnicalLeadershipDimension`
+> SECAV-O activity: `secav:LeaderBehavior` and subclasses, grouped by `secav:TechnicalLeadershipDimension`
 >
-> **Contexto:** Este grupo observa los comportamientos del líder técnico (Engineering Manager o Tech Lead) en sus tres dimensiones estratégicas: personas, arquitectura y estrategia. No evalúa la habilidad técnica individual, sino la capacidad de multiplicar el talento colectivo y alinear las soluciones con los objetivos del negocio.
+> **Context:** This group observes the behaviors of the technical leader (Engineering Manager or Tech Lead) across their three strategic dimensions: people, architecture, and strategy. It does not evaluate individual technical skill, but the capacity to multiply collective talent and align solutions with business objectives.
 >
-> **Frecuencia recomendada:** mensual o por sprint, con revisión trimestral de los cuatro indicadores de evaluación (10.12–10.15).
+> **Recommended frequency:** monthly or per sprint, with quarterly review of the four evaluation indicators (10.12–10.15).
 
-### Dimensión 1 — Personas y Mentoría (35% del peso del liderazgo)
+### Dimension 1 — People and Mentorship (35% of leadership weight)
 
-| # | Tipo | Conducta observable | Término SECAV-O |
-|---|------|---------------------|-----------------|
-| 10.1 | ✓ | El líder realiza sesiones 1-on-1 con cadencia regular y foco en el crecimiento profesional — no solo en el status del sprint | `secav:ActiveMentorship` |
-| 10.2 | ✓ | Los post-mortems de producción terminan con acciones de proceso o herramienta — nunca señalando a individuos | `secav:PsychologicalSafetyPromotion` |
-| 10.3 | ✓ | El líder define el "qué" y el "por qué" del cambio, pero otorga al equipo autonomía para decidir el "cómo" | `secav:EffectiveDelegation` |
-| 10.4 | ✓ | El líder entrega feedback constructivo al equipo en tiempo real y reconoce públicamente el trabajo bien hecho | `secav:ContinuousFeedbackBehavior` |
-| 10.5 | ⚠ | El líder revisa y aprueba cada decisión técnica menor — los ingenieros esperan instrucciones en lugar de tomar iniciativa | ausencia de `secav:EffectiveDelegation` (micromanagement) |
-| 10.6 | ⚠ | Los post-mortems terminan en señalamiento de individuos o en silencio — no se producen acciones de mejora | ausencia de `secav:PsychologicalSafetyPromotion` |
-| 10.7 | ⚠ | No existe cadencia de 1-on-1 — la interacción del líder con los ingenieros ocurre solo en reuniones grupales o cuando hay problemas | ausencia de `secav:ActiveMentorship` |
+| # | Type | Observable behavior | SECAV-O Term |
+|---|------|---------------------|--------------|
+| 10.1 | ✓ | The leader holds 1-on-1 sessions on a regular cadence focused on professional growth — not only sprint status | `secav:ActiveMentorship` |
+| 10.2 | ✓ | Production post-mortems end with process or tooling actions — never pointing at individuals | `secav:PsychologicalSafetyPromotion` |
+| 10.3 | ✓ | The leader defines the "what" and "why" of change, but grants the team autonomy to decide the "how" | `secav:EffectiveDelegation` |
+| 10.4 | ✓ | The leader delivers real-time constructive feedback and publicly acknowledges work done well | `secav:ContinuousFeedbackBehavior` |
+| 10.5 | ⚠ | The leader reviews and approves every minor technical decision — engineers wait for instructions instead of taking initiative | absence of `secav:EffectiveDelegation` (micromanagement) |
+| 10.6 | ⚠ | Post-mortems end in individual blame or silence — no improvement actions are produced | absence of `secav:PsychologicalSafetyPromotion` |
+| 10.7 | ⚠ | No 1-on-1 cadence exists — the leader's interaction with engineers occurs only in group meetings or when there are problems | absence of `secav:ActiveMentorship` |
 
-### Dimensión 2 — Arquitectura y Código (30% del peso del liderazgo)
+### Dimension 2 — Architecture and Code (30% of leadership weight)
 
-| # | Tipo | Conducta observable | Término SECAV-O |
-|---|------|---------------------|-----------------|
-| 10.8 | ✓ | Las decisiones de arquitectura significativas están documentadas en ADRs accesibles a todo el equipo | `secav:ArchitectureDecisionDocumentation` |
-| 10.9 | ✓ | El equipo destina entre 15–20% del esfuerzo del sprint a salud de código (deuda técnica, refactoring, mantenimiento) — negociado con Product | `secav:TechnicalDebtNegotiation` |
-| 10.10 | ⚠ | Las decisiones de arquitectura se toman de forma informal o en conversaciones efímeras — no quedan registradas ni son revisables | ausencia de `secav:ArchitectureDecisionDocumentation` |
-| 10.11 | ⚠ | La deuda técnica nunca se presenta a Product como trabajo prioritario — se acumula sprint tras sprint sin negociación | ausencia de `secav:TechnicalDebtNegotiation` |
+| # | Type | Observable behavior | SECAV-O Term |
+|---|------|---------------------|--------------|
+| 10.8 | ✓ | Significant architecture decisions are documented in ADRs accessible to the entire team | `secav:ArchitectureDecisionDocumentation` |
+| 10.9 | ✓ | The team allocates 15–20% of sprint effort to code health (technical debt, refactoring, maintenance) — negotiated with Product | `secav:TechnicalDebtNegotiation` |
+| 10.10 | ⚠ | Architecture decisions are made informally or in ephemeral conversations — not recorded or reviewable | absence of `secav:ArchitectureDecisionDocumentation` |
+| 10.11 | ⚠ | Technical debt is never presented to Product as priority work — it accumulates sprint after sprint without negotiation | absence of `secav:TechnicalDebtNegotiation` |
 
-### Dimensión 3 — Estrategia e Impacto (35% del peso del liderazgo)
+### Dimension 3 — Strategy and Impact (35% of leadership weight)
 
-| # | Tipo | Conducta observable | Término SECAV-O |
-|---|------|---------------------|-----------------|
-| 10.12 | ✓ | El líder actúa como filtro frente a interrupciones externas — los ingenieros tienen bloques de trabajo profundo protegidos | `secav:TeamShielding` |
-| 10.13 | ✓ | Los despliegues tienen ritmos sostenibles — no hay rush de último momento que comprometa la estabilidad técnica | `secav:DeliveryConsistencyBehavior` |
-| 10.14 | ✓ | El líder comprende las métricas de negocio que el equipo impacta con su código | `secav:HolisticProductVisionBehavior` |
-| 10.15 | ✓ | El líder integra perspectivas técnicas diversas en las decisiones — los ingenieros junior y senior contribuyen en igualdad de condiciones | `secav:TechnicalDiversityBehavior` |
-| 10.16 | ⚠ | Los ingenieros reciben interrupciones directas de stakeholders y cambian de contexto constantemente — el líder no actúa como filtro | ausencia de `secav:TeamShielding` |
-| 10.17 | ⚠ | El líder favorece sistemáticamente una perspectiva técnica sin abrir espacio a otras voces del equipo | ausencia de `secav:TechnicalDiversityBehavior` |
+| # | Type | Observable behavior | SECAV-O Term |
+|---|------|---------------------|--------------|
+| 10.12 | ✓ | The leader acts as a filter against external interruptions — engineers have protected deep-work blocks | `secav:TeamShielding` |
+| 10.13 | ✓ | Deployments follow a sustainable rhythm — no last-minute rush that compromises technical stability | `secav:DeliveryConsistencyBehavior` |
+| 10.14 | ✓ | The leader understands the business metrics the team impacts with their code | `secav:HolisticProductVisionBehavior` |
+| 10.15 | ✓ | The leader integrates diverse technical perspectives in decisions — junior and senior engineers contribute on equal terms | `secav:TechnicalDiversityBehavior` |
+| 10.16 | ⚠ | Engineers receive direct interruptions from stakeholders and constantly context-switch — the leader does not act as a filter | absence of `secav:TeamShielding` |
+| 10.17 | ⚠ | The leader systematically favors one technical perspective without opening space for other team voices | absence of `secav:TechnicalDiversityBehavior` |
 
 ---
 
-## 11. Gestión de Riesgos del Proyecto
+## 11. Project Risk Management
 
-> Actividad SECAV-O: `secav:ProjectRisk` y subclases (`TechnicalRisk`, `ManagementRisk`, `OrganizationalRisk`, `ExternalRisk`); `secav:RiskRegister`, `secav:RiskResponsePlan`
+> SECAV-O activity: `secav:ProjectRisk` and subclasses (`TechnicalRisk`, `ManagementRisk`, `OrganizationalRisk`, `ExternalRisk`); `secav:RiskRegister`, `secav:RiskResponsePlan`
 >
-> **Contexto:** El registro de riesgos es un artefacto vivo que debe revisarse semanalmente o al inicio de cada sprint. El coach observa si el equipo gestiona activamente los riesgos, no solo si los lista. Un riesgo con P×I ≥ 12 sin plan de prevención activo es una señal de alerta sistémica.
+> **Context:** The risk register is a living artifact that must be reviewed weekly or at the start of each sprint. The coach observes whether the team actively manages risks, not just whether they list them. A risk with P×I ≥ 12 without an active prevention plan is a systemic alert signal.
 >
-> **Frecuencia recomendada:** revisión al inicio de cada sprint y en cada junta semanal de seguimiento.
+> **Recommended frequency:** review at the start of each sprint and at each weekly status meeting.
 
-| # | Tipo | Conducta observable | Término SECAV-O |
-|---|------|---------------------|-----------------|
-| 11.1 | ✓ | El equipo mantiene un registro de riesgos activo y lo revisa al inicio de cada sprint | `secav:RiskRegister` activo |
-| 11.2 | ✓ | Cada riesgo está redactado con la sintaxis estándar: Causa → Evento de riesgo → Impacto en el proyecto | `secav:riskRootCause`, `secav:riskEvent`, `secav:riskImpactDescription` |
-| 11.3 | ✓ | Cada riesgo tiene probabilidad (P) e impacto (I) documentados en escala 1–5 con P×I calculado | `secav:riskProbability`, `secav:riskImpact`, `secav:riskScore` |
-| 11.4 | ✓ | Los riesgos con P×I ≥ 12 tienen un plan de prevención activo y un dueño identificado | `secav:RiskResponsePlan` con `secav:preventionAction` y `secav:riskOwner` |
-| 11.5 | ✓ | Cada plan de respuesta incluye acción de prevención Y acción de contingencia | `secav:preventionAction` + `secav:contingencyAction` en `secav:RiskResponsePlan` |
-| 11.6 | ✓ | El equipo identifica nuevos riesgos proactivamente antes de que se materialicen | `secav:MitigateStrategy` o `secav:AvoidStrategy` aplicadas de forma anticipada |
-| 11.7 | ✓ | La estrategia de respuesta (Mitigar / Evitar / Transferir / Aceptar) está explícita para cada riesgo | `secav:hasResponseStrategy` documentado |
-| 11.8 | ⚠ | El registro de riesgos existe pero no ha sido revisado ni actualizado en el último sprint | `secav:RiskRegister` desactualizado |
-| 11.9 | ⚠ | Los riesgos están listados sin puntuación P×I ni dueño identificado | ausencia de `secav:riskScore` y `secav:riskOwner` |
-| 11.10 | ⚠ | Existen riesgos con P×I ≥ 12 sin ningún plan de prevención activo | ausencia de `secav:RiskResponsePlan` para riesgo de alta prioridad |
-| 11.11 | ⚠ | El equipo solo registra riesgos después de que ya se materializaron — modo reactivo | ausencia de estrategia preventiva (`secav:MitigateStrategy` o `secav:AvoidStrategy`) |
-| 11.12 | ⚠ | Los riesgos tienen acción de prevención pero no acción de contingencia — no hay plan B | ausencia de `secav:contingencyAction` en `secav:RiskResponsePlan` |
-| 11.13 | ⚠ | La revisión de riesgos se omite sistemáticamente en la retrospectiva o en la planificación del sprint | `secav:RiskRegister` sin integración en el ciclo de sprint |
-| 11.14 | ✓ | Los riesgos transferidos (seguro, cláusula contractual, outsourcing) tienen el mecanismo de transferencia documentado explícitamente | `secav:TransferStrategy` |
-| 11.15 | ✓ | Los riesgos aceptados conscientemente incluyen la justificación de la decisión y un umbral de activación para reevaluar | `secav:AcceptStrategy` |
-| 11.16 | ⚠ | El equipo marca riesgos como "aceptados" por omisión — sin plan de respuesta ni racional documentado (aceptación implícita) | `secav:AcceptStrategy` aplicada sin decisión consciente |
+| # | Type | Observable behavior | SECAV-O Term |
+|---|------|---------------------|--------------|
+| 11.1 | ✓ | The team maintains an active risk register and reviews it at the start of each sprint | `secav:RiskRegister` active |
+| 11.2 | ✓ | Each risk is worded with the standard syntax: Cause → Risk event → Impact on the project | `secav:riskRootCause`, `secav:riskEvent`, `secav:riskImpactDescription` |
+| 11.3 | ✓ | Each risk has probability (P) and impact (I) documented on a 1–5 scale with P×I calculated | `secav:riskProbability`, `secav:riskImpact`, `secav:riskScore` |
+| 11.4 | ✓ | Risks with P×I ≥ 12 have an active prevention plan and an identified owner | `secav:RiskResponsePlan` with `secav:preventionAction` and `secav:riskOwner` |
+| 11.5 | ✓ | Each response plan includes a prevention action AND a contingency action | `secav:preventionAction` + `secav:contingencyAction` in `secav:RiskResponsePlan` |
+| 11.6 | ✓ | The team proactively identifies new risks before they materialize | `secav:MitigateStrategy` or `secav:AvoidStrategy` applied in advance |
+| 11.7 | ✓ | The response strategy (Mitigate / Avoid / Transfer / Accept) is explicit for each risk | `secav:hasResponseStrategy` documented |
+| 11.8 | ⚠ | The risk register exists but has not been reviewed or updated in the last sprint | `secav:RiskRegister` out of date |
+| 11.9 | ⚠ | Risks are listed without P×I scores or an identified owner | absence of `secav:riskScore` and `secav:riskOwner` |
+| 11.10 | ⚠ | Risks with P×I ≥ 12 exist without any active prevention plan | absence of `secav:RiskResponsePlan` for high-priority risk |
+| 11.11 | ⚠ | The team only records risks after they have already materialized — reactive mode | absence of preventive strategy (`secav:MitigateStrategy` or `secav:AvoidStrategy`) |
+| 11.12 | ⚠ | Risks have a prevention action but no contingency action — no Plan B | absence of `secav:contingencyAction` in `secav:RiskResponsePlan` |
+| 11.13 | ⚠ | Risk review is systematically omitted in the retrospective or sprint planning | `secav:RiskRegister` without integration into the sprint cycle |
+| 11.14 | ✓ | Transferred risks (insurance, contractual clause, outsourcing) have the transfer mechanism explicitly documented | `secav:TransferStrategy` |
+| 11.15 | ✓ | Consciously accepted risks include the decision justification and an activation threshold for reassessment | `secav:AcceptStrategy` |
+| 11.16 | ⚠ | The team marks risks as "accepted" by omission — without a response plan or documented rationale (implicit acceptance) | `secav:AcceptStrategy` applied without conscious decision |
 
 ---
 
-## Resumen de uso del checklist
+## Checklist usage summary
 
-| Cuándo usar cada grupo | Actividad / Sprint |
+| When to use each group | Activity / Sprint |
 |---|---|
-| Grupos 1–2 | Inicio de sprint, refinement, sesiones de diseño |
-| Grupo 3 | Cualquier sesión de trabajo — observación en contexto |
-| Grupo 4 | Revisión de pipeline CI/CD; onboarding de nuevos miembros |
-| Grupos 5–6 | Durante o inmediatamente después de sesiones de revisión / inspección |
-| Grupo 7 | Revisión de PR con cambios de pruebas; revisión de cobertura sprint |
-| Grupo 8 | PRs con código asistido por IA; configuración de herramientas IA del equipo |
-| Grupo 9 | Quincenalmente o mensualmente — evaluación de adopción cultural del nuevo modelo de trabajo |
-| Grupo 10 | Mensualmente o por sprint — observación del líder técnico; revisión trimestral de indicadores 10.12–10.15 |
-| Grupo 11 | Al inicio de cada sprint y en cada junta semanal de seguimiento — revisión del registro de riesgos |
-| Grupo 12 | Antes, durante y después de cada caminata de revisión de código programada |
-| Grupo 13 | Antes, durante y al cierre de cada revisión de diseño (prototipo, wireframe o especificación) |
+| Groups 1–2 | Sprint start, refinement, design sessions |
+| Group 3 | Any working session — in-context observation |
+| Group 4 | CI/CD pipeline review; new member onboarding |
+| Groups 5–6 | During or immediately after review / inspection sessions |
+| Group 7 | PR review with test changes; sprint coverage review |
+| Group 8 | PRs with AI-assisted code; team AI tool configuration |
+| Group 9 | Biweekly or monthly — cultural adoption assessment of the new working model |
+| Group 10 | Monthly or per sprint — technical leader observation; quarterly review of indicators 10.12–10.15 |
+| Group 11 | At the start of each sprint and at each weekly status meeting — risk register review |
+| Group 12 | Before, during, and after each scheduled code walkthrough session |
+| Group 13 | Before, during, and at the close of each design review (prototype, wireframe, or specification) |
 
-Las señales ✓ se registran como `secav:WorkProductEvidence` o `secav:ReviewFinding` y alimentan la `secav:CompetencyAssessment` del ciclo.
+✓ signals are recorded as `secav:WorkProductEvidence` or `secav:ReviewFinding` and feed the `secav:CompetencyAssessment` of the cycle.
 
-Las señales ⚠ que aparecen más de una vez en el sprint deben escalar a `secav:CoachingIntervention`. Si aparecen en múltiples miembros del equipo, documentar una `secavo:ImprovementAction` en la retrospectiva.
+⚠ signals that appear more than once in a sprint should escalate to `secav:CoachingIntervention`. If they appear across multiple team members, document a `secavo:ImprovementAction` in the retrospective.
 
-Para el Grupo 9, las señales ⚠ sistémicas (presentes en más de la mitad del equipo en dos evaluaciones consecutivas) deben derivar en una intervención del `secav:ChangeAgent` responsable — no solo del coach técnico.
-
----
-
-## Grupo 12 — Caminatas de Revisión de Software (`secav:CodeWalkthrough`)
-
-> **Fuente:** Guia de Buenas y Malas Practicas - Caminatas de Revision de Software  
-> **Cuándo observar:** Antes, durante y al cierre de cada sesión de walkthrough programada.  
-> **Término SECAV-O principal:** `secav:CodeWalkthrough` (subclase de `secav:ReviewActivity`)
-
-### 12.1 Preparación
-
-| # | Señal observable | Tipo | Término SECAV-O |
-|---|-----------------|------|-----------------|
-| 12.01 | El autor delimita el alcance a 200–400 líneas de código antes de convocar | ✓ | `secav:CodeWalkthrough` · `secav:walkthroughLineCount` |
-| 12.02 | Los materiales (código, contexto, objetivo) se distribuyen con al menos 24 h de anticipación | ✓ | `secav:CodeWalkthrough` · `secav:WorkProductEvidence` |
-| 12.03 | Se asignan explícitamente los tres roles: Autor/Presentador, Moderador, Escribano | ✓ | `secav:WalkthroughRole` |
-| 12.04 | Se declara el foco de revisión (arquitectura, lógica, seguridad, concurrencia, transferencia de conocimiento) | ✓ | `secav:walkthroughFocus` |
-| 12.05 | La sesión se convoca sin materiales previos ni roles definidos (improvisada) | ⚠ | `secav:ImprovisedWalkthrough` |
-| 12.06 | El alcance supera 1 000 líneas o la sesión está programada para más de 2 horas | ⚠ | `secav:OversizedWalkthrough` |
-| 12.07 | No se designa moderador para la sesión | ⚠ | `secav:UnmoderatedWalkthrough` |
-
-### 12.2 Ejecución
-
-| # | Señal observable | Tipo | Término SECAV-O |
-|---|-----------------|------|-----------------|
-| 12.08 | El autor dedica los primeros 5–10 min a explicar el contexto de negocio del código | ✓ | `secav:CodeWalkthrough` |
-| 12.09 | Las observaciones se dirigen al código, no a la persona ("este método…" no "tú hiciste…") | ✓ | `secav:PositiveBehaviorObservation` |
-| 12.10 | El moderador usa un "Parking Lot" para apartar temas fuera del foco declarado | ✓ | `secav:WalkthroughRole` |
-| 12.11 | Los hallazgos se clasifican en tiempo real: Bloqueante / Mejora / Aclaración | ✓ | `secav:ReviewFinding` · `secav:walkthroughSeverity` |
-| 12.12 | El debate deriva en estilo/formato que podría resolverse con un linter | ⚠ | `secav:StyleDebateDuringWalkthrough` |
-| 12.13 | El autor responde a observaciones de forma defensiva o interpreta preguntas como ataques | ⚠ | `secav:DefensiveAuthorAttitude` |
-| 12.14 | Un revisor monopoliza la sesión con preferencias personales, bloqueando el avance | ⚠ | `secav:WalkthroughMonopolization` |
-| 12.15 | Se intenta refactorizar código complejo en vivo durante la sesión | ⚠ | `secav:LiveRefactoringDuringWalkthrough` |
-
-### 12.3 Cierre y Seguimiento
-
-| # | Señal observable | Tipo | Término SECAV-O |
-|---|-----------------|------|-----------------|
-| 12.16 | Todos los action items se registran en la herramienta de seguimiento (Jira / GitHub Issues) con responsable asignado | ✓ | `secav:ReviewFinding` · `secav:MeetingAgreement` |
-| 12.17 | Cada hallazgo queda clasificado por severidad (Bloqueante / Mejora / Aclaración) antes de cerrar la sesión | ✓ | `secav:walkthroughSeverity` |
-| 12.18 | El equipo verifica que los cambios derivados de la caminata fueron aplicados antes del merge | ✓ | `secav:WorkProductEvidence` |
-| 12.19 | La sesión cierra sin ningún registro escrito — solo acuerdos verbales | ⚠ | `secav:WalkthroughWithoutRecord` |
-| 12.20 | Se hace merge del código sin haber atendido las observaciones registradas | ⚠ | `secav:IgnoredWalkthroughFeedback` |
-| 12.21 | Se convoca una nueva caminata completa para verificar correcciones menores que podrían revisarse de forma asíncrona | ⚠ | `secav:UnnecessaryRewalkthrough` |
-
-### Notas de escalamiento — Grupo 12
-
-- Las señales ⚠ 12.05, 12.06 o 12.07 presentes en la convocatoria deben resolverse **antes** de iniciar la sesión; el coach puede solicitar cancelar o reagendar si no se subsanan.
-- Las señales ⚠ 12.13 o 12.14 persistentes en múltiples sesiones deben derivar en una `secav:CoachingIntervention` individual con el autor o revisor involucrado.
-- La señal ⚠ 12.20 es bloqueante: el coach debe escalar a una `secav:CoachingIntervention` y documentar el hallazgo en `templates/rca-defect-analysis.md` si el código ya llegó a producción.
+For Group 9, systemic ⚠ signals (present in more than half the team across two consecutive assessments) should lead to an intervention from the responsible `secav:ChangeAgent` — not only the technical coach.
 
 ---
 
-## Grupo 13 — Revisiones de Diseño (`secav:DesignReview`)
+## Group 12 — Code Walkthroughs (`secav:CodeWalkthrough`)
 
-> **Fuente:** Guia de Mejores Practicas para Revision de Diseno  
-> **Cuándo observar:** Antes, durante y al cierre de cada revisión de prototipo, wireframe o especificación de diseño.  
-> **Término SECAV-O principal:** `secav:DesignReview` (subclase de `secav:ReviewActivity`)
+> **Source:** Guide to Good and Bad Practices — Software Review Walkthroughs  
+> **When to observe:** Before, during, and at the close of each scheduled walkthrough session.  
+> **Primary SECAV-O term:** `secav:CodeWalkthrough` (subclass of `secav:ReviewActivity`)
 
-### 13.1 Preparación
+### 12.1 Preparation
 
-| # | Señal observable | Tipo | Término SECAV-O |
-|---|-----------------|------|-----------------|
-| 13.01 | El convocante declara explícitamente el objetivo de la revisión (usabilidad, arquitectura, flujo, viabilidad técnica) | ✓ | `secav:DesignReview` |
-| 13.02 | Se comparte el perfil de usuario (personas), el problema a resolver y las restricciones conocidas antes de la sesión | ✓ | `secav:DesignReview` · `secav:WorkProductEvidence` |
-| 13.03 | El prototipo o documentación se distribuye con al menos 24 h de anticipación | ✓ | `secav:DesignReview` |
-| 13.04 | Se declara el nivel de madurez del diseño (exploratorio / conceptual / final) para enmarcar el tipo de feedback esperado | ✓ | `secav:designMaturityLevel` |
-| 13.05 | La sesión se convoca sin objetivo concreto — la discusión deriva a detalles irrelevantes | ⚠ | `secav:UndefinedObjectiveReview` |
-| 13.06 | No se comparten personas, contexto del problema ni restricciones — los participantes evalúan visuals en lugar de soluciones | ⚠ | `secav:MissingUserContextReview` |
-| 13.07 | Los materiales se envían durante la sesión o menos de 2 h antes — los comentarios son reactivos e impulsivos | ⚠ | `secav:ImpulsiveReactionFeedback` |
+| # | Observable signal | Type | SECAV-O Term |
+|---|------------------|------|--------------|
+| 12.01 | The author limits scope to 200–400 lines of code before calling the session | ✓ | `secav:CodeWalkthrough` · `secav:walkthroughLineCount` |
+| 12.02 | Materials (code, context, objective) are distributed at least 24 h in advance | ✓ | `secav:CodeWalkthrough` · `secav:WorkProductEvidence` |
+| 12.03 | The three roles are explicitly assigned: Author/Presenter, Moderator, Recorder | ✓ | `secav:WalkthroughRole` |
+| 12.04 | The review focus is declared (architecture, logic, security, concurrency, knowledge transfer) | ✓ | `secav:walkthroughFocus` |
+| 12.05 | The session is called without prior materials or defined roles (improvised) | ⚠ | `secav:ImprovisedWalkthrough` |
+| 12.06 | Scope exceeds 1,000 lines or the session is scheduled for more than 2 hours | ⚠ | `secav:OversizedWalkthrough` |
+| 12.07 | No moderator is designated for the session | ⚠ | `secav:UnmoderatedWalkthrough` |
 
-### 13.2 Facilitación y Dinámica
+### 12.2 Execution
 
-| # | Señal observable | Tipo | Término SECAV-O |
-|---|-----------------|------|-----------------|
-| 13.08 | Los cuatro roles clave están presentes: Diseñador, Product Manager, Ingeniero/Dev y Stakeholder | ✓ | `secav:DesignReviewRole` |
-| 13.09 | Los revisores señalan fallas en la experiencia o inconsistencias con el negocio, no proponen soluciones directas | ✓ | `secav:ReviewFinding` |
-| 13.10 | El feedback se expresa usando el método "observación + impacto" (qué elemento y qué consecuencia tiene) | ✓ | `secav:observationImpactStatement` |
-| 13.11 | Los comentarios se fundamentan en heurísticas de usabilidad, investigación con usuarios o métricas clave | ✓ | `secav:ReviewFinding` |
-| 13.12 | Los revisores proponen soluciones específicas en lugar de identificar el problema de experiencia | ⚠ | `secav:SolutionCentricFeedback` |
-| 13.13 | Los comentarios son subjetivos y sin respaldo ("no me gusta este color", "yo lo haría diferente") | ⚠ | `secav:SubjectiveFeedback` |
+| # | Observable signal | Type | SECAV-O Term |
+|---|------------------|------|--------------|
+| 12.08 | The author spends the first 5–10 min explaining the business context of the code | ✓ | `secav:CodeWalkthrough` |
+| 12.09 | Observations are directed at the code, not the person ("this method…" not "you did…") | ✓ | `secav:PositiveBehaviorObservation` |
+| 12.10 | The moderator uses a "Parking Lot" to set aside topics outside the declared focus | ✓ | `secav:WalkthroughRole` |
+| 12.11 | Findings are classified in real time: Blocking / Improvement / Clarification | ✓ | `secav:ReviewFinding` · `secav:walkthroughSeverity` |
+| 12.12 | The debate drifts into style/format that could be resolved with a linter | ⚠ | `secav:StyleDebateDuringWalkthrough` |
+| 12.13 | The author responds defensively to observations or interprets questions as attacks | ⚠ | `secav:DefensiveAuthorAttitude` |
+| 12.14 | A reviewer monopolizes the session with personal preferences, blocking progress | ⚠ | `secav:WalkthroughMonopolization` |
+| 12.15 | Complex code is refactored live during the session | ⚠ | `secav:LiveRefactoringDuringWalkthrough` |
 
-### 13.3 Seguimiento y Cierre
+### 12.3 Closure and Follow-up
 
-| # | Señal observable | Tipo | Término SECAV-O |
-|---|-----------------|------|-----------------|
-| 13.14 | Al cierre se compila una lista priorizada de acción con responsables asignados | ✓ | `secav:MeetingAgreement` · `secav:ReviewFinding` |
-| 13.15 | Cada hallazgo queda clasificado: cambio indispensable para lanzamiento vs. mejora opcional para iteraciones futuras | ✓ | `secav:mandatoryForLaunch` |
-| 13.16 | Se documentan las decisiones tomadas: qué alternativas se aprobaron o descartaron y por qué | ✓ | `secav:ReviewFinding` · `secav:WorkProductEvidence` |
-| 13.17 | Se acuerda usar herramientas de anotación visual para el seguimiento asíncrono posterior | ✓ | `secav:MeetingAgreement` |
-| 13.18 | La sesión cierra sin registrar acuerdos ni responsables — solo comentarios verbales | ⚠ | `secav:UndocumentedDesignDecision` |
-| 13.19 | No se documenta por qué se descartaron alternativas — en la siguiente iteración se repiten las mismas discusiones | ⚠ | `secav:UndocumentedDesignDecision` |
+| # | Observable signal | Type | SECAV-O Term |
+|---|------------------|------|--------------|
+| 12.16 | All action items are recorded in the tracking tool (Jira / GitHub Issues) with an assigned owner | ✓ | `secav:ReviewFinding` · `secav:MeetingAgreement` |
+| 12.17 | Each finding is classified by severity (Blocking / Improvement / Clarification) before closing the session | ✓ | `secav:walkthroughSeverity` |
+| 12.18 | The team verifies that changes arising from the walkthrough were applied before the merge | ✓ | `secav:WorkProductEvidence` |
+| 12.19 | The session closes without any written record — only verbal agreements | ⚠ | `secav:WalkthroughWithoutRecord` |
+| 12.20 | Code is merged without having addressed the recorded observations | ⚠ | `secav:IgnoredWalkthroughFeedback` |
+| 12.21 | A full new walkthrough is called to verify minor corrections that could be reviewed asynchronously | ⚠ | `secav:UnnecessaryRewalkthrough` |
 
-### 13.4 Antipatrones adicionales y señales de alerta por rol
+### Escalation notes — Group 12
 
-> **Fuente complementaria:** Guia de Malas Practicas para Revision de Diseno
-
-| # | Señal observable | Tipo | Término SECAV-O |
-|---|-----------------|------|-----------------|
-| 13.20 | El presentador muestra propuestas complejas por primera vez en la reunión sin pre-read enviado | ⚠ | `secav:DesignAmbush` |
-| 13.21 | La sesión tiene más de 8 participantes sin roles definidos — se generan debates interminables y parálisis de análisis | ⚠ | `secav:OvercrowdedDesignReview` |
-| 13.22 | El diseñador mueve píxeles o cambia estilos en vivo según cada solicitud del público | ⚠ | `secav:LiveDesignRedesign` |
-| 13.23 | La sesión lleva más de 15 min debatiendo un detalle cosmético (color, sombra) cuando el flujo principal aún no está validado | ⚠ | `secav:PrematureDetailFocus` |
-| 13.24 | Un revisor emite comentarios vagos e inoperables ("hazlo más moderno", "que tenga más impacto") sin indicar el problema ni su impacto | ⚠ | `secav:VagueFeedback` |
-| 13.25 | El diseñador pasa la mayor parte del tiempo justificando decisiones en lugar de escuchar — bloquea la iteración | ⚠ | `secav:DefensiveDesignerAttitude` |
-| 13.26 | El Product Manager introduce cambios de requisitos o alcance durante la sesión, invalidando trabajo previo | ⚠ | `secav:LastMinuteRequirementChange` |
-| 13.27 | El ingeniero rechaza la propuesta de inmediato sin explorar implementaciones alternativas | ⚠ | `secav:ImmediateTechnicalRejection` |
-| 13.28 | Un stakeholder impone una decisión de diseño por jerarquía sin respaldo en datos ni pruebas con usuarios | ⚠ | `secav:HierarchyBasedDecision` |
-| 13.29 | Se reabre un debate resuelto en sesiones anteriores sin aportar información nueva | ⚠ | `secav:ReopeningClosedDebates` |
-
-### Notas de escalamiento — Grupo 13
-
-- Las señales ⚠ 13.05, 13.06 o 13.07 deben resolverse **antes** de iniciar la sesión; el coach puede solicitar reagendar si la preparación es insuficiente.
-- La señal ⚠ 13.13 o 13.24 recurrente en un mismo revisor debe derivar en una `secav:CoachingIntervention` individual para reforzar el método "observación + impacto".
-- La señal ⚠ 13.18 equivale a una sesión sin valor rastreable; el coach debe solicitar documentar los acuerdos antes de 24 h o la revisión se considera no realizada.
-- Las señales ⚠ 13.25–13.28 son antipatrones específicos por rol: el coach los documenta como `secav:AlertBehaviorObservation` vinculada al rol y persona correspondiente, y diseña una intervención individual si se repiten en dos o más sesiones.
-- La señal ⚠ 13.29 indica deuda de gobernanza: registrar como `secavo:ImprovementAction` el reforzamiento del proceso de cierre y archivo de decisiones.
+- ⚠ signals 12.05, 12.06, or 12.07 present in the invitation must be resolved **before** starting the session; the coach may request cancellation or rescheduling if they are not addressed.
+- Persistent ⚠ signals 12.13 or 12.14 across multiple sessions should lead to an individual `secav:CoachingIntervention` with the involved author or reviewer.
+- ⚠ signal 12.20 is blocking: the coach must escalate to a `secav:CoachingIntervention` and document the finding in `templates/rca-defect-analysis.md` if the code has already reached production.
 
 ---
 
-## Documentos relacionados
+## Group 13 — Design Reviews (`secav:DesignReview`)
 
-| Documento | Relación |
+> **Source:** Guide to Best Practices for Design Review  
+> **When to observe:** Before, during, and at the close of each prototype, wireframe, or design specification review.  
+> **Primary SECAV-O term:** `secav:DesignReview` (subclass of `secav:ReviewActivity`)
+
+### 13.1 Preparation
+
+| # | Observable signal | Type | SECAV-O Term |
+|---|------------------|------|--------------|
+| 13.01 | The organizer explicitly declares the review objective (usability, architecture, flow, technical feasibility) | ✓ | `secav:DesignReview` |
+| 13.02 | The user profile (personas), the problem to solve, and known constraints are shared before the session | ✓ | `secav:DesignReview` · `secav:WorkProductEvidence` |
+| 13.03 | The prototype or documentation is distributed at least 24 h in advance | ✓ | `secav:DesignReview` |
+| 13.04 | The design maturity level is declared (exploratory / conceptual / final) to frame the expected type of feedback | ✓ | `secav:designMaturityLevel` |
+| 13.05 | The session is called without a concrete objective — discussion drifts to irrelevant details | ⚠ | `secav:UndefinedObjectiveReview` |
+| 13.06 | Personas, problem context, and constraints are not shared — participants evaluate visuals instead of solutions | ⚠ | `secav:MissingUserContextReview` |
+| 13.07 | Materials are sent during the session or less than 2 h before — comments are reactive and impulsive | ⚠ | `secav:ImpulsiveReactionFeedback` |
+
+### 13.2 Facilitation and Dynamics
+
+| # | Observable signal | Type | SECAV-O Term |
+|---|------------------|------|--------------|
+| 13.08 | The four key roles are present: Designer, Product Manager, Engineer/Dev, and Stakeholder | ✓ | `secav:DesignReviewRole` |
+| 13.09 | Reviewers identify experience failures or inconsistencies with the business, rather than proposing direct solutions | ✓ | `secav:ReviewFinding` |
+| 13.10 | Feedback is expressed using the "observation + impact" method (which element and what consequence it has) | ✓ | `secav:observationImpactStatement` |
+| 13.11 | Comments are grounded in usability heuristics, user research, or key metrics | ✓ | `secav:ReviewFinding` |
+| 13.12 | Reviewers propose specific solutions instead of identifying the experience problem | ⚠ | `secav:SolutionCentricFeedback` |
+| 13.13 | Comments are subjective and unsupported ("I don't like this color", "I'd do it differently") | ⚠ | `secav:SubjectiveFeedback` |
+
+### 13.3 Follow-up and Closure
+
+| # | Observable signal | Type | SECAV-O Term |
+|---|------------------|------|--------------|
+| 13.14 | At closure a prioritized action list is compiled with assigned owners | ✓ | `secav:MeetingAgreement` · `secav:ReviewFinding` |
+| 13.15 | Each finding is classified: mandatory change for launch vs. optional improvement for future iterations | ✓ | `secav:mandatoryForLaunch` |
+| 13.16 | Decisions made are documented: which alternatives were approved or discarded and why | ✓ | `secav:ReviewFinding` · `secav:WorkProductEvidence` |
+| 13.17 | Visual annotation tools are agreed upon for subsequent asynchronous follow-up | ✓ | `secav:MeetingAgreement` |
+| 13.18 | The session closes without recording agreements or owners — only verbal comments | ⚠ | `secav:UndocumentedDesignDecision` |
+| 13.19 | No documentation of why alternatives were discarded — the same discussions repeat in the next iteration | ⚠ | `secav:UndocumentedDesignDecision` |
+
+### 13.4 Additional antipatterns and role-specific alert signals
+
+> **Complementary source:** Guide to Bad Practices for Design Review
+
+| # | Observable signal | Type | SECAV-O Term |
+|---|------------------|------|--------------|
+| 13.20 | The presenter shows complex proposals for the first time in the meeting without a pre-read sent in advance | ⚠ | `secav:DesignAmbush` |
+| 13.21 | The session has more than 8 participants without defined roles — endless debates and analysis paralysis result | ⚠ | `secav:OvercrowdedDesignReview` |
+| 13.22 | The designer moves pixels or changes styles live in response to each audience request | ⚠ | `secav:LiveDesignRedesign` |
+| 13.23 | The session spends more than 15 min debating a cosmetic detail (color, shadow) when the main flow has not yet been validated | ⚠ | `secav:PrematureDetailFocus` |
+| 13.24 | A reviewer makes vague, unactionable comments ("make it more modern", "more impactful") without identifying the problem or its impact | ⚠ | `secav:VagueFeedback` |
+| 13.25 | The designer spends most of the time justifying decisions instead of listening — blocking iteration | ⚠ | `secav:DefensiveDesignerAttitude` |
+| 13.26 | The Product Manager introduces requirement or scope changes during the session, invalidating prior work | ⚠ | `secav:LastMinuteRequirementChange` |
+| 13.27 | The engineer rejects the proposal immediately without exploring alternative implementations | ⚠ | `secav:ImmediateTechnicalRejection` |
+| 13.28 | A stakeholder imposes a design decision by hierarchy without data or user-testing backing | ⚠ | `secav:HierarchyBasedDecision` |
+| 13.29 | A debate resolved in previous sessions is reopened without contributing new information | ⚠ | `secav:ReopeningClosedDebates` |
+
+### Escalation notes — Group 13
+
+- ⚠ signals 13.05, 13.06, or 13.07 must be resolved **before** starting the session; the coach may request rescheduling if preparation is insufficient.
+- Recurring ⚠ signal 13.13 or 13.24 in the same reviewer should lead to an individual `secav:CoachingIntervention` to reinforce the "observation + impact" method.
+- ⚠ signal 13.18 is equivalent to a session with no traceable value; the coach should request that agreements are documented within 24 h or the review is considered not performed.
+- ⚠ signals 13.25–13.28 are role-specific antipatterns: the coach documents them as `secav:AlertBehaviorObservation` linked to the relevant role and person, and designs an individual intervention if they repeat in two or more sessions.
+- ⚠ signal 13.29 indicates governance debt: record a `secavo:ImprovementAction` to reinforce the closure and decision archiving process.
+
+---
+
+## Related documents
+
+| Document | Relationship |
 |---|---|
-| `coaching-governance/guides/coach-attitudes.md` | Actitudes del coach durante la observación |
-| `coaching-governance/guides/peer-review-antipatterns.md` | Detalle de antipatrones de revisión (grupos 5 y 8) |
-| `coaching-governance/guides/shift-left-prevention.md` | Contexto de los grupos 1–4 (prevención shift-left) |
-| `coaching-governance/guides/formal-inspections.md` | Protocolo completo del grupo 6 |
-| `coaching-governance/guides/ai-assisted-code-review.md` | Contexto completo del grupo 8 |
-| `templates/rca-defect-analysis.md` | Cuando una señal ⚠ deriva en un defecto P1/P2 |
-| `templates/engineer-coaching-assessment.md` | Las evidencias ✓ alimentan la evaluación de competencias |
-| `coaching-governance/guides/software-walkthroughs.md` | Protocolo completo del grupo 12 (caminatas de revisión) |
-| `coaching-governance/guides/design-review.md` | Protocolo completo del grupo 13 (revisiones de diseño) |
+| `coaching-governance/guides/coach-attitudes.md` | Coach attitudes during observation |
+| `coaching-governance/guides/peer-review-antipatterns.md` | Detail of review antipatterns (groups 5 and 8) |
+| `coaching-governance/guides/shift-left-prevention.md` | Context for groups 1–4 (shift-left prevention) |
+| `coaching-governance/guides/formal-inspections.md` | Complete protocol for group 6 |
+| `coaching-governance/guides/ai-assisted-code-review.md` | Complete context for group 8 |
+| `templates/rca-defect-analysis.md` | When a ⚠ signal leads to a P1/P2 defect |
+| `templates/engineer-coaching-assessment.md` | ✓ evidence feeds the competency assessment |
+| `coaching-governance/guides/software-walkthroughs.md` | Complete protocol for group 12 (code walkthroughs) |
+| `coaching-governance/guides/design-review.md` | Complete protocol for group 13 (design reviews) |

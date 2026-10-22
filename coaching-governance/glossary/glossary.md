@@ -1,481 +1,481 @@
-# Glosario del Framework SECAV-O
+# SECAV-O Framework Glossary
 
-Este glosario reúne los términos introducidos o redefinidos por el framework de coaching SECAV-O. Los términos de ingeniería de software de uso general (retrospectiva, sprint, requerimiento, prueba unitaria, etc.) no están incluidos salvo que el framework les dé un significado especializado.
-
----
-
-## Índice temático
-
-- [Calidad y criterios mínimos](#calidad-y-criterios-mínimos)
-- [Documentación y glosarios](#documentación-y-glosarios)
-- [Roles del framework](#roles-del-framework)
-- [Actividades de revisión e inspección](#actividades-de-revisión-e-inspección)
-- [Pruebas unitarias](#pruebas-unitarias)
-- [Ciclo de coaching](#ciclo-de-coaching)
-- [Métricas y trazabilidad de defectos](#métricas-y-trazabilidad-de-defectos)
-- [Adopción incremental](#adopción-incremental)
-- [Gestión de riesgos](#gestión-de-riesgos)
+This glossary collects terms introduced or redefined by the SECAV-O coaching framework. General-use software engineering terms (retrospective, sprint, requirement, unit test, etc.) are not included unless the framework gives them a specialized meaning.
 
 ---
 
-## Calidad y criterios mínimos
+## Thematic index
 
-### Calidad mínima razonable
-*Fuente: `coaching-governance/guides/minimum-quality-criteria.md`*
-
-Criterio propuesto por el framework SECAV-O para definir el umbral mínimo de inspección en cada fase del desarrollo. No es un estándar universal reconocido por organismos de certificación; es una convención del framework que establece el piso a partir del cual este modelo de coaching considera que la cobertura de inspección es insuficiente.
-
-El criterio operativo propuesto es: los artefactos críticos de cada fase productiva deben ser inspeccionados por más de un revisor antes de que esa fase concluya.
-
-Una organización que no aplique este criterio puede tener razones técnicas, de madurez o de contexto que justifiquen un enfoque distinto; el framework invita a reflexionar sobre el riesgo acumulado, no a declarar mala práctica de forma automática. El coach documenta la omisión como `secavo:QualityPlanningConcern` para que la organización pueda tomar una decisión informada.
-
-Contrasta con la [calidad aspiracional](#calidad-aspiracional), que es el nivel al que las organizaciones maduran progresivamente.
-
-**Término SECAV-O asociado:** `secav:QualityCriterion`, `secavo:QualityPlanningConcern`
+- [Quality and minimum criteria](#quality-and-minimum-criteria)
+- [Documentation and glossaries](#documentation-and-glossaries)
+- [Framework roles](#framework-roles)
+- [Review and inspection activities](#review-and-inspection-activities)
+- [Unit testing](#unit-testing)
+- [Coaching cycle](#coaching-cycle)
+- [Metrics and defect traceability](#metrics-and-defect-traceability)
+- [Incremental adoption](#incremental-adoption)
+- [Risk management](#risk-management)
 
 ---
 
-### Proceso robusto
-*Fuente: `coaching-governance/guides/robust-process-criteria.md`*
+## Quality and minimum criteria
 
-Nivel de calidad del framework SECAV-O definido por encima de la [calidad mínima razonable](#calidad-mínima-razonable) y por debajo de la [calidad aspiracional](#calidad-aspiracional). Un proceso robusto no solo realiza las prácticas de calidad requeridas — las realiza de forma que genera su propia evidencia verificable de efectividad.
+### Minimum Reasonable Quality
+*Source: `coaching-governance/guides/minimum-quality-criteria.md`*
 
-Un proceso se considera robusto cuando cumple los criterios definidos en `coaching-governance/guides/robust-process-criteria.md`. Los criterios actualmente definidos son:
+A criterion proposed by the SECAV-O framework to define the minimum inspection threshold for each development phase. It is not a universally recognized certification standard; it is a framework convention that establishes the floor below which this coaching model considers inspection coverage insufficient.
 
-| ID | Criterio |
+The proposed operational criterion is: the critical artifacts of each productive phase must be inspected by more than one reviewer before that phase concludes.
+
+An organization that does not apply this criterion may have technical, maturity, or contextual reasons that justify a different approach; the framework invites reflection on accumulated risk rather than automatically declaring bad practice. The coach documents the omission as a `secavo:QualityPlanningConcern` so that the organization can make an informed decision.
+
+Contrasts with [aspirational quality](#aspirational-quality), which is the level organizations mature toward progressively.
+
+**Associated SECAV-O term:** `secav:QualityCriterion`, `secavo:QualityPlanningConcern`
+
+---
+
+### Robust Process
+*Source: `coaching-governance/guides/robust-process-criteria.md`*
+
+A SECAV-O framework quality level defined above [minimum reasonable quality](#minimum-reasonable-quality) and below [aspirational quality](#aspirational-quality). A robust process not only performs the required quality practices — it performs them in a way that generates its own verifiable evidence of effectiveness.
+
+A process is considered robust when it meets the criteria defined in `coaching-governance/guides/robust-process-criteria.md`. Currently defined criteria:
+
+| ID | Criterion |
 |---|---|
-| CR-1 | Las inspecciones se realizan sobre los productos críticos |
-| CR-2 | El comportamiento dinámico se diseña con diagramas UML de actividad o de secuencia |
-| CR-3 | Los defectos resultantes de revisiones e inspecciones se documentan con campos completos |
-| CR-4 | Las revisiones individuales generan hallazgos |
-| CR-5 | Cuando una revisión no genera hallazgos, el coach emite un [waiver](#waiver-del-coach) justificado |
+| CR-1 | Inspections are performed on critical products |
+| CR-2 | Dynamic behavior is designed with UML activity or sequence diagrams |
+| CR-3 | Defects resulting from reviews and inspections are documented with complete fields |
+| CR-4 | Individual reviews generate findings |
+| CR-5 | When a review generates no findings, the coach issues a justified [coach waiver](#coach-waiver) |
 
-La distinción fundamental con la calidad mínima razonable es que el proceso robusto produce evidencia de que las prácticas funcionan — no solo evidencia de que se realizaron.
+The fundamental distinction from minimum reasonable quality is that the robust process produces evidence that practices work — not just evidence that they were performed.
 
-**Término SECAV-O asociado:** Los criterios individuales referencian `secav:ReviewRecord`, `secav:ReviewFinding`, `secav:DesignArtifact`, `secavo:DefectObservation`, `secavo:CoachWaiver` *(propuesto)*.
-
----
-
-### Waiver del coach
-*Fuente: `coaching-governance/guides/robust-process-criteria.md` §CR-5*
-
-Documento emitido por el coach que justifica objetivamente la ausencia de hallazgos en una revisión individual. Aplica cuando una revisión legítimamente no produce hallazgos — porque el artefacto fue corregido exhaustivamente antes de la revisión, porque el revisor tiene evidencia objetiva de que el artefacto cumple todos los criterios de aceptación, o porque el artefacto es de baja complejidad y alcance acotado.
-
-El waiver debe documentar: identidad del artefacto y del revisor, justificación objetiva referenciando evidencia, criterios de aceptación verificados, firma del coach y fecha. Un waiver sin justificación objetiva es inválido.
-
-Criterio de proceso robusto CR-5: si la ausencia de hallazgos no tiene justificación documentada, el coach registra una `secav:CoachingIntervention` dirigida al desarrollo de la competencia de revisión del ingeniero.
-
-**Término SECAV-O asociado:** `secavo:CoachWaiver` *(propuesto — no declarado aún en TTL)*
+**Associated SECAV-O term:** Individual criteria reference `secav:ReviewRecord`, `secav:ReviewFinding`, `secav:DesignArtifact`, `secavo:DefectObservation`, `secavo:CoachWaiver` *(proposed)*.
 
 ---
 
-### Calidad aspiracional
-*Fuente: `coaching-governance/guides/minimum-quality-criteria.md`*
+### Coach Waiver
+*Source: `coaching-governance/guides/robust-process-criteria.md` §CR-5*
 
-El nivel de calidad en el que la mayoría o todos los artefactos producidos en cada fase son inspeccionados formalmente. Es el ideal al que conviene aproximarse de forma incremental; presuponer que toda organización puede lograrlo desde el inicio es irreal.
+A document issued by the coach that objectively justifies the absence of findings in an individual review. Applies when a review legitimately produces no findings — because the artifact was exhaustively corrected before review, because the reviewer has objective evidence that the artifact meets all acceptance criteria, or because the artifact is low-complexity with bounded scope.
 
-Las organizaciones maduran hacia este nivel usando el modelo de adopción incremental (`coaching-governance/guides/incremental-adoption.md`).
+The waiver must document: identity of the artifact and reviewer, objective justification referencing evidence, acceptance criteria verified, coach signature and date. A waiver without objective justification is invalid.
 
----
+Robust process criterion CR-5: if the absence of findings has no documented justification, the coach records a `secav:CoachingIntervention` targeting the development of the engineer's review competency.
 
-### Criterio de avance entre fases
-*Fuente: `coaching-governance/guides/minimum-quality-criteria.md`*
-
-Condición que un artefacto debe cumplir antes de avanzar a la siguiente fase del desarrollo: (1) los hallazgos de la inspección están documentados en el `secav:ReviewRecord`; (2) los hallazgos críticos o bloqueantes están asignados con responsable y plazo; (3) el coach verifica en el seguimiento que los hallazgos bloqueantes fueron resueltos.
-
-La presión de tiempo que lleva a omitir este criterio se registra como `secavo:QualityPlanningConcern`.
+**Associated SECAV-O term:** `secavo:CoachWaiver` *(proposed — not yet declared in TTL)*
 
 ---
 
-### Módulo crítico
-*Fuente: `coaching-governance/guides/formal-inspections.md`*
+### Aspirational Quality
+*Source: `coaching-governance/guides/minimum-quality-criteria.md`*
 
-Aquel cuyo fallo, defecto o degradación genera consecuencias desproporcionadas sobre el sistema o el negocio. El arquitecto identifica los módulos críticos usando al menos uno de estos seis criterios de riesgo:
+The quality level at which most or all artifacts produced in each phase are formally inspected. It is the ideal toward which organizations should progress incrementally; assuming every organization can achieve it from the outset is unrealistic.
 
-| Criterio | Descripción |
+Organizations mature toward this level using the incremental adoption model (`coaching-governance/guides/incremental-adoption.md`).
+
+---
+
+### Phase-Advance Criterion
+*Source: `coaching-governance/guides/minimum-quality-criteria.md`*
+
+The condition an artifact must meet before advancing to the next development phase: (1) inspection findings are documented in the `secav:ReviewRecord`; (2) critical or blocking findings are assigned with an owner and deadline; (3) the coach verifies in follow-up that blocking findings were resolved.
+
+Time pressure that leads to omitting this criterion is recorded as `secavo:QualityPlanningConcern`.
+
+---
+
+### Critical Module
+*Source: `coaching-governance/guides/formal-inspections.md`*
+
+A module whose failure, defect, or degradation produces disproportionate consequences for the system or business. The architect identifies critical modules using at least one of these six risk criteria:
+
+| Criterion | Description |
 |---|---|
-| Impacto de fallo | Su fallo afecta funcionalidades centrales o genera daño irreversible |
-| Amplitud de uso | Es utilizado o referenciado por muchos otros módulos o equipos |
-| Complejidad estructural | Alta complejidad ciclomática, lógica condicional anidada, muchos casos de borde |
-| Seguridad / privacidad | Maneja autenticación, autorización, datos personales o criptografía |
-| Integridad de datos | Afecta persistencia, consistencia transaccional o integridad referencial |
-| Novedad / incertidumbre | Usa una tecnología o patrón con el que el equipo tiene poca experiencia |
+| Failure impact | Its failure affects core functionality or causes irreversible damage |
+| Breadth of use | It is used or referenced by many other modules or teams |
+| Structural complexity | High cyclomatic complexity, nested conditional logic, many edge cases |
+| Security / privacy | Handles authentication, authorization, personal data, or cryptography |
+| Data integrity | Affects persistence, transactional consistency, or referential integrity |
+| Novelty / uncertainty | Uses a technology or pattern with which the team has little experience |
 
-**Término SECAV-O asociado:** `secav:SourceCodeArtifact`, `secav:QualityCriterion`
-
----
-
-### QualityPlanningConcern (Preocupación de planificación de calidad)
-*Fuente: `coaching-governance/guides/formal-inspections.md`, `coaching-governance/guides/minimum-quality-criteria.md`*
-
-Artefacto de escalación generado por el coach cuando una actividad de calidad obligatoria — inspección formal, revisión de pares, revisión de pruebas unitarias u otra — es omitida o reducida significativamente sin justificación técnica.
-
-El coach documenta el artefacto, lo comunica al Líder Técnico y a la gerencia, y si el patrón es recurrente, lo lleva al Comité de Coaches.
-
-**Término SECAV-O asociado:** `secavo:QualityPlanningConcern`
+**Associated SECAV-O term:** `secav:SourceCodeArtifact`, `secav:QualityCriterion`
 
 ---
 
-## Documentación y glosarios
+### QualityPlanningConcern
+*Source: `coaching-governance/guides/formal-inspections.md`, `coaching-governance/guides/minimum-quality-criteria.md`*
 
-### Glosario primario
-*Fuente: `coaching-governance/guides/requirements-inspection.md`*
+An escalation artifact generated by the coach when a mandatory quality activity — formal inspection, peer review, unit test review, or another — is omitted or significantly reduced without technical justification.
 
-Glosario ubicado al **inicio** de un documento de requerimientos (o de cualquier documento técnico) que contiene los términos sin los cuales el lector no puede interpretar correctamente el documento. Si un término del glosario primario es ambiguo, todos los requerimientos que lo usan heredan esa ambigüedad.
+The coach documents the artifact, communicates it to the Technical Lead and management, and if the pattern is recurring, brings it to the Coach Committee.
 
-Los términos del glosario primario son productos de trabajo inspeccionables con el mismo rigor que un requerimiento: **deben ser discutidos por dos o más revisores de forma independiente** antes de ser aceptados. Un término que dos revisores interpretan de forma distinta es un `secav:ReviewFinding` que debe resolverse antes de aprobar los requerimientos que lo usan.
-
-Criterios de calidad de un término del glosario primario: interpretación unívoca entre revisores, definición operacional (permite decidir si algo pertenece o no al concepto), consistencia con otros términos, y correspondencia con el uso del dominio de negocio.
-
-Contrasta con el [glosario secundario](#glosario-secundario).
-
-**Término SECAV-O asociado:** `secav:DesignArtifact` (parte del documento), `secav:QualityCriterion`, `secav:ReviewFinding`
+**Associated SECAV-O term:** `secavo:QualityPlanningConcern`
 
 ---
 
-### Diagrama de estados
-*Fuente: `coaching-governance/guides/design-documentation-standards.md`*
+## Documentation and glossaries
 
-Artefacto de diseño obligatorio (`secav:DesignArtifact`) para cualquier entidad del sistema — clase, módulo, proceso, recurso o flujo de negocio — cuyo comportamiento varía según el estado en el que se encuentre. Su función es hacer visible simultáneamente todo el ciclo de vida del objeto: estados posibles, estado inicial, estados finales, transiciones, condiciones de guarda y acciones.
+### Primary Glossary
+*Source: `coaching-governance/guides/requirements-inspection.md`*
 
-Un diagrama de estados completo debe incluir: estado inicial explícito (marcado con símbolo estándar), todos los estados posibles, estados finales explícitos, transiciones etiquetadas con el evento o condición que las dispara, condiciones de guarda, y acciones de transición cuando aplique.
+A glossary located at the **beginning** of a requirements document (or any technical document) that contains the terms without which the reader cannot correctly interpret the document. If a primary glossary term is ambiguous, all requirements that use it inherit that ambiguity.
 
-La ausencia de un diagrama de estados cuando el sistema tiene estados, o un diagrama incompleto que omite estados finales o transiciones, es un `secav:ReviewFinding` bloqueante para avanzar a implementación.
+Primary glossary terms are inspectable work products with the same rigor as a requirement: **they must be discussed by two or more reviewers independently** before being accepted. A term that two reviewers interpret differently is a `secav:ReviewFinding` that must be resolved before approving the requirements that use it.
 
-**Término SECAV-O asociado:** `secav:DesignArtifact`, `secav:DesignReview`, `secav:QualityCriterion`, `secav:ReviewFinding`, `secav:DesignCompetency`
+Quality criteria for a primary glossary term: unambiguous interpretation among reviewers, operational definition (allows deciding whether something belongs to the concept or not), consistency with other terms, and correspondence with business domain usage.
 
----
+Contrasts with [secondary glossary](#secondary-glossary).
 
-### Diagrama de actividad / flujo
-*Fuente: `coaching-governance/guides/robust-process-criteria.md` §CR-2*
-
-Artefacto de diseño obligatorio (`secav:DesignArtifact`) para toda lógica cuyo comportamiento varía según el flujo de control: procesos con ramificaciones (if/else), bucles, condiciones de guarda, y algoritmos con múltiples caminos de ejecución.
-
-Un diagrama de actividad válido como artefacto inspeccionable debe: ser consistente con el código o especificación que modela, cubrir los flujos principales y los alternativos o de error más relevantes, y mostrar condiciones de guarda explícitas en todos los puntos de decisión.
-
-La ausencia de este diagrama cuando el comportamiento es dinámico es un `secav:ReviewFinding` de tipo `missingRequiredDiagram`. Se distingue del [diagrama de secuencia](#diagrama-de-secuencia) en que modela flujo de control dentro de un proceso, no mensajes entre componentes.
-
-**Término SECAV-O asociado:** `secav:DesignArtifact`, `secav:DesignReview`, `secav:ReviewFinding`, `secav:DesignCompetency`
+**Associated SECAV-O term:** `secav:DesignArtifact` (part of the document), `secav:QualityCriterion`, `secav:ReviewFinding`
 
 ---
 
-### Diagrama de secuencia
-*Fuente: `coaching-governance/guides/robust-process-criteria.md` §CR-2*
+### State Diagram
+*Source: `coaching-governance/guides/design-documentation-standards.md`*
 
-Artefacto de diseño obligatorio (`secav:DesignArtifact`) para toda interacción entre componentes, servicios, actores o capas del sistema en la que el orden temporal de los mensajes es relevante.
+A mandatory design artifact (`secav:DesignArtifact`) for any system entity — class, module, process, resource, or business flow — whose behavior varies according to its current state. Its function is to simultaneously make visible the entire lifecycle of the object: possible states, initial state, final states, transitions, guard conditions, and actions.
 
-Un diagrama de secuencia válido como artefacto inspeccionable debe: ser consistente con el código o especificación que modela, cubrir los flujos principales e incluir flujos alternativos o de error relevantes, y mostrar el nombre de la operación o evento en cada mensaje junto con los retornos relevantes.
+A complete state diagram must include: explicit initial state (marked with the standard symbol), all possible states, explicit final states, transitions labeled with the triggering event or condition, guard conditions, and transition actions where applicable.
 
-La ausencia de este diagrama cuando existen interacciones con orden temporal definido es un `secav:ReviewFinding` de tipo `missingRequiredDiagram`. Se distingue del [diagrama de actividad](#diagrama-de-actividad--flujo) en que modela la colaboración entre participantes, no el flujo interno de un proceso.
+The absence of a state diagram when the system has states, or an incomplete diagram that omits final states or transitions, is a blocking `secav:ReviewFinding` before advancing to implementation.
 
-**Término SECAV-O asociado:** `secav:DesignArtifact`, `secav:DesignReview`, `secav:ReviewFinding`, `secav:DesignCompetency`
-
----
-
-### Glosario secundario
-*Fuente: `coaching-governance/guides/requirements-inspection.md`*
-
-Glosario ubicado al **final** de un documento de requerimientos que contiene términos de apoyo: acrónimos, referencias a sistemas externos, convenciones de nomenclatura, y términos técnicos que aparecen ocasionalmente pero no son centrales para la comprensión del documento.
-
-A diferencia del [glosario primario](#glosario-primario), los términos del glosario secundario tienen menor riesgo de propagar ambigüedad y no requieren el mismo nivel de inspección formal, aunque sí deben ser revisados por al menos un revisor adicional al autor.
+**Associated SECAV-O term:** `secav:DesignArtifact`, `secav:DesignReview`, `secav:QualityCriterion`, `secav:ReviewFinding`, `secav:DesignCompetency`
 
 ---
 
-## Roles del framework
+### Activity / Flow Diagram
+*Source: `coaching-governance/guides/robust-process-criteria.md` §CR-2*
 
-### Asistente de Calidad
-*Fuente: `coaching-governance/guides/defect-tracking.md`*
+A mandatory design artifact (`secav:DesignArtifact`) for any logic whose behavior varies by control flow: processes with branches (if/else), loops, guard conditions, and algorithms with multiple execution paths.
 
-Miembro del equipo designado para cerrar tickets de defectos en el sistema de tracking cuando el coach no puede asumir esta actividad de forma sostenida. La designación requiere: capacitación previa impartida por el coach, al menos dos sprints de seguimiento supervisado con validación explícita, y registro formal de la designación en el plan de coaching.
+A valid activity diagram as an inspectable artifact must: be consistent with the code or specification it models, cover the main flows and the most relevant alternative or error flows, and show explicit guard conditions at all decision points.
 
-El rol tiene alcance delimitado: solo puede clasificar y cerrar defectos con los criterios acordados; no toma decisiones sobre umbrales de calidad ni sobre qué defectos escalar. El rol también es una oportunidad de desarrollo en `secav:ReviewCompetency` y `secav:DesignCompetency`.
+The absence of this diagram when behavior is dynamic is a `secav:ReviewFinding` of type `missingRequiredDiagram`. It is distinguished from [sequence diagram](#sequence-diagram) in that it models control flow within a process, not messages between components.
 
-**Término SECAV-O asociado:** `secav:Engineer`, `secav:CoachingIntervention` (capacitación), `secav:CompetencyAssessment`
+**Associated SECAV-O term:** `secav:DesignArtifact`, `secav:DesignReview`, `secav:ReviewFinding`, `secav:DesignCompetency`
+
+---
+
+### Sequence Diagram
+*Source: `coaching-governance/guides/robust-process-criteria.md` §CR-2*
+
+A mandatory design artifact (`secav:DesignArtifact`) for any interaction between components, services, actors, or system layers in which the temporal order of messages is relevant.
+
+A valid sequence diagram as an inspectable artifact must: be consistent with the code or specification it models, cover the main flows and include relevant alternative or error flows, and show the operation or event name in each message along with relevant return values.
+
+The absence of this diagram when interactions with a defined temporal order exist is a `secav:ReviewFinding` of type `missingRequiredDiagram`. It is distinguished from [activity diagram](#activity--flow-diagram) in that it models collaboration between participants, not the internal flow of a process.
+
+**Associated SECAV-O term:** `secav:DesignArtifact`, `secav:DesignReview`, `secav:ReviewFinding`, `secav:DesignCompetency`
+
+---
+
+### Secondary Glossary
+*Source: `coaching-governance/guides/requirements-inspection.md`*
+
+A glossary located at the **end** of a requirements document that contains supporting terms: acronyms, references to external systems, naming conventions, and technical terms that appear occasionally but are not central to understanding the document.
+
+Unlike the [primary glossary](#primary-glossary), secondary glossary terms carry lower risk of propagating ambiguity and do not require the same level of formal inspection, although they should still be reviewed by at least one reviewer additional to the author.
+
+---
+
+## Framework roles
+
+### Quality Assistant
+*Source: `coaching-governance/guides/defect-tracking.md`*
+
+A team member designated to close defect tickets in the tracking system when the coach cannot sustain this activity on an ongoing basis. The designation requires: prior training provided by the coach, at least two sprints of supervised follow-up with explicit validation, and formal documentation of the designation in the coaching plan.
+
+The role has a defined scope: it can only classify and close defects using the agreed criteria; it does not make decisions about quality thresholds or which defects to escalate. The role is also a development opportunity in `secav:ReviewCompetency` and `secav:DesignCompetency`.
+
+**Associated SECAV-O term:** `secav:Engineer`, `secav:CoachingIntervention` (training), `secav:CompetencyAssessment`
 
 ---
 
 ### Coach
-*Fuente: `ontology/secav-o.ttl`, framework general*
+*Source: `ontology/secav-o.ttl`, general framework*
 
-Stakeholder (`secav:Coach`, subclase de `secav:Stakeholder`) responsable de observar actividades de ingeniería, recopilar evidencia, producir evaluaciones de competencia y generar intervenciones de coaching.
+A Stakeholder (`secav:Coach`, subclass of `secav:Stakeholder`) responsible for observing engineering activities, collecting evidence, producing competency assessments, and generating coaching interventions.
 
-El rol que adopta el coach varía según la actividad:
+The role the coach adopts varies by activity:
 
-| Actividad | Rol del coach |
+| Activity | Coach role |
 |---|---|
-| Revisiones de pares e inspecciones formales | [Observador silencioso](#observador-silencioso): toma notas, no interviene durante la sesión |
-| Retrospectivas sin Scrum Master ni facilitador | Facilitador: conduce la sesión siguiendo el protocolo definido |
-| Retrospectivas con facilitador externo | Observador silencioso |
-| Planificación de proyecto | Participante: voz de calidad; puede registrar preocupaciones, disentir y escalar |
+| Peer reviews and formal inspections | [Silent observer](#silent-observer): takes notes, does not intervene during the session |
+| Retrospectives without a Scrum Master or facilitator | Facilitator: leads the session following the defined protocol |
+| Retrospectives with an external facilitator | Silent observer |
+| Project planning | Participant: quality voice; may record concerns, dissent, and escalate |
 
-**Responsabilidad técnica de los ingenieros:** el coach observa y retroalimenta, pero no diseña pruebas, no decide qué defectos corregir ni aprueba técnicamente el avance de artefactos. Verificar que el proceso se siguió no equivale a reemplazar la aprobación técnica, que corresponde al Líder Técnico y a los ingenieros responsables.
-
----
-
-### Comité de Coaches (Coach Committee)
-*Fuente: `coaching-governance/docs/coach-committee.md`*
-
-Estructura de gobernanza que se forma cuando una organización tiene más de un coach. El comité coordina las prácticas de coaching, genera el plan de coaching organizacional, asegura la aplicación consistente del framework entre equipos, y gestiona la escalación de problemas que ningún coach individual puede resolver.
-
-No es una jerarquía que reemplace la autonomía del coach en su equipo; es un órgano de coordinación y estándares.
-
-**Término SECAV-O asociado:** `secavo:CoachCommittee` *(propuesto, no declarado aún en TTL)*
+**Engineer technical responsibility:** the coach observes and provides feedback but does not design tests, decide which defects to fix, or technically approve the advancement of artifacts. Verifying that the process was followed is not equivalent to replacing technical approval, which belongs to the Technical Lead and responsible engineers.
 
 ---
 
-### Lead Coach (Coach Líder)
-*Fuente: `coaching-governance/docs/coach-committee.md`*
+### Coach Committee
+*Source: `coaching-governance/docs/coach-committee.md`*
 
-Coordinador designado del Comité de Coaches. Responsable de la gobernanza del plan de coaching organizacional, del manejo de escalaciones inter-equipo, y de la comunicación externa con gerencia o recursos humanos. La designación puede hacerla la gerencia o el consenso del comité.
+A governance structure formed when an organization has more than one coach. The committee coordinates coaching practices, generates the organizational coaching plan, ensures consistent application of the framework across teams, and manages the escalation of problems that no individual coach can resolve alone.
 
-**Término SECAV-O asociado:** `secavo:LeadCoach` *(propuesto, no declarado aún en TTL)*
+It is not a hierarchy that replaces the coach's autonomy within their team; it is a coordination and standards body.
 
----
-
-### Observador silencioso
-*Fuente: `coaching-governance/guides/peer-review-sessions.md`, `coaching-governance/guides/formal-inspections.md`, `coaching-governance/guides/retrospective-participation.md`*
-
-Rol que adopta el coach en todas las reuniones de revisión, inspección y retrospectiva (cuando hay facilitador externo). El coach:
-- No da su opinión técnica durante la sesión.
-- No aprueba ni rechaza hallazgos.
-- No media activamente en desacuerdos.
-- No corrige a los ingenieros en voz alta.
-- Toma notas de observación como `secav:WorkProductEvidence`.
-- Da retroalimentación — grupal, individual o a la organización — después de la sesión.
-
-**Razón:** si el coach interviene durante la sesión, los ingenieros dejan de resolver por sí mismos y esperan su juicio. La revisión deja de ser de pares.
+**Associated SECAV-O term:** `secavo:CoachCommittee` *(proposed, not yet declared in TTL)*
 
 ---
 
-## Actividades de revisión e inspección
+### Lead Coach
+*Source: `coaching-governance/docs/coach-committee.md`*
 
-### ImprovementAction (Acción de mejora)
-*Fuente: `coaching-governance/guides/retrospective-participation.md`, `coaching-governance/guides/peer-review-sessions.md`, `coaching-governance/guides/formal-inspections.md`*
+The designated coordinator of the Coach Committee. Responsible for organizational coaching plan governance, cross-team escalation management, and external communication with management or HR. Designation may be made by management or by committee consensus.
 
-Acción de mejora concreta acordada en una retrospectiva, con responsable y plazo definidos, derivada de datos observados (hallazgos de revisión, métricas de defectos, riesgos) en lugar de opiniones. Es una especialización de `secav:CoachingIntervention`.
-
-**Término SECAV-O asociado:** `secavo:ImprovementAction` (subclase de `secav:CoachingIntervention`)
+**Associated SECAV-O term:** `secavo:LeadCoach` *(proposed, not yet declared in TTL)*
 
 ---
 
-### Inspección formal
-*Fuente: `coaching-governance/guides/formal-inspections.md`*
+### Silent Observer
+*Source: `coaching-governance/guides/peer-review-sessions.md`, `coaching-governance/guides/formal-inspections.md`, `coaching-governance/guides/retrospective-participation.md`*
 
-Revisión estructurada en la que un grupo de participantes con roles definidos examina un artefacto contra criterios de calidad explícitos, con el objetivo de identificar defectos antes de que avancen a la siguiente fase del desarrollo.
+The role the coach adopts in all review, inspection, and retrospective meetings (when there is an external facilitator). The coach:
+- Does not express a technical opinion during the session.
+- Does not approve or reject findings.
+- Does not actively mediate disagreements.
+- Does not correct engineers aloud.
+- Takes observation notes as `secav:WorkProductEvidence`.
+- Provides feedback — group, individual, or organizational — after the session.
 
-Se diferencia de una revisión de código ordinaria por el grado de estructura: roles definidos (moderador designado, recorder, inspectores), preparación individual obligatoria previa a la reunión, reunión moderada con agenda, y registro formal de hallazgos en un `secav:ReviewRecord`.
-
-El coach asiste como [observador silencioso](#observador-silencioso). El moderador es un inspector designado, no el coach.
-
-**Término SECAV-O asociado:** `secav:CodeReview` / `secav:DesignReview` / `secav:UnitTestDesignReview`, `secav:ReviewRecord`, `secav:ReviewFinding`
-
----
-
-### Punto pendiente
-*Fuente: `coaching-governance/guides/peer-review-sessions.md`*
-
-Desacuerdo no resuelto en una revisión de pares que ha sido "suficientemente debatido": ambas posiciones fueron expresadas con argumentos técnicos, no emerge nueva evidencia, y el debate consumió tiempo desproporcionado. Se registra en el `secav:ReviewRecord` como hallazgo sin resolución y se escala al Líder de Proyecto después de la sesión, no durante ella.
+**Reason:** if the coach intervenes during the session, engineers stop resolving issues independently and wait for the coach's judgment. The review ceases to be a peer review.
 
 ---
 
-### Revisión de pares (Peer review)
-*Fuente: `coaching-governance/guides/peer-review-sessions.md`*
+## Review and inspection activities
 
-Sesión de revisión estructurada en la que los ingenieros — no el coach — examinan un artefacto de código o diseño. Se distingue de la inspección formal por menor estructura: no requiere protocolo de preparación individual obligatoria ni rol de recorder. El coach asiste como [observador silencioso](#observador-silencioso).
+### ImprovementAction
+*Source: `coaching-governance/guides/retrospective-participation.md`, `coaching-governance/guides/peer-review-sessions.md`, `coaching-governance/guides/formal-inspections.md`*
 
-**Término SECAV-O asociado:** `secav:CodeReview` / `secav:DesignReview`
+A concrete improvement action agreed upon in a retrospective, with a defined owner and deadline, derived from observed data (review findings, defect metrics, risks) rather than opinions. It is a specialization of `secav:CoachingIntervention`.
 
----
-
-## Pruebas unitarias
-
-### Análisis de valores límite (Boundary Value Analysis — BVA)
-*Fuente: `coaching-governance/guides/unit-test-review.md`*
-
-Técnica sistemática de diseño de casos de prueba que identifica los valores en los extremos de cada partición de equivalencia: límites numéricos (mínimo, máximo, cero, negativo), límites de colecciones (vacía, un elemento, capacidad máxima), y límites de cadenas (vacía, espacio, un carácter, muy larga). Fuente: Beizer, *Software Testing Techniques* (1990).
+**Associated SECAV-O term:** `secavo:ImprovementAction` (subclass of `secav:CoachingIntervention`)
 
 ---
 
-### Patrón AAA / GWT (Arrange-Act-Assert / Given-When-Then)
-*Fuente: `coaching-governance/guides/unit-test-review.md`*
+### Formal Inspection
+*Source: `coaching-governance/guides/formal-inspections.md`*
 
-Estructura de tres partes para pruebas unitarias:
-- **Arrange / Given:** configuración de datos de entrada y comportamiento de mocks.
-- **Act / When:** ejecución del método bajo prueba, preferentemente en una sola línea.
-- **Assert / Then:** verificación explícita del resultado esperado.
+A structured review in which a group of participants with defined roles examines an artifact against explicit quality criteria, with the goal of identifying defects before they advance to the next development phase.
 
-Una prueba que tiene lógica de control de flujo (`if`, `for`) en la sección Act o Assert tiene un defecto de diseño de casos. Fuente: Meszaros, *xUnit Test Patterns* (2007).
+It differs from an ordinary code review in its degree of structure: defined roles (designated moderator, recorder, inspectors), mandatory individual preparation before the meeting, a moderated meeting with an agenda, and formal recording of findings in a `secav:ReviewRecord`.
+
+The coach attends as a [silent observer](#silent-observer). The moderator is a designated inspector, not the coach.
+
+**Associated SECAV-O term:** `secav:CodeReview` / `secav:DesignReview` / `secav:UnitTestDesignReview`, `secav:ReviewRecord`, `secav:ReviewFinding`
 
 ---
 
-### Principios FIRST
-*Fuente: `coaching-governance/guides/unit-test-review.md`*
+### Pending Point
+*Source: `coaching-governance/guides/peer-review-sessions.md`*
 
-Cinco criterios de calidad (`secav:QualityCriterion`) que toda prueba unitaria debe cumplir:
+An unresolved disagreement in a peer review that has been "sufficiently debated": both positions were expressed with technical arguments, no new evidence emerges, and the debate consumed disproportionate time. It is recorded in the `secav:ReviewRecord` as an unresolved finding and escalated to the Project Leader after the session, not during it.
 
-| Principio | Criterio |
+---
+
+### Peer Review
+*Source: `coaching-governance/guides/peer-review-sessions.md`*
+
+A structured review session in which engineers — not the coach — examine a code or design artifact. It differs from a formal inspection in its lower degree of structure: it does not require a mandatory individual preparation protocol or a recorder role. The coach attends as a [silent observer](#silent-observer).
+
+**Associated SECAV-O term:** `secav:CodeReview` / `secav:DesignReview`
+
+---
+
+## Unit testing
+
+### Boundary Value Analysis (BVA)
+*Source: `coaching-governance/guides/unit-test-review.md`*
+
+A systematic test-case design technique that identifies values at the extremes of each equivalence partition: numeric limits (minimum, maximum, zero, negative), collection limits (empty, one element, maximum capacity), and string limits (empty, space, one character, very long). Source: Beizer, *Software Testing Techniques* (1990).
+
+---
+
+### AAA / GWT Pattern (Arrange-Act-Assert / Given-When-Then)
+*Source: `coaching-governance/guides/unit-test-review.md`*
+
+A three-part structure for unit tests:
+- **Arrange / Given:** configuration of input data and mock behavior.
+- **Act / When:** execution of the method under test, preferably in a single line.
+- **Assert / Then:** explicit verification of the expected result.
+
+A test that has control flow logic (`if`, `for`) in the Act or Assert section has a test case design defect. Source: Meszaros, *xUnit Test Patterns* (2007).
+
+---
+
+### FIRST Principles
+*Source: `coaching-governance/guides/unit-test-review.md`*
+
+Five quality criteria (`secav:QualityCriterion`) that every unit test must satisfy:
+
+| Principle | Criterion |
 |---|---|
-| **Fast (Rápida)** | Ejecución en milisegundos; sin I/O real (bases de datos, red, sistema de archivos) |
-| **Isolated (Aislada)** | Ninguna prueba depende del resultado de otra; sin estado global mutable compartido |
-| **Repeatable (Repetible)** | Mismo resultado en cualquier entorno, fecha u hora de ejecución |
-| **Self-Validating (Autovalidable)** | Resultado binario Pass / Fail; sin interpretación manual de logs |
-| **Timely (Oportuna)** | Escrita en paralelo o antes del código de producción (TDD) |
+| **Fast** | Executes in milliseconds; no real I/O (databases, network, filesystem) |
+| **Isolated** | No test depends on the result of another; no shared mutable global state |
+| **Repeatable** | Same result in any environment, date, or time of execution |
+| **Self-Validating** | Binary Pass / Fail result; no manual interpretation of logs |
+| **Timely** | Written in parallel with or before production code (TDD) |
 
-Fuente: Martin, *Clean Code* (2008), capítulo 9.
-
----
-
-## Ciclo de coaching
-
-### Baseline de crecimiento inicial
-*Fuente: `coaching-governance/docs/coaching-cycle.md`*
-
-Perfil de competencia de un ingeniero establecido al inicio del ciclo de coaching o inmediatamente después del lanzamiento del equipo. Incluye: competencia demostrada, autonomía, evidencia de revisiones e inspecciones, patrones de defectos, historial de capacitación relevante y restricciones contextuales. No es un ranking punitivo: es el punto de comparación para medir el crecimiento longitudinal.
-
-**Término SECAV-O asociado:** `secav:CompetencyAssessment`, `secav:WorkProductEvidence`
+Source: Martin, *Clean Code* (2008), Chapter 9.
 
 ---
 
-### Plan anual de coaching
-*Fuente: `coaching-governance/docs/coaching-cycle.md`*
+## Coaching cycle
 
-Artefacto que define las prioridades de desarrollo de competencias para el año, establece el baseline inicial, fija objetivos y resultados esperados, selecciona métricas y fuentes de evidencia, e identifica las actividades y artefactos que el coach observará. Es el marco dentro del cual se ejecutan los sprints de coaching.
+### Initial Growth Baseline
+*Source: `coaching-governance/docs/coaching-cycle.md`*
 
-**Término SECAV-O asociado:** `secavo:AnnualCoachingPlan`
+An engineer's competency profile established at the start of the coaching cycle or immediately after team launch. Includes: demonstrated competency, autonomy, review and inspection evidence, defect patterns, relevant training history, and contextual constraints. It is not a punitive ranking: it is the comparison point for measuring longitudinal growth.
 
----
-
-### Plan de coaching organizacional
-*Fuente: `coaching-governance/docs/coach-committee.md`*
-
-Plan generado por el Comité de Coaches que agrega y coordina los planes individuales de cada equipo. Incluye objetivos de coaching a nivel organizacional, baseline de competencias entre equipos, registro de riesgos organizacionales, matriz de asignación de coaches y calendario compartido de actividades de coaching.
-
-**Término SECAV-O asociado:** `secavo:AnnualCoachingPlan` (alcance organizacional)
+**Associated SECAV-O term:** `secav:CompetencyAssessment`, `secav:WorkProductEvidence`
 
 ---
 
-### Preparación de miembro
-*Fuente: `coaching-governance/docs/coaching-cycle.md`*
+### Annual Coaching Plan
+*Source: `coaching-governance/docs/coaching-cycle.md`*
 
-Actividad que ocurre antes del lanzamiento del equipo o al incorporarse un nuevo miembro, en la que el ingeniero recibe: propósito y objetivos del proyecto, modelo de entrega, prácticas de ingeniería, expectativas de calidad, riesgos conocidos, artefactos clave, expectativas de revisiones e inspecciones, prácticas de pruebas, responsabilidades de validación humana en trabajo asistido por IA, y métricas que se recopilarán. Su enfoque es de desarrollo, no de evaluación de idoneidad.
+An artifact that defines competency-development priorities for the year, establishes the initial baseline, sets objectives and expected outcomes, selects metrics and evidence sources, and identifies the activities and artifacts the coach will observe. It is the framework within which coaching sprints are executed.
 
----
-
-### Sprint de coaching
-*Fuente: `coaching-governance/docs/coaching-cycle.md`*
-
-Iteración acotada de coaching que: revisa el plan anual, selecciona objetivos de competencia para el sprint, observa actividades de ingeniería y recopila evidencia, aplica intervenciones de coaching, y retrospecciona. La duración no está prescrita; debe ser suficientemente larga para producir evidencia observable y suficientemente corta para permitir replanificación oportuna.
-
-**Término SECAV-O asociado:** `secavo:CoachingSprint`
+**Associated SECAV-O term:** `secavo:AnnualCoachingPlan`
 
 ---
 
-## Métricas y trazabilidad de defectos
+### Organizational Coaching Plan
+*Source: `coaching-governance/docs/coach-committee.md`*
 
-### detectionMethod (Método de detección)
-*Fuente: `coaching-governance/guides/defect-tracking.md`*
+A plan generated by the Coach Committee that aggregates and coordinates the individual plans for each team. Includes organization-wide coaching objectives, cross-team competency baseline, organizational risk register, coach assignment matrix, and a shared calendar of coaching activities.
 
-Propiedad de datos de `secavo:DefectObservation` que registra cómo fue encontrado el defecto: inspección formal, revisión de pares, prueba automatizada, prueba manual, reporte de usuario, u otro. Permite calcular la efectividad relativa de cada técnica de detección.
-
-**Término SECAV-O asociado:** `secavo:detectionMethod`
+**Associated SECAV-O term:** `secavo:AnnualCoachingPlan` (organizational scope)
 
 ---
 
-### Densidad de defectos por módulo
-*Fuente: `coaching-governance/guides/defect-tracking.md`*
+### Member Preparation
+*Source: `coaching-governance/docs/coaching-cycle.md`*
 
-Métrica que cuenta el número de defectos registrados por módulo o componente en un período dado. Identifica los componentes de mayor riesgo que deberían ser candidatos prioritarios a inspección formal.
-
-**Término SECAV-O asociado:** `secavo:Metric`, `secavo:DefectObservation`
+An activity that occurs before team launch or when a new member joins, in which the engineer receives: project purpose and objectives, delivery model, engineering practices, quality expectations, known risks, key artifacts, review and inspection expectations, testing practices, human validation responsibilities for AI-assisted work, and metrics that will be collected. Its focus is developmental, not eligibility assessment.
 
 ---
 
-### Efectividad de revisión
-*Fuente: `coaching-governance/guides/defect-tracking.md`*
+### Coaching Sprint
+*Source: `coaching-governance/docs/coaching-cycle.md`*
 
-Porcentaje de defectos detectados en actividades de revisión de código o inspección formal respecto al total de defectos registrados en el período. Un valor bajo indica que las revisiones no están capturando defectos antes de que escapen a fases posteriores.
+A bounded coaching iteration that: reviews the annual plan, selects competency objectives for the sprint, observes engineering activities and collects evidence, applies coaching interventions, and conducts a retrospective. Duration is not prescribed; it must be long enough to produce observable evidence and short enough to allow timely replanning.
 
-**Término SECAV-O asociado:** `secavo:Metric`, `secavo:ReviewObservation`
-
----
-
-### phaseDetected (Fase de detección)
-*Fuente: `coaching-governance/guides/defect-tracking.md`*
-
-Propiedad de datos de `secavo:DefectObservation` que registra en qué fase del desarrollo fue encontrado el defecto: revisión de código, inspección formal, prueba unitaria, integración, sistema, aceptación, producción. Junto con `phaseInjected` permite calcular el costo relativo de detección tardía.
-
-**Término SECAV-O asociado:** `secavo:phaseDetected`
+**Associated SECAV-O term:** `secavo:CoachingSprint`
 
 ---
 
-### phaseInjected (Fase de inyección)
-*Fuente: `coaching-governance/guides/defect-tracking.md`*
+## Metrics and defect traceability
 
-Propiedad de datos de `secavo:DefectObservation` que registra en qué fase del desarrollo fue introducido el defecto: requerimientos, diseño de arquitectura, diseño detallado, codificación, diseño de pruebas unitarias, diseño de pruebas de sistema, diseño de pruebas de aceptación. La distribución de `phaseInjected` a lo largo de los sprints indica qué fases generan más defectos y deben priorizarse para inspección.
+### detectionMethod
+*Source: `coaching-governance/guides/defect-tracking.md`*
 
-**Término SECAV-O asociado:** `secavo:phaseInjected`
+A data property of `secavo:DefectObservation` that records how the defect was found: formal inspection, peer review, automated test, manual test, user report, or other. Enables calculating the relative effectiveness of each detection technique.
 
----
-
-### Tasa de escape (Escape rate)
-*Fuente: `coaching-governance/guides/defect-tracking.md`*
-
-Porcentaje de defectos encontrados en producción o en fases tardías (integración, sistema, aceptación) respecto al total de defectos registrados. Una tasa de escape alta indica que las inspecciones y revisiones de fases tempranas no son efectivas o no están ocurriendo.
-
-**Término SECAV-O asociado:** `secavo:Metric`, `secavo:DefectObservation`
+**Associated SECAV-O term:** `secavo:detectionMethod`
 
 ---
 
-## Adopción incremental
+### Defect Density per Module
+*Source: `coaching-governance/guides/defect-tracking.md`*
 
-### Decisión Go / Pivot / Stop
-*Fuente: `coaching-governance/guides/incremental-adoption.md`*
+A metric that counts the number of defects recorded per module or component in a given period. Identifies the highest-risk components that should be priority candidates for formal inspection.
 
-Tres posibles resultados de la evaluación de una iteración piloto del framework:
+**Associated SECAV-O term:** `secavo:Metric`, `secavo:DefectObservation`
 
-| Decisión | Condición |
+---
+
+### Review Effectiveness
+*Source: `coaching-governance/guides/defect-tracking.md`*
+
+The percentage of defects detected in code review or formal inspection activities relative to the total defects recorded in the period. A low value indicates that reviews are not capturing defects before they escape to later phases.
+
+**Associated SECAV-O term:** `secavo:Metric`, `secavo:ReviewObservation`
+
+---
+
+### phaseDetected
+*Source: `coaching-governance/guides/defect-tracking.md`*
+
+A data property of `secavo:DefectObservation` that records in which development phase the defect was found: code review, formal inspection, unit test, integration, system, acceptance, production. Together with `phaseInjected` it enables calculating the relative cost of late detection.
+
+**Associated SECAV-O term:** `secavo:phaseDetected`
+
+---
+
+### phaseInjected
+*Source: `coaching-governance/guides/defect-tracking.md`*
+
+A data property of `secavo:DefectObservation` that records in which development phase the defect was introduced: requirements, architecture design, detailed design, coding, unit test design, system test design, acceptance test design. The distribution of `phaseInjected` across sprints indicates which phases generate the most defects and should be prioritized for inspection.
+
+**Associated SECAV-O term:** `secavo:phaseInjected`
+
+---
+
+### Escape Rate
+*Source: `coaching-governance/guides/defect-tracking.md`*
+
+The percentage of defects found in production or late phases (integration, system, acceptance) relative to the total defects recorded. A high escape rate indicates that inspections and reviews in early phases are not effective or are not occurring.
+
+**Associated SECAV-O term:** `secavo:Metric`, `secavo:DefectObservation`
+
+---
+
+## Incremental adoption
+
+### Go / Pivot / Stop Decision
+*Source: `coaching-governance/guides/incremental-adoption.md`*
+
+Three possible outcomes of evaluating a pilot framework iteration:
+
+| Decision | Condition |
 |---|---|
-| **Go (Escalar)** | La evidencia es consistente, la cadena completa está documentada, no hay bloqueantes de gobernanza |
-| **Pivot (Corregir)** | Se detectó fricción sistemática; se aplica una corrección y se reitera |
-| **Stop (Detener)** | Un supuesto fundacional es inválido e incorregible; se documentan los hallazgos para evitar una inversión mayor en algo que no funciona en este contexto |
+| **Go (Scale)** | Evidence is consistent, the complete chain is documented, no governance blockers |
+| **Pivot (Correct)** | Systematic friction detected; a correction is applied and the iteration repeats |
+| **Stop** | A foundational assumption is invalid and uncorrectable; findings are documented to avoid a larger investment in something that does not work in this context |
 
 ---
 
-### Fail Fast (Falla rápido)
-*Fuente: `coaching-governance/guides/incremental-adoption.md`*
+### Fail Fast
+*Source: `coaching-governance/guides/incremental-adoption.md`*
 
-Filosofía de adopción incremental cuyo objetivo es hacer visibles los supuestos incorrectos, cuellos de botella y restricciones técnicas o de gobernanza en la etapa más temprana posible, cuando el costo de corrección es mínimo. Un fallo controlado con datos empíricos es un resultado de aprendizaje exitoso, no un fracaso.
-
----
-
-### Proof of Concept — PoC
-*Fuente: `coaching-governance/guides/incremental-adoption.md`*
-
-Experimento mínimo que responde una sola pregunta: ¿Es esto factible en este contexto? En el contexto del framework: ejecutar una actividad de ingeniería con un coach y un ingeniero antes de lanzar un piloto completo, para verificar si los mecanismos básicos de observación y evidencia funcionan.
+An incremental adoption philosophy whose goal is to make incorrect assumptions, bottlenecks, and technical or governance constraints visible at the earliest possible stage, when the cost of correction is minimal. A controlled failure with empirical data is a successful learning outcome, not a failure.
 
 ---
 
-### Trazador de extremo a extremo (End-to-end tracer)
-*Fuente: `coaching-governance/guides/incremental-adoption.md`*
+### Proof of Concept (PoC)
+*Source: `coaching-governance/guides/incremental-adoption.md`*
 
-Rebanada vertical delgada pero completa del sistema de coaching: un ciclo completo desde la selección de actividad hasta la recopilación de evidencia, `secav:CompetencyAssessment`, `secav:CoachingIntervention` y `secavo:SprintRetrospective`, antes de ampliar el alcance. Permite verificar que la cadena completa funciona antes de invertir en escalar.
-
----
-
-## Gestión de riesgos
-
-### Acción correctiva / de contingencia
-*Fuente: `coaching-governance/guides/risk-management.md`*
-
-Acción definida de antemano que se ejecuta cuando un riesgo se materializa. Ejemplos: cambiar el objetivo del sprint, agregar un revisor independiente, escalar una dependencia bloqueada, revisar el baseline.
-
-**Término SECAV-O asociado:** `secavo:CorrectiveAction`
+A minimal experiment that answers a single question: Is this feasible in this context? In the framework context: executing one engineering activity with a coach and one engineer before launching a full pilot, to verify that the basic observation and evidence mechanisms work.
 
 ---
 
-### Acción preventiva
-*Fuente: `coaching-governance/guides/risk-management.md`*
+### End-to-End Tracer
+*Source: `coaching-governance/guides/incremental-adoption.md`*
 
-Acción definida de antemano para reducir la probabilidad de que un riesgo ocurra. Ejemplos: clarificar criterios de aceptación, agendar revisiones de pares, proporcionar capacitación, aumentar la frecuencia de inspecciones en módulos de alto riesgo.
+A thin but complete vertical slice of the coaching system: one complete cycle from activity selection through evidence collection, `secav:CompetencyAssessment`, `secav:CoachingIntervention`, and `secavo:SprintRetrospective`, before expanding scope. Verifies that the complete chain works before investing in scaling.
 
-**Término SECAV-O asociado:** `secavo:PreventiveAction`
+---
+
+## Risk management
+
+### Corrective / Contingency Action
+*Source: `coaching-governance/guides/risk-management.md`*
+
+A predefined action executed when a risk materializes. Examples: change the sprint objective, add an independent reviewer, escalate a blocked dependency, review the baseline.
+
+**Associated SECAV-O term:** `secavo:CorrectiveAction`
+
+---
+
+### Preventive Action
+*Source: `coaching-governance/guides/risk-management.md`*
+
+A predefined action to reduce the probability that a risk occurs. Examples: clarify acceptance criteria, schedule peer reviews, provide training, increase inspection frequency in high-risk modules.
+
+**Associated SECAV-O term:** `secavo:PreventiveAction`
