@@ -66,6 +66,8 @@ graph LR
         PA(Preventive\nAction)
         HVA(Human\nValidation)
         DA(Deterministic\nAnalysis)
+        PL(Planning\nActivity)
+        RL(Release)
     end
 
     subgraph QC_Group["Quality Criteria"]
@@ -83,6 +85,7 @@ graph LR
         CO(Coach\nObservation)
         AB(Adoption\nBehavior)
         LB(Leader\nBehavior)
+        CAR(Coach\nAbsence\nRecord)
     end
 
     subgraph CompGroup["Competency & Coaching"]
@@ -113,6 +116,8 @@ graph LR
     EA -->|requiresHumanValidation| HVA
     DA -->|precedes| HVA
     PA -->|prevents| Ev
+    PL -->|produces| Art
+    RL -->|produces| Art
     Art -.->|becomes| Ev
     RR -.->|becomes| Ev
     RF --> Ev
@@ -121,13 +126,15 @@ graph LR
     CO --> Ev
     AB --> Ev
     LB --> Ev
+    CAR --> Art
     Ev -->|providesEvidenceOf| Comp
     Ev -->|triggers| CI
     CA -->|basedOnEvidence| Ev
     CA -->|assessesCompetency| Comp
     CI -->|targetsCompetency| Comp
     RAnt -->|triggers| CI
-    C -->|observes| EA
+    C -->|observes all phases| EA
+    C -->|hasAbsenceRecord| CAR
     C -->|conducts| CI
     C -->|facilitates| CMT
     TL -->|exhibits| LB
@@ -138,23 +145,117 @@ graph LR
     RRP -.->|implements| PA
 ```
 
+### Development lifecycle — 28 phases
+
+Each production phase pairs with a review phase. Every review requires recorded findings and a coach sign-off (`secav:CoachReviewSignOff`). Blue = production; green = review.
+
+```mermaid
+graph LR
+    classDef prod fill:#dbeafe,stroke:#3b82f6,color:#1e3a5f
+    classDef rev  fill:#dcfce7,stroke:#16a34a,color:#14532d
+
+    PLAN[Planning]:::prod        --> PLANR[Planning Review]:::rev
+    REQ[Requirements]:::prod     --> REQR[Requirements Review]:::rev
+    HLD[High Level\nDesign]:::prod --> HLDR[HLD Review]:::rev
+    DES[Design]:::prod           --> DESR[Design Review]:::rev
+    UTD[Unit Test\nDesign]:::prod --> UTDR[UT Design Review]:::rev
+    ITD[Integration Test\nDesign]:::prod --> ITDR[IT Design Review]:::rev
+    STD[System Test\nDesign]:::prod --> STDR[ST Design Review]:::rev
+    ATD[Acceptance Test\nDesign]:::prod --> ATDR[AT Design Review]:::rev
+    IMPL[Implementation]:::prod  --> IMPLR[Implementation Review]:::rev
+    UTE[Unit Test\nExecution]:::prod --> UTER[UT Results Review]:::rev
+    ITE[Integration Test\nExecution]:::prod --> ITER[IT Results Review]:::rev
+    STE[System Test\nExecution]:::prod --> STER[ST Results Review]:::rev
+    ATE[Acceptance Test\nExecution]:::prod --> ATER[AT Results Review]:::rev
+    REL[Release]:::prod          --> RELR[Release Review]:::rev
+
+    PLANR --> REQ
+    REQR  --> HLD
+    HLDR  --> DES
+    DESR  --> UTD
+    UTDR  --> ITD
+    ITDR  --> STD
+    STDR  --> ATD
+    ATDR  --> IMPL
+    IMPLR --> UTE
+    UTER  --> ITE
+    ITER  --> STE
+    STER  --> ATE
+    ATER  --> REL
+```
+
 ### Class hierarchy
 
 ```mermaid
 graph TD
     subgraph ActH["EngineeringActivity hierarchy"]
         EA2[EngineeringActivity]
+        EA2 --> REQACT[RequirementsActivity]
+        EA2 --> DACT[DesignActivity]
+        EA2 --> CACT[CodingActivity]
+        EA2 --> TACT[TestingActivity]
+        EA2 --> IACT[ImplementationActivity]
         EA2 --> RA2[ReviewActivity]
         EA2 --> PA2[PreventiveAction]
         EA2 --> AIA[AIAssistedActivity]
         EA2 --> DTA[DeterministicAnalysisActivity]
         EA2 --> CIA2[ContinuousIntegrationActivity]
+        EA2 --> PL2[PlanningActivity]
+        EA2 --> REL2[Release]
+
+        DACT --> HLD2[HighLevelDesign]
+        DACT --> ADES[ApplicationDesign]
+        DACT --> UTD2[UnitTestDesign]
+        DACT --> ITD2[IntegrationTestDesign]
+        DACT --> STD2[SystemTestDesign]
+        DACT --> ATD2[AcceptanceTestDesign]
+
+        CACT --> CIMPL[CodeImplementation]
+        IACT --> UTDI[UnitTestDesign\nImplementation]
+        IACT --> ITDI[IntegrationTestDesign\nImplementation]
+        IACT --> STDI[SystemTestDesign\nImplementation]
+        IACT --> ATDI[AcceptanceTestDesign\nImplementation]
+
+        TACT --> UTE2[UnitTestExecution]
+        TACT --> ITE2[IntegrationTestExecution]
+        TACT --> STE2[SystemTestExecution]
+        TACT --> ATE2[AcceptanceTestExecution]
+
+        RA2 --> PRVIEW[PeerReview]
+        RA2 --> FINSP[FormalInspection]
+        RA2 --> WLKT[Walkthrough]
+        WLKT --> CWLKT[CodeWalkthrough]
+        WLKT --> DWLKT[DesignWalkthrough]
+        RA2 --> WEXE[WalkthroughExecution]
+        RA2 --> WREV[WalkthroughReview]
         RA2 --> HVA2[HumanValidationActivity]
-        RA2 --> CR2[CodeReview]
         RA2 --> SR2[SelfReview]
+        RA2 --> CR2[CodeReview]
+        RA2 --> REQREV[RequirementsReview]
+        RA2 --> HLDR2[HighLevelDesignReview]
+        RA2 --> DESR2[DesignReview]
+        RA2 --> UTDR2[UnitTestDesignReview]
+        RA2 --> ITDR2[IntegrationTestDesignReview]
+        RA2 --> STDR2[SystemTestDesignReview]
+        RA2 --> ATDR2[AcceptanceTestDesignReview]
+        RA2 --> UTER2[UnitTestResultsReview]
+        RA2 --> ITER2[IntegrationTestResultsReview]
+        RA2 --> STER2[SystemTestResultsReview]
+        RA2 --> ATER2[AcceptanceTestResultsReview]
+        RA2 --> PLANREV[PlanningReview]
+        RA2 --> RELREV[ReleaseReview]
+
         PA2 --> SR2
         PA2 --> ACD[AcceptanceCriteria\nDefinition]
         PA2 --> APC[APIContract\nDefinition]
+
+        HLD2 --> HLDR2
+        UTD2 --> UTDR2
+        ITD2 --> ITDR2
+        STD2 --> STDR2
+        ATD2 --> ATDR2
+        PL2 --> PLANREV
+        REL2 --> RELREV
     end
 
     subgraph EvH["Evidence hierarchy"]
@@ -168,10 +269,18 @@ graph TD
         Ev2 --> AB2[AdoptionBehavior]
         Ev2 --> LB2[LeaderBehavior]
         DR2 --> REO[ReviewEscape\nObservation]
+        RF2 --> RDEF[RequirementsDefect]
+        RDEF --> VRQ[VagueRequirement]
+        RDEF --> ARQ[AmbiguousRequirement]
+        RDEF --> URQ[UnclearRequirement]
+        RDEF --> IRQ[IncompleteRequirement]
         RAnt2 --> CRA[CulturalReview\nAntipattern]
         RAnt2 --> PRA[ProcessReview\nAntipattern]
         RAnt2 --> TRA[TechnicalReview\nAntipattern]
         RAnt2 --> CLRA[ClosureReview\nAntipattern]
+        RAnt2 --> WA[WalkthroughAntipattern]
+        RAnt2 --> DRA[DesignReview\nAntipattern]
+        RAnt2 --> MRR[MissingRequirements\nReview]
         CRA --> PUN[PunitiveReview\nApproach]
         CRA --> NEF[NonEmpathic\nFeedback]
         CRA --> RDC[Reviewer\nDictatorship]
@@ -228,6 +337,16 @@ graph TD
         Art2[Artifact]
         Art2 --> DA3[DesignArtifact]
         Art2 --> SCA[SourceCodeArtifact]
+        Art2 --> REA[RequirementsArtifact]
+        Art2 --> HLDA[HighLevelDesign\nArtifact]
+        Art2 --> UTDA[UnitTestDesign\nArtifact]
+        Art2 --> ITDA[IntegrationTestDesign\nArtifact]
+        Art2 --> STDA[SystemTestDesign\nArtifact]
+        Art2 --> ATDA[AcceptanceTestDesign\nArtifact]
+        Art2 --> TERA[TestExecution\nResultArtifact]
+        Art2 --> PLA[PlanningArtifact]
+        Art2 --> RELA[ReleaseArtifact]
+        Art2 --> CABS[CoachAbsenceRecord]
         Art2 --> RRec2[ReviewRecord]
         Art2 --> RReq2[ReviewRequest]
         Art2 --> MM2[MeetingMinutes]
@@ -235,6 +354,13 @@ graph TD
         DA3 --> ACA[APIContract\nArtifact]
         RReq2 --> FRR[FormalReview\nRequest]
         RReq2 --> DRR[DraftReview\nRequest]
+    end
+
+    subgraph CoachGovH["Coach Governance"]
+        CRSF[CoachReviewSignOff]
+        CABS2[CoachAbsenceRecord]
+        CRSF -.->|issued after| WREV
+        CABS2 -->|designatedObserver| STK[Stakeholder]
     end
 
     subgraph CompH["Competency hierarchy"]
