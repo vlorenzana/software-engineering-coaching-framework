@@ -900,6 +900,18 @@ secav:agreementStatus a owl:DatatypeProperty ;
     rdfs:label "agreement status"@en ;
     rdfs:comment "Current tracking status of the agreement: 'open', 'completed', or 'cancelled'."@en .
 
+secav:hasParticipant a owl:ObjectProperty ;
+    rdfs:domain secav:MeetingMinutes ;
+    rdfs:range secav:Stakeholder ;
+    rdfs:label "has participant"@en ;
+    rdfs:comment "Links meeting minutes to a stakeholder who attended the coaching meeting. At least one participant must be recorded for the minutes to be valid."@en .
+
+secav:meetingTopicSummary a owl:DatatypeProperty ;
+    rdfs:domain secav:MeetingMinutes ;
+    rdfs:range xsd:string ;
+    rdfs:label "meeting topic summary"@en ;
+    rdfs:comment "A brief description of a topic discussed during the coaching meeting. At least one topic must be recorded alongside its outcome or decision."@en .
+
 # ---------------------------------------------------------------------------
 # Software Project Risk Management
 # Derived from: Software Development Risk Register (Gestión de Riesgos de Software)

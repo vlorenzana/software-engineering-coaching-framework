@@ -192,6 +192,28 @@ secav:LeaderBehaviorShape
         sh:message "A leader behavior must belong to at least one technical leadership dimension."@en
     ] .
 
+secav:MeetingMinutesShape
+    a sh:NodeShape ;
+    sh:targetClass secav:MeetingMinutes ;
+    sh:property [
+        sh:path secav:hasParticipant ;
+        sh:minCount 1 ;
+        sh:class secav:Stakeholder ;
+        sh:message "Meeting minutes must record at least one participant (name and role). Minutes without participants cannot be traced to any attendee."@en
+    ] ;
+    sh:property [
+        sh:path secav:meetingTopicSummary ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Meeting minutes must record at least one topic discussed with its outcome or decision."@en
+    ] ;
+    sh:property [
+        sh:path secav:hasAgreement ;
+        sh:minCount 1 ;
+        sh:class secav:MeetingAgreement ;
+        sh:message "Meeting minutes must record at least one agreement with an identified owner and an explicit due date."@en
+    ] .
+
 secav:MeetingAgreementShape
     a sh:NodeShape ;
     sh:targetClass secav:MeetingAgreement ;
@@ -205,7 +227,7 @@ secav:MeetingAgreementShape
         sh:path secav:agreementDueDate ;
         sh:minCount 1 ;
         sh:datatype xsd:date ;
-        sh:message "A meeting agreement must have a due date."@en
+        sh:message "A meeting agreement must have an explicit due date. An agreement without a date is not a real commitment."@en
     ] .
 
 secav:ProjectRiskShape

@@ -4,6 +4,18 @@
      Distribuye el borrador a los participantes dentro de las 24 horas posteriores a la reunión.
      Cada acuerdo es una instancia de secav:MeetingAgreement rastreable en siguientes juntas. -->
 
+> **ELEMENTOS MÍNIMOS OBLIGATORIOS — la minuta solo es válida si contiene los tres:**
+>
+> | # | Elemento | Sección | Sin esto... |
+> |---|----------|---------|-------------|
+> | 1 | **Participantes** — nombre y rol de cada asistente | § 1 | No hay trazabilidad de quién tomó los acuerdos |
+> | 2 | **Temas tratados** — al menos un tema con su resultado o decisión | § 2 | No hay registro de qué se discutió |
+> | 3 | **Acuerdos con fecha** — al menos un acuerdo con responsable y fecha límite explícita | § 3 | No hay compromiso rastreable ni seguimiento posible |
+>
+> Una minuta que omite cualquiera de estos tres elementos no puede cerrar la junta y debe completarse antes de distribuirse.
+
+---
+
 ## Encabezado
 
 - **Código de minuta:** MIN-`AAAA`-`XXXX`
@@ -18,14 +30,25 @@
   - [ ] Seguimiento de acuerdos previos
   - [ ] Ad-hoc / urgente
 - **Facilitador (coach):** [Nombre]
-- **Participantes:** [Nombre — Rol, Nombre — Rol, ...]
 - **Sprint / Ciclo:** [ID del sprint o periodo]
 
 **SECAV-O:** Esta minuta es una instancia de `secav:MeetingMinutes`, producida en una `secav:CoachingMeeting` y vinculada al `secav:CoachingIntervention` del ciclo actual.
 
 ---
 
-## 1. Contexto y Propósito
+## 1. Participantes
+
+> **Obligatorio.** Registra a todos los asistentes. Una junta sin participantes documentados no tiene trazabilidad.
+
+| Nombre | Rol | Asistencia |
+|--------|-----|------------|
+| [Nombre] | [Rol] | [ ] Presente  [ ] Excusa justificada |
+| [Nombre] | [Rol] | [ ] Presente  [ ] Excusa justificada |
+| [Nombre] | [Rol] | [ ] Presente  [ ] Excusa justificada |
+
+---
+
+## 2. Contexto y Propósito
 
 > ¿Por qué se realizó esta junta? ¿Qué situación, observación o artefacto motivó la convocatoria?
 
@@ -33,7 +56,9 @@ _
 
 ---
 
-## 2. Temas Tratados
+## 3. Temas Tratados
+
+> **Obligatorio.** Registra al menos un tema con su resultado o decisión. Sin esto no hay registro de lo que se discutió.
 
 | # | Tema | Decisión / Resultado | Término SECAV-O |
 |---|------|----------------------|-----------------|
@@ -45,25 +70,28 @@ _
 
 ---
 
-## 3. Acuerdos y Compromisos
+## 4. Acuerdos y Compromisos
+
+> **Obligatorio.** Cada acuerdo debe tener responsable y fecha límite explícita. Sin fecha no hay seguimiento posible.
+>
+> Los acuerdos abiertos se revisan **siempre al inicio de la próxima junta** de este tipo.
 
 Cada fila es un `secav:MeetingAgreement` con responsable, fecha límite y estado de seguimiento.
-Los acuerdos abiertos se revisan **siempre al inicio de la próxima junta** de este tipo.
 
-| ID | Acuerdo / Compromiso | Responsable | Fecha límite | Estado |
-|----|----------------------|-------------|--------------|--------|
-| ACU-01 | | [Nombre] | DD/MM/AAAA | [ ] Abierto |
-| ACU-02 | | [Nombre] | DD/MM/AAAA | [ ] Abierto |
-| ACU-03 | | [Nombre] | DD/MM/AAAA | [ ] Abierto |
+| ID | Acuerdo / Compromiso | Responsable | **Fecha límite** | Estado |
+|----|----------------------|-------------|------------------|--------|
+| ACU-01 | | [Nombre] | **DD/MM/AAAA** | [ ] Abierto |
+| ACU-02 | | [Nombre] | **DD/MM/AAAA** | [ ] Abierto |
+| ACU-03 | | [Nombre] | **DD/MM/AAAA** | [ ] Abierto |
 
 **Escalamiento de acuerdos:**
 - Si un acuerdo requiere acompañamiento individual → registrar `secav:CoachingIntervention` en `templates/engineer-coaching-assessment.md`
 - Si un acuerdo genera una mejora de proceso sistémica → registrar como `secavo:ImprovementAction` en `templates/sprint-retrospective.md`
-- Si un acuerdo derivan en un análisis de causa raíz → iniciar `templates/rca-defect-analysis.md`
+- Si un acuerdo deriva en un análisis de causa raíz → iniciar `templates/rca-defect-analysis.md`
 
 ---
 
-## 4. Revisión de Acuerdos de Juntas Anteriores
+## 5. Revisión de Acuerdos de Juntas Anteriores
 
 | ID anterior | Acuerdo | Responsable | Estado al cierre |
 |-------------|---------|-------------|------------------|
@@ -71,7 +99,7 @@ Los acuerdos abiertos se revisan **siempre al inicio de la próxima junta** de e
 
 ---
 
-## 5. Puntos Abiertos
+## 6. Puntos Abiertos
 
 Temas que requieren información adicional, análisis o una próxima sesión para resolverse.
 
@@ -82,7 +110,7 @@ Temas que requieren información adicional, análisis o una próxima sesión par
 
 ---
 
-## 6. Próxima Junta
+## 7. Próxima Junta
 
 - **Fecha propuesta:** DD/MM/AAAA
 - **Hora:** HH:MM
@@ -93,7 +121,12 @@ Temas que requieren información adicional, análisis o una próxima sesión par
 
 ---
 
-## Distribución y Confirmación
+## Cierre y Distribución
+
+> Antes de distribuir, verifica que la minuta cumpla los tres elementos obligatorios:
+> - [ ] § 1 completada — todos los participantes registrados con nombre y rol
+> - [ ] § 3 completada — al menos un tema con decisión o resultado
+> - [ ] § 4 completada — al menos un acuerdo con responsable y **fecha límite explícita**
 
 Esta minuta fue distribuida a los participantes el: DD/MM/AAAA
 
