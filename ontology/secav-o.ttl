@@ -1730,3 +1730,38 @@ secav:designatedObserver a owl:ObjectProperty ;
     rdfs:range secav:Stakeholder ;
     rdfs:label "designated observer"@en ;
     rdfs:comment "The trained team member designated by the coach to observe the session in their absence and report findings. Required for critical artifact sessions when the coach cannot attend."@en .
+
+# ---------------------------------------------------------------------------
+# Remote endorsement — alternative certification path (Principles 16 and 18)
+# Issued when the coach was absent but a designated observer attended and
+# filed a report. A CoachRemoteEndorsement is NOT a CoachReviewSignOff:
+# it certifies review of the observer's documentation, not personal witness.
+# ---------------------------------------------------------------------------
+
+secav:CoachRemoteEndorsement a owl:Class ;
+    rdfs:label "Coach Remote Endorsement"@en ;
+    rdfs:comment "A formal record in which the coach confirms that they have reviewed the designated observer's report of a session they did not personally attend, and accept the reported findings as sufficient basis for non-provisional competency evidence. Explicitly distinct from secav:CoachReviewSignOff: a remote endorsement certifies review of the observer's documentation — not personal presence at the session. Grounded in Principle 16 of the Code of Ethics."@en .
+
+secav:hasRemoteEndorsement a owl:ObjectProperty ;
+    rdfs:domain secav:ReviewActivity ;
+    rdfs:range secav:CoachRemoteEndorsement ;
+    rdfs:label "has remote endorsement"@en ;
+    rdfs:comment "Links a review activity to a coach remote endorsement issued after the coach reviewed the designated observer's report. Applicable only when the coach was absent and a designated observer filed a report (Principle 16). If the coach was present, a secav:CoachReviewSignOff applies instead."@en .
+
+secav:remoteEndorsementReason a owl:DatatypeProperty ;
+    rdfs:domain secav:CoachRemoteEndorsement ;
+    rdfs:range xsd:string ;
+    rdfs:label "remote endorsement reason"@en ;
+    rdfs:comment "Documents why the coach was absent from the session and is endorsing remotely (e.g., 'coach at parallel critical session; designated observer: Jane Smith; report reviewed on 2026-10-22')."@en .
+
+secav:remoteEndorsementDate a owl:DatatypeProperty ;
+    rdfs:domain secav:CoachRemoteEndorsement ;
+    rdfs:range xsd:date ;
+    rdfs:label "remote endorsement date"@en ;
+    rdfs:comment "The date on which the coach reviewed the designated observer's report and issued the remote endorsement."@en .
+
+secav:endorsedObserverReport a owl:ObjectProperty ;
+    rdfs:domain secav:CoachRemoteEndorsement ;
+    rdfs:range secav:CoachAbsenceRecord ;
+    rdfs:label "endorsed observer report"@en ;
+    rdfs:comment "Links the remote endorsement to the CoachAbsenceRecord that documents the absence, the designated observer, and the observer's findings. This traceability chain — absence → observer report → coach endorsement → non-provisional findings — is required for the endorsement to be valid."@en .

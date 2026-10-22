@@ -16,6 +16,29 @@ secav:EngineeringActivityShape
         sh:message "An engineering activity should identify at least one required competency."@en
     ] .
 
+# Reusable certification constraint — allows either direct sign-off (coach present)
+# or remote endorsement (designated observer attended; coach reviewed the report).
+# Reference with sh:node in any review shape that requires certification.
+secav:ReviewCertifiedShape
+    a sh:NodeShape ;
+    sh:or (
+        [
+            sh:property [
+                sh:path secav:hasSignOff ;
+                sh:minCount 1 ;
+                sh:class secav:CoachReviewSignOff
+            ]
+        ]
+        [
+            sh:property [
+                sh:path secav:hasRemoteEndorsement ;
+                sh:minCount 1 ;
+                sh:class secav:CoachRemoteEndorsement
+            ]
+        ]
+    ) ;
+    sh:message "A review activity must be certified by either a direct coach sign-off (secav:CoachReviewSignOff, coach personally present) or a remote endorsement (secav:CoachRemoteEndorsement, designated observer attended and coach reviewed their report — Principles 16 and 18)."@en .
+
 secav:ReviewActivityShape
     a sh:NodeShape ;
     sh:targetClass secav:ReviewActivity ;
@@ -31,12 +54,7 @@ secav:ReviewActivityShape
         sh:class secav:ReviewFinding ;
         sh:message "Every peer review, walkthrough, or inspection must record at least one finding — including an explicit 'no defects found' record when the artifact is clean."@en
     ] ;
-    sh:property [
-        sh:path secav:hasSignOff ;
-        sh:minCount 1 ;
-        sh:class secav:CoachReviewSignOff ;
-        sh:message "Every review activity requires a coach process sign-off confirming the session was conducted acceptably before its findings are valid for competency assessment."@en
-    ] .
+    sh:node secav:ReviewCertifiedShape .
 
 secav:CoachReviewSignOffShape
     a sh:NodeShape ;
@@ -52,6 +70,28 @@ secav:CoachReviewSignOffShape
         sh:minCount 1 ;
         sh:datatype xsd:date ;
         sh:message "A coach review sign-off must record the date of approval."@en
+    ] .
+
+secav:CoachRemoteEndorsementShape
+    a sh:NodeShape ;
+    sh:targetClass secav:CoachRemoteEndorsement ;
+    sh:property [
+        sh:path secav:remoteEndorsementReason ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "A remote endorsement must document why the coach was absent and why remote endorsement is appropriate."@en
+    ] ;
+    sh:property [
+        sh:path secav:remoteEndorsementDate ;
+        sh:minCount 1 ;
+        sh:datatype xsd:date ;
+        sh:message "A remote endorsement must record the date on which the coach reviewed the observer's report."@en
+    ] ;
+    sh:property [
+        sh:path secav:endorsedObserverReport ;
+        sh:minCount 1 ;
+        sh:class secav:CoachAbsenceRecord ;
+        sh:message "A remote endorsement must reference the coach absence record that documents the designated observer and their findings — without this link the endorsement is untraced and invalid."@en
     ] .
 
 secav:AIAssistedActivityShape
@@ -309,12 +349,7 @@ secav:RequirementsReviewShape
         sh:class secav:RequirementsArtifact ;
         sh:message "A requirements review must identify the requirements artifact being reviewed."@en
     ] ;
-    sh:property [
-        sh:path secav:hasSignOff ;
-        sh:minCount 1 ;
-        sh:class secav:CoachReviewSignOff ;
-        sh:message "A requirements review must be endorsed by the coach before implementation begins on the reviewed requirements."@en
-    ] .
+    sh:node secav:ReviewCertifiedShape .
 
 secav:UnitTestDesignReviewShape
     a sh:NodeShape ;
@@ -463,12 +498,7 @@ secav:FormalInspectionShape
         sh:class secav:ReviewFinding ;
         sh:message "A formal inspection must record at least one finding — including an explicit 'no defects found' record when the artifact is clean. Causal analysis of findings is required for process improvement."@en
     ] ;
-    sh:property [
-        sh:path secav:hasSignOff ;
-        sh:minCount 1 ;
-        sh:class secav:CoachReviewSignOff ;
-        sh:message "A formal inspection must be certified by a coach sign-off confirming that the session was conducted with proper roles (Moderator, Reader, Inspectors, Scribe), entry criteria met, and all findings recorded."@en
-    ] .
+    sh:node secav:ReviewCertifiedShape .
 
 secav:ReleaseReviewShape
     a sh:NodeShape ;
@@ -485,12 +515,7 @@ secav:ReleaseReviewShape
         sh:class secav:ReviewFinding ;
         sh:message "A release review must record at least one finding — including an explicit 'release approved, all quality gates confirmed' when no blocking issues remain."@en
     ] ;
-    sh:property [
-        sh:path secav:hasSignOff ;
-        sh:minCount 1 ;
-        sh:class secav:CoachReviewSignOff ;
-        sh:message "A release review must be certified by a coach sign-off confirming that all quality gates were verified and the release readiness assessment was conducted acceptably."@en
-    ] .
+    sh:node secav:ReviewCertifiedShape .
 
 secav:PlanningReviewShape
     a sh:NodeShape ;
@@ -507,12 +532,7 @@ secav:PlanningReviewShape
         sh:class secav:ReviewFinding ;
         sh:message "A planning review must record at least one finding — including an explicit 'plan approved, all mandatory review activities scheduled' when requirements are met."@en
     ] ;
-    sh:property [
-        sh:path secav:hasSignOff ;
-        sh:minCount 1 ;
-        sh:class secav:CoachReviewSignOff ;
-        sh:message "A planning review must be certified by a coach sign-off confirming the plan contains all mandatory quality gates before the sprint is authorized to begin (Code of Ethics, Principle 17)."@en
-    ] .
+    sh:node secav:ReviewCertifiedShape .
 
 secav:DesignWalkthroughShape
     a sh:NodeShape ;
@@ -561,12 +581,7 @@ secav:WalkthroughReviewShape
         sh:class secav:ReviewFinding ;
         sh:message "A walkthrough review must record the follow-up state of each finding from the walkthrough execution — confirming corrections were adequate or flagging remaining issues."@en
     ] ;
-    sh:property [
-        sh:path secav:hasSignOff ;
-        sh:minCount 1 ;
-        sh:class secav:CoachReviewSignOff ;
-        sh:message "The walkthrough lifecycle closes with a coach sign-off issued during the walkthrough review, confirming all findings were addressed."@en
-    ] .
+    sh:node secav:ReviewCertifiedShape .
 
 secav:CoachAbsenceRecordShape
     a sh:NodeShape ;

@@ -82,7 +82,7 @@ Repeated failure to verify the requirements review planning gate and to document
 
 ### 18. Observer obligation for all lifecycle phases
 
-The coach has an obligation — not only a recommendation — to be present as a **silent, non-intervening observer** during any scheduled lifecycle phase activity: planning, requirements, high-level design, design, test design, implementation, test execution, walkthrough execution, formal inspection, and release. Presence is the only basis on which the coach can issue observations, sign-offs, and competency evidence for that activity.
+The coach has an obligation to observe lifecycle phase activities according to a **risk-based coverage plan**. For high-risk activities — those involving critical artifacts, new or low-competency team members, high-complexity phases, or phases with a documented history of defect injection — presence is required unless the Principle 16 delegation protocol applies. For routine activities with experienced team members, documented risk-based sampling is permitted (see Obligation 1). Presence is the only basis on which the coach can issue observations, sign-offs, and competency evidence for a given activity.
 
 **Scope.** This principle generalizes Principle 16 (witness obligation for review sessions) to all lifecycle phases, not only review activities. The quality gate principle is the same: the coach cannot certify what they did not witness.
 
@@ -91,7 +91,9 @@ The coach has an obligation — not only a recommendation — to be present as a
 **Obligations:**
 
 1. **Prioritize presence at high-risk sessions.** The coach should attend all sessions involving critical artifacts, new or low-competency team members, high-complexity activities, or phases with a history of defect injection. For routine phases and experienced team members, the coach may apply **risk-based sampling** — attending a documented subset of sessions — provided the sampling criteria, coverage targets, and rationale are recorded in the coaching plan and reviewed each sprint. Continuous presence at every session is the ideal but is not mandated for all organizational contexts. Repeated unexplained absence from high-risk sessions is a practice quality concern.
-2. **Document every absence.** When the coach cannot attend, they must record a `secav:CoachAbsenceRecord` for that activity before the session, not retroactively. The record must state the reason and the consequence.
+2. **Distinguish planned from unplanned non-attendance.** Not all non-attendance is the same:
+   - **Planned non-attendance (within approved sample)** — when a session falls outside the coach's documented sampling plan for that sprint, no absence record is required. The session appears in the coaching plan as a non-observed session, which is an expected sampling outcome, not a gap.
+   - **Unplanned absence (session was within the intended coverage)** — when the coach expected to attend but cannot, a `secav:CoachAbsenceRecord` must be created before the session, not retroactively. The record must state the reason and the consequence.
 3. **No implicit approval from absence.** The coach's absence from any activity — review or otherwise — does not constitute approval, sign-off, or certification of what occurred. Absence produces a gap in the observation record, not a neutral endorsement.
 4. **For review activities: no sign-off without presence.** Absence from a review activity (peer review, walkthrough, inspection, results review) means no `secav:CoachReviewSignOff` can be issued for that session (see Principle 16 for the full protocol when a designated observer is needed).
 5. **For non-review activities: no observation record.** Absence from a non-review activity (planning, design, implementation, test execution) means no `secav:CoachObservation` can be recorded for that session. Competency evidence from that session is unavailable until a follow-up observation opportunity arises.
