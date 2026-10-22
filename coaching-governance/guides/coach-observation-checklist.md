@@ -75,6 +75,8 @@ Este checklist permite al coach registrar, durante cualquier sesión de observac
 | 4.6 | ⚠ | Existen errores de tipado suprimidos con comentarios `// @ts-ignore` o equivalentes sin justificación | `secav:StrictTypingPolicy` (comprometida) |
 | 4.7 | ⚠ | La cobertura de pruebas cae sprint a sprint sin que el equipo lo mencione ni lo tome como acción | `secav:CodeCoverageGate` sin seguimiento |
 | 4.8 | ⚠ | El equipo desconoce qué comprueba el pipeline de CI — solo saben "si pasa, bien" | `secav:DeterministicAnalysisActivity` sin apropiación del equipo |
+| 4.9 | ✓ | El pipeline de CI completo (build, test, análisis estático) se ejecuta en cada PR y su resultado es visible para todo el equipo | `secav:ContinuousIntegrationActivity` |
+| 4.10 | ⚠ | El pipeline de CI falla de forma intermitente y el equipo lo normaliza — los failures se consideran "ruido" en lugar de señal | `secav:ContinuousIntegrationActivity` comprometida |
 
 ---
 
@@ -100,6 +102,7 @@ Este checklist permite al coach registrar, durante cualquier sesión de observac
 | 5.14 | ⚠ | Los comentarios son punitivos o despectivos — "esto es un desastre", "¿cómo pensaste esto?" | `secav:PunitiveReviewApproach` |
 | 5.15 | ⚠ | Un revisor dicta la solución en lugar de señalar el problema y dejar la decisión al autor | `secav:ReviewerDictatorship` |
 | 5.16 | ⚠ | La revisión valida solo el happy path — ningún caso límite ni de error fue cuestionado | `secav:HappyPathOnlyReview` |
+| 5.17 | ⚠ | Los comentarios son irónicos, sarcásticos o condescendientes — el tono no es deliberadamente punitivo pero daña la seguridad psicológica | `secav:NonEmpathicReviewFeedback` |
 
 ---
 
@@ -145,7 +148,7 @@ Este checklist permite al coach registrar, durante cualquier sesión de observac
 
 ## 8. Revisión de Código Asistida por IA
 
-> Actividad SECAV-O: `secav:AIAssistedActivity`, `secav:HumanValidationActivity`, `secav:AIReviewPromptConfiguration`
+> Actividad SECAV-O: `secav:AIAssistedActivity`, `secav:HumanValidationActivity`, `secav:AIReviewPromptConfiguration`, `secav:ReviewDimension`
 
 | # | Tipo | Conducta observable | Término SECAV-O |
 |---|------|---------------------|-----------------|
@@ -161,6 +164,8 @@ Este checklist permite al coach registrar, durante cualquier sesión de observac
 | 8.10 | ⚠ | El código generado por IA llega sin el historial de decisiones que explica el diseño | `secav:MissingReviewContext` |
 | 8.11 | ⚠ | Los módulos críticos con código generado por IA no reciben inspección formal adicional | ausencia de `secav:HumanValidationActivity` para `secav:AIAssistedActivity` en módulo crítico |
 | 8.12 | ⚠ | El equipo no cuestiona el código de IA porque "compila y los tests pasan" | `secav:RubberStampApproval` aplicado a código IA |
+| 8.13 | ✓ | Cada dimensión de revisión (impacto, seguridad, pruebas, contexto) está configurada explícitamente en el prompt de la herramienta de IA | `secav:ReviewDimension` |
+| 8.14 | ⚠ | PRs clasificados como rutinarios superan a producción con defectos significativos — el modelo de clasificación por riesgo tiene falsos negativos | `secav:ReviewEscapeObservation` |
 
 ---
 
@@ -278,6 +283,9 @@ Este checklist permite al coach registrar, durante cualquier sesión de observac
 | 11.11 | ⚠ | El equipo solo registra riesgos después de que ya se materializaron — modo reactivo | ausencia de estrategia preventiva (`secav:MitigateStrategy` o `secav:AvoidStrategy`) |
 | 11.12 | ⚠ | Los riesgos tienen acción de prevención pero no acción de contingencia — no hay plan B | ausencia de `secav:contingencyAction` en `secav:RiskResponsePlan` |
 | 11.13 | ⚠ | La revisión de riesgos se omite sistemáticamente en la retrospectiva o en la planificación del sprint | `secav:RiskRegister` sin integración en el ciclo de sprint |
+| 11.14 | ✓ | Los riesgos transferidos (seguro, cláusula contractual, outsourcing) tienen el mecanismo de transferencia documentado explícitamente | `secav:TransferStrategy` |
+| 11.15 | ✓ | Los riesgos aceptados conscientemente incluyen la justificación de la decisión y un umbral de activación para reevaluar | `secav:AcceptStrategy` |
+| 11.16 | ⚠ | El equipo marca riesgos como "aceptados" por omisión — sin plan de respuesta ni racional documentado (aceptación implícita) | `secav:AcceptStrategy` aplicada sin decisión consciente |
 
 ---
 

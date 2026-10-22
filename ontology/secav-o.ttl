@@ -24,7 +24,7 @@ secav:ReviewActivity a owl:Class ; rdfs:subClassOf secav:EngineeringActivity ; r
 secav:ApplicationDesign a owl:Class ; rdfs:subClassOf secav:DesignActivity ; rdfs:label "Application Design"@en .
 secav:UnitTestDesign a owl:Class ; rdfs:subClassOf secav:DesignActivity ; rdfs:label "Unit Test Design"@en .
 secav:DesignImplementation a owl:Class ; rdfs:subClassOf secav:ImplementationActivity, secav:DesignActivity ; rdfs:label "Design Implementation"@en .
-secav:DesignReview a owl:Class ; rdfs:subClassOf secav:ReviewActivity, secav:DesignActivity ; rdfs:label "Design Review"@en .
+secav:DesignReview a owl:Class ; rdfs:subClassOf secav:ReviewActivity, secav:DesignActivity ; rdfs:label "Design Review"@en ; rdfs:comment "A formal multidisciplinary review session that evaluates a design artifact (prototype, wireframe, or specification) for usability, technical feasibility, and business alignment. Not purely aesthetic — it is a strategic process to ensure the product solves real user problems."@en .
 secav:UnitTestDesignImplementation a owl:Class ; rdfs:subClassOf secav:ImplementationActivity, secav:UnitTestDesign ; rdfs:label "Unit Test Design Implementation"@en .
 secav:UnitTestDesignReview a owl:Class ; rdfs:subClassOf secav:ReviewActivity, secav:UnitTestDesign ; rdfs:label "Unit Test Design Review"@en .
 secav:CodeImplementation a owl:Class ; rdfs:subClassOf secav:ImplementationActivity, secav:CodingActivity ; rdfs:label "Code Implementation"@en .
@@ -1153,10 +1153,7 @@ secav:walkthroughSeverity a owl:DatatypeProperty ;
 # Derived from: Guia de Mejores Practicas para Revision de Diseno
 # ---------------------------------------------------------------------------
 
-secav:DesignReview a owl:Class ;
-    rdfs:subClassOf secav:ReviewActivity ;
-    rdfs:label "Design Review"@en ;
-    rdfs:comment "A formal multidisciplinary review session that evaluates a design artifact (prototype, wireframe, or specification) for usability, technical feasibility, and business alignment. Not purely aesthetic — it is a strategic process to ensure the product solves real user problems."@en .
+# secav:DesignReview is declared on line 27 with full rdfs:comment and both superclasses (ReviewActivity, DesignActivity).
 
 secav:DesignReviewAntipattern a owl:Class ;
     rdfs:subClassOf secav:ReviewAntipattern ;
