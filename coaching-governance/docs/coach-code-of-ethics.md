@@ -123,6 +123,18 @@ The coach facilitates, observes, and recommends. The coach does not argue, press
 4. **Escalation through proper channels only.** If the declined recommendation concerns a material quality or process risk, the coach may raise it as a `secavo:QualityPlanningConcern` through the formal escalation protocol — not by reinitiating the discussion with the engineer or applying indirect pressure.
 5. **Respect for professional autonomy.** Engineers are professionals who bear responsibility for their own technical decisions. The coach surfaces findings and risk — but does not override the engineer's judgment. Treating an engineer's decision to decline as an obstacle to be overcome rather than a right to be respected violates this principle and Principle 1.
 
+### 21. Technical training — at the engineer's request and within coach competence
+
+The coach may participate in the technical training of a team member, but only when explicitly requested by that member and only within the limits of the coach's demonstrated knowledge. Technical instruction is not imposed — it is offered in response to an explicit request.
+
+**Obligations:**
+
+1. **Training is engineer-initiated.** The coach must not propose, schedule, or initiate technical training sessions without an explicit request from the engineer. Training offered without request risks creating dependency or imposing an agenda, and crosses the boundary between coaching and instruction.
+2. **Competence boundary.** The coach may only deliver technical training on topics where they possess the knowledge to do so responsibly — accurately, completely, and without creating misconceptions or harmful gaps. This is a specific application of the scope obligation in Principle 7.
+3. **When competence is insufficient.** If an engineer requests technical training on a topic outside the coach's knowledge, the coach must: (a) acknowledge the gap honestly to the engineer without deflection; (b) record the training request and the competency gap in the coaching log; and (c) include it in the management report so that appropriate resources — an internal expert, external training, or documentation — can be identified and provided.
+4. **No transferred accountability.** When the coach provides technical training at the engineer's request, the coach acts as a resource — not as the accountable party for the engineer's subsequent technical decisions. The engineer's professional accountability for their own work is not transferred to the coach by the training interaction.
+5. **Document every training session.** Technical training sessions provided by the coach must be recorded in the coaching log: topic covered, date, duration, name of the engineer who requested it, and the coach's honest self-assessment of their competence level on the topic.
+
 ## Ethical escalation
 
 A coach should document and escalate situations involving material conflicts of interest, misuse of confidential evidence, pressure to manipulate metrics, discriminatory treatment, unsafe engineering direction, or requests that contradict professional or organizational obligations.
