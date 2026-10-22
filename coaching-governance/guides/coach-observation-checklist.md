@@ -255,6 +255,32 @@ Este checklist permite al coach registrar, durante cualquier sesión de observac
 
 ---
 
+## 11. Gestión de Riesgos del Proyecto
+
+> Actividad SECAV-O: `secav:ProjectRisk` y subclases (`TechnicalRisk`, `ManagementRisk`, `OrganizationalRisk`, `ExternalRisk`); `secav:RiskRegister`, `secav:RiskResponsePlan`
+>
+> **Contexto:** El registro de riesgos es un artefacto vivo que debe revisarse semanalmente o al inicio de cada sprint. El coach observa si el equipo gestiona activamente los riesgos, no solo si los lista. Un riesgo con P×I ≥ 12 sin plan de prevención activo es una señal de alerta sistémica.
+>
+> **Frecuencia recomendada:** revisión al inicio de cada sprint y en cada junta semanal de seguimiento.
+
+| # | Tipo | Conducta observable | Término SECAV-O |
+|---|------|---------------------|-----------------|
+| 11.1 | ✓ | El equipo mantiene un registro de riesgos activo y lo revisa al inicio de cada sprint | `secav:RiskRegister` activo |
+| 11.2 | ✓ | Cada riesgo está redactado con la sintaxis estándar: Causa → Evento de riesgo → Impacto en el proyecto | `secav:riskRootCause`, `secav:riskEvent`, `secav:riskImpactDescription` |
+| 11.3 | ✓ | Cada riesgo tiene probabilidad (P) e impacto (I) documentados en escala 1–5 con P×I calculado | `secav:riskProbability`, `secav:riskImpact`, `secav:riskScore` |
+| 11.4 | ✓ | Los riesgos con P×I ≥ 12 tienen un plan de prevención activo y un dueño identificado | `secav:RiskResponsePlan` con `secav:preventionAction` y `secav:riskOwner` |
+| 11.5 | ✓ | Cada plan de respuesta incluye acción de prevención Y acción de contingencia | `secav:preventionAction` + `secav:contingencyAction` en `secav:RiskResponsePlan` |
+| 11.6 | ✓ | El equipo identifica nuevos riesgos proactivamente antes de que se materialicen | `secav:MitigateStrategy` o `secav:AvoidStrategy` aplicadas de forma anticipada |
+| 11.7 | ✓ | La estrategia de respuesta (Mitigar / Evitar / Transferir / Aceptar) está explícita para cada riesgo | `secav:hasResponseStrategy` documentado |
+| 11.8 | ⚠ | El registro de riesgos existe pero no ha sido revisado ni actualizado en el último sprint | `secav:RiskRegister` desactualizado |
+| 11.9 | ⚠ | Los riesgos están listados sin puntuación P×I ni dueño identificado | ausencia de `secav:riskScore` y `secav:riskOwner` |
+| 11.10 | ⚠ | Existen riesgos con P×I ≥ 12 sin ningún plan de prevención activo | ausencia de `secav:RiskResponsePlan` para riesgo de alta prioridad |
+| 11.11 | ⚠ | El equipo solo registra riesgos después de que ya se materializaron — modo reactivo | ausencia de estrategia preventiva (`secav:MitigateStrategy` o `secav:AvoidStrategy`) |
+| 11.12 | ⚠ | Los riesgos tienen acción de prevención pero no acción de contingencia — no hay plan B | ausencia de `secav:contingencyAction` en `secav:RiskResponsePlan` |
+| 11.13 | ⚠ | La revisión de riesgos se omite sistemáticamente en la retrospectiva o en la planificación del sprint | `secav:RiskRegister` sin integración en el ciclo de sprint |
+
+---
+
 ## Resumen de uso del checklist
 
 | Cuándo usar cada grupo | Actividad / Sprint |
@@ -267,6 +293,7 @@ Este checklist permite al coach registrar, durante cualquier sesión de observac
 | Grupo 8 | PRs con código asistido por IA; configuración de herramientas IA del equipo |
 | Grupo 9 | Quincenalmente o mensualmente — evaluación de adopción cultural del nuevo modelo de trabajo |
 | Grupo 10 | Mensualmente o por sprint — observación del líder técnico; revisión trimestral de indicadores 10.12–10.15 |
+| Grupo 11 | Al inicio de cada sprint y en cada junta semanal de seguimiento — revisión del registro de riesgos |
 
 Las señales ✓ se registran como `secav:WorkProductEvidence` o `secav:ReviewFinding` y alimentan la `secav:CompetencyAssessment` del ciclo.
 

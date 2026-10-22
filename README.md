@@ -21,6 +21,8 @@ graph LR
         E(Engineer)
         C(Coach)
         AI(AI System)
+        TL(Technical\nLeader)
+        CHGA(Change\nAgent)
     end
 
     subgraph Activities["Engineering Activities"]
@@ -42,18 +44,29 @@ graph LR
         RF(Review\nFinding)
         RAnt(Review\nAntipattern)
         M(Measurement)
+        CO(Coach\nObservation)
+        AB(Adoption\nBehavior)
+        LB(Leader\nBehavior)
     end
 
     subgraph CompGroup["Competency & Coaching"]
         Comp(Competency)
         CA(Competency\nAssessment)
         CI(Coaching\nIntervention)
+        CMT(Coaching\nMeeting)
     end
 
     subgraph ArtifactGroup["Artifacts"]
         Art(Artifact)
         RR(Review\nRecord)
         RReq(Review\nRequest)
+        MM(Meeting\nMinutes)
+    end
+
+    subgraph RiskGroup["Risk Management"]
+        RISK(Project\nRisk)
+        RREG(Risk\nRegister)
+        RRP(Risk Response\nPlan)
     end
 
     E -->|performs| EA
@@ -69,6 +82,9 @@ graph LR
     RF --> Ev
     RAnt --> Ev
     M --> Ev
+    CO --> Ev
+    AB --> Ev
+    LB --> Ev
     Ev -->|providesEvidenceOf| Comp
     Ev -->|triggers| CI
     CA -->|basedOnEvidence| Ev
@@ -77,6 +93,13 @@ graph LR
     RAnt -->|triggers| CI
     C -->|observes| EA
     C -->|conducts| CI
+    C -->|facilitates| CMT
+    TL -->|exhibits| LB
+    CHGA -->|facilitates| AB
+    CMT -->|producesMinutes| MM
+    RREG -->|tracksRisk| RISK
+    RISK -->|hasResponsePlan| RRP
+    RRP -.->|implements| PA
 ```
 
 ### Class hierarchy
@@ -105,6 +128,9 @@ graph TD
         Ev2 --> RAnt2[ReviewAntipattern]
         Ev2 --> M2[Measurement]
         Ev2 --> RO2[ReviewObservation]
+        Ev2 --> CO2[CoachObservation]
+        Ev2 --> AB2[AdoptionBehavior]
+        Ev2 --> LB2[LeaderBehavior]
         DR2 --> REO[ReviewEscape\nObservation]
         RAnt2 --> CRA[CulturalReview\nAntipattern]
         RAnt2 --> PRA[ProcessReview\nAntipattern]
@@ -124,6 +150,25 @@ graph TD
         TRA --> IAS[InsufficientAI\nScrutiny]
         CLRA --> MRC[MissingReview\nContext]
         CLRA --> ICL[InfiniteComment\nLoop]
+        CO2 --> PBO[PositiveBehavior\nObservation]
+        CO2 --> ABO[AlertBehavior\nObservation]
+        AB2 --> LDA[LeaderDigital\nToolAdoption]
+        AB2 --> PRB[PublicRecognition\nNewBehaviors]
+        AB2 --> CDP[Centralized\nDocumentation]
+        AB2 --> FSP[FocusedSync\nPractice]
+        AB2 --> ETC[EarlyTransparent\nCommunication]
+        AB2 --> AGA[Autonomous\nGuideApplication]
+        AB2 --> CRF[Constructive\nRetrospective]
+        LB2 --> PSP[PsychologicalSafety\nPromotion]
+        LB2 --> ACMT[ActiveMentorship]
+        LB2 --> EFD[Effective\nDelegation]
+        LB2 --> TDN[TechDebt\nNegotiation]
+        LB2 --> ADOC[Architecture\nDecision Doc]
+        LB2 --> TSH[TeamShielding]
+        LB2 --> DCB[DeliveryConsistency]
+        LB2 --> CFB[ContinuousFeedback]
+        LB2 --> TDB[TechnicalDiversity]
+        LB2 --> HPV[HolisticProduct\nVision]
     end
 
     subgraph QCH["QualityCriterion hierarchy"]
@@ -149,6 +194,8 @@ graph TD
         Art2 --> SCA[SourceCodeArtifact]
         Art2 --> RRec2[ReviewRecord]
         Art2 --> RReq2[ReviewRequest]
+        Art2 --> MM2[MeetingMinutes]
+        Art2 --> RREG2[RiskRegister]
         DA3 --> ACA[APIContract\nArtifact]
         RReq2 --> FRR[FormalReview\nRequest]
         RReq2 --> DRR[DraftReview\nRequest]
@@ -161,7 +208,50 @@ graph TD
         Comp2 --> TC2[TestingCompetency]
         Comp2 --> SC2[SecurityCompetency]
         Comp2 --> PC2[PlanningCompetency]
+        Comp2 --> TLC[TechnicalLeadership\nCompetency]
+        Comp2 --> CAC[ChangeAdaptability\nCompetency]
     end
+
+    subgraph AdoptH["Adoption Pillars & Measurement"]
+        AP[AdoptionPillar]
+        AP --> LMP[LeadershipModeling\nPillar]
+        AP --> ECP[EfficientCollaboration\nPillar]
+        AP --> OCP[OpenCommunication\nPillar]
+        AP --> CADP[ContinuousAdaptability\nPillar]
+        AP --> FAP[FeedbackAndInnovation\nPillar]
+        AM2[AdoptionMeasurement]
+        AM2 --> PSM[PulseSurvey\nMeasurement]
+        AM2 --> DRO[DirectRitual\nObservation]
+    end
+    M2 --> AM2
+
+    subgraph LeadH["Leadership Dimensions"]
+        TLD[TechnicalLeadership\nDimension]
+        TLD --> PMD[PeopleAndMentoring\nDimension]
+        TLD --> ACHDIM[ArchitectureAndCode\nDimension]
+        TLD --> SID[StrategyAndImpact\nDimension]
+    end
+
+    subgraph RiskH["Risk Management"]
+        PR2[ProjectRisk]
+        PR2 --> TECHR[TechnicalRisk]
+        PR2 --> MNGR[ManagementRisk]
+        PR2 --> ORGR[OrganizationalRisk]
+        PR2 --> EXTR[ExternalRisk]
+        RRS[RiskResponseStrategy]
+        RRS --> MIT[MitigateStrategy]
+        RRS --> AVO[AvoidStrategy]
+        RRS --> TRS[TransferStrategy]
+        RRS --> ACCS[AcceptStrategy]
+        RRP2[RiskResponsePlan]
+    end
+
+    subgraph MtgH["Meetings & Agreements"]
+        CMT2[CoachingMeeting]
+        MA[MeetingAgreement]
+    end
+    CMT2 --> MM2
+    MM2 --> MA
 ```
 
 ## Core cycle
