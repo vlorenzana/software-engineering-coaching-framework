@@ -9,6 +9,149 @@ This package extends the SECAV-O coaching operating model with six connected gov
 5. a Code of Ethics for coaches; and
 6. formal coach participation in project planning, quality advocacy, documented dissent and proportional escalation when material quality activities are omitted or weakened.
 
+## Ontology Overview
+
+### Core pattern
+
+The diagram below shows the primary relationships between the main classes of `secav-o.ttl`.
+
+```mermaid
+graph LR
+    subgraph Stakeholders
+        E(Engineer)
+        C(Coach)
+        AI(AI System)
+    end
+
+    subgraph Activities["Engineering Activities"]
+        EA(Engineering\nActivity)
+        PA(Preventive\nAction)
+        HVA(Human\nValidation)
+        DA(Deterministic\nAnalysis)
+    end
+
+    subgraph QC_Group["Quality Criteria"]
+        QC(Quality\nCriterion)
+        AG(Automation\nGate)
+        RRd(Reviewer\nReadiness)
+        DCS(Developer\nCognitive State)
+    end
+
+    subgraph EvidenceGroup["Evidence"]
+        Ev(Evidence)
+        RF(Review\nFinding)
+        RAnt(Review\nAntipattern)
+        M(Measurement)
+    end
+
+    subgraph CompGroup["Competency & Coaching"]
+        Comp(Competency)
+        CA(Competency\nAssessment)
+        CI(Coaching\nIntervention)
+    end
+
+    subgraph ArtifactGroup["Artifacts"]
+        Art(Artifact)
+        RR(Review\nRecord)
+        RReq(Review\nRequest)
+    end
+
+    E -->|performs| EA
+    EA -->|produces| Art
+    EA -->|assessedAgainst| QC
+    EA -->|requiresCompetency| Comp
+    EA -->|assistedByAI| AI
+    EA -->|requiresHumanValidation| HVA
+    DA -->|precedes| HVA
+    PA -->|prevents| Ev
+    Art -.->|becomes| Ev
+    RR -.->|becomes| Ev
+    RF --> Ev
+    RAnt --> Ev
+    M --> Ev
+    Ev -->|providesEvidenceOf| Comp
+    Ev -->|triggers| CI
+    CA -->|basedOnEvidence| Ev
+    CA -->|assessesCompetency| Comp
+    CI -->|targetsCompetency| Comp
+    RAnt -->|triggers| CI
+    C -->|observes| EA
+    C -->|conducts| CI
+```
+
+### Class hierarchy
+
+```mermaid
+graph TD
+    subgraph ActH["EngineeringActivity hierarchy"]
+        EA2[EngineeringActivity]
+        EA2 --> RA2[ReviewActivity]
+        EA2 --> PA2[PreventiveAction]
+        EA2 --> AIA[AIAssistedActivity]
+        EA2 --> DTA[DeterministicAnalysisActivity]
+        EA2 --> CIA2[ContinuousIntegrationActivity]
+        RA2 --> HVA2[HumanValidationActivity]
+        RA2 --> CR2[CodeReview]
+        RA2 --> SR2[SelfReview]
+        PA2 --> SR2
+        PA2 --> ACD[AcceptanceCriteria\nDefinition]
+        PA2 --> APC[APIContract\nDefinition]
+    end
+
+    subgraph EvH["Evidence hierarchy"]
+        Ev2[Evidence]
+        Ev2 --> RF2[ReviewFinding]
+        Ev2 --> DR2[DefectRecord]
+        Ev2 --> RAnt2[ReviewAntipattern]
+        Ev2 --> M2[Measurement]
+        Ev2 --> RO2[ReviewObservation]
+        DR2 --> REO[ReviewEscape\nObservation]
+        RAnt2 --> MSR[ManualStyleReview]
+        RAnt2 --> OSR[OversizedReview\nSession]
+        RAnt2 --> MRC[MissingReview\nContext]
+        RAnt2 --> PRR[PrematureReview\nRequest]
+        RAnt2 --> NEF[NonEmpathic\nFeedback]
+        RAnt2 --> IAS[InsufficientAI\nScrutiny]
+    end
+
+    subgraph QCH["QualityCriterion hierarchy"]
+        QC2[QualityCriterion]
+        QC2 --> AC2[AcceptanceCriterion]
+        QC2 --> AG2[AutomationGate]
+        QC2 --> RRd2[ReviewerReadiness]
+        QC2 --> DCS2[DeveloperCognitive\nState]
+        QC2 --> QAR2[QualityActivity\nRequirement]
+        AG2 --> PCH[PreCommitHook]
+        AG2 --> STP[StrictTyping\nPolicy]
+        AG2 --> CCG[CodeCoverage\nGate]
+        RRd2 --> REC[ReviewerEnergy\nCondition]
+        RRd2 --> RFC[ReviewerFocus\nCondition]
+        DCS2 --> DWC[DeepWork\nCondition]
+        DCS2 --> FMC[FatigueManagement\nCondition]
+        QAR2 --> ARPC[AIReviewPrompt\nConfiguration]
+    end
+
+    subgraph ArtH["Artifact hierarchy"]
+        Art2[Artifact]
+        Art2 --> DA3[DesignArtifact]
+        Art2 --> SCA[SourceCodeArtifact]
+        Art2 --> RRec2[ReviewRecord]
+        Art2 --> RReq2[ReviewRequest]
+        DA3 --> ACA[APIContract\nArtifact]
+        RReq2 --> FRR[FormalReview\nRequest]
+        RReq2 --> DRR[DraftReview\nRequest]
+    end
+
+    subgraph CompH["Competency hierarchy"]
+        Comp2[Competency]
+        Comp2 --> RC2[ReviewCompetency]
+        Comp2 --> DC3[DesignCompetency]
+        Comp2 --> TC2[TestingCompetency]
+        Comp2 --> SC2[SecurityCompetency]
+        Comp2 --> PC2[PlanningCompetency]
+    end
+```
+
 ## Core cycle
 
 Institutional / Project Objectives -> Project Planning & Quality Governance -> Team Inception & Launch -> Member Preparation -> Initial Baselines -> Annual Coaching Plan -> Risk Plan -> Coaching Sprint -> Evidence & Metrics -> Coaching Intervention -> Sprint Retrospective -> Risk Review -> Replanning -> Competency Trend -> New-Member Onboarding -> Institutional Alignment Review
