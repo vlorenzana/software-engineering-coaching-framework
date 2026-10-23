@@ -14,6 +14,13 @@
     rdfs:seeAlso <https://dev.nemo.inf.ufes.br/seon/SEON.html> .
 
 secav:SoftwareEngineeringProcess a owl:Class ; rdfs:label "Software Engineering Process"@en .
+
+secav:comprises a owl:ObjectProperty ;
+    rdfs:domain secav:SoftwareEngineeringProcess ;
+    rdfs:range secav:EngineeringActivity ;
+    rdfs:label "comprises"@en ;
+    rdfs:comment "Links a software engineering process to the engineering activities it encompasses."@en .
+
 secav:EngineeringActivity a owl:Class ; rdfs:label "Engineering Activity"@en .
 secav:RequirementsActivity a owl:Class ; rdfs:subClassOf secav:EngineeringActivity ; rdfs:label "Requirements Activity"@en .
 secav:DesignActivity a owl:Class ; rdfs:subClassOf secav:EngineeringActivity ; rdfs:label "Design Activity"@en .
@@ -111,9 +118,6 @@ secav:triggers a owl:ObjectProperty ;
 
 secav:targetsCompetency a owl:ObjectProperty ;
     rdfs:domain secav:CoachingIntervention ; rdfs:range secav:Competency ; rdfs:label "targets competency"@en .
-
-secav:recommendedBy a owl:ObjectProperty ;
-    rdfs:domain secav:CoachingIntervention ; rdfs:range secav:CoachingRecommendation ; rdfs:label "recommended by"@en .
 
 secav:evidenceNote a owl:DatatypeProperty ;
     rdfs:domain secav:Evidence ; rdfs:range xsd:string ; rdfs:label "evidence note"@en .
@@ -872,6 +876,7 @@ secav:MeetingMinutes a owl:Class ;
     rdfs:comment "A structured artifact recording topics discussed, decisions made, and agreements committed to in a coaching meeting; distributed to all participants within 24 hours."@en .
 
 secav:MeetingAgreement a owl:Class ;
+    rdfs:subClassOf secav:Artifact ;
     rdfs:label "Meeting Agreement"@en ;
     rdfs:comment "A tracked commitment made by one or more participants during a coaching meeting, with an identified owner and a due date. Reviewed at the opening of every subsequent meeting of the same type."@en .
 
@@ -987,6 +992,7 @@ secav:AcceptStrategy a owl:Class ;
 # § Risk Response Plan — prevention + contingency for a specific risk.
 
 secav:RiskResponsePlan a owl:Class ;
+    rdfs:subClassOf secav:Artifact ;
     rdfs:label "Risk Response Plan"@en ;
     rdfs:comment "A concrete plan combining a prevention action and a contingency action for a project risk, with an identified owner."@en .
 
@@ -1114,6 +1120,13 @@ secav:CoachingRecommendation a owl:Class ;
     rdfs:label "Coaching Recommendation"@en ;
     rdfs:comment "An observation or improvement suggestion raised by the coach that is not backed by a currently adopted process requirement. Coaching recommendations have advisory weight only — the engineer may accept or decline them (Principle 20 of the Code of Ethics). If repeated observations reveal a systematic gap, the coach may propose formalizing the recommendation as a process requirement through the appropriate channel. Distinct from a ProcessComplianceFinding, which references an existing obligation."@en .
 
+secav:producesRecommendation a owl:ObjectProperty ;
+    rdfs:subPropertyOf secav:producesReviewFinding ;
+    rdfs:domain secav:ReviewActivity ;
+    rdfs:range secav:CoachingRecommendation ;
+    rdfs:label "produces recommendation"@en ;
+    rdfs:comment "Links a review activity to a coaching recommendation raised during the session. Specialization of secav:producesReviewFinding for advisory, non-mandatory findings."@en .
+
 secav:referencedProcessRequirement a owl:DatatypeProperty ;
     rdfs:domain secav:ProcessComplianceFinding ;
     rdfs:range xsd:string ;
@@ -1173,6 +1186,7 @@ secav:MissingRequirementsReview a owl:Class ;
 # ---------------------------------------------------------------------------
 
 secav:CoachReviewSignOff a owl:Class ;
+    rdfs:subClassOf secav:Artifact ;
     rdfs:label "Coach Review Sign-Off"@en ;
     rdfs:comment "Formal coach approval certifying that a peer review, walkthrough, or inspection was conducted acceptably: roles were followed, process phases completed, and findings were documented. Required for every review activity before its findings are considered valid evidence for competency assessment. Does not imply the coach approved the code or design — only that the process itself met the minimum quality bar."@en .
 
@@ -1739,6 +1753,7 @@ secav:designatedObserver a owl:ObjectProperty ;
 # ---------------------------------------------------------------------------
 
 secav:CoachRemoteEndorsement a owl:Class ;
+    rdfs:subClassOf secav:Artifact ;
     rdfs:label "Coach Remote Endorsement"@en ;
     rdfs:comment "A formal record in which the coach confirms that they have reviewed the designated observer's report of a session they did not personally attend, and accept the reported findings as sufficient basis for non-provisional competency evidence. Explicitly distinct from secav:CoachReviewSignOff: a remote endorsement certifies review of the observer's documentation — not personal presence at the session. Grounded in Principle 16 of the Code of Ethics."@en .
 
@@ -1755,6 +1770,7 @@ secav:correspondingAbsenceRecord a owl:ObjectProperty ;
     rdfs:comment "Links the remote endorsement to the CoachAbsenceRecord that originally documented the coach's absence and named the designated observer. Required for cross-verification: the designatedObserver in this absence record must match the reportedBy in the endorsed ObserverReport."@en .
 
 secav:sessionIdentifier a owl:DatatypeProperty ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( secav:CoachAbsenceRecord secav:ObserverReport secav:CoachRemoteEndorsement ) ] ;
     rdfs:range xsd:string ;
     rdfs:label "session identifier"@en ;
     rdfs:comment "A shared identifier (e.g., sprint-ID + activity-type + date) used to link a CoachAbsenceRecord, ObserverReport, and CoachRemoteEndorsement to the same lifecycle phase session. Enables cross-artifact traceability verification."@en .
@@ -1840,94 +1856,6 @@ secav:FMEAAnalysis a owl:Class ;
 secav:FaultTreeAnalysis a owl:Class ;
     rdfs:subClassOf secav:DefectPreventionActivity ;
     rdfs:label "Fault Tree Analysis"@en ;
-    rdfs:comment "Top-down deductive analysis that starts from a declared catastrophic failure event and decomposes the combination of software, hardware, and human errors required for it to occur. Uses Boolean logic: AND gates (all sub-events must co-occur) and OR gates (any sub-event alone is sufficient). Primary result: identification and elimination of single points of failure. When to apply: security or systems safety analysis during architecture definition."@en .
-
-secav:ThreatModelingActivity a owl:Class ;
-    rdfs:subClassOf secav:DefectPreventionActivity ;
-    rdfs:label "Threat Modeling Activity"@en ;
-    rdfs:comment "A structured analysis of the attack surface from an adversarial perspective. Uses the STRIDE classification: Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege. Output: a ThreatModel documenting identified threats and the controls planned for each. When to apply: architecture definition phase, before security boundaries and trust zones are committed. Required for systems that handle authentication, user data, or external interfaces."@en .
-
-secav:ChaosEngineeringActivity a owl:Class ;
-    rdfs:subClassOf secav:DefectPreventionActivity, secav:TestingActivity ;
-    rdfs:label "Chaos Engineering Activity"@en ;
-    rdfs:comment "Empirical verification of resilience by deliberately injecting failures into a staging or controlled production environment. Validates that resilience patterns (circuit breakers, bulkheads, graceful degradation) perform as designed under actual fault conditions. Distinct from analytical techniques: Chaos Engineering is applied post-implementation. When to apply: testing or pre-production phase after resilience mechanisms are in place."@en .
-
-# § Artifact classes
-
-secav:PreMortemReport a owl:Class ;
-    rdfs:subClassOf secav:Artifact ;
-    rdfs:label "Pre-Mortem Report"@en ;
-    rdfs:comment "A documented list of hypothetical failure causes produced by a PreMortemAnalysis session. Items are collected independently from each participant, then grouped and prioritized. The report feeds directly into the project RiskRegister as candidate risks for further evaluation."@en .
-
-secav:FMEARegister a owl:Class ;
-    rdfs:subClassOf secav:Artifact ;
-    rdfs:label "FMEA Register"@en ;
-    rdfs:comment "A structured table produced by an FMEAAnalysis session containing the identified failure modes, their effects, root causes, Severity, Occurrence, and Detectability scores, and the resulting RPN (Risk Priority Number = S × O × D) for each. High-RPN entries drive the selection of resilience patterns and feed the RiskResponsePlan."@en .
-
-secav:ThreatModel a owl:Class ;
-    rdfs:subClassOf secav:Artifact ;
-    rdfs:label "Threat Model"@en ;
-    rdfs:comment "A documented analysis of the attack surface produced by a ThreatModelingActivity. Contains the system's trust boundaries and data flows, the enumerated STRIDE threats, their severity, and the access controls, encryption requirements, or architectural changes planned to mitigate each threat."@en .
-
-# § FMEA datatype properties
-
-secav:fmeaSeverity a owl:DatatypeProperty ;
-    rdfs:range xsd:integer ;
-    rdfs:label "FMEA severity"@en ;
-    rdfs:comment "FMEA Severity score (1–10): the impact on the system or end user if the failure mode occurs. Score 1 = no noticeable effect; score 10 = catastrophic failure with no warning."@en .
-
-secav:fmeaOccurrence a owl:DatatypeProperty ;
-    rdfs:range xsd:integer ;
-    rdfs:label "FMEA occurrence"@en ;
-    rdfs:comment "FMEA Occurrence score (1–10): the probability that the failure mode will occur. Score 1 = almost never; score 10 = failure is certain or near-certain."@en .
-
-secav:fmeaDetectability a owl:DatatypeProperty ;
-    rdfs:range xsd:integer ;
-    rdfs:label "FMEA detectability"@en ;
-    rdfs:comment "FMEA Detectability score (1–10): the difficulty of detecting the failure before it reaches the end user. Score 1 = easily detectable by automated means; score 10 = undetectable before production impact. Note: higher score means WORSE detectability — inverted direction compared to Severity and Occurrence."@en .
-
-secav:rpnScore a owl:DatatypeProperty ;
-    rdfs:range xsd:integer ;
-    rdfs:label "RPN score"@en ;
-    rdfs:comment "Risk Priority Number = fmeaSeverity × fmeaOccurrence × fmeaDetectability. Range 1–1000. High-RPN failure modes (typically RPN ≥ 100) are prioritized for resilience patterns and preventive action."@en .
-
-secav:failureMode a owl:DatatypeProperty ;
-    rdfs:range xsd:string ;
-    rdfs:label "failure mode"@en ;
-    rdfs:comment "Description of the specific way in which a component can fail (the 'what could go wrong' statement in FMEA). Each component may have multiple failure modes, each analyzed independently."@en .
-
-secav:failureEffect a owl:DatatypeProperty ;
-    rdfs:range xsd:string ;
-    rdfs:label "failure effect"@en ;
-    rdfs:comment "The observable consequence of a failure mode on the system, subsystem, or end user. Used in FMEA to establish the Severity score and to prioritize which failures most need resilience countermeasures."@en .
-
-# ---------------------------------------------------------------------------
-# Pessimistic Defect Prevention Techniques
-# Derived from: Prevención de Defectos Basada en Escenarios Pesimistas
-# ---------------------------------------------------------------------------
-
-# § Parent activity class
-
-secav:DefectPreventionActivity a owl:Class ;
-    rdfs:subClassOf secav:EngineeringActivity ;
-    rdfs:label "Defect Prevention Activity"@en ;
-    rdfs:comment "A structured engineering activity that assumes failure as a certainty and analyzes its causes before the construction phase, in order to surface vulnerabilities, erroneous assumptions, and single points of failure before they are built in. Contrasts with reactive quality assurance: prevention acts as a design-phase filter rather than a post-construction detector. Specializations: PreMortemAnalysis, FMEAAnalysis, FaultTreeAnalysis, ThreatModelingActivity, ChaosEngineeringActivity."@en .
-
-# § Specific technique classes
-
-secav:PreMortemAnalysis a owl:Class ;
-    rdfs:subClassOf secav:DefectPreventionActivity ;
-    rdfs:label "Pre-Mortem Analysis"@en ;
-    rdfs:comment "A defect prevention session held before project start in which the team assumes the system has already failed catastrophically. Each participant independently documents all hypothetical causes of failure. Independence is mandatory: social pressure to suppress doubts must be neutralized. Output: a PreMortemReport that feeds the project risk register. Psychological basis: prospective hindsight increases failure-cause identification by approximately 30%."@en .
-
-secav:FMEAAnalysis a owl:Class ;
-    rdfs:subClassOf secav:DefectPreventionActivity ;
-    rdfs:label "FMEA Analysis"@en ;
-    rdfs:comment "Failure Mode and Effects Analysis — a systematic activity that evaluates how each individual component can fail. Quantifies three factors per failure mode: Severity (S), Occurrence (O), and Detectability (D). Risk Priority Number: RPN = S × O × D. High-RPN failure modes are prioritized for resilience patterns (circuit breakers, fallbacks, retry, redundancy). When to apply: detailed design or architecture definition phase. Output: FMEARegister."@en .
-
-secav:FaultTreeAnalysis a owl:Class ;
-    rdfs:subClassOf secav:DefectPreventionActivity ;
-    rdfs:label "Fault Tree Analysis"@en ;
     rdfs:comment "Top-down deductive analysis that starts from a declared catastrophic failure event and decomposes the combination of software, hardware, and human errors required for it to occur. Uses Boolean logic: AND gates (all sub-events must co-occur) and OR gates (any sub-event alone is sufficient). Primary result: identification and elimination of single points of failure — nodes that appear in multiple paths to the top event. When to apply: security or systems safety analysis during architecture definition."@en .
 
 secav:ThreatModelingActivity a owl:Class ;
@@ -1952,6 +1880,17 @@ secav:FMEARegister a owl:Class ;
     rdfs:label "FMEA Register"@en ;
     rdfs:comment "A structured table produced by an FMEAAnalysis session containing the identified failure modes, their effects, root causes, Severity, Occurrence, and Detectability scores, and the resulting RPN (Risk Priority Number = S × O × D) for each. High-RPN entries drive the selection of resilience patterns and feed the RiskResponsePlan."@en .
 
+secav:FMEAFailureMode a owl:Class ;
+    rdfs:subClassOf secav:Artifact ;
+    rdfs:label "FMEA Failure Mode"@en ;
+    rdfs:comment "An individual failure mode entry within an FMEARegister: a specific way a component can fail, its observable effect, and the resulting RPN score (S × O × D). An FMEARegister is composed of one or more FMEAFailureMode entries."@en .
+
+secav:hasFMEAEntry a owl:ObjectProperty ;
+    rdfs:domain secav:FMEARegister ;
+    rdfs:range secav:FMEAFailureMode ;
+    rdfs:label "has FMEA entry"@en ;
+    rdfs:comment "Links an FMEA register to each individual failure mode entry it contains."@en .
+
 secav:ThreatModel a owl:Class ;
     rdfs:subClassOf secav:Artifact ;
     rdfs:label "Threat Model"@en ;
@@ -1960,31 +1899,37 @@ secav:ThreatModel a owl:Class ;
 # § FMEA datatype properties
 
 secav:fmeaSeverity a owl:DatatypeProperty ;
+    rdfs:domain secav:FMEAFailureMode ;
     rdfs:range xsd:integer ;
     rdfs:label "FMEA severity"@en ;
     rdfs:comment "FMEA Severity score (1–10): the impact on the system or end user if the failure mode occurs. Score 1 = no noticeable effect; score 10 = catastrophic failure with no warning."@en .
 
 secav:fmeaOccurrence a owl:DatatypeProperty ;
+    rdfs:domain secav:FMEAFailureMode ;
     rdfs:range xsd:integer ;
     rdfs:label "FMEA occurrence"@en ;
     rdfs:comment "FMEA Occurrence score (1–10): the probability that the failure mode will occur within the expected operating life. Score 1 = almost never; score 10 = failure is certain or near-certain."@en .
 
 secav:fmeaDetectability a owl:DatatypeProperty ;
+    rdfs:domain secav:FMEAFailureMode ;
     rdfs:range xsd:integer ;
     rdfs:label "FMEA detectability"@en ;
     rdfs:comment "FMEA Detectability score (1–10): the difficulty of detecting the failure before it reaches the end user. Score 1 = easily detectable by automated means; score 10 = undetectable before production impact. Note: higher score means WORSE detectability — the direction is inverted compared to Severity and Occurrence."@en .
 
 secav:rpnScore a owl:DatatypeProperty ;
+    rdfs:domain secav:FMEAFailureMode ;
     rdfs:range xsd:integer ;
     rdfs:label "RPN score"@en ;
     rdfs:comment "Risk Priority Number = fmeaSeverity × fmeaOccurrence × fmeaDetectability. Range 1–1000. High-RPN failure modes (typically RPN ≥ 100) are prioritized for resilience patterns and preventive action. Used in FMEAAnalysis to rank failure modes by combined risk."@en .
 
 secav:failureMode a owl:DatatypeProperty ;
+    rdfs:domain secav:FMEAFailureMode ;
     rdfs:range xsd:string ;
     rdfs:label "failure mode"@en ;
     rdfs:comment "Description of the specific way in which a component can fail (the 'what could go wrong' statement in FMEA). Each component may have multiple failure modes, each analyzed independently."@en .
 
 secav:failureEffect a owl:DatatypeProperty ;
+    rdfs:domain secav:FMEAFailureMode ;
     rdfs:range xsd:string ;
     rdfs:label "failure effect"@en ;
     rdfs:comment "The observable consequence of a failure mode on the system, subsystem, or end user. Used in FMEA to establish the Severity score and to prioritize which failures most need resilience countermeasures."@en .
